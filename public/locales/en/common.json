@@ -1,0 +1,20 @@
+{
+  "main": {
+    "aboutProduct": "О продукте",
+    "blog": "Блог",
+    "aboutCompany": "О компании",
+    "registration": "Зарегистрироваться",
+    "login": "Войти",
+    "accountTitle": "Личный кабинет"
+  },
+  "secondMain": {
+    "history": "История",
+    "advantages": "Преимущества",
+    "knowledgeBase": "База знаний",
+    "howWork": "Как работает?",
+    "subscription": "Подписка",
+    "howToStart": "Как начать?"
+
+  },
+  "test": "vas"
+}

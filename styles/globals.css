@@ -1,16 +1,90 @@
+:root {
+  --black1: #000;
+  --black2: #1d1d1d;
+  --black3: #010202;
+
+  --white: #fff;
+
+  --green: #48be9c;
+
+  --greenGradient: linear-gradient(269.41deg, #45c6a1 0.51%, #179a74 99.5%);
+}
+@font-face {
+  font-family: 'Gilroy';
+  src: url('../assets/fonts/Gilroy-Regular.woff2'),
+    url('../assets/fonts/Gilroy-Regular.woff');
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Gilroy';
+  src: url('../assets/fonts/Gilroy-Semibold.woff2'),
+    url('../assets/fonts/Gilroy-Semibold.woff');
+  font-display: swap;
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Gilroy';
+  src: url('../assets/fonts/Gilroy-Bold.woff2'),
+    url('../assets/fonts/Gilroy-Bold.woff');
+  font-display: swap;
+  font-weight: 700;
+  font-style: normal;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Gilroy', Helvetica, sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  appearance: none;
 }
 
 a {
   color: inherit;
   text-decoration: none;
 }
-
-* {
+body {
+  /* height: 3000px; */
+  min-height: 100vh;
+  /* mobile viewport bug fix */
+  min-height: -webkit-fill-available;
+}
+html {
+  height: -webkit-fill-available;
+}
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
