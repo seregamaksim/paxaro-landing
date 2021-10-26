@@ -83,7 +83,9 @@ const HeaderBottomMenuLink = styled.a`
   letter-spacing: 0.01em;
 
   color: var(--white);
-  &.active {
+  transition: color 0.3s ease;
+  &.active,
+  &:hover {
     color: var(--green);
   }
 `;

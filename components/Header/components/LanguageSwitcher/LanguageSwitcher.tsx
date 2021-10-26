@@ -20,8 +20,9 @@ const LanguageSwitcher: FC<ILanguageSwitcherProps> = ({ className }) => {
 
   useOnClickOutside(ref, () => setIsOpen(false));
 
-  function closeDropdownEsc(e: KeyboardEvent) {
-    const code = e.code;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  function closeDropdownEsc(event: KeyboardEvent) {
+    const code = event.code;
     if (code === 'Escape') {
       setIsOpen(false);
     }

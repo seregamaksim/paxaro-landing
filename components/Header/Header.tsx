@@ -253,7 +253,9 @@ const HeaderTopLink = styled.a`
   line-height: 25px;
   letter-spacing: 0.01em;
   color: var(--white);
-  &.active {
+  transition: color 0.3s ease;
+  &.active,
+  &:hover {
     color: var(--green);
   }
   @media (max-width: 900px) {
@@ -309,6 +311,10 @@ const HeaderLinkLogin = styled.a`
   line-height: 20px;
   letter-spacing: 0.01em;
   margin-right: 14px;
+  transition: all 0.3s ease;
+  &:hover {
+    box-shadow: 0px 14px 30px 0px rgba(27, 157, 120, 0.42);
+  }
 
   span {
     background-color: var(--black3);
