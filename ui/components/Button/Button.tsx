@@ -26,8 +26,14 @@ const Root = styled.button`
   line-height: 29px;
   color: var(--white);
   padding: 25px 28px;
+  cursor: pointer;
   &:hover {
-    box-shadow: 0px 14px 30px -26px rgba(27, 157, 120, 0.42);
+    box-shadow: 0 14px 30px 0 rgba(27, 157, 120, 0.42);
+  }
+  @media (max-width: 768px) {
+    font-size: 14px;
+    line-height: 20px;
+    padding: 14px 28px;
   }
 `;
 

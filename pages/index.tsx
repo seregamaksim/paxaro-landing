@@ -7,6 +7,7 @@ import { Header } from '../components/Header';
 import styled from 'styled-components';
 import { ActiveLink } from '../components/ActiveLink';
 import { useTranslation } from 'react-i18next';
+import LeadForm from '../pageComponents/HomePage/LeadFormSection/LeadFormSection';
 
 const Home: NextPage = () => {
   const { t } = useTranslation();
@@ -62,7 +63,9 @@ const Home: NextPage = () => {
           </HeaderBottomMenuItem>
         </HeaderBottomMenu>
       </Header>
-      <main></main>
+      <main>
+        <LeadForm />
+      </main>
     </MainLayout>
   );
 };
@@ -108,7 +111,7 @@ const HeaderBottomMenuLink = styled.a`
 
 export const getServerSideProps = async ({ locale }: any) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['common', 'header'])),
+    ...(await serverSideTranslations(locale, ['common', 'header', 'leadForm'])),
   },
 });
 export default Home;
