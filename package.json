@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/react-headroom": "^2.2.2",
     "@types/styled-components": "^5.1.15",
     "formik": "^2.2.9",
     "i18next": "^20.6.1",
@@ -18,11 +19,12 @@
     "react-dom": "17.0.2",
     "react-i18next": "^11.12.0",
     "styled-components": "^5.3.3",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "react-headroom": "^3.2.0"
   },
   "devDependencies": {
     "@types/react": "17.0.31",
-    "eslint": "8.0.1",
+    "eslint": "^8.1.0",
     "eslint-config-next": "11.1.2",
     "typescript": "4.4.4"
   }

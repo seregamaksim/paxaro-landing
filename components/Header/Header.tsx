@@ -1,18 +1,20 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import styled from 'styled-components';
 import { Container } from '../Container';
 import Link from 'next/link';
 import Image from 'next/image';
-import logo from '../../assets/images/logo.svg';
+import logo from '@/assets/images/logo.svg';
 import { useRouter } from 'next/dist/client/router';
 import { ActiveLink } from '../ActiveLink';
-import { Button } from '../../ui/components/Button';
+import { Button } from '@/ui/components/Button';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
-import Logo from '../../ui/icons/Logo';
-import LogoMini from '../../ui/icons/LogoMini';
-import { useIsDesktop } from '../../hooks/useIsDesktop';
+
+import LogoMini from '@/ui/icons/LogoMini';
+import { useIsDesktop } from '@/hooks/useIsDesktop';
 import SocialList from '../SocialList/SocialList';
+import Headroom from 'react-headroom';
+import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 
 interface IHeaderWrapper {
   isActiveMenu: boolean;
@@ -22,101 +24,64 @@ const Header: FC = ({ children }) => {
   const { t } = useTranslation('header');
   const router = useRouter();
   const isDesktop = useIsDesktop();
-  console.log('isDesktop', isDesktop);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
-  function openMenu() {
-    setIsOpenMenu(!isOpenMenu);
-  }
-  function closeMobileMenuClick(e: MouseEvent) {
-    const target = e.target as Element;
-    const parentTarget = target.closest('.mobile-menu');
-    if (!parentTarget && isOpenMenu) {
-      setIsOpenMenu(false);
+  useOnClickOutside(ref, () => handleBurgerClick());
+
+  function handleBurgerClick() {
+    if (innerWidth < 900) {
+      setIsOpenMenu(!isOpenMenu);
     }
   }
   useEffect(() => {
     window.innerWidth > 900 ? setIsOpenMenu(true) : setIsOpenMenu(false);
   }, []);
-  useEffect(() => {
-    window.addEventListener('click', closeMobileMenuClick);
-    return () => {
-      window.removeEventListener('click', closeMobileMenuClick);
-    };
-  }, [closeMobileMenuClick]);
   return (
-    <Root>
-      <HeaderScroller>
+    <Headroom>
+      <Root ref={ref}>
         <HeaderBurgerNavContainer>
           <Link href="/" passHref>
             <a>
               <LogoMini />
             </a>
           </Link>
-          <BurgerBtn className={isOpenMenu ? 'active' : ''} onClick={openMenu}>
+          <BurgerBtn
+            className={isOpenMenu ? 'active' : ''}
+            onClick={handleBurgerClick}
+          >
             <span></span>
           </BurgerBtn>
         </HeaderBurgerNavContainer>
+
         <HeaderWrapper isActiveMenu={isOpenMenu}>
-          <HeaderTop>
-            <HeaderTopContainer>
-              <Link href="/" passHref>
-                <HeaderLogoLink>
-                  <Image src={logo} alt={t('logoAlt')} />
-                  {/* <Logo width={148} height={46} /> */}
-                </HeaderLogoLink>
-              </Link>
-              <HeaderTopNav>
-                <HeaderTopItem>
-                  <ActiveLink href="/" activeClassName="active" passHref>
-                    <HeaderTopLink>{t('main.aboutProduct')}</HeaderTopLink>
-                  </ActiveLink>
-                </HeaderTopItem>
-                <HeaderTopItem>
-                  <ActiveLink href="/blog" activeClassName="active" passHref>
-                    <HeaderTopLink>{t('main.blog')}</HeaderTopLink>
-                  </ActiveLink>
-                </HeaderTopItem>
-                <HeaderTopItem>
-                  <ActiveLink href="/about" activeClassName="active" passHref>
-                    <HeaderTopLink>{t('main.aboutCompany')}</HeaderTopLink>
-                  </ActiveLink>
-                </HeaderTopItem>
-              </HeaderTopNav>
-              {isDesktop && (
-                <HeaderButtonsWrap>
-                  <HeaderButtonTitle>
-                    {t('main.accountTitle')}
-                  </HeaderButtonTitle>
-                  <HeaderButtons>
-                    <Link
-                      href="https://nextjs.org/docs/advanced-features/i18n-routing"
-                      passHref
-                    >
-                      <HeaderButtonRegistration
-                        isLink
-                        text={t('main.registration')}
-                      ></HeaderButtonRegistration>
-                    </Link>
-                    <Link
-                      href="https://nextjs.org/docs/advanced-features/i18n-routing"
-                      passHref
-                    >
-                      <HeaderLinkLogin>
-                        <span>{t('main.login')}</span>
-                      </HeaderLinkLogin>
-                    </Link>
-                    <LanguageSwitcher />
-                  </HeaderButtons>
-                </HeaderButtonsWrap>
-              )}
-            </HeaderTopContainer>
-          </HeaderTop>
-          {children && (
-            <HeaderBottom>
-              <HeaderBottomContainer>
-                {children}
-                {!isDesktop && (
+          <HeaderScroller>
+            <HeaderTop>
+              <HeaderTopContainer>
+                <Link href="/" passHref>
+                  <HeaderLogoLink>
+                    <Image src={logo} alt={t('logoAlt')} />
+                    {/* <Logo width={148} height={46} /> */}
+                  </HeaderLogoLink>
+                </Link>
+                <HeaderTopNav>
+                  <HeaderTopItem>
+                    <ActiveLink href="/" activeClassName="active">
+                      <HeaderTopLink>{t('main.aboutProduct')}</HeaderTopLink>
+                    </ActiveLink>
+                  </HeaderTopItem>
+                  <HeaderTopItem>
+                    <ActiveLink href="/blog" activeClassName="active">
+                      <HeaderTopLink>{t('main.blog')}</HeaderTopLink>
+                    </ActiveLink>
+                  </HeaderTopItem>
+                  <HeaderTopItem>
+                    <ActiveLink href="/about" activeClassName="active">
+                      <HeaderTopLink>{t('main.aboutCompany')}</HeaderTopLink>
+                    </ActiveLink>
+                  </HeaderTopItem>
+                </HeaderTopNav>
+                {isDesktop && (
                   <HeaderButtonsWrap>
                     <HeaderButtonTitle>
                       {t('main.accountTitle')}
@@ -139,46 +104,70 @@ const Header: FC = ({ children }) => {
                           <span>{t('main.login')}</span>
                         </HeaderLinkLogin>
                       </Link>
+                      <LanguageSwitcher />
                     </HeaderButtons>
                   </HeaderButtonsWrap>
                 )}
-              </HeaderBottomContainer>
-            </HeaderBottom>
-          )}
-          {!isDesktop && (
-            <>
-              <StyledSocialList />
-              <StyledLanguageSwitcher />
-            </>
-          )}
+              </HeaderTopContainer>
+            </HeaderTop>
+            {children && (
+              <HeaderBottom>
+                <HeaderBottomContainer>
+                  {children}
+                  {!isDesktop && (
+                    <HeaderButtonsWrap>
+                      <HeaderButtonTitle>
+                        {t('main.accountTitle')}
+                      </HeaderButtonTitle>
+                      <HeaderButtons>
+                        <Link
+                          href="https://nextjs.org/docs/advanced-features/i18n-routing"
+                          passHref
+                        >
+                          <HeaderButtonRegistration
+                            isLink
+                            text={t('main.registration')}
+                          ></HeaderButtonRegistration>
+                        </Link>
+                        <Link
+                          href="https://nextjs.org/docs/advanced-features/i18n-routing"
+                          passHref
+                        >
+                          <HeaderLinkLogin>
+                            <span>{t('main.login')}</span>
+                          </HeaderLinkLogin>
+                        </Link>
+                      </HeaderButtons>
+                    </HeaderButtonsWrap>
+                  )}
+                </HeaderBottomContainer>
+              </HeaderBottom>
+            )}
+            {!isDesktop && (
+              <>
+                <StyledSocialList />
+                <StyledLanguageSwitcher />
+              </>
+            )}
+          </HeaderScroller>
         </HeaderWrapper>
-      </HeaderScroller>
-    </Root>
+      </Root>
+    </Headroom>
   );
 };
 
 const Root = styled.header`
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  transition: transform 0.5s ease-out;
-  will-change: transform;
   background: var(--black3);
   box-shadow: 0px 30px 36px -15px rgba(0, 0, 0, 0.15);
   @media (max-width: 900px) {
-    height: 100vh;
-    min-height: 100vh;
-    /* mobile viewport bug fix */
-    min-height: -webkit-fill-available;
-    overflow: hidden;
   }
 `;
-const HeaderScroller = styled.div`
-  height: 100%;
 
-  padding-bottom: 50px;
-  overflow: scroll;
+const HeaderScroller = styled.div`
+  @media (max-width: 900px) {
+    padding-bottom: 200px;
+    overflow: scroll;
+  }
 `;
 
 const HeaderWrapper = styled.div.attrs<IHeaderWrapper>((props) => ({
@@ -190,9 +179,10 @@ const HeaderWrapper = styled.div.attrs<IHeaderWrapper>((props) => ({
     display: ${(props: IHeaderWrapper) =>
       props.isActiveMenu ? 'flex' : 'none'};
     flex-direction: column;
+    height: 100vh;
   }
 `;
-const HeaderBurgerNav = styled.div``;
+
 const HeaderBurgerNavContainer = styled(Container)`
   display: none;
   align-items: center;
@@ -203,7 +193,9 @@ const HeaderBurgerNavContainer = styled(Container)`
     display: flex;
   }
 `;
+
 const HeaderTop = styled.div``;
+
 const HeaderTopContainer = styled(Container)`
   padding-top: 22px;
   padding-bottom: 22px;
@@ -215,6 +207,7 @@ const HeaderTopContainer = styled(Container)`
     padding-bottom: 0;
   }
 `;
+
 const HeaderLogoLink = styled.a`
   margin-right: 42px;
   @media (max-width: 1024px) {
@@ -224,6 +217,7 @@ const HeaderLogoLink = styled.a`
     display: none;
   }
 `;
+
 const HeaderTopNav = styled.ul`
   display: flex;
   align-items: center;
@@ -235,6 +229,7 @@ const HeaderTopNav = styled.ul`
     border-bottom: 1px solid rgba(153, 153, 153, 0.3);
   }
 `;
+
 const HeaderTopItem = styled.li`
   margin-right: 30px;
   &:last-child {
@@ -251,13 +246,16 @@ const HeaderTopItem = styled.li`
     }
   }
 `;
+
 const HeaderTopLink = styled.a`
   font-weight: 600;
   font-size: 18px;
   line-height: 25px;
   letter-spacing: 0.01em;
   color: var(--white);
-  &.active {
+  transition: color 0.3s ease;
+  &.active,
+  &:hover {
     color: var(--green);
   }
   @media (max-width: 900px) {
@@ -265,6 +263,7 @@ const HeaderTopLink = styled.a`
     line-height: 34px;
   }
 `;
+
 const HeaderButtonsWrap = styled.div`
   margin-left: auto;
   @media (max-width: 900px) {
@@ -272,10 +271,12 @@ const HeaderButtonsWrap = styled.div`
     margin-bottom: 24px;
   }
 `;
+
 const HeaderButtons = styled.div`
   display: flex;
   align-items: center;
 `;
+
 const HeaderButtonTitle = styled.p`
   font-weight: bold;
   font-size: 24px;
@@ -288,6 +289,7 @@ const HeaderButtonTitle = styled.p`
     display: block;
   }
 `;
+
 const HeaderButtonRegistration = styled(Button)`
   margin-right: 14px;
   font-size: 14px;
@@ -309,6 +311,10 @@ const HeaderLinkLogin = styled.a`
   line-height: 20px;
   letter-spacing: 0.01em;
   margin-right: 14px;
+  transition: all 0.3s ease;
+  &:hover {
+    box-shadow: 0px 14px 30px 0px rgba(27, 157, 120, 0.42);
+  }
 
   span {
     background-color: var(--black3);
@@ -319,12 +325,14 @@ const HeaderLinkLogin = styled.a`
     border-radius: 8px;
   }
 `;
+
 const HeaderBottom = styled.div`
   background-color: var(--black2);
   @media (max-width: 900px) {
     background-color: transparent;
   }
 `;
+
 const HeaderBottomContainer = styled(Container)`
   padding-top: 11px;
   padding-bottom: 11px;
@@ -382,14 +390,7 @@ const BurgerBtn = styled.button`
   }
 `;
 
-const StyledLanguageSwitcher = styled(LanguageSwitcher)`
-  @media (max-width: 900px) {
-    /* position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0; */
-  }
-`;
+const StyledLanguageSwitcher = styled(LanguageSwitcher)``;
 
 const StyledSocialList = styled(SocialList)`
   margin-bottom: 24px;
@@ -398,16 +399,3 @@ const StyledSocialList = styled(SocialList)`
 `;
 
 export default Header;
-
-// #menu-toggle:checked ~ .menu-btn > span::before{
-//   top: 0;
-//   transform: rotate(0);
-// }
-// #menu-toggle:checked ~ .menu-btn > span::after{
-//   top: 0;
-//   transform: rotate(90deg);
-// }
-// #menu-toggle:checked ~ .menubox{
-//   visibility: visible;
-//   left: 0;
-// }

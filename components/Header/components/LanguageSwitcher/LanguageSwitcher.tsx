@@ -1,11 +1,13 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { ActiveLink } from '../../../ActiveLink';
-import russiaIcon from '../../../../assets/images/russia.svg';
-import kazakhstanIcon from '../../../../assets/images/kazakhstan.svg';
-import usaIcon from '../../../../assets/images/usa.svg';
+
+import russiaIcon from '@/assets/images/russia.svg';
+import kazakhstanIcon from '@/assets/images/kazakhstan.svg';
+import usaIcon from '@/assets/images/usa.svg';
+import { useOnClickOutside } from '@/hooks/useOnClickOutside';
+import { ActiveLink } from '@/components/ActiveLink';
 interface ILanguageSwitcherProps {
   className?: string;
 }
@@ -14,27 +16,17 @@ const LanguageSwitcher: FC<ILanguageSwitcherProps> = ({ className }) => {
   const router = useRouter();
   const { pathname, query, asPath } = router;
   const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
-  function closeDropdownClick(e: MouseEvent) {
-    const target = e.target as Element;
-    const isDropdownParent = target.closest('.language-switcher');
-    if (!isDropdownParent && isOpen) {
-      setIsOpen(false);
-    }
-  }
-  function closeDropdownEsc(e: KeyboardEvent) {
-    const code = e.code;
+  useOnClickOutside(ref, () => setIsOpen(false));
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  function closeDropdownEsc(event: KeyboardEvent) {
+    const code = event.code;
     if (code === 'Escape') {
       setIsOpen(false);
     }
   }
-  useEffect(() => {
-    window.addEventListener('click', closeDropdownClick);
-    return () => {
-      window.removeEventListener('click', closeDropdownClick);
-    };
-  }, [closeDropdownClick]);
-
   useEffect(() => {
     window.addEventListener('keyup', closeDropdownEsc);
     return () => {
@@ -43,7 +35,7 @@ const LanguageSwitcher: FC<ILanguageSwitcherProps> = ({ className }) => {
   }, [closeDropdownEsc]);
 
   return (
-    <Root className={className}>
+    <Root ref={ref} className={className}>
       <ButtonLangIndicator $isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
         {router.locale}
       </ButtonLangIndicator>
@@ -56,7 +48,6 @@ const LanguageSwitcher: FC<ILanguageSwitcherProps> = ({ className }) => {
                 asPath={asPath}
                 activeClassName="active"
                 locale="ru"
-                passHref
               >
                 <LanguagesDropdownLink>
                   <Image src={russiaIcon} />
@@ -70,7 +61,6 @@ const LanguageSwitcher: FC<ILanguageSwitcherProps> = ({ className }) => {
                 asPath={asPath}
                 activeClassName="active"
                 locale="en"
-                passHref
               >
                 <LanguagesDropdownLink>
                   <Image src={usaIcon} />
@@ -84,7 +74,6 @@ const LanguageSwitcher: FC<ILanguageSwitcherProps> = ({ className }) => {
                 asPath={asPath}
                 activeClassName="active"
                 locale="kz"
-                passHref
               >
                 <LanguagesDropdownLink>
                   <Image src={kazakhstanIcon} />
@@ -129,7 +118,7 @@ const ButtonLangIndicator = styled.button<{ $isOpen: boolean }>`
       props.$isOpen ? 'var(--black2)' : 'transparent'};
     color: var(--white);
     justify-content: flex-start;
-    /* transition: all 0.3s ease; */
+
     position: relative;
     &::before {
       content: '';

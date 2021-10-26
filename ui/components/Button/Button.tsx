@@ -1,6 +1,5 @@
 import React, { ButtonHTMLAttributes, FC } from 'react';
 import styled from 'styled-components';
-import { ActiveLink } from '../../../components/ActiveLink';
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
@@ -36,5 +35,5 @@ const Root = styled.button`
     padding: 14px 28px;
   }
 `;
-
+Button.displayName = 'Button';
 export default Button;
