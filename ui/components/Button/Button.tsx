@@ -29,5 +29,5 @@ const Root = styled.button`
     box-shadow: 0px 14px 30px 0px rgba(27, 157, 120, 0.42);
   }
 `;
-
+Button.displayName = 'Button';
 export default Button;

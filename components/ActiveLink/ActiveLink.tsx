@@ -23,4 +23,5 @@ const ActiveLink: FC<any> = React.forwardRef(
   }
 );
 
+ActiveLink.displayName = 'ActiveLink';
 export default ActiveLink;
