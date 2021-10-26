@@ -1,14 +1,18 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { Header } from '../components/Header';
+import { Footer } from '@/components/Footer';
+import { Header } from '@/components/Header';
 
 interface IMainLayoutProps {}
 
 const MainLayout: FC<IMainLayoutProps> = ({ children }) => {
-  return <Root>{children}</Root>;
+  return (
+    <Root>
+      {children}
+      <Footer />
+    </Root>
+  );
 };
 
-const Root = styled.div`
-  padding-top: 133px;
-`;
+const Root = styled.div``;
 export default MainLayout;
