@@ -27,7 +27,7 @@ const Root = styled.button`
   color: var(--white);
   padding: 25px 28px;
   &:hover {
-    box-shadow: 0px 14px 30px -26px rgba(27, 157, 120, 0.42);
+    box-shadow: 0px 14px 30px 0px rgba(27, 157, 120, 0.42);
   }
 `;
 

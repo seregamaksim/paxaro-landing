@@ -13,6 +13,7 @@ import Logo from '../../ui/icons/Logo';
 import LogoMini from '../../ui/icons/LogoMini';
 import { useIsDesktop } from '../../hooks/useIsDesktop';
 import SocialList from '../SocialList/SocialList';
+import Headroom from 'react-headroom';
 
 interface IHeaderWrapper {
   isActiveMenu: boolean;
@@ -22,13 +23,15 @@ const Header: FC = ({ children }) => {
   const { t } = useTranslation('header');
   const router = useRouter();
   const isDesktop = useIsDesktop();
-  console.log('isDesktop', isDesktop);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
 
   function openMenu() {
     setIsOpenMenu(!isOpenMenu);
   }
   function closeMobileMenuClick(e: MouseEvent) {
+    if (window.innerWidth > 900) {
+      return false;
+    }
     const target = e.target as Element;
     const parentTarget = target.closest('.mobile-menu');
     if (!parentTarget && isOpenMenu) {
@@ -43,10 +46,10 @@ const Header: FC = ({ children }) => {
     return () => {
       window.removeEventListener('click', closeMobileMenuClick);
     };
-  }, [closeMobileMenuClick]);
+  }, []);
   return (
-    <Root>
-      <HeaderScroller>
+    <Headroom>
+      <Root>
         <HeaderBurgerNavContainer>
           <Link href="/" passHref>
             <a>
@@ -58,65 +61,33 @@ const Header: FC = ({ children }) => {
           </BurgerBtn>
         </HeaderBurgerNavContainer>
         <HeaderWrapper isActiveMenu={isOpenMenu}>
-          <HeaderTop>
-            <HeaderTopContainer>
-              <Link href="/" passHref>
-                <HeaderLogoLink>
-                  <Image src={logo} alt={t('logoAlt')} />
-                  {/* <Logo width={148} height={46} /> */}
-                </HeaderLogoLink>
-              </Link>
-              <HeaderTopNav>
-                <HeaderTopItem>
-                  <ActiveLink href="/" activeClassName="active" passHref>
-                    <HeaderTopLink>{t('main.aboutProduct')}</HeaderTopLink>
-                  </ActiveLink>
-                </HeaderTopItem>
-                <HeaderTopItem>
-                  <ActiveLink href="/blog" activeClassName="active" passHref>
-                    <HeaderTopLink>{t('main.blog')}</HeaderTopLink>
-                  </ActiveLink>
-                </HeaderTopItem>
-                <HeaderTopItem>
-                  <ActiveLink href="/about" activeClassName="active" passHref>
-                    <HeaderTopLink>{t('main.aboutCompany')}</HeaderTopLink>
-                  </ActiveLink>
-                </HeaderTopItem>
-              </HeaderTopNav>
-              {isDesktop && (
-                <HeaderButtonsWrap>
-                  <HeaderButtonTitle>
-                    {t('main.accountTitle')}
-                  </HeaderButtonTitle>
-                  <HeaderButtons>
-                    <Link
-                      href="https://nextjs.org/docs/advanced-features/i18n-routing"
-                      passHref
-                    >
-                      <HeaderButtonRegistration
-                        isLink
-                        text={t('main.registration')}
-                      ></HeaderButtonRegistration>
-                    </Link>
-                    <Link
-                      href="https://nextjs.org/docs/advanced-features/i18n-routing"
-                      passHref
-                    >
-                      <HeaderLinkLogin>
-                        <span>{t('main.login')}</span>
-                      </HeaderLinkLogin>
-                    </Link>
-                    <LanguageSwitcher />
-                  </HeaderButtons>
-                </HeaderButtonsWrap>
-              )}
-            </HeaderTopContainer>
-          </HeaderTop>
-          {children && (
-            <HeaderBottom>
-              <HeaderBottomContainer>
-                {children}
-                {!isDesktop && (
+          <HeaderScroller>
+            <HeaderTop>
+              <HeaderTopContainer>
+                <Link href="/" passHref>
+                  <HeaderLogoLink>
+                    <Image src={logo} alt={t('logoAlt')} />
+                    {/* <Logo width={148} height={46} /> */}
+                  </HeaderLogoLink>
+                </Link>
+                <HeaderTopNav>
+                  <HeaderTopItem>
+                    <ActiveLink href="/" activeClassName="active" passHref>
+                      <HeaderTopLink>{t('main.aboutProduct')}</HeaderTopLink>
+                    </ActiveLink>
+                  </HeaderTopItem>
+                  <HeaderTopItem>
+                    <ActiveLink href="/blog" activeClassName="active" passHref>
+                      <HeaderTopLink>{t('main.blog')}</HeaderTopLink>
+                    </ActiveLink>
+                  </HeaderTopItem>
+                  <HeaderTopItem>
+                    <ActiveLink href="/about" activeClassName="active" passHref>
+                      <HeaderTopLink>{t('main.aboutCompany')}</HeaderTopLink>
+                    </ActiveLink>
+                  </HeaderTopItem>
+                </HeaderTopNav>
+                {isDesktop && (
                   <HeaderButtonsWrap>
                     <HeaderButtonTitle>
                       {t('main.accountTitle')}
@@ -139,46 +110,76 @@ const Header: FC = ({ children }) => {
                           <span>{t('main.login')}</span>
                         </HeaderLinkLogin>
                       </Link>
+                      <LanguageSwitcher />
                     </HeaderButtons>
                   </HeaderButtonsWrap>
                 )}
-              </HeaderBottomContainer>
-            </HeaderBottom>
-          )}
-          {!isDesktop && (
-            <>
-              <StyledSocialList />
-              <StyledLanguageSwitcher />
-            </>
-          )}
+              </HeaderTopContainer>
+            </HeaderTop>
+            {children && (
+              <HeaderBottom>
+                <HeaderBottomContainer>
+                  {children}
+                  {!isDesktop && (
+                    <HeaderButtonsWrap>
+                      <HeaderButtonTitle>
+                        {t('main.accountTitle')}
+                      </HeaderButtonTitle>
+                      <HeaderButtons>
+                        <Link
+                          href="https://nextjs.org/docs/advanced-features/i18n-routing"
+                          passHref
+                        >
+                          <HeaderButtonRegistration
+                            isLink
+                            text={t('main.registration')}
+                          ></HeaderButtonRegistration>
+                        </Link>
+                        <Link
+                          href="https://nextjs.org/docs/advanced-features/i18n-routing"
+                          passHref
+                        >
+                          <HeaderLinkLogin>
+                            <span>{t('main.login')}</span>
+                          </HeaderLinkLogin>
+                        </Link>
+                      </HeaderButtons>
+                    </HeaderButtonsWrap>
+                  )}
+                </HeaderBottomContainer>
+              </HeaderBottom>
+            )}
+            {!isDesktop && (
+              <>
+                <StyledSocialList />
+                <StyledLanguageSwitcher />
+              </>
+            )}
+          </HeaderScroller>
         </HeaderWrapper>
-      </HeaderScroller>
-    </Root>
+      </Root>
+    </Headroom>
   );
 };
 
 const Root = styled.header`
-  position: fixed;
+  /* position: fixed;
   left: 0;
   right: 0;
   top: 0;
+  z-index: 10;
   transition: transform 0.5s ease-out;
-  will-change: transform;
+  will-change: transform; */
   background: var(--black3);
   box-shadow: 0px 30px 36px -15px rgba(0, 0, 0, 0.15);
   @media (max-width: 900px) {
-    height: 100vh;
-    min-height: 100vh;
-    /* mobile viewport bug fix */
-    min-height: -webkit-fill-available;
-    overflow: hidden;
   }
 `;
 const HeaderScroller = styled.div`
-  height: 100%;
-
-  padding-bottom: 50px;
-  overflow: scroll;
+  @media (max-width: 900px) {
+    padding-bottom: 200px;
+    overflow: scroll;
+  }
 `;
 
 const HeaderWrapper = styled.div.attrs<IHeaderWrapper>((props) => ({
@@ -190,8 +191,10 @@ const HeaderWrapper = styled.div.attrs<IHeaderWrapper>((props) => ({
     display: ${(props: IHeaderWrapper) =>
       props.isActiveMenu ? 'flex' : 'none'};
     flex-direction: column;
+    height: 100vh;
   }
 `;
+
 const HeaderBurgerNav = styled.div``;
 const HeaderBurgerNavContainer = styled(Container)`
   display: none;
