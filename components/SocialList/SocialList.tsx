@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { ActiveLink } from '../ActiveLink';
+import { ActiveLink } from '@/components/ActiveLink';
 
 interface ISocialListProps {
   className?: string;
@@ -9,27 +9,27 @@ const SocialList: FC<ISocialListProps> = ({ className }) => {
   return (
     <Root className={className}>
       <Item>
-        <ActiveLink href="https://dev.to/" passHref>
+        <ActiveLink href="https://dev.to/">
           <ItemLink>Instagram</ItemLink>
         </ActiveLink>
       </Item>
       <Item>
-        <ActiveLink href="https://dev.to/" passHref>
+        <ActiveLink href="https://dev.to/">
           <ItemLink>VC</ItemLink>
         </ActiveLink>
       </Item>
       <Item>
-        <ActiveLink href="https://dev.to/" passHref>
+        <ActiveLink href="https://dev.to/">
           <ItemLink>Twitter</ItemLink>
         </ActiveLink>
       </Item>
       <Item>
-        <ActiveLink href="https://dev.to/" passHref>
+        <ActiveLink href="https://dev.to/">
           <ItemLink>YouTube</ItemLink>
         </ActiveLink>
       </Item>
       <Item>
-        <ActiveLink href="https://dev.to/" passHref>
+        <ActiveLink href="https://dev.to/">
           <ItemLink>Telegram</ItemLink>
         </ActiveLink>
       </Item>
@@ -44,6 +44,7 @@ const Root = styled.ul`
     flex-direction: row;
   }
 `;
+
 const Item = styled.li`
   margin-bottom: 14px;
   &:last-child {
@@ -57,6 +58,7 @@ const Item = styled.li`
     }
   }
 `;
+
 const ItemLink = styled.a`
   font-weight: 600;
   font-size: 14px;

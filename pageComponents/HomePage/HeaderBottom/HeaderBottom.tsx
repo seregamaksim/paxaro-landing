@@ -1,45 +1,45 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { ActiveLink } from '../../../components/ActiveLink';
+import { ActiveLink } from '@/components/ActiveLink';
 
 const HeaderBottom: FC = () => {
   const { t } = useTranslation('header');
   return (
     <HeaderBottomMenu>
       <HeaderBottomMenuItem>
-        <ActiveLink href="/#history" activeClassName="active" passHref>
+        <ActiveLink href="/#history" activeClassName="active">
           <HeaderBottomMenuLink>{t('secondMain.history')}</HeaderBottomMenuLink>
         </ActiveLink>
       </HeaderBottomMenuItem>
       <HeaderBottomMenuItem>
-        <ActiveLink href="/#advantages" activeClassName="active" passHref>
+        <ActiveLink href="/#advantages" activeClassName="active">
           <HeaderBottomMenuLink>
             {t('secondMain.advantages')}
           </HeaderBottomMenuLink>
         </ActiveLink>
       </HeaderBottomMenuItem>
       <HeaderBottomMenuItem>
-        <ActiveLink href="/#knowledgeBase" activeClassName="active" passHref>
+        <ActiveLink href="/#knowledgeBase" activeClassName="active">
           <HeaderBottomMenuLink>
             {t('secondMain.knowledgeBase')}
           </HeaderBottomMenuLink>
         </ActiveLink>
       </HeaderBottomMenuItem>
       <HeaderBottomMenuItem>
-        <ActiveLink href="/#howWork" activeClassName="active" passHref>
+        <ActiveLink href="/#howWork" activeClassName="active">
           <HeaderBottomMenuLink>{t('secondMain.howWork')}</HeaderBottomMenuLink>
         </ActiveLink>
       </HeaderBottomMenuItem>
       <HeaderBottomMenuItem>
-        <ActiveLink href="/#subscription" activeClassName="active" passHref>
+        <ActiveLink href="/#subscription" activeClassName="active">
           <HeaderBottomMenuLink>
             {t('secondMain.subscription')}
           </HeaderBottomMenuLink>
         </ActiveLink>
       </HeaderBottomMenuItem>
       <HeaderBottomMenuItem>
-        <ActiveLink href="/#howToStart" activeClassName="active" passHref>
+        <ActiveLink href="/#howToStart" activeClassName="active">
           <HeaderBottomMenuLink>
             {t('secondMain.howToStart')}
           </HeaderBottomMenuLink>
@@ -56,10 +56,9 @@ const HeaderBottomMenu = styled.ul`
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 24px;
-    /* margin-bottom: 24px; */
-    /* border-bottom: 1px solid rgba(153, 153, 153, 0.3); */
   }
 `;
+
 const HeaderBottomMenuItem = styled.li`
   margin-right: 30px;
   &:last-child {
@@ -76,6 +75,7 @@ const HeaderBottomMenuItem = styled.li`
     }
   }
 `;
+
 const HeaderBottomMenuLink = styled.a`
   font-weight: 600;
   font-size: 14px;

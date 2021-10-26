@@ -1,19 +1,20 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import styled from 'styled-components';
 import { Container } from '../Container';
 import Link from 'next/link';
 import Image from 'next/image';
-import logo from '../../assets/images/logo.svg';
+import logo from '@/assets/images/logo.svg';
 import { useRouter } from 'next/dist/client/router';
 import { ActiveLink } from '../ActiveLink';
-import { Button } from '../../ui/components/Button';
+import { Button } from '@/ui/components/Button';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
-import Logo from '../../ui/icons/Logo';
-import LogoMini from '../../ui/icons/LogoMini';
-import { useIsDesktop } from '../../hooks/useIsDesktop';
+
+import LogoMini from '@/ui/icons/LogoMini';
+import { useIsDesktop } from '@/hooks/useIsDesktop';
 import SocialList from '../SocialList/SocialList';
 import Headroom from 'react-headroom';
+import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 
 interface IHeaderWrapper {
   isActiveMenu: boolean;
@@ -24,42 +25,35 @@ const Header: FC = ({ children }) => {
   const router = useRouter();
   const isDesktop = useIsDesktop();
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
-  function openMenu() {
-    setIsOpenMenu(!isOpenMenu);
-  }
-  function closeMobileMenuClick(e: MouseEvent) {
-    if (window.innerWidth > 900) {
-      return false;
-    }
-    const target = e.target as Element;
-    const parentTarget = target.closest('.mobile-menu');
-    if (!parentTarget && isOpenMenu) {
-      setIsOpenMenu(false);
+  useOnClickOutside(ref, () => handleBurgerClick());
+
+  function handleBurgerClick() {
+    if (innerWidth < 900) {
+      setIsOpenMenu(!isOpenMenu);
     }
   }
   useEffect(() => {
     window.innerWidth > 900 ? setIsOpenMenu(true) : setIsOpenMenu(false);
   }, []);
-  useEffect(() => {
-    window.addEventListener('click', closeMobileMenuClick);
-    return () => {
-      window.removeEventListener('click', closeMobileMenuClick);
-    };
-  }, []);
   return (
     <Headroom>
-      <Root>
+      <Root ref={ref}>
         <HeaderBurgerNavContainer>
           <Link href="/" passHref>
             <a>
               <LogoMini />
             </a>
           </Link>
-          <BurgerBtn className={isOpenMenu ? 'active' : ''} onClick={openMenu}>
+          <BurgerBtn
+            className={isOpenMenu ? 'active' : ''}
+            onClick={handleBurgerClick}
+          >
             <span></span>
           </BurgerBtn>
         </HeaderBurgerNavContainer>
+
         <HeaderWrapper isActiveMenu={isOpenMenu}>
           <HeaderScroller>
             <HeaderTop>
@@ -72,17 +66,17 @@ const Header: FC = ({ children }) => {
                 </Link>
                 <HeaderTopNav>
                   <HeaderTopItem>
-                    <ActiveLink href="/" activeClassName="active" passHref>
+                    <ActiveLink href="/" activeClassName="active">
                       <HeaderTopLink>{t('main.aboutProduct')}</HeaderTopLink>
                     </ActiveLink>
                   </HeaderTopItem>
                   <HeaderTopItem>
-                    <ActiveLink href="/blog" activeClassName="active" passHref>
+                    <ActiveLink href="/blog" activeClassName="active">
                       <HeaderTopLink>{t('main.blog')}</HeaderTopLink>
                     </ActiveLink>
                   </HeaderTopItem>
                   <HeaderTopItem>
-                    <ActiveLink href="/about" activeClassName="active" passHref>
+                    <ActiveLink href="/about" activeClassName="active">
                       <HeaderTopLink>{t('main.aboutCompany')}</HeaderTopLink>
                     </ActiveLink>
                   </HeaderTopItem>
@@ -163,18 +157,12 @@ const Header: FC = ({ children }) => {
 };
 
 const Root = styled.header`
-  /* position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 10;
-  transition: transform 0.5s ease-out;
-  will-change: transform; */
   background: var(--black3);
   box-shadow: 0px 30px 36px -15px rgba(0, 0, 0, 0.15);
   @media (max-width: 900px) {
   }
 `;
+
 const HeaderScroller = styled.div`
   @media (max-width: 900px) {
     padding-bottom: 200px;
@@ -195,7 +183,6 @@ const HeaderWrapper = styled.div.attrs<IHeaderWrapper>((props) => ({
   }
 `;
 
-const HeaderBurgerNav = styled.div``;
 const HeaderBurgerNavContainer = styled(Container)`
   display: none;
   align-items: center;
@@ -206,7 +193,9 @@ const HeaderBurgerNavContainer = styled(Container)`
     display: flex;
   }
 `;
+
 const HeaderTop = styled.div``;
+
 const HeaderTopContainer = styled(Container)`
   padding-top: 22px;
   padding-bottom: 22px;
@@ -218,6 +207,7 @@ const HeaderTopContainer = styled(Container)`
     padding-bottom: 0;
   }
 `;
+
 const HeaderLogoLink = styled.a`
   margin-right: 42px;
   @media (max-width: 1024px) {
@@ -227,6 +217,7 @@ const HeaderLogoLink = styled.a`
     display: none;
   }
 `;
+
 const HeaderTopNav = styled.ul`
   display: flex;
   align-items: center;
@@ -238,6 +229,7 @@ const HeaderTopNav = styled.ul`
     border-bottom: 1px solid rgba(153, 153, 153, 0.3);
   }
 `;
+
 const HeaderTopItem = styled.li`
   margin-right: 30px;
   &:last-child {
@@ -254,6 +246,7 @@ const HeaderTopItem = styled.li`
     }
   }
 `;
+
 const HeaderTopLink = styled.a`
   font-weight: 600;
   font-size: 18px;
@@ -268,6 +261,7 @@ const HeaderTopLink = styled.a`
     line-height: 34px;
   }
 `;
+
 const HeaderButtonsWrap = styled.div`
   margin-left: auto;
   @media (max-width: 900px) {
@@ -275,10 +269,12 @@ const HeaderButtonsWrap = styled.div`
     margin-bottom: 24px;
   }
 `;
+
 const HeaderButtons = styled.div`
   display: flex;
   align-items: center;
 `;
+
 const HeaderButtonTitle = styled.p`
   font-weight: bold;
   font-size: 24px;
@@ -291,6 +287,7 @@ const HeaderButtonTitle = styled.p`
     display: block;
   }
 `;
+
 const HeaderButtonRegistration = styled(Button)`
   margin-right: 14px;
   font-size: 14px;
@@ -322,12 +319,14 @@ const HeaderLinkLogin = styled.a`
     border-radius: 8px;
   }
 `;
+
 const HeaderBottom = styled.div`
   background-color: var(--black2);
   @media (max-width: 900px) {
     background-color: transparent;
   }
 `;
+
 const HeaderBottomContainer = styled(Container)`
   padding-top: 11px;
   padding-bottom: 11px;
@@ -385,14 +384,7 @@ const BurgerBtn = styled.button`
   }
 `;
 
-const StyledLanguageSwitcher = styled(LanguageSwitcher)`
-  @media (max-width: 900px) {
-    /* position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0; */
-  }
-`;
+const StyledLanguageSwitcher = styled(LanguageSwitcher)``;
 
 const StyledSocialList = styled(SocialList)`
   margin-bottom: 24px;
@@ -401,16 +393,3 @@ const StyledSocialList = styled(SocialList)`
 `;
 
 export default Header;
-
-// #menu-toggle:checked ~ .menu-btn > span::before{
-//   top: 0;
-//   transform: rotate(0);
-// }
-// #menu-toggle:checked ~ .menu-btn > span::after{
-//   top: 0;
-//   transform: rotate(90deg);
-// }
-// #menu-toggle:checked ~ .menubox{
-//   visibility: visible;
-//   left: 0;
-// }

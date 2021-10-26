@@ -1,6 +1,5 @@
 import React, { ButtonHTMLAttributes, FC } from 'react';
 import styled from 'styled-components';
-import { ActiveLink } from '../../../components/ActiveLink';
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
