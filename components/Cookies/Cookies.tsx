@@ -7,11 +7,14 @@ import { useCookies } from 'react-cookie';
 
 const Cookies: FC = () => {
   const { t } = useTranslation('cookies');
-  const [cookies, setCookie, removeCookie] = useCookies(['cookies']);
-  console.log('cookies', cookies);
+  const [cookies, setCookie] = useCookies(['cookiesSite']);
+
+  function handleClickApplyButton() {
+    setCookie('cookiesSite', 'true', { path: '/' });
+  }
 
   return (
-    <Root>
+    <Root $show={cookies.cookiesSite ? true : false}>
       <Wrapper>
         <Text>
           {t('text')}
@@ -19,21 +22,32 @@ const Cookies: FC = () => {
             <TextLink>{t('more')}</TextLink>
           </Link>
         </Text>
-        <ApplyButton
-          text={t('textButton')}
-          onClick={() => console.log('success')}
-        />
+        <ApplyButton text={t('textButton')} onClick={handleClickApplyButton} />
       </Wrapper>
     </Root>
   );
 };
 
-const Root = styled.div``;
+const Root = styled.div<{ $show: boolean }>`
+  display: ${(props) => (props.$show ? 'none' : 'block')};
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(1, 2, 2, 0.8);
+`;
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 22px;
+  @media (max-width: 768px) {
+    padding: 20px;
+    flex-direction: column;
+  }
 `;
 
 const Text = styled.p`
@@ -42,6 +56,12 @@ const Text = styled.p`
   line-height: 17px;
 
   color: var(--white);
+  max-width: 610px;
+  margin-right: 30px;
+  @media (max-width: 768px) {
+    margin-right: 0;
+    margin-bottom: 12px;
+  }
 `;
 
 const TextLink = styled.a`

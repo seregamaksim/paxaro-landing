@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { Footer } from '@/components/Footer';
-import { Header } from '@/components/Header';
+
 import { Cookies } from '@/components/Cookies';
 
 interface IMainLayoutProps {}
 
-const MainLayout: FC<IMainLayoutProps> = ({ children }) => {
+const MainLayout: FC = ({ children }) => {
   return (
     <Root>
       {children}
@@ -16,5 +16,8 @@ const MainLayout: FC<IMainLayoutProps> = ({ children }) => {
   );
 };
 
-const Root = styled.div``;
+const Root = styled.div`
+  position: relative;
+`;
+
 export default MainLayout;
