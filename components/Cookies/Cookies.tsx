@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import Link from 'next/link';
@@ -8,13 +8,16 @@ import { useCookies } from 'react-cookie';
 const Cookies: FC = () => {
   const { t } = useTranslation('cookies');
   const [cookies, setCookie] = useCookies(['cookiesSite']);
-
+  const [hasCookie, setHasCookie] = useState(true);
   function handleClickApplyButton() {
     setCookie('cookiesSite', 'true', { path: '/' });
+    setHasCookie(true);
   }
-
+  useEffect(() => {
+    cookies.cookiesSite ? setHasCookie(true) : setHasCookie(false);
+  }, []);
   return (
-    <Root $show={cookies.cookiesSite ? true : false}>
+    <Root $show={hasCookie}>
       <Wrapper>
         <Text>
           {t('text')}
@@ -76,4 +79,5 @@ const ApplyButton = styled(Button)`
   padding-top: 8px;
   padding-bottom: 8px;
 `;
+
 export default Cookies;
