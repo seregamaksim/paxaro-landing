@@ -2,10 +2,14 @@
   --black1: #000;
   --black2: #1d1d1d;
   --black3: #010202;
+  --black4: #333;
 
   --white: #fff;
 
   --green: #48be9c;
+
+  --red: #ee6363;
+  --lightGray: #f4f4f4;
 
   --greenGradient: linear-gradient(269.41deg, #45c6a1 0.51%, #179a74 99.5%);
 }
@@ -77,7 +81,6 @@ a {
 }
 body {
   overflow-x: hidden;
-  height: 3000px;
 }
 html {
   scroll-behavior: smooth;
