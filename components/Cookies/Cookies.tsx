@@ -19,8 +19,8 @@ const Cookies: FC = () => {
     cookies.cookiesSite ? setHasCookie(true) : setHasCookie(false);
   }, []);
 
-  return (
-    <Root $show={hasCookie}>
+  return hasCookie ? null : (
+    <Root>
       <Wrapper>
         <Text>
           {t('text')}
@@ -34,8 +34,7 @@ const Cookies: FC = () => {
   );
 };
 
-const Root = styled.div<{ $show: boolean }>`
-  display: ${(props) => (props.$show ? 'none' : 'block')};
+const Root = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;

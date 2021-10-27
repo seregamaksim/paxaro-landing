@@ -5,7 +5,7 @@ import { Container } from '../Container';
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '@/assets/images/logo.svg';
-import { useRouter } from 'next/dist/client/router';
+
 import { ActiveLink } from '../ActiveLink';
 import { Button } from '@/ui/components/Button';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
@@ -13,7 +13,7 @@ import LogoMini from '@/ui/icons/LogoMini';
 import { useIsDesktop } from '@/hooks/useIsDesktop';
 import SocialList from '../SocialList/SocialList';
 import Headroom from 'react-headroom';
-import { isMobile } from 'react-device-detect';
+
 import { MobileStore } from './components/MobileStore';
 
 interface IHeaderWrapper {
@@ -22,12 +22,9 @@ interface IHeaderWrapper {
 
 const Header: FC = ({ children }) => {
   const { t } = useTranslation('header');
-  const router = useRouter();
   const isDesktop = useIsDesktop();
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-
-  // useOnClickOutside(ref, () => handleBurgerClick());
 
   function handleBurgerClick() {
     if (innerWidth < 900) {
@@ -63,7 +60,6 @@ const Header: FC = ({ children }) => {
                   <Link href="/" passHref>
                     <HeaderLogoLink>
                       <Image src={logo} alt={t('logoAlt')} />
-                      {/* <Logo width={148} height={46} /> */}
                     </HeaderLogoLink>
                   </Link>
                   <HeaderTopNav>
