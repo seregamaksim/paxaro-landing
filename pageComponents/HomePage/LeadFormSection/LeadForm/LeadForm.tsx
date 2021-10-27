@@ -1,12 +1,12 @@
 import { FC, useState } from 'react';
 import { Formik, Form } from 'formik';
-import { InputBorder } from '../../../../ui/components/InputBorder';
+import { InputBorder } from '@/ui/components/InputBorder';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import styled from 'styled-components';
 import { Trans } from 'react-i18next';
 import Link from 'next/link';
-import { Button } from '../../../../ui/components/Button';
+import { Button } from '@/ui/components/Button';
 
 interface FormValues {
   firstname: string;
@@ -40,9 +40,8 @@ const LeadForm: FC<ILeadFormProps> = ({ className }) => {
 
   async function submitForm(values: FormValues) {
     await new Promise((r) => setTimeout(r, 2000));
-    // alert(JSON.stringify(values, null, 2));
+
     setIsSuccess(true);
-    // console.log('values', values);
   }
   return isSuccess ? (
     <SuccessBlock>
@@ -150,6 +149,7 @@ const FormPrivacyText = styled.p`
     text-decoration: underline;
   }
 `;
+
 const SubmitButton = styled(Button)`
   align-self: flex-end;
   @media (max-width: 768px) {
@@ -170,6 +170,7 @@ const SuccessBlock = styled.div`
     border-radius: 30px;
   }
 `;
+
 const SuccessBlockText = styled.p`
   font-weight: bold;
   font-size: 24px;
@@ -197,4 +198,5 @@ const SuccessBlockText = styled.p`
     line-height: 24px;
   }
 `;
+
 export default LeadForm;

@@ -1,10 +1,9 @@
 import type { NextPage } from 'next';
-import MainLayout from '../layouts/MainLayout';
+import MainLayout from '@/layouts/MainLayout';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Header } from '@/components/Header';
 import HeaderBottom from '@/pageComponents/HomePage/HeaderBottom/HeaderBottom';
-import LeadForm from '../pageComponents/HomePage/LeadFormSection/LeadFormSection';
-import { Footer } from '@/components/Footer';
+import LeadForm from '@/pageComponents/HomePage/LeadFormSection/LeadFormSection';
 
 const Home: NextPage = () => {
   return (

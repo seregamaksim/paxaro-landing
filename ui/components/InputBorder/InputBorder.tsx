@@ -1,5 +1,5 @@
-import { FieldHookConfig, useField } from 'formik';
-import { FC, HTMLInputTypeAttribute, useState } from 'react';
+import { useField } from 'formik';
+import { FC, useState } from 'react';
 import styled from 'styled-components';
 
 interface IInputBorderProps {
@@ -16,10 +16,8 @@ const InputBorder: FC<JSX.IntrinsicElements['input'] & IInputBorderProps> = ({
   id,
   ...props
 }) => {
-  const [field, meta, helpers] = useField(name);
+  const [field, meta] = useField(name);
   const [focusInput, setFocusInput] = useState(field.value > 0 ? true : false);
-
-  console.log('meta', meta);
 
   function onBlur() {
     if (field.value.length > 0) {
