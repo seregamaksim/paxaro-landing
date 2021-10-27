@@ -17,6 +17,7 @@ const MobileStore: FC = () => {
   function hangleClickCloseButton() {
     setIsOpen(false);
   }
+
   function getDeviceLink() {
     if (isAndroid) {
       return googlePlayLink;
@@ -26,6 +27,7 @@ const MobileStore: FC = () => {
     }
     return '';
   }
+
   return (
     <Root $open={isOpen}>
       <Wrapper>
@@ -57,10 +59,6 @@ const Wrapper = styled.div`
 `;
 
 const CloseButton = styled.button`
-  /* width: 24px;
-  height: 24px; */
-  /* background: url(${closeIcon}) no-repeat center;
-  background-size: cover; */
   width: 100%;
   max-width: 24px;
   margin-right: 9px;

@@ -9,7 +9,6 @@ import { useRouter } from 'next/dist/client/router';
 import { ActiveLink } from '../ActiveLink';
 import { Button } from '@/ui/components/Button';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
-
 import LogoMini from '@/ui/icons/LogoMini';
 import { useIsDesktop } from '@/hooks/useIsDesktop';
 import SocialList from '../SocialList/SocialList';

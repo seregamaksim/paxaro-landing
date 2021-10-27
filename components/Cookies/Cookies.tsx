@@ -9,13 +9,16 @@ const Cookies: FC = () => {
   const { t } = useTranslation('cookies');
   const [cookies, setCookie] = useCookies(['cookiesSite']);
   const [hasCookie, setHasCookie] = useState(true);
+
   function handleClickApplyButton() {
     setCookie('cookiesSite', 'true', { path: '/' });
     setHasCookie(true);
   }
+
   useEffect(() => {
     cookies.cookiesSite ? setHasCookie(true) : setHasCookie(false);
   }, []);
+
   return (
     <Root $show={hasCookie}>
       <Wrapper>
