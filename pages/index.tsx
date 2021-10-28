@@ -4,6 +4,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Header } from '@/components/Header';
 import HeaderBottom from '@/pageComponents/HomePage/HeaderBottom/HeaderBottom';
 import LeadForm from '@/pageComponents/HomePage/LeadFormSection/LeadFormSection';
+import { WhyPaxaro } from '@/pageComponents/HomePage/WhyPaxaro';
 
 const Home: NextPage = () => {
   return (
@@ -12,6 +13,7 @@ const Home: NextPage = () => {
         <HeaderBottom />
       </Header>
       <main>
+        <WhyPaxaro />
         <LeadForm />
       </main>
     </MainLayout>
@@ -26,6 +28,7 @@ export const getServerSideProps = async ({ locale }: any) => ({
       'footer',
       'cookies',
       'leadForm',
+      'whyPaxaro',
     ])),
   },
 });
