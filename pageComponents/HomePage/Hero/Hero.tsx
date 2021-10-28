@@ -20,7 +20,14 @@ const Hero: FC = () => {
             <StyledLink text={t('btnText')} isLink />
           </Link>
         </Head>
-        <CanvasNotebook />
+        {/* <CanvasNotebook /> */}
+        {/* <img src={require('@/assets/images/logo.svg')} /> */}
+        <CanvasNotebook
+          scrollHeight={4000}
+          width={1158}
+          height={770}
+          numFrames={143}
+        />
       </StyledContainer>
     </Root>
   );
