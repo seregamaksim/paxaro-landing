@@ -26,6 +26,7 @@ export const getServerSideProps = async ({ locale }: any) => ({
       'footer',
       'cookies',
       'leadForm',
+      'calculator',
     ])),
   },
 });
