@@ -26,6 +26,7 @@ export const getServerSideProps = async ({ locale }: any) => ({
       'common',
       'header',
       'footer',
+      'cookies',
       'leadForm',
       'whyPaxaro',
     ])),

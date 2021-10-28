@@ -11,20 +11,25 @@
   "dependencies": {
     "@types/react-headroom": "^2.2.2",
     "@types/styled-components": "^5.1.15",
+    "cookie": "^0.4.1",
     "formik": "^2.2.9",
     "gsap": "^3.8.0",
     "i18next": "^20.6.1",
     "next": "11.1.2",
     "next-i18next": "^8.9.0",
     "react": "17.0.2",
+    "react-cookie": "^4.1.1",
+    "react-device-detect": "^2.1.2",
     "react-dom": "17.0.2",
     "react-headroom": "^3.2.0",
     "react-i18next": "^11.12.0",
     "styled-components": "^5.3.3",
+    "universal-cookie": "^4.0.4",
     "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/react": "17.0.31",
+    "babel-plugin-styled-components": "^1.13.3",
     "eslint": "^8.1.0",
     "eslint-config-next": "11.1.2",
     "typescript": "4.4.4"

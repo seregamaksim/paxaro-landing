@@ -6,6 +6,7 @@ import { composeInitialProps, Trans, useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 
 const WhyPaxaro: FC = () => {
   const { t } = useTranslation('whyPaxaro');
@@ -17,6 +18,7 @@ const WhyPaxaro: FC = () => {
   const counterLineBarRef = useRef(null);
   const descriptionTextWrapFirstRef = useRef(null);
   const descriptionTextWrapSecondRef = useRef(null);
+  const secondDescriptionBlockRef = useRef(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -28,19 +30,73 @@ const WhyPaxaro: FC = () => {
         pin: true,
         scrub: 1,
         markers: true,
+        snap: 'labels',
       },
     });
 
-    WhyPaxaroTimeline.addLabel('start').to(
-      whyPaxaroTitleRef.current,
-      {
-        xPercent: -100,
-        opacity: 0,
-        duration: 1,
-      },
-      'start'
-    );
-  }, []);
+    WhyPaxaroTimeline.addLabel('start')
+      .to(
+        whyPaxaroTitleRef.current,
+        {
+          x: -100,
+          opacity: 0,
+          duration: 0.3,
+        },
+        0
+      )
+      .from(
+        desciptionBlockRef.current,
+        {
+          opacity: 0,
+          duration: 0.3,
+        },
+        '>-0.1'
+      )
+      .addLabel('showDescriptionBlock')
+      .to(
+        [counterFirstNumberRef.current, descriptionTextWrapFirstRef.current],
+        {
+          opacity: 0,
+          duration: 0.1,
+        },
+        'showDescriptionBlock'
+      )
+      .to(
+        counterLineBarRef.current,
+        {
+          x: 35,
+          duration: 0.1,
+        },
+        'showDescriptionBlock'
+      )
+      .from(
+        [counterSecondNumberRef.current, descriptionTextWrapSecondRef.current],
+        {
+          opacity: 0,
+          duration: 0.1,
+        },
+        'showDescriptionBlock'
+      )
+      .addLabel('showSecondDescription')
+      .to(
+        desciptionBlockRef.current,
+        {
+          opacity: 0,
+          duration: 0.3,
+        },
+        'showSecondDescription+=0.5'
+      )
+      .from(
+        secondDescriptionBlockRef.current,
+        {
+          opacity: 0,
+          duration: 0.3,
+          y: 30,
+        },
+        '>'
+      )
+      .addLabel('showSecondDescriptionBlockRef');
+  });
 
   return (
     <Root ref={mainRef}>
@@ -83,6 +139,9 @@ const WhyPaxaro: FC = () => {
               </DescriptionCounterTextWrapAbsolute>
             </DescriptionCounterTextsWrapper>
           </DescriptionsWrapper>
+          <SecondDescriptionBlockRef ref={secondDescriptionBlockRef}>
+            <DescriptionText>{t('description3.text1')}</DescriptionText>
+          </SecondDescriptionBlockRef>
         </Content>
       </StyledContainer>
     </Root>
@@ -113,7 +172,9 @@ const StyledSectionTitle = styled(SectionTitle)`
   max-width: 454px;
 `;
 
-const Content = styled.div``;
+const Content = styled.div`
+  position: relative;
+`;
 
 const ContentTitle = styled.p`
   max-width: 530px;
@@ -122,8 +183,10 @@ const ContentTitle = styled.p`
   line-height: 87px;
   color: var(--black2);
   position: absolute;
+  z-index: 1;
   left: 6.94%;
   bottom: 15%;
+  will-change: transform, opacity;
   span {
     color: #bdbdbd;
   }
@@ -137,7 +200,8 @@ const DescriptionsWrapper = styled.div`
   background: var(--white);
   box-shadow: 0px 6px 36px rgba(104, 104, 104, 0.08);
   border-radius: 40px;
-  opacity: 0;
+  will-change: opacity;
+  /* opacity: 0; */
 `;
 
 const DescriptionsCounter = styled.div`
@@ -156,7 +220,7 @@ const DescriptionCounterText = styled.p`
   line-height: 25px;
 
   letter-spacing: 0.01em;
-
+  will-change: opacity;
   color: var(--black2);
 `;
 
@@ -164,7 +228,6 @@ const DescriptionCounterTextAbsolute = styled(DescriptionCounterText)`
   position: absolute;
   top: 0;
   left: 0;
-  opacity: 0;
 `;
 
 const DescriptionCounterLineWrap = styled.div`
@@ -181,6 +244,7 @@ const DescriptionCounterLineWrap = styled.div`
     left: 0;
     top: 0;
     background-color: var(--green);
+    will-change: transform;
   }
 `;
 
@@ -188,14 +252,16 @@ const DescriptionCounterTextsWrapper = styled.div`
   position: relative;
 `;
 
-const DescriptionCounterTextWrap = styled.div``;
+const DescriptionCounterTextWrap = styled.div`
+  will-change: opacity;
+`;
 
 const DescriptionCounterTextWrapAbsolute = styled(DescriptionCounterTextWrap)`
   position: absolute;
   top: 0;
   left: 0;
-  opacity: 0;
 `;
+
 const DescriptionText = styled.p`
   font-size: 18px;
   line-height: 25px;
@@ -208,4 +274,21 @@ const DescriptionText = styled.p`
   }
 `;
 
+const SecondDescriptionBlockRef = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 720px;
+  padding: 58px 35px;
+  background: var(--white);
+  box-shadow: 0px 6px 36px rgba(104, 104, 104, 0.08);
+  border-radius: 40px;
+  will-change: transform, opacity;
+  & ${DescriptionText} {
+    font-weight: 600;
+    text-align: center;
+  }
+`;
 export default WhyPaxaro;
