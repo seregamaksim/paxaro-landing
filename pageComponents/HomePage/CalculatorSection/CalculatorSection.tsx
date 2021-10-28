@@ -3,6 +3,7 @@ import { SectionTitle } from '@/components/SectionTitle';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import { Calculator } from './components/Calculator';
 
 const CalculatorSection: FC = () => {
   const { t } = useTranslation('calculator');
@@ -14,6 +15,7 @@ const CalculatorSection: FC = () => {
 
           <SectionSubtitle>{t('subTitle')}</SectionSubtitle>
         </SectionHead>
+        <Calculator />
       </StyledContainer>
     </section>
   );
@@ -35,6 +37,8 @@ const SectionSubtitle = styled.p`
   font-size: 18px;
   line-height: 25px;
   letter-spacing: 0.01em;
-
   color: var(--black2);
+  max-width: 440px;
 `;
+
+export default CalculatorSection;
