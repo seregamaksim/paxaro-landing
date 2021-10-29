@@ -91,3 +91,14 @@ html {
 *::after {
   box-sizing: border-box;
 }
+
+body .rc-slider-tooltip-inner {
+  background-color: transparent;
+  height: auto;
+  padding: 0;
+  box-shadow: none;
+  font-size: 18px;
+  line-height: 25px;
+  letter-spacing: 0.01em;
+  color: var(--white);
+}

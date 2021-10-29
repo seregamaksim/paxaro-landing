@@ -87,7 +87,7 @@ const WhyPaxaro: FC = () => {
         end: () => `+=${mainRef!.current!.offsetHeight * 3}`,
         pin: true,
         scrub: 1,
-        markers: true,
+
         snap: {
           snapTo: 'labels',
           duration: { min: 0.2, max: 2 },
