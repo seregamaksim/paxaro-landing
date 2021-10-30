@@ -128,12 +128,49 @@ const Calculator: FC<ICalculatorProps> = ({ className }) => {
     { value: '180', label: t('calculator.halfYear') },
     { value: '360', label: t('calculator.year') },
   ];
+  const investmentsAmountOptions: { [key: string]: any } = {
+    i30: [
+      { value: '1000', label: '1000' },
+      { value: '5000', label: '5000' },
+      { value: '10000', label: '10000' },
+      { value: '50000', label: '50000' },
+      { value: '100000', label: '100000' },
+      { value: '500000', label: '500000' },
+      { value: '1000000', label: '1000000' },
+    ],
+    i50: [
+      { value: '1000', label: '1000' },
+      { value: '2000', label: '2000' },
+      { value: '5000', label: '5000' },
+      { value: '10000', label: '10000' },
+      { value: '50000', label: '50000' },
+      { value: '100000', label: '100000' },
+      { value: '500000', label: '500000' },
+      { value: '1000000', label: '1000000' },
+    ],
+    i100: [
+      { value: '1000', label: '1000' },
+      { value: '2000', label: '2000' },
+      { value: '2500', label: '2500' },
+      { value: '5000', label: '5000' },
+      { value: '10000', label: '10000' },
+      { value: '50000', label: '50000' },
+      { value: '100000', label: '100000' },
+      { value: '500000', label: '500000' },
+      { value: '1000000', label: '1000000' },
+    ],
+  };
+  console.log('investmentsAmountOptions', investmentsAmountOptions);
 
   function submit(e: any) {
-    console.log('submit', {
-      ...e,
-      cash: cashValue,
-    });
+    if (innerWidth > 768) {
+      console.log('submit', {
+        ...e,
+        cash: cashValue,
+      });
+    } else {
+      console.log('submit', e);
+    }
   }
 
   const handle = (props: any, type: any) => {
@@ -159,17 +196,24 @@ const Calculator: FC<ICalculatorProps> = ({ className }) => {
   function onChange(e: any, type: string) {
     setCashValue(marks[type][e]);
   }
-
+  function getInitialValues() {
+    if (innerWidth > 768) {
+      return {
+        porfolio_type: 'i30',
+        date_days: '30',
+      };
+    } else {
+      return {
+        porfolio_type: 'i30',
+        date_days: '30',
+        cash: '1000',
+      };
+    }
+  }
   return isMounted ? (
     <Root className={className}>
       <Wrapper>
-        <Formik
-          initialValues={{
-            porfolio_type: 'i30',
-            date_days: '30',
-          }}
-          onSubmit={submit}
-        >
+        <Formik initialValues={getInitialValues()} onSubmit={submit}>
           {({ values }: FormikProps<Values>) => {
             return (
               <Form>
@@ -191,42 +235,63 @@ const Calculator: FC<ICalculatorProps> = ({ className }) => {
                     />
                   </HeadSection>
 
-                  <FullHeadSection>
-                    <HeadLabel>{t('calculator.investmentsAmount')}</HeadLabel>
-                    <SliderWrapper>
-                      <SliderBorders>
-                        {currency(
-                          marks[values.porfolio_type][
-                            Object.keys(marks[values.porfolio_type])[0]
-                          ]
-                        ).format()}
-                      </SliderBorders>
-                      <StyledSlider
-                        marks={marks[values.porfolio_type]}
-                        step={null}
-                        onChange={(e) => {
-                          onChange(e, values.porfolio_type);
-                        }}
-                        handle={(e) => handle(e, values.porfolio_type)}
+                  {innerWidth < 768 ? (
+                    <HeadSection>
+                      <HeadLabel>{t('calculator.investmentsAmount')}</HeadLabel>
+                      <SelectUiNoSSR
+                        name="cash"
+                        options={investmentsAmountOptions[values.porfolio_type]}
+                        id="cash"
                       />
-                      <SliderBorders>
-                        {currency(
-                          marks[values.porfolio_type][
-                            Object.keys(marks[values.porfolio_type])[
-                              Object.keys(marks[values.porfolio_type]).length -
-                                1
+                    </HeadSection>
+                  ) : (
+                    <FullHeadSection>
+                      <HeadLabel>{t('calculator.investmentsAmount')}</HeadLabel>
+                      <SliderWrapper>
+                        <SliderBorders>
+                          {currency(
+                            marks[values.porfolio_type][
+                              Object.keys(marks[values.porfolio_type])[0]
                             ]
-                          ],
-                          {
-                            separator: '.',
-                            precision: 0,
-                          }
-                        ).format()}
-                      </SliderBorders>
-                    </SliderWrapper>
-                  </FullHeadSection>
+                          ).format()}
+                        </SliderBorders>
+                        <StyledSlider
+                          marks={marks[values.porfolio_type]}
+                          step={null}
+                          onChange={(e) => {
+                            onChange(e, values.porfolio_type);
+                          }}
+                          handle={(e) => handle(e, values.porfolio_type)}
+                        />
+                        <SliderBorders>
+                          {currency(
+                            marks[values.porfolio_type][
+                              Object.keys(marks[values.porfolio_type])[
+                                Object.keys(marks[values.porfolio_type])
+                                  .length - 1
+                              ]
+                            ],
+                            {
+                              separator: '.',
+                              precision: 0,
+                            }
+                          ).format()}
+                        </SliderBorders>
+                      </SliderWrapper>
+                    </FullHeadSection>
+                  )}
+                  <HeadSection>
+                    {innerWidth < 768 && (
+                      <StyledButton
+                        type="submit"
+                        text={t('calculator.calculate')}
+                      />
+                    )}
+                  </HeadSection>
                 </Head>
-                <StyledChart data={secondData} />
+                <ChartWrap>
+                  <StyledChart data={secondData} />
+                </ChartWrap>
                 <Footer>
                   <ProfitBlock>
                     <ProfitBlockText>
@@ -234,10 +299,12 @@ const Calculator: FC<ICalculatorProps> = ({ className }) => {
                       <span>$1,199</span>
                     </ProfitBlockText>
                   </ProfitBlock>
-                  <StyledButton
-                    type="submit"
-                    text={t('calculator.calculate')}
-                  />
+                  {innerWidth > 768 && (
+                    <StyledButton
+                      type="submit"
+                      text={t('calculator.calculate')}
+                    />
+                  )}
                 </Footer>
               </Form>
             );
@@ -251,6 +318,9 @@ const Calculator: FC<ICalculatorProps> = ({ className }) => {
 const Root = styled.div`
   background: var(--black2);
   border-radius: 50px;
+  @media (max-width: 768px) {
+    border-radius: 24px;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -259,6 +329,9 @@ const Wrapper = styled.div`
   @media (max-width: 1024px) {
     padding: 30px;
   }
+  @media (max-width: 768px) {
+    padding: 30px 12px 12px 12px;
+  }
 `;
 
 const Head = styled.div`
@@ -266,6 +339,12 @@ const Head = styled.div`
   align-items: flex-start;
   flex-wrap: wrap;
   margin-bottom: 40px;
+  @media (max-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    align-items: flex-end;
+  }
 `;
 
 const HeadSection = styled.div`
@@ -273,6 +352,25 @@ const HeadSection = styled.div`
   margin-right: 40px;
   &:last-child {
     margin-right: 0;
+  }
+  @media (max-width: 1024px) {
+    width: 50%;
+    min-width: auto;
+
+    margin-right: 0;
+    &:first-child {
+      margin-right: 15px;
+      width: calc(50% - 15px);
+    }
+  }
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-right: 0;
+    &:first-child {
+      width: 100%;
+    }
   }
 `;
 const FullHeadSection = styled(HeadSection)`
@@ -342,20 +440,33 @@ const SliderBorders = styled.p`
   color: var(--white);
 `;
 
-const StyledChart = styled(Chart)`
+const ChartWrap = styled.div`
   margin-bottom: 40px;
+  overflow: auto;
 `;
+
+const StyledChart = styled(Chart)``;
 
 const Footer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 const ProfitBlock = styled.div`
   padding: 10px 20px;
   border: 1px solid #999999;
   border-radius: 10px;
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
 `;
 
 const ProfitBlockText = styled.p`
@@ -370,6 +481,15 @@ const ProfitBlockText = styled.p`
   span {
     color: var(--green);
     margin-left: 24px;
+  }
+  @media (max-width: 768px) {
+    font-size: 18px;
+    line-height: 25px;
+    span {
+      font-size: 24px;
+      line-height: 34px;
+      margin-left: 14px;
+    }
   }
 `;
 

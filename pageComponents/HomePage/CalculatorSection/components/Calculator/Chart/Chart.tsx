@@ -43,14 +43,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 const Chart: FC<IChartProps> = ({ className, data }) => {
   const router = useRouter();
   return (
-    <div
-      className={className}
-      style={{
-        width: '100%',
-        height: 300,
-        display: 'flex',
-      }}
-    >
+    <Root className={className}>
       <ResponsiveContainer>
         <StyledLineChart data={data}>
           <CartesianGrid
@@ -112,9 +105,18 @@ const Chart: FC<IChartProps> = ({ className, data }) => {
           />
         </StyledLineChart>
       </ResponsiveContainer>
-    </div>
+    </Root>
   );
 };
+
+const Root = styled.div`
+  width: 100%;
+  height: 300px;
+  display: flex;
+  @media (max-width: 768px) {
+    width: 768px;
+  }
+`;
 
 const StyledLineChart = styled(LineChart)`
   width: 100% !important;

@@ -81,6 +81,7 @@ const SelectUI: FC<ISelectUIProps & any> = ({
           <option key={index} value={option.value} label={option.label} />
         ))}
       </select> */}
+
       <Select
         inputId={id}
         styles={customStyles}
