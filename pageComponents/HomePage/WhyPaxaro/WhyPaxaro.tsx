@@ -35,7 +35,6 @@ const WhyPaxaro: FC = () => {
   const gridWithArrowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
     function getPixelsByVw(vw: number) {
       const widthWindow = innerWidth <= 1440 ? innerWidth : 1440;
       return (vw * widthWindow) / 100;

@@ -123,7 +123,7 @@ const PhoneBlock = styled.div`
     border-bottom-left-radius: 45px;
     border-bottom-right-radius: 45px;
   }
-  @media (max-width: 1024px) {
+  @media (max-width: 1200px) {
     width: 100%;
     min-height: 400px;
   }
