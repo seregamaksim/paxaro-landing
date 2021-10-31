@@ -27,10 +27,16 @@ const StyledContainer = styled(Container)`
 
 const SectionHead = styled.div`
   margin-bottom: 48px;
+  @media (max-width: 768px) {
+    margin-bottom: 24px;
+  }
 `;
 
 const StyledSectionTitle = styled(SectionTitle)`
   margin-bottom: 18px;
+  @media (max-width: 768px) {
+    margin-bottom: 12px;
+  }
 `;
 
 const SectionSubtitle = styled.p`
@@ -39,6 +45,10 @@ const SectionSubtitle = styled.p`
   letter-spacing: 0.01em;
   color: var(--black2);
   max-width: 440px;
+  @media (max-width: 768px) {
+    font-size: 14px;
+    line-height: 20px;
+  }
 `;
 
 export default CalculatorSection;

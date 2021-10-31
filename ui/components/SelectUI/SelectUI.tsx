@@ -25,7 +25,7 @@ const SelectUI: FC<ISelectUIProps & any> = ({
   const customStyles = {
     control: (provided: any, state: any) => ({
       ...provided,
-      borderColor: '#999999',
+      borderColor: 'var(--darkGray)',
       borderRadius: 14,
       backgroundColor: 'transparent',
       minHeight: 47,
@@ -92,6 +92,7 @@ const SelectUI: FC<ISelectUIProps & any> = ({
         defaultValue={options.find(
           (option: Option) => option.value === field.value
         )}
+        isSearchable={false}
         onChange={onChange}
       />
     </Root>

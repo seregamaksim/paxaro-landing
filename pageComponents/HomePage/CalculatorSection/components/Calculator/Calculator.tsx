@@ -1,14 +1,19 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
-import { Field, Form, Formik, FormikProps, useField } from 'formik';
-import Slider, { Handle, Range, SliderTooltip } from 'rc-slider';
+import { Form, Formik, FormikProps, useField } from 'formik';
+import Slider, { Handle, SliderTooltip } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import currency from 'currency.js';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/ui/components/Button';
 import { Chart } from './Chart';
-import { useIsMouted } from '@/hooks/useIsMounted';
+import { useIsMounted } from '@/hooks/useIsMounted';
+import {
+  investmentsAmountOptions,
+  marks,
+  portfolioTypeOptions,
+} from './staticData';
 
 const SelectUiNoSSR = dynamic(
   () => import('@/ui/components/SelectUI/SelectUI'),
@@ -25,42 +30,6 @@ interface Values {
   porfolio_type: string;
   date_days: string;
 }
-
-const marks: { [key: string]: any } = {
-  i30: {
-    0: 0,
-    5: 1000,
-    14: 5000,
-    28: 10000,
-    42: 50000,
-    56: 100000,
-    70: 500000,
-    100: 1000000,
-  },
-  i50: {
-    0: 0,
-    5: 1000,
-    14: 2000,
-    28: 5000,
-    42: 10000,
-    56: 50000,
-    70: 100000,
-    84: 500000,
-    100: 1000000,
-  },
-  i100: {
-    0: 0,
-    5: 1000,
-    12: 2000,
-    24: 2500,
-    36: 5000,
-    48: 10000,
-    60: 50000,
-    72: 100000,
-    90: 500000,
-    100: 1000000,
-  },
-};
 
 const secondData = [
   {
@@ -114,53 +83,15 @@ const secondData = [
 ];
 
 const Calculator: FC<ICalculatorProps> = ({ className }) => {
-  const isMounted = useIsMouted();
+  const isMounted = useIsMounted();
   const { t } = useTranslation('calculator');
   const [cashValue, setCashValue] = useState(0);
 
-  const portfolioTypeOptions = [
-    { value: 'i30', label: 'i30' },
-    { value: 'i50', label: 'i50' },
-    { value: 'i100', label: 'i100' },
-  ];
   const dateDaysOptions = [
     { value: '30', label: t('calculator.month') },
     { value: '180', label: t('calculator.halfYear') },
     { value: '360', label: t('calculator.year') },
   ];
-  const investmentsAmountOptions: { [key: string]: any } = {
-    i30: [
-      { value: '1000', label: '1000' },
-      { value: '5000', label: '5000' },
-      { value: '10000', label: '10000' },
-      { value: '50000', label: '50000' },
-      { value: '100000', label: '100000' },
-      { value: '500000', label: '500000' },
-      { value: '1000000', label: '1000000' },
-    ],
-    i50: [
-      { value: '1000', label: '1000' },
-      { value: '2000', label: '2000' },
-      { value: '5000', label: '5000' },
-      { value: '10000', label: '10000' },
-      { value: '50000', label: '50000' },
-      { value: '100000', label: '100000' },
-      { value: '500000', label: '500000' },
-      { value: '1000000', label: '1000000' },
-    ],
-    i100: [
-      { value: '1000', label: '1000' },
-      { value: '2000', label: '2000' },
-      { value: '2500', label: '2500' },
-      { value: '5000', label: '5000' },
-      { value: '10000', label: '10000' },
-      { value: '50000', label: '50000' },
-      { value: '100000', label: '100000' },
-      { value: '500000', label: '500000' },
-      { value: '1000000', label: '1000000' },
-    ],
-  };
-  console.log('investmentsAmountOptions', investmentsAmountOptions);
 
   function submit(e: any) {
     if (innerWidth > 768) {
@@ -397,7 +328,7 @@ const StyledSlider = styled(Slider)`
   margin-left: 12px;
   margin-right: 12px;
   .rc-slider-rail {
-    background-color: #999999;
+    background-color: var(--darkGray);
   }
 
   .rc-slider-track {
@@ -459,7 +390,7 @@ const Footer = styled.div`
 
 const ProfitBlock = styled.div`
   padding: 10px 20px;
-  border: 1px solid #999999;
+  border: 1px solid var(--darkGray);
   border-radius: 10px;
   @media (max-width: 768px) {
     display: flex;
