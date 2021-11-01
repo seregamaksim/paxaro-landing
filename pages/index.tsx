@@ -8,6 +8,11 @@ import { WhyPaxaro } from '@/pageComponents/HomePage/WhyPaxaro';
 import { CalculatorSection } from '@/pageComponents/HomePage/CalculatorSection';
 import { MobileApp } from '@/pageComponents/HomePage/MobileApp';
 import { PlansSection } from '@/pageComponents/HomePage/PlansSection';
+import { Advantages } from '@/pageComponents/HomePage/Advantages';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Home: NextPage = () => {
   return (
@@ -19,6 +24,7 @@ const Home: NextPage = () => {
         <WhyPaxaro />
 
         <CalculatorSection />
+        <Advantages />
         <PlansSection />
         <MobileApp />
         <LeadForm />
@@ -38,6 +44,7 @@ export const getServerSideProps = async ({ locale }: any) => ({
       'whyPaxaro',
       'calculator',
       'plans',
+      'advantages',
     ])),
   },
 });

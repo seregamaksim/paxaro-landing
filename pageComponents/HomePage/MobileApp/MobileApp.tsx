@@ -9,7 +9,7 @@ import appStoreImg from '@/assets/images/app-store.svg';
 import googleStoreImg from '@/assets/images/google-play.svg';
 import { useTranslation } from 'react-i18next';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
 import { useIsMounted } from '@/hooks/useIsMounted';
 import { appStoreLink, googlePlayLink } from '@/constants';
 
@@ -21,7 +21,6 @@ const MobileApp: FC = () => {
   const phoneImgRef = useRef(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
     if (innerWidth > 1024) {
       gsap.from(phoneImgRef.current, {
         scrollTrigger: {

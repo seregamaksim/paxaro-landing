@@ -5,7 +5,6 @@ import { FC, useEffect, useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Image from 'next/image';
 import bitcoinIcon from '@/assets/images/bitcoin.svg';
 import ethereumIcon from '@/assets/images/ethereum.svg';

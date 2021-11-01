@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/ui/components/Button';
 import { useTranslation } from 'react-i18next';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+// import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useIsMounted } from '@/hooks/useIsMounted';
 
 interface ItemType {
@@ -33,7 +33,7 @@ const Plan: FC<IPlanProps> = ({ title, price, hrefLink, className, data }) => {
   };
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    // gsap.registerPlugin(ScrollTrigger);
     const planTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: mainRef.current,
