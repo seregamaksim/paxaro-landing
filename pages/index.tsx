@@ -5,6 +5,9 @@ import { Header } from '@/components/Header';
 import HeaderBottom from '@/pageComponents/HomePage/HeaderBottom/HeaderBottom';
 import LeadForm from '@/pageComponents/HomePage/LeadFormSection/LeadFormSection';
 import { WhyPaxaro } from '@/pageComponents/HomePage/WhyPaxaro';
+import { CalculatorSection } from '@/pageComponents/HomePage/CalculatorSection';
+import { MobileApp } from '@/pageComponents/HomePage/MobileApp';
+import { PlansSection } from '@/pageComponents/HomePage/PlansSection';
 
 const Home: NextPage = () => {
   return (
@@ -14,6 +17,10 @@ const Home: NextPage = () => {
       </Header>
       <main>
         <WhyPaxaro />
+
+        <CalculatorSection />
+        <PlansSection />
+        <MobileApp />
         <LeadForm />
       </main>
     </MainLayout>
@@ -29,6 +36,8 @@ export const getServerSideProps = async ({ locale }: any) => ({
       'cookies',
       'leadForm',
       'whyPaxaro',
+      'calculator',
+      'plans',
     ])),
   },
 });

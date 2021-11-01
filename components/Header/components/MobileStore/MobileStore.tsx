@@ -7,14 +7,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/ui/components/Button';
+import { appStoreLink, googlePlayLink } from '@/constants';
 
 const MobileStore: FC = () => {
   const { t } = useTranslation('cookies');
   const [isOpen, setIsOpen] = useState(true);
-  const googlePlayLink = 'https://play.google.com/store?hl=ru&gl=US';
-  const appStoreLink = 'https://www.apple.com/';
 
-  function hangleClickCloseButton() {
+  function handleCloseButtonClick() {
     setIsOpen(false);
   }
 
@@ -31,13 +30,15 @@ const MobileStore: FC = () => {
   return (
     <Root $open={isOpen}>
       <Wrapper>
-        <CloseButton onClick={hangleClickCloseButton}>
-          <Image src={closeIcon} alt="Paxaro" />
-        </CloseButton>
-        <LogoWrap>
-          <Image src={logoMini} alt="Paxaro" />
-        </LogoWrap>
-        <Text>{t('appsText')}</Text>
+        <LogoTextWrap>
+          <CloseButton onClick={handleCloseButtonClick}>
+            <Image src={closeIcon} alt="Paxaro" />
+          </CloseButton>
+          <LogoWrap>
+            <Image src={logoMini} alt="Paxaro" />
+          </LogoWrap>
+          <Text>{t('appsText')}</Text>
+        </LogoTextWrap>
 
         <Link href={getDeviceLink()} passHref>
           <InstallLink text={t('install')} isLink />
@@ -56,6 +57,12 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
+
+const LogoTextWrap = styled.div`
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
 `;
 
 const CloseButton = styled.button`
