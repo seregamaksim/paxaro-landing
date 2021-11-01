@@ -137,6 +137,7 @@ const PhoneImgWrap = styled.div`
   position: absolute;
   top: 17%;
   left: 50%;
+  width: 370px;
   transform: translateX(-50%);
   @media (max-width: 768px) {
     width: 225px;
