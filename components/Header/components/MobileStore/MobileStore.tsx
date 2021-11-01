@@ -13,7 +13,7 @@ const MobileStore: FC = () => {
   const { t } = useTranslation('cookies');
   const [isOpen, setIsOpen] = useState(true);
 
-  function hangleClickCloseButton() {
+  function handleCloseButtonClick() {
     setIsOpen(false);
   }
 
@@ -31,7 +31,7 @@ const MobileStore: FC = () => {
     <Root $open={isOpen}>
       <Wrapper>
         <LogoTextWrap>
-          <CloseButton onClick={hangleClickCloseButton}>
+          <CloseButton onClick={handleCloseButtonClick}>
             <Image src={closeIcon} alt="Paxaro" />
           </CloseButton>
           <LogoWrap>

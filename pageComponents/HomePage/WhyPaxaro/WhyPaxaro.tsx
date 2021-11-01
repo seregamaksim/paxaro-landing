@@ -301,30 +301,31 @@ const WhyPaxaro: FC = () => {
           )
           .addLabel('showSecondDescriptionBlock');
       } else {
+        const more600 = innerWidth > 600 ? true : false;
         // ---------
         // MOBILE
         // ---------
         WhyPaxaroTimeline.addLabel('start')
           .set(gridWithArrowRef.current, getGridPixels())
           .set(bitcoinRef.current, {
-            x: innerWidth > 600 ? getPixelsByVw(46.2) : 150,
-            y: innerWidth > 600 ? getPixelsByVw(56.7) : 350,
+            x: more600 ? getPixelsByVw(46.2) : 150,
+            y: more600 ? getPixelsByVw(56.7) : 350,
           })
           .set(ethereumRef.current, {
-            x: innerWidth > 600 ? getPixelsByVw(38.6) : 80,
-            y: innerWidth > 600 ? getPixelsByVw(50.5) : 300,
+            x: more600 ? getPixelsByVw(38.6) : 80,
+            y: more600 ? getPixelsByVw(50.5) : 300,
           })
           .set(coin1Ref.current, {
-            x: innerWidth > 600 ? getPixelsByVw(52.6) : 230,
-            y: innerWidth > 600 ? getPixelsByVw(46.7) : 300,
+            x: more600 ? getPixelsByVw(52.6) : 230,
+            y: more600 ? getPixelsByVw(46.7) : 300,
           })
           .set(coin2Ref.current, {
-            x: innerWidth > 600 ? getPixelsByVw(35.9) : 50,
-            y: innerWidth > 600 ? getPixelsByVw(63.9) : 430,
+            x: more600 ? getPixelsByVw(35.9) : 50,
+            y: more600 ? getPixelsByVw(63.9) : 430,
           })
           .set(coin3Ref.current, {
-            x: innerWidth > 600 ? getPixelsByVw(57.4) : 250,
-            y: innerWidth > 600 ? getPixelsByVw(62) : 450,
+            x: more600 ? getPixelsByVw(57.4) : 250,
+            y: more600 ? getPixelsByVw(62) : 450,
           })
           .to(
             whyPaxaroTitleRef.current,
@@ -453,7 +454,7 @@ const WhyPaxaro: FC = () => {
             bitcoinRef.current,
             {
               x: getPixelsByVw(80.5),
-              y: innerWidth > 600 ? getPixelsByVw(15.7) : 150,
+              y: more600 ? getPixelsByVw(15.7) : 150,
               scale: 1,
               duration: 0.6,
             },
@@ -463,7 +464,7 @@ const WhyPaxaro: FC = () => {
             ethereumRef.current,
             {
               x: getPixelsByVw(8.9),
-              y: innerWidth > 600 ? getPixelsByVw(19) : 180,
+              y: more600 ? getPixelsByVw(19) : 180,
               duration: 0.6,
             },
             '<'
@@ -472,7 +473,7 @@ const WhyPaxaro: FC = () => {
             coin1Ref.current,
             {
               x: getPixelsByVw(2.4),
-              y: innerWidth > 600 ? getPixelsByVw(42.4) : 550,
+              y: more600 ? getPixelsByVw(42.4) : 550,
               scale: 1,
               duration: 0.6,
             },
@@ -482,7 +483,7 @@ const WhyPaxaro: FC = () => {
             coin2Ref.current,
             {
               x: getPixelsByVw(88.5),
-              y: innerWidth > 600 ? getPixelsByVw(27.5) : 500,
+              y: more600 ? getPixelsByVw(27.5) : 500,
               scale: 1,
               duration: 0.6,
             },
@@ -492,7 +493,7 @@ const WhyPaxaro: FC = () => {
             coin3Ref.current,
             {
               x: getPixelsByVw(66.3),
-              y: innerWidth > 600 ? getPixelsByVw(55.3) : 550,
+              y: more600 ? getPixelsByVw(55.3) : 550,
               duration: 0.6,
             },
             '<'

@@ -183,7 +183,10 @@ const Calculator: FC<ICalculatorProps> = ({ className }) => {
                           {currency(
                             marks[values.porfolio_type][
                               Object.keys(marks[values.porfolio_type])[0]
-                            ]
+                            ],
+                            {
+                              precision: 0,
+                            }
                           ).format()}
                         </SliderBorders>
                         <StyledSlider
@@ -304,6 +307,7 @@ const HeadSection = styled.div`
     }
   }
 `;
+
 const FullHeadSection = styled(HeadSection)`
   width: 100%;
   max-width: 440px;

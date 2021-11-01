@@ -136,9 +136,6 @@ const CustomTooltipContentText = styled.p`
   font-size: 14px;
   line-height: 25px;
   letter-spacing: 0.01em;
-
-  /* White */
-
   color: var(--white);
 `;
 export default Chart;

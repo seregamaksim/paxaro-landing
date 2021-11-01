@@ -76,12 +76,6 @@ const SelectUI: FC<ISelectUIProps & any> = ({
   };
   return (
     <Root className={className}>
-      {/* <select {...field}>
-        {options.map((option: Option, index: number) => (
-          <option key={index} value={option.value} label={option.label} />
-        ))}
-      </select> */}
-
       <Select
         inputId={id}
         styles={customStyles}
