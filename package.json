@@ -12,6 +12,7 @@
     "@types/react-headroom": "^2.2.2",
     "@types/styled-components": "^5.1.15",
     "formik": "^2.2.9",
+    "gsap": "^3.8.0",
     "i18next": "^20.6.1",
     "next": "11.1.2",
     "next-i18next": "^8.9.0",

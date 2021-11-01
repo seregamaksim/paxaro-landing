@@ -1,17 +1,34 @@
 import { Container } from '@/components/Container';
 import { SectionLabel } from '@/components/SectionLabel';
 import { Button } from '@/ui/components/Button';
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { CanvasNotebook } from './components/CanvasNotebook';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 const Hero: FC = () => {
   const { t } = useTranslation('hero');
+  const rootRef = useRef(null);
+
+  useEffect(() => {
+    // gsap.registerPlugin(ScrollTrigger);
+    // const heroTimeline = gsap.timeline({
+    //   scrollTrigger: {
+    //     trigger: rootRef.current,
+    //     start: 'top bottom',
+    //     // end: '+=4000',
+    //     markers: true,
+    //     scrub: 1,
+    //     // pin: true,
+    //   },
+    // });
+  }, []);
 
   return (
-    <Root>
+    <Root ref={rootRef}>
       <StyledContainer>
         <Head>
           <SectionTitle>{t('title')}</SectionTitle>
@@ -20,13 +37,12 @@ const Hero: FC = () => {
             <StyledLink text={t('btnText')} isLink />
           </Link>
         </Head>
-        {/* <CanvasNotebook /> */}
-        {/* <img src={require('@/assets/images/logo.svg')} /> */}
+
         <CanvasNotebook
-          scrollHeight={4000}
+          // scrollHeight={4000}
           width={1158}
           height={770}
-          numFrames={143}
+          numFrames={142}
         />
       </StyledContainer>
     </Root>
