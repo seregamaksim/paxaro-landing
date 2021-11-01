@@ -1,7 +1,11 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { gsap } from 'gsap';
+import { gsap } from 'gsap/dist/gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 function getCurrentFrame(index: any) {
   return `/notebook/notebook${index.toString().padStart(3, '0')}.png`;
@@ -15,7 +19,6 @@ const CanvasNotebook = ({ scrollHeight, numFrames, width, height }: any) => {
   function preloadImages() {
     for (let i = 0; i <= numFrames; i++) {
       console.log(getCurrentFrame(i));
-      // const img = `<img src=${getCurrentFrame(i)} />`;
       const img = new Image();
       const imgSrc = getCurrentFrame(i);
       img.src = imgSrc;
@@ -24,7 +27,7 @@ const CanvasNotebook = ({ scrollHeight, numFrames, width, height }: any) => {
   }
 
   const handleScroll = () => {
-    const scrollFraction = window.scrollY / (4000 - window.innerHeight);
+    const scrollFraction = window.scrollY / (scrollHeight - window.innerHeight);
     const index = Math.min(
       numFrames - 1,
       Math.ceil(scrollFraction * numFrames)
@@ -42,12 +45,85 @@ const CanvasNotebook = ({ scrollHeight, numFrames, width, height }: any) => {
     context!.canvas.width = width;
     context!.canvas.height = height;
   };
+  // const sxcrollTriggerRef = useRef(
+
+  //   gsap.timeline({
+  //     scrollTrigger: {
+  //       trigger: canvasWrapRef.current,
+  //       start: 'top top',
+  //       // end: '+=' ,
+  //       pin: true,
+  //       markers: true,
+  //       scrub: true,
+  //       // onUpdate: handleScroll,
+  //     },
+  //   })
+  // );
+  // const sxcrollTriggerRef = useRef(gsap.to(canvasRef.current, {
+  //   scrollTrigger: {
+  //     trigger: canvasWrapRef.current,
+  //     start: 'top top',
+  //     // end: '+=' ,
+  //     pin: true,
+  //     markers: true,
+  //     scrub: true,
+  //     // onUpdate: handleScroll,
+  //   },
+  // }))
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
     preloadImages();
     renderCanvas();
+    // if (!canvasRef.current || images.length < 1) {
+    //   return;
+    // }
+    const context = canvasRef!.current!.getContext('2d');
+    let requestId: any;
 
-    window.addEventListener('scroll', handleScroll);
+    const render = () => {
+      context!.drawImage(
+        images[frameIndex],
+        0,
+        0,
+        1100,
+        (1100 * images[frameIndex].height) / images[frameIndex].width
+      );
+      requestId = requestAnimationFrame(render);
+    };
+    gsap.to(canvasRef.current, {
+      scrollTrigger: {
+        trigger: canvasWrapRef.current,
+        start: 'top top',
+        // end: '+=' ,
+        pin: true,
+        markers: true,
+        scrub: true,
+        // refreshPriority: 1,
+        onUpdate: () => {
+          console.log('update');
+          // // handleScroll();
+          // const scrollFraction =
+          //   window.scrollY / (scrollHeight - window.innerHeight);
+          // const index = Math.min(
+          //   numFrames - 1,
+          //   Math.ceil(scrollFraction * numFrames)
+          // );
+
+          // if (index <= 0 || index > numFrames) {
+          //   return;
+          // }
+
+          // setFrameIndex(index);
+          // render();
+        },
+      },
+    });
+    // window.addEventListener('scroll', handleScroll);
+    // return () => {
+    //   // t.kill();
+    //   // ScrollTrigger.getAll().forEach((e) => e.kill());
+    //   // window.removeEventListener('scroll', handleScroll);
+    //   // cancelAnimationFrame(requestId);
+    // };
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -72,22 +148,11 @@ const CanvasNotebook = ({ scrollHeight, numFrames, width, height }: any) => {
     };
 
     render();
-    // const heroTimeline = gsap.timeline({
-    //   scrollTrigger: {
-    //     trigger: canvasWrapRef.current,
-    //     start: 'top bottom',
-    //     // end: '+=4000',
-    //     markers: true,
-    //     scrub: 1,
-    //     pin: true,
-    //     // onUpdate: render,
-    //   },
-    // });
+
     return () => cancelAnimationFrame(requestId);
   }, [frameIndex, images]);
-
   return (
-    <div ref={canvasWrapRef}>
+    <div ref={canvasWrapRef} style={{ height: scrollHeight }}>
       <canvas ref={canvasRef} />
     </div>
   );

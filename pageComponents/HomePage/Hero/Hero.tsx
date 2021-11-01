@@ -39,7 +39,7 @@ const Hero: FC = () => {
         </Head>
 
         <CanvasNotebook
-          // scrollHeight={4000}
+          scrollHeight={4000}
           width={1158}
           height={770}
           numFrames={142}
