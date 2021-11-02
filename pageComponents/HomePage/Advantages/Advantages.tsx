@@ -41,12 +41,10 @@ const Advantages: FC = () => {
   const { t } = useTranslation('advantages');
   const isMounted = useIsMounted();
   const rootRef = useRef<HTMLElement>(null);
-  const itemsRef = useRef<HTMLLIElement[]>([] as HTMLLIElement[]);
-  const itemsBgRef = useRef<HTMLDivElement[]>([] as HTMLDivElement[]);
-  const listSecondScreens = useRef<HTMLLIElement[]>([] as HTMLLIElement[]);
-  const itemsTitleRef = useRef<HTMLParagraphElement[]>(
-    [] as HTMLParagraphElement[]
-  );
+  const itemsRef = useRef<HTMLLIElement[]>([]);
+  const itemsBgRef = useRef<HTMLDivElement[]>([]);
+  const listSecondScreens = useRef<HTMLLIElement[]>([]);
+  const itemsTitleRef = useRef<HTMLParagraphElement[]>([]);
   const circleRef = useRef<HTMLDivElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
 
