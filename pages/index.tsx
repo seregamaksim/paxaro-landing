@@ -8,6 +8,7 @@ import { WhyPaxaro } from '@/pageComponents/HomePage/WhyPaxaro';
 import { CalculatorSection } from '@/pageComponents/HomePage/CalculatorSection';
 import { MobileApp } from '@/pageComponents/HomePage/MobileApp';
 import { PlansSection } from '@/pageComponents/HomePage/PlansSection';
+import { Education } from '@/pageComponents/HomePage/Education';
 
 const Home: NextPage = () => {
   return (
@@ -19,6 +20,8 @@ const Home: NextPage = () => {
         <WhyPaxaro />
 
         <CalculatorSection />
+
+        <Education />
         <PlansSection />
         <MobileApp />
         <LeadForm />
@@ -38,6 +41,7 @@ export const getServerSideProps = async ({ locale }: any) => ({
       'whyPaxaro',
       'calculator',
       'plans',
+      'education',
     ])),
   },
 });
