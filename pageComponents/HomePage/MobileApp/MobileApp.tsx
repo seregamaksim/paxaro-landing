@@ -9,9 +9,13 @@ import appStoreImg from '@/assets/images/app-store.svg';
 import googleStoreImg from '@/assets/images/google-play.svg';
 import { useTranslation } from 'react-i18next';
 import { gsap } from 'gsap';
-
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useIsMounted } from '@/hooks/useIsMounted';
 import { appStoreLink, googlePlayLink } from '@/constants';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const MobileApp: FC = () => {
   const isMounted = useIsMounted();

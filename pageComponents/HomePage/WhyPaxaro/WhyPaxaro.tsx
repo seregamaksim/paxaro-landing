@@ -5,6 +5,7 @@ import { FC, useEffect, useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Image from 'next/image';
 import bitcoinIcon from '@/assets/images/bitcoin.svg';
 import ethereumIcon from '@/assets/images/ethereum.svg';
@@ -14,6 +15,9 @@ import coin3Icon from '@/assets/images/coin-icon3.svg';
 import gridWithArrow from '@/assets/images/grid-with-arrow.svg';
 import { useIsMounted } from '@/hooks/useIsMounted';
 
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 const WhyPaxaro: FC = () => {
   const { t } = useTranslation('whyPaxaro');
   const isMounted = useIsMounted();
@@ -520,22 +524,22 @@ const WhyPaxaro: FC = () => {
         </SectionHead>
 
         <GridWithArrowWrap ref={gridWithArrowRef}>
-          <GridWithArrow />
+          <GridWithArrow loading="eager" />
         </GridWithArrowWrap>
         <BitcoinWrap ref={bitcoinRef}>
-          <Bitcoin />
+          <Bitcoin loading="eager" />
         </BitcoinWrap>
         <EthereumWrap ref={ethereumRef}>
-          <Ethereum />
+          <Ethereum loading="eager" />
         </EthereumWrap>
         <Coin1Wrap ref={coin1Ref}>
-          <Coin1 />
+          <Coin1 loading="eager" />
         </Coin1Wrap>
         <Coin2Wrap ref={coin2Ref}>
-          <Coin2 />
+          <Coin2 loading="eager" />
         </Coin2Wrap>
         <Coin3Wrap ref={coin3Ref}>
-          <Coin3 />
+          <Coin3 loading="eager" />
         </Coin3Wrap>
 
         <Content>

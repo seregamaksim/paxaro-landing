@@ -7,7 +7,7 @@ import 'rc-slider/assets/index.css';
 import currency from 'currency.js';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/ui/components/Button';
-import { Chart } from './Chart';
+import { Chart } from '../Chart';
 import { useIsMounted } from '@/hooks/useIsMounted';
 import {
   investmentsAmountOptions,
@@ -141,7 +141,7 @@ const Calculator: FC<ICalculatorProps> = ({ className }) => {
       };
     }
   }
-  return isMounted ? (
+  return (
     <Root className={className}>
       <Wrapper>
         <Formik initialValues={getInitialValues()} onSubmit={submit}>
@@ -246,7 +246,7 @@ const Calculator: FC<ICalculatorProps> = ({ className }) => {
         </Formik>
       </Wrapper>
     </Root>
-  ) : null;
+  );
 };
 
 const Root = styled.div`
@@ -377,7 +377,7 @@ const SliderBorders = styled.p`
 
 const ChartWrap = styled.div`
   margin-bottom: 40px;
-  overflow: auto;
+  overflow-x: auto;
 `;
 
 const StyledChart = styled(Chart)``;
