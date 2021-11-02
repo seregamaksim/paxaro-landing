@@ -50,17 +50,6 @@ const Advantages: FC = () => {
   const circleRef = useRef<HTMLDivElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
 
-  // useEffect(() => {
-  //   ScrollTrigger.refresh();
-  // }, [
-  //   rootRef,
-  //   itemsRef,
-  //   itemsBgRef,
-  //   listSecondScreens,
-  //   itemsTitleRef,
-  //   circleRef,
-  //   headRef,
-  // ]);
   useEffect(() => {
     if (isMounted) {
       if (innerWidth > 768) {
@@ -329,7 +318,6 @@ const Advantages: FC = () => {
             trigger: rootRef.current,
             start: 'top top',
             end: '+=2000',
-            // markers: true,
             pin: true,
 
             scrub: 0,
@@ -377,8 +365,10 @@ const Advantages: FC = () => {
           );
       }
     }
+    ScrollTrigger.refresh();
   }, [isMounted]);
-  return isMounted ? (
+
+  return (
     <Root ref={rootRef}>
       <StyledContainer>
         <Cirle ref={circleRef} />
@@ -489,7 +479,7 @@ const Advantages: FC = () => {
         </DescriptionSecondList>
       </StyledContainer>
     </Root>
-  ) : null;
+  );
 };
 
 const Root = styled.section`
@@ -511,6 +501,7 @@ const StyledContainer = styled(Container)`
     padding-bottom: 40px;
   }
 `;
+
 const Cirle = styled.div`
   position: absolute;
   right: -5%;
@@ -586,7 +577,6 @@ const DescriptionStyleTitle = styled.p`
   color: var(--white);
   will-change: transform;
   position: relative;
-  /* z-index: 1; */
   span {
     display: inline-block;
     position: relative;
@@ -765,6 +755,7 @@ const GrayDescriptionSecondScreenItem = styled(DescriptionSecondScreenItem)`
     z-index: 1;
   }
 `;
+
 const GreenDescriptionSecondScreenItem = styled(DescriptionSecondScreenItem)`
   background: var(--greenGradient);
 
