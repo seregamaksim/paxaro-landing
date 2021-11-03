@@ -151,7 +151,7 @@ const Calculator: FC<ICalculatorProps> = ({ className }) => {
 
   useEffect(() => {
     setInitiaFormlValue(getInitialValues());
-  }, [isMounted]);
+  }, []);
 
   return (
     <Root className={className}>

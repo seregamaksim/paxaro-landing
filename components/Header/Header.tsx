@@ -15,7 +15,6 @@ import SocialList from '../SocialList/SocialList';
 import Headroom from 'react-headroom';
 
 import { MobileStore } from './components/MobileStore';
-import { useIsMounted } from '@/hooks/useIsMounted';
 
 interface IHeaderWrapper {
   isActiveMenu: boolean;
@@ -29,7 +28,6 @@ const Header: FC<IHeaderProps> = ({ children, userAgent }) => {
   const isDesktop = useIsDesktop();
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const isMounted = useIsMounted();
 
   function handleBurgerClick() {
     if (innerWidth < 900) {

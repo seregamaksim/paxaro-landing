@@ -10,7 +10,6 @@ import googleStoreImg from '@/assets/images/google-play.svg';
 import { useTranslation } from 'react-i18next';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { useIsMounted } from '@/hooks/useIsMounted';
 import { appStoreLink, googlePlayLink } from '@/constants';
 
 if (typeof window !== 'undefined') {
@@ -18,41 +17,38 @@ if (typeof window !== 'undefined') {
 }
 
 const MobileApp: FC = () => {
-  const isMounted = useIsMounted();
   const { t } = useTranslation('common');
   const rootRef = useRef(null);
   const phoneBlockRef = useRef(null);
   const phoneImgRef = useRef(null);
 
   useEffect(() => {
-    if (isMounted) {
-      if (innerWidth > 1024) {
-        gsap.from(phoneImgRef.current, {
-          scrollTrigger: {
-            trigger: rootRef.current,
-            start: '20% 90%',
-            end: '21% 90%',
-            toggleActions: 'play none reverse none',
-          },
-          opacity: 0,
-          yPercent: 50,
-          duration: 1,
-        });
-      } else {
-        gsap.from(phoneImgRef.current, {
-          scrollTrigger: {
-            trigger: phoneBlockRef.current,
-            start: '20% 70%',
-            end: '21% 70%',
-            toggleActions: 'play none reverse none',
-          },
-          opacity: 0,
-          yPercent: 50,
-          duration: 1,
-        });
-      }
+    if (innerWidth > 1024) {
+      gsap.from(phoneImgRef.current, {
+        scrollTrigger: {
+          trigger: rootRef.current,
+          start: '20% 90%',
+          end: '21% 90%',
+          toggleActions: 'play none reverse none',
+        },
+        opacity: 0,
+        yPercent: 50,
+        duration: 1,
+      });
+    } else {
+      gsap.from(phoneImgRef.current, {
+        scrollTrigger: {
+          trigger: phoneBlockRef.current,
+          start: '20% 70%',
+          end: '21% 70%',
+          toggleActions: 'play none reverse none',
+        },
+        opacity: 0,
+        yPercent: 50,
+        duration: 1,
+      });
     }
-  }, [isMounted]);
+  }, []);
 
   return (
     <Root ref={rootRef}>
