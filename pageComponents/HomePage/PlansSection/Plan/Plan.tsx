@@ -1,11 +1,14 @@
-import { FC, useEffect, useLayoutEffect, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { Button } from '@/ui/components/Button';
 import { useTranslation } from 'react-i18next';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { useIsMounted } from '@/hooks/useIsMounted';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface ItemType {
   text: string;
@@ -20,7 +23,7 @@ interface IPlanProps {
 
 const Plan: FC<IPlanProps> = ({ title, price, hrefLink, className, data }) => {
   const { t } = useTranslation('plans');
-  const isMounted = useIsMounted();
+
   const mainRef = useRef(null);
   const headRef = useRef(null);
   const priceRef = useRef(null);
@@ -33,7 +36,6 @@ const Plan: FC<IPlanProps> = ({ title, price, hrefLink, className, data }) => {
   };
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
     const planTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: mainRef.current,
@@ -42,39 +44,38 @@ const Plan: FC<IPlanProps> = ({ title, price, hrefLink, className, data }) => {
         toggleActions: 'play none reverse none',
       },
     });
-    if (isMounted) {
-      planTimeline
-        .addLabel('start')
-        .from(
-          headRef.current,
-          {
-            width: '70%',
-            opacity: 0,
-            duration: 1,
-          },
-          'start'
-        )
-        .from(
-          priceRef.current,
-          {
-            opacity: 0,
-            duration: 0.7,
-          },
-          '>-0.8'
-        )
-        .from(
-          listRef.current,
-          {
-            opacity: 0,
-            x: 15,
-            duration: 0.7,
-            stagger: 0.1,
-          },
-          '>'
-        );
-    }
-  }, [isMounted]);
-  return isMounted ? (
+
+    planTimeline
+      .addLabel('start')
+      .from(
+        headRef.current,
+        {
+          width: '70%',
+          opacity: 0,
+          duration: 1,
+        },
+        'start'
+      )
+      .from(
+        priceRef.current,
+        {
+          opacity: 0,
+          duration: 0.7,
+        },
+        '>-0.8'
+      )
+      .from(
+        listRef.current,
+        {
+          opacity: 0,
+          x: 15,
+          duration: 0.7,
+          stagger: 0.1,
+        },
+        '>'
+      );
+  }, []);
+  return (
     <Root className={className} ref={mainRef}>
       <PlanHead ref={headRef}>
         <PlanTitle>{title}</PlanTitle>
@@ -93,7 +94,7 @@ const Plan: FC<IPlanProps> = ({ title, price, hrefLink, className, data }) => {
         ))}
       </PlanList>
     </Root>
-  ) : null;
+  );
 };
 
 const Root = styled.div`

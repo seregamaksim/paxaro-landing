@@ -12,7 +12,6 @@ import styled from 'styled-components';
 import moment from 'moment';
 
 import currency from 'currency.js';
-import { useRouter } from 'next/router';
 
 interface Data {
   name: string;
@@ -40,7 +39,6 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 const Chart: FC<IChartProps> = ({ className, data }) => {
-  const router = useRouter();
   return (
     <Root className={className}>
       <ResponsiveContainer>
@@ -75,13 +73,7 @@ const Chart: FC<IChartProps> = ({ className, data }) => {
               position: 'left',
             }}
           />
-          <Tooltip
-            contentStyle={{
-              backgroundColor: 'red',
-            }}
-            label={false}
-            content={<CustomTooltip />}
-          />
+          <Tooltip label={false} content={<CustomTooltip />} />
 
           <Line
             type="monotone"
@@ -125,12 +117,14 @@ const StyledLineChart = styled(LineChart)`
     width: 100% !important;
   }
 `;
+
 const CustomTooltipContent = styled.div`
   padding: 3px 8px;
   background: var(--green);
   border-radius: 6px;
   box-shadow: 0px 0.796707px 6.37366px rgba(152, 152, 152, 0.17);
 `;
+
 const CustomTooltipContentText = styled.p`
   font-weight: 600;
   font-size: 14px;
@@ -138,4 +132,5 @@ const CustomTooltipContentText = styled.p`
   letter-spacing: 0.01em;
   color: var(--white);
 `;
+
 export default Chart;

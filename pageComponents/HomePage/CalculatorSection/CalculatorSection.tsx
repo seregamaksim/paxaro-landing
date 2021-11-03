@@ -1,5 +1,6 @@
 import { Container } from '@/components/Container';
 import { SectionTitle } from '@/components/SectionTitle';
+import { useIsMounted } from '@/hooks/useIsMounted';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -7,12 +8,12 @@ import { Calculator } from './components/Calculator';
 
 const CalculatorSection: FC = () => {
   const { t } = useTranslation('calculator');
+  const isMounted = useIsMounted();
   return (
     <section>
       <StyledContainer>
         <SectionHead>
           <StyledSectionTitle text={t('title')} />
-
           <SectionSubtitle>{t('subTitle')}</SectionSubtitle>
         </SectionHead>
         <Calculator />
