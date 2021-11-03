@@ -9,11 +9,15 @@ import { CalculatorSection } from '@/pageComponents/HomePage/CalculatorSection';
 import { MobileApp } from '@/pageComponents/HomePage/MobileApp';
 import { PlansSection } from '@/pageComponents/HomePage/PlansSection';
 import { Advantages } from '@/pageComponents/HomePage/Advantages';
+import { getSelectorsByUserAgent } from 'react-device-detect';
 
-const Home: NextPage = () => {
+interface Props {
+  userAgent: { [key: string]: any };
+}
+const Home: NextPage<Props> = ({ userAgent }) => {
   return (
     <MainLayout>
-      <Header>
+      <Header userAgent={userAgent}>
         <HeaderBottom />
       </Header>
       <main>
@@ -29,8 +33,11 @@ const Home: NextPage = () => {
   );
 };
 
-export const getServerSideProps = async ({ locale }: any) => ({
+export const getServerSideProps = async ({ locale, req }: any) => ({
   props: {
+    userAgent: req
+      ? getSelectorsByUserAgent(req.headers['user-agent'])
+      : navigator.userAgent,
     ...(await serverSideTranslations(locale, [
       'common',
       'header',

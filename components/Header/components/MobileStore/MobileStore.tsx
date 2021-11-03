@@ -9,7 +9,11 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@/ui/components/Button';
 import { appStoreLink, googlePlayLink } from '@/constants';
 
-const MobileStore: FC = () => {
+interface IMobileStoreProps {
+  userAgent: { [key: string]: any };
+}
+
+const MobileStore: FC<IMobileStoreProps> = ({ userAgent }) => {
   const { t } = useTranslation('cookies');
   const [isOpen, setIsOpen] = useState(true);
 
@@ -18,10 +22,10 @@ const MobileStore: FC = () => {
   }
 
   function getDeviceLink() {
-    if (isAndroid) {
+    if (userAgent.isAndroid) {
       return googlePlayLink;
     }
-    if (isIOS) {
+    if (userAgent.isIOS) {
       return appStoreLink;
     }
     return '';
@@ -50,6 +54,9 @@ const MobileStore: FC = () => {
 const Root = styled.div<{ $open: boolean }>`
   display: ${(props) => (props.$open ? 'block' : 'none')};
   background-color: var(--black2);
+  @media (min-width: 900px) {
+    display: none;
+  }
 `;
 
 const Wrapper = styled.div`

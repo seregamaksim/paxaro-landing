@@ -25,34 +25,36 @@ const MobileApp: FC = () => {
   const phoneImgRef = useRef(null);
 
   useEffect(() => {
-    if (innerWidth > 1024) {
-      gsap.from(phoneImgRef.current, {
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: '20% 90%',
-          end: '21% 90%',
-          toggleActions: 'play none reverse none',
-        },
-        opacity: 0,
-        yPercent: 50,
-        duration: 1,
-      });
-    } else {
-      gsap.from(phoneImgRef.current, {
-        scrollTrigger: {
-          trigger: phoneBlockRef.current,
-          start: '20% 70%',
-          end: '21% 70%',
-          toggleActions: 'play none reverse none',
-        },
-        opacity: 0,
-        yPercent: 50,
-        duration: 1,
-      });
+    if (isMounted) {
+      if (innerWidth > 1024) {
+        gsap.from(phoneImgRef.current, {
+          scrollTrigger: {
+            trigger: rootRef.current,
+            start: '20% 90%',
+            end: '21% 90%',
+            toggleActions: 'play none reverse none',
+          },
+          opacity: 0,
+          yPercent: 50,
+          duration: 1,
+        });
+      } else {
+        gsap.from(phoneImgRef.current, {
+          scrollTrigger: {
+            trigger: phoneBlockRef.current,
+            start: '20% 70%',
+            end: '21% 70%',
+            toggleActions: 'play none reverse none',
+          },
+          opacity: 0,
+          yPercent: 50,
+          duration: 1,
+        });
+      }
     }
-  });
+  }, [isMounted]);
 
-  return isMounted ? (
+  return (
     <Root ref={rootRef}>
       <StyledContainer>
         <PhoneBlock ref={phoneBlockRef}>
@@ -80,7 +82,7 @@ const MobileApp: FC = () => {
         </StoresBlock>
       </StyledContainer>
     </Root>
-  ) : null;
+  );
 };
 
 const Root = styled.section`

@@ -9,18 +9,17 @@ import { Calculator } from './components/Calculator';
 const CalculatorSection: FC = () => {
   const { t } = useTranslation('calculator');
   const isMounted = useIsMounted();
-  return isMounted ? (
+  return (
     <section>
       <StyledContainer>
         <SectionHead>
           <StyledSectionTitle text={t('title')} />
-
           <SectionSubtitle>{t('subTitle')}</SectionSubtitle>
         </SectionHead>
         <Calculator />
       </StyledContainer>
     </section>
-  ) : null;
+  );
 };
 
 const StyledContainer = styled(Container)`

@@ -20,8 +20,11 @@ import { useIsMounted } from '@/hooks/useIsMounted';
 interface IHeaderWrapper {
   isActiveMenu: boolean;
 }
+interface IHeaderProps {
+  userAgent: { [key: string]: any };
+}
 
-const Header: FC = ({ children }) => {
+const Header: FC<IHeaderProps> = ({ children, userAgent }) => {
   const { t } = useTranslation('header');
   const isDesktop = useIsDesktop();
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -37,129 +40,121 @@ const Header: FC = ({ children }) => {
     window.innerWidth > 900 ? setIsOpenMenu(true) : setIsOpenMenu(false);
   }, []);
   return (
-    <>
-      {isMounted && (
-        <Headroom>
-          {!isDesktop && <MobileStore />}
-          <Root ref={ref}>
-            <HeaderBurgerNavContainer>
-              <Link href="/" passHref>
-                <a>
-                  <LogoMini />
-                </a>
-              </Link>
-              <BurgerBtn
-                className={isOpenMenu ? 'active' : ''}
-                onClick={handleBurgerClick}
-              >
-                <span></span>
-              </BurgerBtn>
-            </HeaderBurgerNavContainer>
+    <Headroom>
+      <MobileStore userAgent={userAgent} />
+      <Root ref={ref}>
+        <HeaderBurgerNavContainer>
+          <Link href="/" passHref>
+            <a>
+              <LogoMini />
+            </a>
+          </Link>
+          <BurgerBtn
+            className={isOpenMenu ? 'active' : ''}
+            onClick={handleBurgerClick}
+          >
+            <span></span>
+          </BurgerBtn>
+        </HeaderBurgerNavContainer>
 
-            <HeaderWrapper isActiveMenu={isOpenMenu}>
-              <HeaderScroller>
-                <HeaderTop>
-                  <HeaderTopContainer>
-                    <Link href="/" passHref>
-                      <HeaderLogoLink>
-                        <Image src={logo} alt={t('logoAlt')} loading="eager" />
-                      </HeaderLogoLink>
-                    </Link>
-                    <HeaderTopNav>
-                      <HeaderTopItem>
-                        <ActiveLink href="/" activeClassName="active">
-                          <HeaderTopLink>
-                            {t('main.aboutProduct')}
-                          </HeaderTopLink>
-                        </ActiveLink>
-                      </HeaderTopItem>
-                      <HeaderTopItem>
-                        <ActiveLink href="/blog" activeClassName="active">
-                          <HeaderTopLink>{t('main.blog')}</HeaderTopLink>
-                        </ActiveLink>
-                      </HeaderTopItem>
-                      <HeaderTopItem>
-                        <ActiveLink href="/about" activeClassName="active">
-                          <HeaderTopLink>
-                            {t('main.aboutCompany')}
-                          </HeaderTopLink>
-                        </ActiveLink>
-                      </HeaderTopItem>
-                    </HeaderTopNav>
-                    {isDesktop && (
-                      <HeaderButtonsWrap>
-                        <HeaderButtonTitle>
-                          {t('main.accountTitle')}
-                        </HeaderButtonTitle>
-                        <HeaderButtons>
-                          <Link
-                            href="https://nextjs.org/docs/advanced-features/i18n-routing"
-                            passHref
-                          >
-                            <HeaderButtonRegistration
-                              isLink
-                              text={t('main.registration')}
-                            ></HeaderButtonRegistration>
-                          </Link>
-                          <Link
-                            href="https://nextjs.org/docs/advanced-features/i18n-routing"
-                            passHref
-                          >
-                            <HeaderLinkLogin>
-                              <span>{t('main.login')}</span>
-                            </HeaderLinkLogin>
-                          </Link>
-                          <LanguageSwitcher />
-                        </HeaderButtons>
-                      </HeaderButtonsWrap>
-                    )}
-                  </HeaderTopContainer>
-                </HeaderTop>
-                {children && (
-                  <HeaderBottom>
-                    <HeaderBottomContainer>
-                      {children}
-                      {!isDesktop && (
-                        <HeaderButtonsWrap>
-                          <HeaderButtonTitle>
-                            {t('main.accountTitle')}
-                          </HeaderButtonTitle>
-                          <HeaderButtons>
-                            <Link
-                              href="https://nextjs.org/docs/advanced-features/i18n-routing"
-                              passHref
-                            >
-                              <HeaderButtonRegistration
-                                isLink
-                                text={t('main.registration')}
-                              ></HeaderButtonRegistration>
-                            </Link>
-                            <Link
-                              href="https://nextjs.org/docs/advanced-features/i18n-routing"
-                              passHref
-                            >
-                              <HeaderLinkLogin>
-                                <span>{t('main.login')}</span>
-                              </HeaderLinkLogin>
-                            </Link>
-                          </HeaderButtons>
-                        </HeaderButtonsWrap>
-                      )}
-                    </HeaderBottomContainer>
-                  </HeaderBottom>
+        <HeaderWrapper isActiveMenu={isOpenMenu}>
+          <HeaderScroller>
+            <HeaderTop>
+              <HeaderTopContainer>
+                <Link href="/" passHref>
+                  <HeaderLogoLink>
+                    <Image src={logo} alt={t('logoAlt')} loading="eager" />
+                  </HeaderLogoLink>
+                </Link>
+                <HeaderTopNav>
+                  <HeaderTopItem>
+                    <ActiveLink href="/" activeClassName="active">
+                      <HeaderTopLink>{t('main.aboutProduct')}</HeaderTopLink>
+                    </ActiveLink>
+                  </HeaderTopItem>
+                  <HeaderTopItem>
+                    <ActiveLink href="/blog" activeClassName="active">
+                      <HeaderTopLink>{t('main.blog')}</HeaderTopLink>
+                    </ActiveLink>
+                  </HeaderTopItem>
+                  <HeaderTopItem>
+                    <ActiveLink href="/about" activeClassName="active">
+                      <HeaderTopLink>{t('main.aboutCompany')}</HeaderTopLink>
+                    </ActiveLink>
+                  </HeaderTopItem>
+                </HeaderTopNav>
+                {isDesktop && (
+                  <HeaderButtonsWrap>
+                    <HeaderButtonTitle>
+                      {t('main.accountTitle')}
+                    </HeaderButtonTitle>
+                    <HeaderButtons>
+                      <Link
+                        href="https://nextjs.org/docs/advanced-features/i18n-routing"
+                        passHref
+                      >
+                        <HeaderButtonRegistration
+                          isLink
+                          text={t('main.registration')}
+                        ></HeaderButtonRegistration>
+                      </Link>
+                      <Link
+                        href="https://nextjs.org/docs/advanced-features/i18n-routing"
+                        passHref
+                      >
+                        <HeaderLinkLogin>
+                          <span>{t('main.login')}</span>
+                        </HeaderLinkLogin>
+                      </Link>
+                      <LanguageSwitcher />
+                    </HeaderButtons>
+                  </HeaderButtonsWrap>
                 )}
-                {!isDesktop && (
-                  <>
-                    <StyledSocialList />
-                    <StyledLanguageSwitcher />
-                  </>
-                )}
-              </HeaderScroller>
-            </HeaderWrapper>
-          </Root>
-        </Headroom>
-      )}
-    </>
+              </HeaderTopContainer>
+            </HeaderTop>
+            {children && (
+              <HeaderBottom>
+                <HeaderBottomContainer>
+                  {children}
+                  {!isDesktop && (
+                    <HeaderButtonsWrap>
+                      <HeaderButtonTitle>
+                        {t('main.accountTitle')}
+                      </HeaderButtonTitle>
+                      <HeaderButtons>
+                        <Link
+                          href="https://nextjs.org/docs/advanced-features/i18n-routing"
+                          passHref
+                        >
+                          <HeaderButtonRegistration
+                            isLink
+                            text={t('main.registration')}
+                          ></HeaderButtonRegistration>
+                        </Link>
+                        <Link
+                          href="https://nextjs.org/docs/advanced-features/i18n-routing"
+                          passHref
+                        >
+                          <HeaderLinkLogin>
+                            <span>{t('main.login')}</span>
+                          </HeaderLinkLogin>
+                        </Link>
+                      </HeaderButtons>
+                    </HeaderButtonsWrap>
+                  )}
+                </HeaderBottomContainer>
+              </HeaderBottom>
+            )}
+            {!isDesktop && (
+              <>
+                <StyledSocialList />
+                <StyledLanguageSwitcher />
+              </>
+            )}
+          </HeaderScroller>
+        </HeaderWrapper>
+      </Root>
+    </Headroom>
   );
 };
 

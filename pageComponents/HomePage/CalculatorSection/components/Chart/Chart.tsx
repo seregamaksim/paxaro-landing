@@ -73,13 +73,7 @@ const Chart: FC<IChartProps> = ({ className, data }) => {
               position: 'left',
             }}
           />
-          <Tooltip
-            contentStyle={{
-              backgroundColor: 'red',
-            }}
-            label={false}
-            content={<CustomTooltip />}
-          />
+          <Tooltip label={false} content={<CustomTooltip />} />
 
           <Line
             type="monotone"

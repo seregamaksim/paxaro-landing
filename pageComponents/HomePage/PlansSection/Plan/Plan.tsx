@@ -77,7 +77,7 @@ const Plan: FC<IPlanProps> = ({ title, price, hrefLink, className, data }) => {
         );
     }
   }, [isMounted]);
-  return isMounted ? (
+  return (
     <Root className={className} ref={mainRef}>
       <PlanHead ref={headRef}>
         <PlanTitle>{title}</PlanTitle>
@@ -96,7 +96,7 @@ const Plan: FC<IPlanProps> = ({ title, price, hrefLink, className, data }) => {
         ))}
       </PlanList>
     </Root>
-  ) : null;
+  );
 };
 
 const Root = styled.div`

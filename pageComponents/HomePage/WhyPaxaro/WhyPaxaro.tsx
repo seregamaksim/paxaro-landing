@@ -18,6 +18,7 @@ import { useIsMounted } from '@/hooks/useIsMounted';
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
+
 const WhyPaxaro: FC = () => {
   const { t } = useTranslation('whyPaxaro');
   const isMounted = useIsMounted();
@@ -515,7 +516,7 @@ const WhyPaxaro: FC = () => {
     }
   }, [isMounted]);
 
-  return isMounted ? (
+  return (
     <Root ref={mainRef}>
       <StyledContainer>
         <SectionHead>
@@ -581,7 +582,7 @@ const WhyPaxaro: FC = () => {
         </Content>
       </StyledContainer>
     </Root>
-  ) : null;
+  );
 };
 
 const Root = styled.section`

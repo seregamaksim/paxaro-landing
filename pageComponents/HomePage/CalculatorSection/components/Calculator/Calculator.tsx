@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import { Form, Formik, FormikProps, useField } from 'formik';
@@ -29,6 +29,7 @@ interface ICalculatorProps {
 interface Values {
   porfolio_type: string;
   date_days: string;
+  cash?: string;
 }
 
 const secondData = [
@@ -86,6 +87,11 @@ const Calculator: FC<ICalculatorProps> = ({ className }) => {
   const isMounted = useIsMounted();
   const { t } = useTranslation('calculator');
   const [cashValue, setCashValue] = useState(0);
+  const [initiaFormlValue, setInitiaFormlValue] = useState<Values>({
+    porfolio_type: 'i30',
+    date_days: '30',
+    cash: '1000',
+  });
 
   const dateDaysOptions = [
     { value: '30', label: t('calculator.month') },
@@ -97,7 +103,7 @@ const Calculator: FC<ICalculatorProps> = ({ className }) => {
     if (innerWidth > 768) {
       console.log('submit', {
         ...e,
-        cash: cashValue,
+        cash: cashValue.toString(),
       });
     } else {
       console.log('submit', e);
@@ -127,6 +133,7 @@ const Calculator: FC<ICalculatorProps> = ({ className }) => {
   function onChange(e: any, type: string) {
     setCashValue(marks[type][e]);
   }
+
   function getInitialValues() {
     if (innerWidth > 768) {
       return {
@@ -141,10 +148,15 @@ const Calculator: FC<ICalculatorProps> = ({ className }) => {
       };
     }
   }
+
+  useEffect(() => {
+    setInitiaFormlValue(getInitialValues());
+  }, [isMounted]);
+
   return (
     <Root className={className}>
       <Wrapper>
-        <Formik initialValues={getInitialValues()} onSubmit={submit}>
+        <Formik initialValues={initiaFormlValue} onSubmit={submit}>
           {({ values }: FormikProps<Values>) => {
             return (
               <Form>
@@ -166,61 +178,64 @@ const Calculator: FC<ICalculatorProps> = ({ className }) => {
                     />
                   </HeadSection>
 
-                  {innerWidth < 768 ? (
-                    <HeadSection>
-                      <HeadLabel>{t('calculator.investmentsAmount')}</HeadLabel>
-                      <SelectUiNoSSR
-                        name="cash"
-                        options={investmentsAmountOptions[values.porfolio_type]}
-                        id="cash"
+                  <CashSelectSection>
+                    <HeadLabel>{t('calculator.investmentsAmount')}</HeadLabel>
+                    <SelectUiNoSSR
+                      name="cash"
+                      options={investmentsAmountOptions[values.porfolio_type]}
+                      id="cash"
+                    />
+                  </CashSelectSection>
+
+                  <FullHeadSection>
+                    <HeadLabel>{t('calculator.investmentsAmount')}</HeadLabel>
+                    <SliderWrapper>
+                      <SliderBorders>
+                        {currency(
+                          marks[values.porfolio_type][
+                            Object.keys(marks[values.porfolio_type])[0]
+                          ],
+                          {
+                            precision: 0,
+                          }
+                        ).format()}
+                      </SliderBorders>
+                      <StyledSlider
+                        marks={marks[values.porfolio_type]}
+                        step={null}
+                        onChange={(e) => {
+                          onChange(e, values.porfolio_type);
+                        }}
+                        handle={(e) =>
+                          isMounted ? (
+                            handle(e, values.porfolio_type)
+                          ) : (
+                            <div></div>
+                          )
+                        }
                       />
-                    </HeadSection>
-                  ) : (
-                    <FullHeadSection>
-                      <HeadLabel>{t('calculator.investmentsAmount')}</HeadLabel>
-                      <SliderWrapper>
-                        <SliderBorders>
-                          {currency(
-                            marks[values.porfolio_type][
-                              Object.keys(marks[values.porfolio_type])[0]
-                            ],
-                            {
-                              precision: 0,
-                            }
-                          ).format()}
-                        </SliderBorders>
-                        <StyledSlider
-                          marks={marks[values.porfolio_type]}
-                          step={null}
-                          onChange={(e) => {
-                            onChange(e, values.porfolio_type);
-                          }}
-                          handle={(e) => handle(e, values.porfolio_type)}
-                        />
-                        <SliderBorders>
-                          {currency(
-                            marks[values.porfolio_type][
-                              Object.keys(marks[values.porfolio_type])[
-                                Object.keys(marks[values.porfolio_type])
-                                  .length - 1
-                              ]
-                            ],
-                            {
-                              separator: '.',
-                              precision: 0,
-                            }
-                          ).format()}
-                        </SliderBorders>
-                      </SliderWrapper>
-                    </FullHeadSection>
-                  )}
+                      <SliderBorders>
+                        {currency(
+                          marks[values.porfolio_type][
+                            Object.keys(marks[values.porfolio_type])[
+                              Object.keys(marks[values.porfolio_type]).length -
+                                1
+                            ]
+                          ],
+                          {
+                            separator: '.',
+                            precision: 0,
+                          }
+                        ).format()}
+                      </SliderBorders>
+                    </SliderWrapper>
+                  </FullHeadSection>
+
                   <HeadSection>
-                    {innerWidth < 768 && (
-                      <StyledButton
-                        type="submit"
-                        text={t('calculator.calculate')}
-                      />
-                    )}
+                    <MobileSubmitBtn
+                      type="submit"
+                      text={t('calculator.calculate')}
+                    />
                   </HeadSection>
                 </Head>
                 <ChartWrap>
@@ -233,12 +248,10 @@ const Calculator: FC<ICalculatorProps> = ({ className }) => {
                       <span>$1,199</span>
                     </ProfitBlockText>
                   </ProfitBlock>
-                  {innerWidth > 768 && (
-                    <StyledButton
-                      type="submit"
-                      text={t('calculator.calculate')}
-                    />
-                  )}
+                  <DesktopSubmitBtn
+                    type="submit"
+                    text={t('calculator.calculate')}
+                  />
                 </Footer>
               </Form>
             );
@@ -311,9 +324,19 @@ const HeadSection = styled.div`
 const FullHeadSection = styled(HeadSection)`
   width: 100%;
   max-width: 440px;
+  display: none;
   @media (max-width: 1024px) {
     max-width: none;
     margin-top: 20px;
+  }
+  @media (min-width: 768px) {
+    display: block;
+  }
+`;
+
+const CashSelectSection = styled(HeadSection)`
+  @media (min-width: 768px) {
+    display: none;
   }
 `;
 
@@ -400,7 +423,6 @@ const ProfitBlock = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
   }
 `;
 
@@ -435,4 +457,17 @@ const StyledButton = styled(Button)`
   padding-bottom: 11px;
 `;
 
+const DesktopSubmitBtn = styled(StyledButton)`
+  display: block;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const MobileSubmitBtn = styled(StyledButton)`
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
 export default Calculator;

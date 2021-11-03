@@ -50,31 +50,28 @@ const Advantages: FC = () => {
 
   useEffect(() => {
     if (isMounted) {
-      if (innerWidth > 768) {
-        if (!rootRef.current || !circleRef.current) {
-          return;
-        }
+      const advantagesTimeline = gsap.timeline({
+        defaults: {
+          ease: 'sine.out',
+        },
+        scrollTrigger: {
+          trigger: rootRef.current,
+          start: 'top top',
+          end: () => (innerWidth > 768 ? `+=5000` : `+=2000`),
+          pin: true,
 
-        const advantagesDesktopTimeline = gsap.timeline({
-          defaults: {
+          scrub: innerWidth > 768 ? 1 : 0,
+          markers: true,
+          snap: {
+            snapTo: 'labels',
+            duration: { min: 0.2, max: 2 },
+            delay: 0.2,
             ease: 'sine.out',
           },
-          scrollTrigger: {
-            trigger: rootRef.current,
-            start: 'top top',
-            end: '+=5000',
-            pin: true,
-            scrub: 1,
-            pinSpacing: true,
-            snap: {
-              snapTo: 'labels',
-              duration: { min: 0.2, max: 2 },
-              delay: 0.2,
-              ease: 'sine.out',
-            },
-          },
-        });
-        advantagesDesktopTimeline
+        },
+      });
+      if (innerWidth > 768) {
+        advantagesTimeline
           .addLabel('start')
           .from(
             itemsRef.current,
@@ -299,35 +296,14 @@ const Advantages: FC = () => {
             },
             {
               scale:
-                rootRef.current.scrollWidth / circleRef.current.offsetWidth +
+                rootRef!.current!.scrollWidth /
+                  circleRef!.current!.offsetWidth +
                 10,
               duration: 1,
             }
           );
       } else {
-        if (!rootRef.current || !circleRef.current) {
-          return;
-        }
-        const advantagesMobileTimeline = gsap.timeline({
-          defaults: {
-            ease: 'sine.out',
-          },
-          scrollTrigger: {
-            trigger: rootRef.current,
-            start: 'top top',
-            end: '+=2000',
-            pin: true,
-
-            scrub: 0,
-            snap: {
-              snapTo: 'labels',
-              duration: { min: 0.2, max: 2 },
-              delay: 0.2,
-              ease: 'sine.out',
-            },
-          },
-        });
-        advantagesMobileTimeline
+        advantagesTimeline
           .addLabel('start')
           .from(
             listSecondScreens.current[1],
@@ -357,13 +333,14 @@ const Advantages: FC = () => {
             },
             {
               scale:
-                rootRef.current.scrollWidth / circleRef.current.offsetWidth + 5,
+                rootRef!.current!.scrollWidth /
+                  circleRef!.current!.offsetWidth +
+                5,
               duration: 0.7,
             }
           );
       }
     }
-    ScrollTrigger.refresh();
   }, [isMounted]);
 
   return (
