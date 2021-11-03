@@ -62,7 +62,7 @@ const WhyPaxaro: FC = () => {
       if (innerWidth < 1024 && innerWidth > 768) {
         return {
           x: innerWidth / 2 - gridWithArrowRef!.current!.offsetWidth / 2,
-          y: getPixelsByVw(42),
+          y: getPixelsByVw(32),
         };
       }
       if (innerWidth < 768) {

@@ -31,8 +31,17 @@ const Header: FC = ({ children }) => {
       setIsOpenMenu(!isOpenMenu);
     }
   }
+
   useEffect(() => {
-    window.innerWidth > 900 ? setIsOpenMenu(true) : setIsOpenMenu(false);
+    if (isOpenMenu && innerWidth < 900) {
+      document.documentElement.style.overflow = 'hidden';
+    } else if (!isOpenMenu && innerWidth < 900) {
+      document.documentElement.style.overflow = '';
+    }
+  }, [isOpenMenu]);
+
+  useEffect(() => {
+    innerWidth > 900 ? setIsOpenMenu(true) : setIsOpenMenu(false);
   }, []);
   return (
     <>
