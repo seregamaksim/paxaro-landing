@@ -89,11 +89,10 @@ const Advantages: FC = () => {
               itemsRef.current[0],
               listSecondScreens.current[0]
             ).x,
-            y:
-              getItemCenterPosition(
-                itemsRef.current[0],
-                listSecondScreens.current[0]
-              ).y + 80,
+            y: getItemCenterPosition(
+              itemsRef.current[0],
+              listSecondScreens.current[0]
+            ).y,
             duration: 1,
           },
           'finishMoveItems'
@@ -175,11 +174,10 @@ const Advantages: FC = () => {
               itemsRef.current[1],
               listSecondScreens.current[1]
             ).x,
-            y:
-              getItemCenterPosition(
-                itemsRef.current[1],
-                listSecondScreens.current[1]
-              ).y + 80,
+            y: getItemCenterPosition(
+              itemsRef.current[1],
+              listSecondScreens.current[1]
+            ).y,
             duration: 1,
           },
           '<'
@@ -245,11 +243,10 @@ const Advantages: FC = () => {
               itemsRef.current[2],
               listSecondScreens.current[2]
             ).x,
-            y:
-              getItemCenterPosition(
-                itemsRef.current[2],
-                listSecondScreens.current[2]
-              ).y + 80,
+            y: getItemCenterPosition(
+              itemsRef.current[2],
+              listSecondScreens.current[2]
+            ).y,
             duration: 1,
           },
           '<'
