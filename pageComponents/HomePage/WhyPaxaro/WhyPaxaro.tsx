@@ -65,7 +65,7 @@ const WhyPaxaro: FC = () => {
       if (innerWidth < 1024 && innerWidth > 768) {
         return {
           x: innerWidth / 2 - gridWithArrowRef!.current!.offsetWidth / 2,
-          y: getPixelsByVw(32),
+          y: 400,
         };
       }
       if (innerWidth < 768) {
@@ -384,18 +384,18 @@ const WhyPaxaro: FC = () => {
         .to(
           bitcoinRef.current,
           {
-            x: getPixelsByVw(63.4),
-            y: 450,
+            x: getPixelsByVw(70.4),
+            y: 470,
             duration: 0.6,
-            scale: 0.7,
+            // scale: 0.7,
           },
           '<'
         )
         .to(
           ethereumRef.current,
           {
-            x: getPixelsByVw(43.4),
-            y: 530,
+            x: getPixelsByVw(29.4),
+            y: 510,
             duration: 0.6,
           },
           '<'
@@ -403,9 +403,9 @@ const WhyPaxaro: FC = () => {
         .to(
           coin1Ref.current,
           {
-            x: getPixelsByVw(56.6),
-            y: 480,
-            scale: 0.6,
+            x: getPixelsByVw(48.6),
+            y: 490,
+            // scale: 0.6,
             duration: 0.6,
           },
           '<'
@@ -413,9 +413,9 @@ const WhyPaxaro: FC = () => {
         .to(
           coin2Ref.current,
           {
-            x: getPixelsByVw(59.5),
-            y: 450,
-            scale: 0.6,
+            x: getPixelsByVw(62.5),
+            y: 520,
+            // scale: 0.6,
             duration: 0.6,
           },
           '<'
@@ -423,8 +423,8 @@ const WhyPaxaro: FC = () => {
         .to(
           coin3Ref.current,
           {
-            x: getPixelsByVw(51.7),
-            y: 520,
+            x: getPixelsByVw(47.7),
+            y: 530,
             duration: 0.6,
           },
           '<'
@@ -775,8 +775,8 @@ const BitcoinWrap = styled.div`
     height: 100px;
   }
   @media (max-width: 768px) {
-    width: 80px;
-    height: 80px;
+    width: 65px;
+    height: 65px;
   }
 `;
 
@@ -791,10 +791,6 @@ const EthereumWrap = styled.div`
   @media (max-width: 1024px) {
     width: 80px;
     height: 80px;
-  }
-  @media (max-width: 768px) {
-    width: 62px;
-    height: 62px;
   }
 `;
 
@@ -811,8 +807,8 @@ const Coin1Wrap = styled.div`
     height: 90px;
   }
   @media (max-width: 768px) {
-    width: 80px;
-    height: 80px;
+    width: 51px;
+    height: 51px;
   }
 `;
 
@@ -827,6 +823,10 @@ const Coin2Wrap = styled.div`
   @media (max-width: 1024px) {
     width: 90px;
     height: 90px;
+  }
+  @media (max-width: 768px) {
+    width: 35px;
+    height: 35px;
   }
 `;
 

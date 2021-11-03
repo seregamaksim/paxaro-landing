@@ -400,7 +400,33 @@ const SliderBorders = styled.p`
 
 const ChartWrap = styled.div`
   margin-bottom: 40px;
+  overflow-y: hidden;
   overflow-x: auto;
+  @media (max-width: 768px) {
+    ::-webkit-scrollbar {
+      -webkit-appearance: none;
+      -webkit-overflow-scrolling: auto;
+    }
+
+    ::-webkit-scrollbar:vertical {
+      width: 3px;
+    }
+
+    ::-webkit-scrollbar:horizontal {
+      height: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--green);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background-color: #ffffff;
+    }
+    padding-bottom: 20px;
+  }
 `;
 
 const StyledChart = styled(Chart)``;

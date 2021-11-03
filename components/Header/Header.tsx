@@ -169,12 +169,13 @@ const Root = styled.header`
   background: var(--black1);
   box-shadow: 0px 30px 36px -15px rgba(0, 0, 0, 0.15);
   @media (max-width: 900px) {
+    position: relative;
   }
 `;
 
 const HeaderScroller = styled.div`
   @media (max-width: 900px) {
-    padding-bottom: 200px;
+    padding-bottom: 150px;
     overflow: scroll;
   }
 `;
@@ -189,6 +190,12 @@ const HeaderWrapper = styled.div.attrs<IHeaderWrapper>((props) => ({
       props.isActiveMenu ? 'flex' : 'none'};
     flex-direction: column;
     height: 100vh;
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    background: var(--black1);
+    z-index: 10;
   }
 `;
 

@@ -145,6 +145,7 @@ const LanguagesDropdown = styled.div.attrs(() => ({
   border-radius: 8px;
   padding-bottom: 7px;
   overflow: hidden;
+  z-index: 2;
   @media (max-width: 900px) {
     top: auto;
     bottom: 100%;
