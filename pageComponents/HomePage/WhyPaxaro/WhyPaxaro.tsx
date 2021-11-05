@@ -761,7 +761,7 @@ const SecondDescriptionBlockRef = styled.div`
     top: 35%;
   }
   @media (max-width: 1024px) {
-    top: 100%;
+    top: 75%;
   }
 `;
 
