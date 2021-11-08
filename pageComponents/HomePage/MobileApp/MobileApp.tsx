@@ -10,18 +10,19 @@ import googleStoreImg from '@/assets/images/google-play.svg';
 import { useTranslation } from 'react-i18next';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { useIsMounted } from '@/hooks/useIsMounted';
 import { appStoreLink, googlePlayLink } from '@/constants';
 
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 const MobileApp: FC = () => {
-  const isMounted = useIsMounted();
   const { t } = useTranslation('common');
   const rootRef = useRef(null);
   const phoneBlockRef = useRef(null);
   const phoneImgRef = useRef(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
     if (innerWidth > 1024) {
       gsap.from(phoneImgRef.current, {
         scrollTrigger: {
@@ -47,9 +48,9 @@ const MobileApp: FC = () => {
         duration: 1,
       });
     }
-  });
+  }, []);
 
-  return isMounted ? (
+  return (
     <Root ref={rootRef}>
       <StyledContainer>
         <PhoneBlock ref={phoneBlockRef}>
@@ -77,7 +78,7 @@ const MobileApp: FC = () => {
         </StoresBlock>
       </StyledContainer>
     </Root>
-  ) : null;
+  );
 };
 
 const Root = styled.section`

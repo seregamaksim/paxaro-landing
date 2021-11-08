@@ -19,21 +19,21 @@ const Footer: FC = () => {
           <LogoStoresWrap>
             <ActiveLink href="/">
               <LogoLink>
-                <Image src={logo} alt="Paxaro" />
+                <Image src={logo} alt="Paxaro" loading="eager" />
               </LogoLink>
             </ActiveLink>
             <StoresList>
               <StoresItem>
                 <ActiveLink href="https://www.apple.com/ru/app-store/">
                   <StoresLink>
-                    <Image src={appStore} alt="App store" />
+                    <Image src={appStore} alt="App store" loading="eager" />
                   </StoresLink>
                 </ActiveLink>
               </StoresItem>
               <StoresItem>
                 <ActiveLink href="https://play.google.com/store?hl=ru&gl=US">
                   <StoresLink>
-                    <Image src={googlePlay} alt="Google play" />
+                    <Image src={googlePlay} alt="Google play" loading="eager" />
                   </StoresLink>
                 </ActiveLink>
               </StoresItem>

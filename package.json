@@ -19,6 +19,7 @@
     "moment": "^2.29.1",
     "next": "11.1.2",
     "next-i18next": "^8.9.0",
+    "next-transpile-modules": "^9.0.0",
     "rc-slider": "^9.7.4",
     "react": "17.0.2",
     "react-cookie": "^4.1.1",
