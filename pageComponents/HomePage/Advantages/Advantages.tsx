@@ -660,6 +660,7 @@ const DescriptionSecondScreenItemText = styled.p`
   line-height: 34px;
   letter-spacing: 0.01em;
   color: var(--white);
+
   @media (max-width: 1024px) {
     font-size: 20px;
     line-height: 30px;
@@ -667,6 +668,10 @@ const DescriptionSecondScreenItemText = styled.p`
   @media (max-width: 600px) {
     font-size: 18px;
     line-height: 25px;
+  }
+  @media (min-width: 320px) and (max-width: 1024px) and (max-height: 700px) {
+    font-size: 16px;
+    line-height: 24px;
   }
 `;
 
@@ -690,6 +695,7 @@ const DescriptionSecondScreenItem = styled.li`
     padding-top: 50px;
     min-height: 320px;
   }
+
   @media (max-width: 1100px) {
     padding-top: 50px;
     min-height: 320px;
@@ -705,6 +711,11 @@ const DescriptionSecondScreenItem = styled.li`
     left: 0;
     max-width: none;
     z-index: 0;
+  }
+  @media (min-width: 320px) and (max-width: 1024px) and (max-height: 700px) {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    min-height: auto;
   }
 `;
 
