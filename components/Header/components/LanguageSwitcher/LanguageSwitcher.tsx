@@ -8,11 +8,11 @@ import usaIcon from '@/assets/images/usa.svg';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import { ActiveLink } from '@/components/ActiveLink';
 
-interface ILanguageSwitcherProps {
+interface LanguageSwitcherProps {
   className?: string;
 }
 
-const LanguageSwitcher: FC<ILanguageSwitcherProps> = ({ className }) => {
+const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ className }) => {
   const router = useRouter();
   const { pathname, query, asPath } = router;
   const [isOpen, setIsOpen] = useState(false);

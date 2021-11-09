@@ -18,9 +18,9 @@ if (typeof window !== 'undefined') {
 
 const MobileApp: FC = () => {
   const { t } = useTranslation('common');
-  const rootRef = useRef(null);
-  const phoneBlockRef = useRef(null);
-  const phoneImgRef = useRef(null);
+  const rootRef = useRef<HTMLElement>(null);
+  const phoneBlockRef = useRef<HTMLDivElement>(null);
+  const phoneImgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (innerWidth > 1024) {

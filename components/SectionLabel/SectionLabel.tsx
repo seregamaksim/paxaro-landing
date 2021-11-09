@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 
-interface ISectionLabelProps {
+interface SectionLabelProps {
   className?: string;
   text: string;
   isDark?: boolean;
 }
 
-const SectionLabel: FC<ISectionLabelProps> = ({
+const SectionLabel: FC<SectionLabelProps> = ({
   className,
   text,
   isDark = false,

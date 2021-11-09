@@ -3,7 +3,7 @@ import { FC, useEffect } from 'react';
 import Select from 'react-select';
 import styled from 'styled-components';
 
-interface ISelectUIProps {
+interface SelectUIProps {
   className?: string;
   id: string;
   options: Option[];
@@ -14,7 +14,7 @@ interface Option {
   label: string;
 }
 
-const SelectUI: FC<ISelectUIProps & any> = ({
+const SelectUI: FC<SelectUIProps & any> = ({
   className,
   options,
   id,

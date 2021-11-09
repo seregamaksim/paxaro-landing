@@ -19,14 +19,14 @@ const Education: FC = () => {
   const rootRef = useRef(null);
   const headRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const descriptionWrapperRef = useRef(null);
-  const descriptionFirstRef = useRef(null);
-  const descriptionSecondRef = useRef(null);
+  const descriptionWrapperRef = useRef<HTMLDivElement>(null);
+  const descriptionFirstRef = useRef<HTMLDivElement>(null);
+  const descriptionSecondRef = useRef<HTMLDivElement>(null);
   const notebookWrapperRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const infoLinkWrapperRef = useRef(null);
-  const infoLinkBackgroundRef = useRef(null);
-  const notebookImageWrapperRef = useRef(null);
+  const infoLinkWrapperRef = useRef<HTMLDivElement>(null);
+  const infoLinkBackgroundRef = useRef<HTMLDivElement>(null);
+  const notebookImageWrapperRef = useRef<HTMLDivElement>(null);
   const mobileVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -226,10 +226,10 @@ const Education: FC = () => {
 
       <SectionContent ref={contentRef}>
         <DescriptionWrapper ref={descriptionWrapperRef}>
-          <DescriptionSection1 ref={descriptionFirstRef}>
+          <DescriptionSection ref={descriptionFirstRef}>
             <DescriptionLabel text={t('descriptionLabel')} />
             <DescriptionText>{t('descriptionText1')}</DescriptionText>
-          </DescriptionSection1>
+          </DescriptionSection>
           <DescriptionSection2 ref={descriptionSecondRef}>
             <DescriptionText>{t('descriptionText2')}</DescriptionText>
           </DescriptionSection2>
@@ -439,8 +439,6 @@ const DescriptionSection = styled.div`
     margin-bottom: 0;
   }
 `;
-
-const DescriptionSection1 = styled(DescriptionSection)``;
 
 const DescriptionSection2 = styled(DescriptionSection)`
   opacity: 0;

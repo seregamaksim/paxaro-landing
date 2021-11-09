@@ -4,8 +4,6 @@ import { Footer } from '@/components/Footer';
 
 import { Cookies } from '@/components/Cookies';
 
-interface IMainLayoutProps {}
-
 const MainLayout: FC = ({ children }) => {
   return (
     <Root>

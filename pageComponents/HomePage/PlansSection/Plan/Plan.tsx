@@ -13,7 +13,7 @@ if (typeof window !== 'undefined') {
 interface ItemType {
   text: string;
 }
-interface IPlanProps {
+interface PlanProps {
   title: string;
   price: string;
   hrefLink: string;
@@ -21,12 +21,12 @@ interface IPlanProps {
   data: ItemType[];
 }
 
-const Plan: FC<IPlanProps> = ({ title, price, hrefLink, className, data }) => {
+const Plan: FC<PlanProps> = ({ title, price, hrefLink, className, data }) => {
   const { t } = useTranslation('plans');
 
-  const mainRef = useRef(null);
-  const headRef = useRef(null);
-  const priceRef = useRef(null);
+  const mainRef = useRef<HTMLDivElement>(null);
+  const headRef = useRef<HTMLDivElement>(null);
+  const priceRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLLIElement[]>([]);
 
   const addToRefs = (el: HTMLLIElement) => {

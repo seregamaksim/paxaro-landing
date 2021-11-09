@@ -53,7 +53,7 @@ const Algorithm: FC = () => {
         <SectionHead ref={headRef}>
           <StyledSectionLabel text={t('label')} isDark />
           <StyledSectionTitle text={t('title')} />
-          <StyledSubtitle>{t('subtitle')}</StyledSubtitle>
+          <Subtitle>{t('subtitle')}</Subtitle>
         </SectionHead>
       </StyledContainer>
     </Root>
@@ -87,7 +87,7 @@ const StyledSectionTitle = styled(SectionTitle)`
   margin-bottom: 24px;
 `;
 
-const StyledSubtitle = styled.p`
+const Subtitle = styled.p`
   font-size: 24px;
   line-height: 34px;
   text-align: center;

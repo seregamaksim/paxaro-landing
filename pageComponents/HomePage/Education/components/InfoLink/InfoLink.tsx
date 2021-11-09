@@ -8,11 +8,11 @@ import { Trans, useTranslation } from 'react-i18next';
 import { Button } from '@/ui/components/Button';
 import { educationLink } from '@/constants';
 
-interface IInfoLinkProps {
+interface InfoLinkProps {
   className?: string;
 }
 
-const InfoLink: FC<IInfoLinkProps> = ({ className }) => {
+const InfoLink: FC<InfoLinkProps> = ({ className }) => {
   const { t } = useTranslation('education');
 
   return (

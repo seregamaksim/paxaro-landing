@@ -12,10 +12,10 @@ import { Education } from '@/pageComponents/HomePage/Education';
 import { Advantages } from '@/pageComponents/HomePage/Advantages';
 import { getSelectorsByUserAgent } from 'react-device-detect';
 
-interface Props {
+interface HomePageProps {
   userAgent: { [key: string]: any };
 }
-const Home: NextPage<Props> = ({ userAgent }) => {
+const Home: NextPage<HomePageProps> = ({ userAgent }) => {
   return (
     <MainLayout>
       <Header userAgent={userAgent}>
