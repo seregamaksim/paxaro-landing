@@ -669,7 +669,7 @@ const DescriptionSecondScreenItemText = styled.p`
     font-size: 18px;
     line-height: 25px;
   }
-  @media (min-width: 320px) and (max-width: 1024px) and (max-height: 700px) {
+  @media (min-width: 320px) and (max-width: 768px) and (max-height: 700px) {
     font-size: 16px;
     line-height: 24px;
   }
@@ -712,7 +712,7 @@ const DescriptionSecondScreenItem = styled.li`
     max-width: none;
     z-index: 0;
   }
-  @media (min-width: 320px) and (max-width: 1024px) and (max-height: 700px) {
+  @media (min-width: 320px) and (max-width: 768px) and (max-height: 700px) {
     padding-top: 30px;
     padding-bottom: 30px;
     min-height: auto;

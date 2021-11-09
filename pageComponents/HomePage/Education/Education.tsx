@@ -35,7 +35,7 @@ const Education: FC = () => {
         scrollTrigger: {
           trigger: rootRef.current,
           start: 'top top',
-          end: '+=2000',
+          end: () => '+=2000',
           pin: true,
           scrub: 1,
           snap: {
@@ -180,7 +180,7 @@ const Education: FC = () => {
         scrollTrigger: {
           trigger: rootRef.current,
           start: 'top top',
-          end: '+=500',
+          end: () => '+=500',
           pin: true,
           scrub: 1,
           snap: {

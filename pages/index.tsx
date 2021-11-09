@@ -11,6 +11,7 @@ import { PlansSection } from '@/pageComponents/HomePage/PlansSection';
 import { Education } from '@/pageComponents/HomePage/Education';
 import { Advantages } from '@/pageComponents/HomePage/Advantages';
 import { getSelectorsByUserAgent } from 'react-device-detect';
+import { Algorithm } from '@/pageComponents/HomePage/Algorithm';
 
 interface HomePageProps {
   userAgent: { [key: string]: any };
@@ -27,6 +28,7 @@ const Home: NextPage<HomePageProps> = ({ userAgent }) => {
         <CalculatorSection />
         <Advantages />
         <Education />
+        <Algorithm />
         <PlansSection />
         <MobileApp />
         <LeadForm />
