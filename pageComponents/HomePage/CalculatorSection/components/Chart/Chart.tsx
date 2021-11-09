@@ -17,7 +17,7 @@ interface Data {
   name: string;
   value: number;
 }
-interface IChartProps {
+interface ChartProps {
   className?: string;
   data: Data[];
 }
@@ -38,7 +38,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-const Chart: FC<IChartProps> = ({ className, data }) => {
+const Chart: FC<ChartProps> = ({ className, data }) => {
   return (
     <Root className={className}>
       <ResponsiveContainer>

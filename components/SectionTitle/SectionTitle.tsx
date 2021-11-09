@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 
-interface ISectionTitleProps {
+interface SectionTitleProps {
   className?: string;
   text: string;
 }
 
-const SectionTitle: FC<ISectionTitleProps> = ({ className, text }) => {
+const SectionTitle: FC<SectionTitleProps> = ({ className, text }) => {
   return <Title className={className}>{text}</Title>;
 };
 

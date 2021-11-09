@@ -8,13 +8,14 @@ import { WhyPaxaro } from '@/pageComponents/HomePage/WhyPaxaro';
 import { CalculatorSection } from '@/pageComponents/HomePage/CalculatorSection';
 import { MobileApp } from '@/pageComponents/HomePage/MobileApp';
 import { PlansSection } from '@/pageComponents/HomePage/PlansSection';
+import { Education } from '@/pageComponents/HomePage/Education';
 import { Advantages } from '@/pageComponents/HomePage/Advantages';
 import { getSelectorsByUserAgent } from 'react-device-detect';
 
-interface Props {
+interface HomePageProps {
   userAgent: { [key: string]: any };
 }
-const Home: NextPage<Props> = ({ userAgent }) => {
+const Home: NextPage<HomePageProps> = ({ userAgent }) => {
   return (
     <MainLayout>
       <Header userAgent={userAgent}>
@@ -25,6 +26,7 @@ const Home: NextPage<Props> = ({ userAgent }) => {
 
         <CalculatorSection />
         <Advantages />
+        <Education />
         <PlansSection />
         <MobileApp />
         <LeadForm />
@@ -47,8 +49,11 @@ export const getServerSideProps = async ({ locale, req }: any) => ({
       'whyPaxaro',
       'calculator',
       'plans',
+      'education',
       'advantages',
+      'algorithm',
     ])),
   },
 });
+
 export default Home;

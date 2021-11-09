@@ -16,7 +16,7 @@ import Headroom from 'react-headroom';
 
 import { MobileStore } from './components/MobileStore';
 
-interface IHeaderWrapper {
+interface HeaderWrapperProps {
   isActiveMenu: boolean;
 }
 interface IHeaderProps {
@@ -180,14 +180,16 @@ const HeaderScroller = styled.div`
   }
 `;
 
-const HeaderWrapper = styled.div.attrs<IHeaderWrapper>((props) => ({
-  className: props.isActiveMenu ? 'mobile-menu active' : 'mobile-menu',
-}))`
-  display: ${(props: IHeaderWrapper) =>
-    props.isActiveMenu ? 'block' : 'none'};
+const HeaderWrapper = styled.div.attrs<HeaderWrapperProps>(
+  ({ isActiveMenu }) => ({
+    className: isActiveMenu ? 'mobile-menu active' : 'mobile-menu',
+  })
+)`
+  display: ${({ isActiveMenu }: HeaderWrapperProps) =>
+    isActiveMenu ? 'block' : 'none'};
   @media (max-width: 900px) {
-    display: ${(props: IHeaderWrapper) =>
-      props.isActiveMenu ? 'flex' : 'none'};
+    display: ${({ isActiveMenu }: HeaderWrapperProps) =>
+      isActiveMenu ? 'flex' : 'none'};
     flex-direction: column;
     height: 100vh;
     position: absolute;

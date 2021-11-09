@@ -22,19 +22,19 @@ const WhyPaxaro: FC = () => {
   const { t } = useTranslation('whyPaxaro');
 
   const mainRef = useRef<HTMLElement>(null);
-  const whyPaxaroTitleRef = useRef(null);
-  const desciptionBlockRef = useRef(null);
-  const counterFirstNumberRef = useRef(null);
-  const counterSecondNumberRef = useRef(null);
-  const counterLineBarRef = useRef(null);
-  const descriptionTextWrapFirstRef = useRef(null);
-  const descriptionTextWrapSecondRef = useRef(null);
-  const secondDescriptionBlockRef = useRef(null);
-  const bitcoinRef = useRef(null);
-  const ethereumRef = useRef(null);
-  const coin1Ref = useRef(null);
-  const coin2Ref = useRef(null);
-  const coin3Ref = useRef(null);
+  const whyPaxaroTitleRef = useRef<HTMLParagraphElement>(null);
+  const desciptionBlockRef = useRef<HTMLDivElement>(null);
+  const counterFirstNumberRef = useRef<HTMLParagraphElement>(null);
+  const counterSecondNumberRef = useRef<HTMLParagraphElement>(null);
+  const counterLineBarRef = useRef<HTMLDivElement>(null);
+  const descriptionTextWrapFirstRef = useRef<HTMLDivElement>(null);
+  const descriptionTextWrapSecondRef = useRef<HTMLDivElement>(null);
+  const secondDescriptionBlockRef = useRef<HTMLDivElement>(null);
+  const bitcoinRef = useRef<HTMLDivElement>(null);
+  const ethereumRef = useRef<HTMLDivElement>(null);
+  const coin1Ref = useRef<HTMLDivElement>(null);
+  const coin2Ref = useRef<HTMLDivElement>(null);
+  const coin3Ref = useRef<HTMLDivElement>(null);
   const gridWithArrowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

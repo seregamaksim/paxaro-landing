@@ -22,7 +22,7 @@ const SelectUiNoSSR = dynamic(
   }
 );
 
-interface ICalculatorProps {
+interface CalculatorProps {
   className?: string;
 }
 
@@ -83,7 +83,7 @@ const secondData = [
   },
 ];
 
-const Calculator: FC<ICalculatorProps> = ({ className }) => {
+const Calculator: FC<CalculatorProps> = ({ className }) => {
   const isMounted = useIsMounted();
   const { t } = useTranslation('calculator');
   const [cashValue, setCashValue] = useState(0);

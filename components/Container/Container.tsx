@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 
-interface IContainerProps {
+interface ContainerProps {
   className?: string;
 }
 
-const Container: FC<IContainerProps> = ({ children, className }) => {
+const Container: FC<ContainerProps> = ({ children, className }) => {
   return <Root className={className}>{children}</Root>;
 };
 

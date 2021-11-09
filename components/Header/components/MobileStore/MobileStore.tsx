@@ -9,11 +9,11 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@/ui/components/Button';
 import { appStoreLink, googlePlayLink } from '@/constants';
 
-interface IMobileStoreProps {
+interface MobileStoreProps {
   userAgent: { [key: string]: any };
 }
 
-const MobileStore: FC<IMobileStoreProps> = ({ userAgent }) => {
+const MobileStore: FC<MobileStoreProps> = ({ userAgent }) => {
   const { t } = useTranslation('cookies');
   const [isOpen, setIsOpen] = useState(true);
 

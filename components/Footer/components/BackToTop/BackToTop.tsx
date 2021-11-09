@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import arrowUp from '../../../../assets/images/arrow-up.svg';
 
-interface IBackToTopProps {
+interface BackToTopProps {
   className?: string;
 }
 
-const BackToTop: FC<IBackToTopProps> = ({ className }) => {
+const BackToTop: FC<BackToTopProps> = ({ className }) => {
   const { t } = useTranslation('footer');
 
   function scrollToTop() {
@@ -20,7 +20,7 @@ const BackToTop: FC<IBackToTopProps> = ({ className }) => {
   return (
     <Root className={className} onClick={scrollToTop}>
       <Text>{t('upText')}</Text>
-      <Image src={arrowUp} />
+      <Image src={arrowUp} alt="To top" />
     </Root>
   );
 };
