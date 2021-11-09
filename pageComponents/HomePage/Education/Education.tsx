@@ -1,11 +1,12 @@
 import { SectionLabel } from '@/components/SectionLabel';
 import { SectionTitle } from '@/components/SectionTitle';
-import { FC, useEffect, useRef } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import mockup from '@/assets/images/mockup-notebook.png';
+import mockupMackbook from '@/assets/images/mockup-notebook.png';
+import mockupIphone from '@/assets/images/mockup-iphone.png';
 import Image from 'next/image';
-import { InfoLink } from './components';
+import { InfoLink } from './components/InfoLink';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
@@ -16,7 +17,7 @@ if (typeof window !== 'undefined') {
 const Education: FC = () => {
   const { t } = useTranslation('education');
   const rootRef = useRef(null);
-  const headRef = useRef(null);
+  const headRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const descriptionWrapperRef = useRef(null);
   const descriptionFirstRef = useRef(null);
@@ -24,137 +25,196 @@ const Education: FC = () => {
   const notebookWrapperRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const infoLinkWrapperRef = useRef(null);
+  const infoLinkBackgroundRef = useRef(null);
   const notebookImageWrapperRef = useRef(null);
+  const mobileVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const educationTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: rootRef.current,
-        start: 'top top',
-        end: '+=2000',
-        markers: true,
-        pin: true,
-        scrub: 1,
-        snap: {
-          snapTo: 'labels',
-          duration: { min: 0.2, max: 2 },
-          delay: 0.2,
-          ease: 'sine.out',
-        },
-        onEnter: () => {
-          videoRef?.current?.play();
-        },
-      },
-    });
-
-    educationTimeline
-      .addLabel('start')
-      .to(
-        descriptionFirstRef.current,
-        {
-          opacity: 0,
-          yPercent: -100,
-          duration: 0.5,
-        },
-
-        'start'
-      )
-      .to(
-        descriptionSecondRef.current,
-        {
-          opacity: 1,
-          yPercent: -100,
-          duration: 0.5,
-        },
-        '<'
-      )
-      .addLabel('finishChangeDescription')
-      .to(
-        videoRef.current,
-        {
-          yPercent: -100,
-          duration: 0.5,
-          onComplete: () => {
-            videoRef.current?.pause();
+    if (innerWidth > 900) {
+      const educationTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: rootRef.current,
+          start: 'top top',
+          end: '+=2000',
+          pin: true,
+          scrub: 1,
+          snap: {
+            snapTo: 'labels',
+            duration: { min: 0.2, max: 2 },
+            delay: 0.2,
+            ease: 'sine.out',
+          },
+          onEnter: () => {
+            videoRef?.current?.play();
           },
         },
-        'finishChangeDescription'
-      )
-      .to(
-        infoLinkWrapperRef.current,
-        {
-          y: 0,
-          duration: 0.5,
-        },
-        'finishChangeDescription'
-      )
-      .addLabel('finishChangeInfoLinkPosition')
-      .to(
-        descriptionWrapperRef.current,
-        {
-          xPercent: 100,
-          opacity: 0,
-          duration: 0.5,
-        },
-        'finishChangeInfoLinkPosition'
-      )
-      .to(
-        notebookWrapperRef.current,
-        {
-          x:
-            contentRef!.current!.offsetWidth / 2 -
-            notebookWrapperRef!.current!.getBoundingClientRect().width / 2,
+      });
 
-          duration: 0.5,
-        },
-        'finishChangeInfoLinkPosition'
-      )
-      .addLabel('finishMoveNotebook')
-      .to(
-        headRef.current,
-        {
-          yPercent: -100,
-          opacity: 0,
-          duration: 0.5,
-        },
-        'finishMoveNotebook'
-      )
-      .to(
-        notebookWrapperRef.current,
-        {
-          x: 0,
-          y: -300,
-          scale: 1,
-          duration: 0.5,
-        },
-        'finishMoveNotebook'
-      )
-      .to(
-        notebookImageWrapperRef.current,
-        {
-          scale: 1.242,
-          duration: 0.5,
-        },
-        '>-0.1'
-      )
-      .to(
-        infoLinkWrapperRef.current,
-        {
-          scale: 1,
-          duration: 0.5,
-        },
-        '<'
-      )
-      .to(
-        notebookImageWrapperRef.current,
-        {
-          opacity: 0,
-          duration: 0.2,
-        },
-        '>-0.1'
-      )
+      educationTimeline
+        .addLabel('start')
+        .to(
+          descriptionFirstRef.current,
+          {
+            opacity: 0,
+            yPercent: -50,
+            duration: 0.5,
+          },
 
-      .addLabel('finish');
+          'start'
+        )
+        .addLabel('finishHideFirstDescription')
+        .to(
+          descriptionSecondRef.current,
+          {
+            opacity: 1,
+            yPercent: -100,
+            duration: 0.5,
+          },
+          '<'
+        )
+        .addLabel('finishChangeDescription')
+        .to(
+          videoRef.current,
+          {
+            yPercent: -100,
+            duration: 0.5,
+            opacity: 0,
+            onStart: () => {
+              videoRef.current?.pause();
+            },
+          },
+          'finishChangeDescription'
+        )
+        .to(
+          infoLinkWrapperRef.current,
+          {
+            y: 0,
+            duration: 0.5,
+          },
+          'finishChangeDescription'
+        )
+        .set(notebookWrapperRef.current, { overflow: 'initial' })
+        .addLabel('finishChangeInfoLinkPosition')
+        .to(
+          descriptionWrapperRef.current,
+          {
+            xPercent: 100,
+            opacity: 0,
+            duration: 0.5,
+          },
+          'finishChangeInfoLinkPosition'
+        )
+        .to(
+          notebookWrapperRef.current,
+          {
+            x:
+              contentRef!.current!.offsetWidth / 2 -
+              notebookWrapperRef!.current!.getBoundingClientRect().width / 2,
+
+            duration: 0.5,
+          },
+          'finishChangeInfoLinkPosition'
+        )
+        .addLabel('finishMoveNotebook')
+        .to(
+          headRef.current,
+          {
+            yPercent: -100,
+            opacity: 0,
+            duration: 0.5,
+          },
+          'finishMoveNotebook'
+        )
+        .to(
+          notebookWrapperRef.current,
+          {
+            x: 0,
+            y: -headRef!.current!.offsetHeight / 2,
+            scale: 1,
+            duration: 0.5,
+          },
+          'finishMoveNotebook'
+        )
+        .to(
+          notebookImageWrapperRef.current,
+          {
+            scale:
+              innerWidth > 1440
+                ? document.documentElement.offsetWidth /
+                    contentRef!.current!.offsetWidth +
+                  1
+                : 1.242,
+            duration: 0.5,
+          },
+          '>-0.1'
+        )
+        .to(
+          infoLinkBackgroundRef.current,
+          {
+            scaleX:
+              document.documentElement.offsetWidth /
+              contentRef!.current!.offsetWidth,
+            duration: 0.5,
+          },
+          '<'
+        )
+        .to(
+          infoLinkWrapperRef.current,
+          {
+            scale: 1,
+            duration: 0.5,
+          },
+          '<'
+        )
+        .to(
+          notebookImageWrapperRef.current,
+          {
+            opacity: 0,
+            duration: 0.2,
+          },
+          '>-0.1'
+        )
+        .addLabel('finish');
+    } else {
+      const educationTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: rootRef.current,
+          start: 'top top',
+          end: '+=500',
+          pin: true,
+          scrub: 1,
+          snap: {
+            snapTo: 'labels',
+            duration: { min: 0.2, max: 2 },
+            delay: 0.2,
+            ease: 'sine.out',
+          },
+          onEnter: () => {
+            mobileVideoRef?.current?.play();
+          },
+        },
+      });
+
+      educationTimeline
+        .addLabel('start')
+        .to(
+          descriptionFirstRef.current,
+          {
+            opacity: 0,
+            duration: 0.5,
+          },
+          'start'
+        )
+        .to(
+          descriptionSecondRef.current,
+          {
+            opacity: 1,
+            duration: 0.5,
+          },
+          '<'
+        )
+        .addLabel('finish');
+    }
   }, []);
 
   return (
@@ -175,15 +235,27 @@ const Education: FC = () => {
           </DescriptionSection2>
         </DescriptionWrapper>
         <NotebookWrapper ref={notebookWrapperRef}>
-          <DesktopVideo playsInline muted ref={videoRef}>
+          <DesktopVideo ref={videoRef}>
             <source src="/videos/education-desktop.mp4" />
             <source src="/videos/education-desktop.webm" />
           </DesktopVideo>
+          <MobileVideoWrapper>
+            <MobileVideo>
+              <source src="/videos/education-mobile.mp4" />
+              <source src="/videos/education-mobile.webm" />
+            </MobileVideo>
+            <IphoneImgWrapper>
+              <Image src={mockupIphone} alt="Iphone" />
+            </IphoneImgWrapper>
+          </MobileVideoWrapper>
           <InfoLinkWrapper ref={infoLinkWrapperRef}>
-            <StyledInfoLink />
+            <InfoLinkContent>
+              <InfoLinkBackground ref={infoLinkBackgroundRef} />
+              <StyledInfoLink />
+            </InfoLinkContent>
           </InfoLinkWrapper>
           <NotebookImageWrapper ref={notebookImageWrapperRef}>
-            <Image src={mockup} alt="Mackbook Pro" />
+            <Image src={mockupMackbook} alt="Mackbook Pro" />
           </NotebookImageWrapper>
         </NotebookWrapper>
       </SectionContent>
@@ -195,14 +267,29 @@ const Root = styled.section`
   background-color: var(--black1);
   height: 100vh;
   overflow: hidden;
+  @media (max-width: 900px) {
+    height: auto;
+    min-height: 100vh;
+  }
 `;
 
 const SectionHead = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 100px;
+  text-align: center;
+  padding-bottom: 100px;
   padding-top: 120px;
+  will-change: transform, opacity;
+  @media (max-width: 1300px) {
+    padding-top: 70px;
+    padding-bottom: 50px;
+  }
+  @media (max-width: 900px) {
+    padding-top: 50px;
+    padding-bottom: 0;
+    margin-bottom: 24px;
+  }
 `;
 
 const StyledLabel = styled(SectionLabel)`
@@ -217,6 +304,14 @@ const SectionContent = styled.div`
   max-width: 1440px;
   margin: 0 auto;
   position: relative;
+  @media (max-width: 900px) {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+  @media (max-width: 768px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 `;
 
 const NotebookWrapper = styled.div`
@@ -224,21 +319,89 @@ const NotebookWrapper = styled.div`
   transform: translateX(100px) scale(0.4375);
   transform-origin: top left;
   overflow: hidden;
+  will-change: transform;
+
+  @media (max-width: 1100px) {
+    transform: translate(50px, 50px) scale(0.4375);
+  }
+  @media (max-width: 900px) {
+    transform: none;
+    overflow: initial;
+  }
 `;
 
 const NotebookImageWrapper = styled.div`
   position: relative;
   pointer-events: none;
+  will-change: transform, opacity;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
 `;
 
 const DesktopVideo = styled.video.attrs(() => ({
   muted: true,
   controls: false,
+  playsInline: true,
 }))`
   transform: scale(0.758);
   transform-origin: top;
   position: absolute;
-  top: 75px;
+  top: 4%;
+  will-change: transform;
+  @media (max-width: 900px) {
+    display: none;
+  }
+`;
+
+const MobileVideoWrapper = styled.div`
+  width: 100%;
+  position: relative;
+  display: none;
+  max-height: 480px;
+  overflow: hidden;
+  padding-top: 13px;
+  margin-bottom: 80px;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(1, 2, 2, 0) 0%, #010202 100%);
+    z-index: 2;
+  }
+
+  @media (max-width: 900px) {
+    display: block;
+  }
+`;
+
+const IphoneImgWrapper = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 308px;
+  @media (max-width: 374px) {
+    width: 280px;
+  }
+`;
+
+const MobileVideo = styled.video.attrs(() => ({
+  muted: true,
+  controls: false,
+  playsInline: true,
+  autoPlay: true,
+  loop: true,
+}))`
+  width: 274px;
+  margin: 0 auto;
+  @media (max-width: 374px) {
+    width: 257px;
+  }
 `;
 
 const DescriptionWrapper = styled.div`
@@ -246,11 +409,33 @@ const DescriptionWrapper = styled.div`
   max-width: 400px;
   top: 50px;
   right: 200px;
+  will-change: transform, opacity;
+  @media (max-width: 1300px) {
+    right: 50px;
+  }
+  @media (max-width: 1024px) {
+    max-width: 300px;
+  }
+  @media (max-width: 900px) {
+    position: relative;
+    right: auto;
+    top: auto;
+    margin-bottom: 40px;
+    max-width: none;
+  }
 `;
 
 const DescriptionSection = styled.div`
   margin-bottom: 50px;
   &:last-child {
+    margin-bottom: 0;
+  }
+  will-change: transform, opacity;
+  @media (max-width: 1300px) {
+    margin-bottom: 18px;
+  }
+
+  @media (max-width: 768px) {
     margin-bottom: 0;
   }
 `;
@@ -259,12 +444,20 @@ const DescriptionSection1 = styled(DescriptionSection)``;
 
 const DescriptionSection2 = styled(DescriptionSection)`
   opacity: 0;
+  @media (max-width: 900px) {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 `;
 
 const DescriptionLabel = styled(SectionLabel)`
   background-color: #168665;
   margin-bottom: 24px;
   color: var(--white);
+  @media (max-width: 900px) {
+    display: none;
+  }
 `;
 
 const DescriptionText = styled.p`
@@ -272,6 +465,10 @@ const DescriptionText = styled.p`
   line-height: 25px;
   letter-spacing: 0.01em;
   color: var(--white);
+  @media (max-width: 768px) {
+    font-size: 14px;
+    line-height: 20px;
+  }
 `;
 
 const InfoLinkWrapper = styled.div`
@@ -283,10 +480,38 @@ const InfoLinkWrapper = styled.div`
   transform: scale(0.758) translateY(100%);
   display: flex;
   align-items: center;
+
+  will-change: transform;
+  @media (max-width: 900px) {
+    position: static;
+    transform: none;
+    margin-left: -32px;
+    width: calc(100% + 64px);
+  }
+  @media (max-width: 768px) {
+    margin-left: -20px;
+    width: calc(100% + 40px);
+  }
+`;
+
+const InfoLinkContent = styled.div`
+  position: relative;
+  width: 100%;
 `;
 
 const StyledInfoLink = styled(InfoLink)`
+  position: relative;
+`;
+
+const InfoLinkBackground = styled.div`
+  background-color: var(--black5);
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  will-change: transform;
   width: 100%;
+  height: 100%;
 `;
 
 export default Education;

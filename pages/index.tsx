@@ -51,7 +51,9 @@ export const getServerSideProps = async ({ locale, req }: any) => ({
       'plans',
       'education',
       'advantages',
+      'algorithm',
     ])),
   },
 });
+
 export default Home;

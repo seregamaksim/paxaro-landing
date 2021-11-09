@@ -37,21 +37,40 @@ const InfoLink: FC<IInfoLinkProps> = ({ className }) => {
 };
 
 const Root = styled.div`
-  background-color: #1c1c1c;
+  background-color: var(--black5);
 `;
 
 const StyledContainer = styled(Container)`
   padding: 75px 14%;
+  @media (max-width: 1300px) {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  @media (max-width: 900px) {
+    padding: 40px 32px;
+  }
+  @media (max-width: 768px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 `;
 
 const LogoWrapper = styled.div`
   margin-bottom: 48px;
+  @media (max-width: 768px) {
+    width: 168px;
+    margin-bottom: 24px;
+  }
 `;
 
 const InfoWrap = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const Text = styled.p`
@@ -60,8 +79,23 @@ const Text = styled.p`
   line-height: 67px;
   color: var(--white);
   max-width: 670px;
+
   span {
     color: var(--darkGray);
+  }
+  @media (max-width: 1300px) {
+    font-size: 36px;
+    line-height: 48px;
+    max-width: 520px;
+  }
+  @media (max-width: 1024px) {
+    margin-bottom: 24px;
+    max-width: 670px;
+  }
+  @media (max-width: 900px) {
+    font-size: 24px;
+    line-height: 34px;
+    max-width: none;
   }
 `;
 

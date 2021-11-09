@@ -3,6 +3,7 @@
   --black2: #1d1d1d;
   --black3: #010202;
   --black4: #333;
+  --black5: #1c1c1c;
 
   --white: #fff;
 
@@ -14,6 +15,7 @@
 
   --greenGradient: linear-gradient(269.41deg, #45c6a1 0.51%, #179a74 99.5%);
 }
+
 @font-face {
   font-family: 'Gilroy';
   src: url('../assets/fonts/Gilroy-Regular.woff2'),
