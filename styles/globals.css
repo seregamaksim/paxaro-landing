@@ -16,6 +16,38 @@
   --greenGradient: linear-gradient(269.41deg, #45c6a1 0.51%, #179a74 99.5%);
 }
 
+.case-preloader {
+  transition: opacity 0.5s;
+  opacity: 0;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  pointer-events: none;
+  background-color: var(--black4);
+}
+.case-preloader.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.case-preloader__img {
+  width: 200px;
+  height: 200px;
+  overflow: visible;
+}
+@media (max-width: 768px) {
+  .case-preloader__img {
+    width: 100px;
+    height: 100px;
+  }
+}
 @font-face {
   font-family: 'Gilroy';
   src: url('../assets/fonts/Gilroy-Regular.woff2'),

@@ -6,27 +6,10 @@ import { Trans, useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { getCenterTopPosition } from '@/helpers/getCenterTopPosition';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
-}
-
-function getItemCenterPosition(
-  targetElem: HTMLLIElement,
-  toElem: HTMLLIElement
-) {
-  const targetElemPosition = {
-    left: targetElem.getBoundingClientRect().left,
-    top: targetElem.getBoundingClientRect().top,
-  };
-  const toElemPosition = {
-    left: toElem.getBoundingClientRect().left,
-    top: toElem.getBoundingClientRect().top,
-  };
-  return {
-    x: toElemPosition.left - targetElemPosition.left,
-    y: toElemPosition.top - targetElemPosition.top,
-  };
 }
 
 function getItemSizes(item: HTMLElement) {
@@ -85,13 +68,13 @@ const Advantages: FC = () => {
         .to(
           itemsRef.current[0],
           {
-            x: getItemCenterPosition(
-              itemsRef.current[0],
-              listSecondScreens.current[0]
+            x: getCenterTopPosition(
+              listSecondScreens.current[0],
+              itemsRef.current[0]
             ).x,
-            y: getItemCenterPosition(
-              itemsRef.current[0],
-              listSecondScreens.current[0]
+            y: getCenterTopPosition(
+              listSecondScreens.current[0],
+              itemsRef.current[0]
             ).y,
             duration: 1,
           },
@@ -170,13 +153,13 @@ const Advantages: FC = () => {
         .to(
           itemsRef.current[1],
           {
-            x: getItemCenterPosition(
-              itemsRef.current[1],
-              listSecondScreens.current[1]
+            x: getCenterTopPosition(
+              listSecondScreens.current[1],
+              itemsRef.current[1]
             ).x,
-            y: getItemCenterPosition(
-              itemsRef.current[1],
-              listSecondScreens.current[1]
+            y: getCenterTopPosition(
+              listSecondScreens.current[1],
+              itemsRef.current[1]
             ).y,
             duration: 1,
           },
@@ -239,13 +222,13 @@ const Advantages: FC = () => {
         .to(
           itemsRef.current[2],
           {
-            x: getItemCenterPosition(
-              itemsRef.current[2],
-              listSecondScreens.current[2]
+            x: getCenterTopPosition(
+              listSecondScreens.current[2],
+              itemsRef.current[2]
             ).x,
-            y: getItemCenterPosition(
-              itemsRef.current[2],
-              listSecondScreens.current[2]
+            y: getCenterTopPosition(
+              listSecondScreens.current[2],
+              itemsRef.current[2]
             ).y,
             duration: 1,
           },
@@ -669,7 +652,7 @@ const DescriptionSecondScreenItemText = styled.p`
     font-size: 18px;
     line-height: 25px;
   }
-  @media (min-width: 320px) and (max-width: 1024px) and (max-height: 700px) {
+  @media (min-width: 320px) and (max-width: 768px) and (max-height: 700px) {
     font-size: 16px;
     line-height: 24px;
   }
@@ -712,7 +695,7 @@ const DescriptionSecondScreenItem = styled.li`
     max-width: none;
     z-index: 0;
   }
-  @media (min-width: 320px) and (max-width: 1024px) and (max-height: 700px) {
+  @media (min-width: 320px) and (max-width: 768px) and (max-height: 700px) {
     padding-top: 30px;
     padding-bottom: 30px;
     min-height: auto;
