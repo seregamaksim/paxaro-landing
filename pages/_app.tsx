@@ -8,6 +8,7 @@ import { Preloader } from '@/components/Preloader';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <CookiesProvider>
+      <Preloader />
       <Component {...pageProps} />
     </CookiesProvider>
   );
