@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { InfoLink } from './components/InfoLink';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { getCenterTopPosition } from '@/helpers/getCenterTopPosition';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -16,7 +17,7 @@ if (typeof window !== 'undefined') {
 
 const Education: FC = () => {
   const { t } = useTranslation('education');
-  const rootRef = useRef(null);
+  const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const descriptionWrapperRef = useRef<HTMLDivElement>(null);
@@ -129,7 +130,11 @@ const Education: FC = () => {
           notebookWrapperRef.current,
           {
             x: 0,
-            y: -headRef!.current!.offsetHeight / 2,
+            y: () =>
+              getCenterTopPosition(
+                rootRef!.current!,
+                notebookWrapperRef!.current!
+              ).y,
             scale: 1,
             duration: 0.5,
           },
