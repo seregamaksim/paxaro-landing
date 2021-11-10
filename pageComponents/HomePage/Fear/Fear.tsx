@@ -1,14 +1,32 @@
 import { Container } from '@/components/Container';
 import { SectionLabel } from '@/components/SectionLabel';
 import { SectionTitle } from '@/components/SectionTitle';
-import { FC, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import Image from 'next/image';
 import phoneImg from '@/assets/images/fear-phone.png';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { getCenterTopPosition } from '@/helpers/getCenterTopPosition';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 function getItemSizes(item: HTMLElement) {
   return { width: item.offsetWidth, height: item.offsetHeight };
+}
+
+// function getPositionElemRelativeOtherElem(targetElem:HTMLElement, otherElem: HTMLElement) {
+
+// }
+
+function getScaleParams(targetElem: HTMLElement, toElem: HTMLElement) {
+  return {
+    scaleX: getItemSizes(toElem).width / getItemSizes(targetElem).width,
+    scaleY: getItemSizes(toElem).height / getItemSizes(targetElem).height,
+  };
 }
 
 const Fear: FC = () => {
@@ -16,6 +34,91 @@ const Fear: FC = () => {
   const rootRef = useRef<HTMLElement>(null);
   const cardItems = useRef<HTMLLIElement[]>([]);
   const miniCardItems = useRef<HTMLDivElement[]>([]);
+  const miniCardTitles = useRef<HTMLParagraphElement[]>([]);
+  const miniCardBackgrounds = useRef<HTMLDivElement[]>([]);
+
+  useEffect(() => {
+    console.log(
+      getCenterTopPosition(cardItems!.current[0], miniCardItems!.current[0])
+    );
+    const fearTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: rootRef.current,
+        start: 'top top',
+        end: () => '+=5000',
+        markers: true,
+        pin: true,
+        scrub: 1,
+        snap: {
+          snapTo: 'labels',
+          duration: { min: 0.2, max: 2 },
+          delay: 0.2,
+          ease: 'sine.out',
+        },
+      },
+    });
+
+    fearTimeline
+      .addLabel('start')
+      .to(
+        miniCardItems.current[0],
+        {
+          opacity: 1,
+          duration: 0.5,
+        },
+        'start+=0.2'
+      )
+      .to(
+        miniCardTitles.current[0],
+        {
+          color: '#1d1d1d',
+          duration: 0.5,
+        },
+        '>'
+      )
+      .to(
+        miniCardBackgrounds.current[0],
+        {
+          backgroundColor: '#fff',
+        },
+        '<'
+      )
+      .addLabel('showFirstMiniCardWithBackground')
+      .to(
+        miniCardBackgrounds.current[0],
+        {
+          scaleX: getScaleParams(
+            miniCardItems!.current[0],
+            cardItems!.current[0]
+          ).scaleX,
+          scaleY: getScaleParams(
+            miniCardItems!.current[0],
+            cardItems!.current[0]
+          ).scaleY,
+          duration: 0.8,
+        },
+        'showFirstMiniCardWithBackground'
+      )
+      .to(
+        miniCardItems.current[0],
+        {
+          x:
+            getCenterTopPosition(
+              cardItems!.current[0],
+              miniCardItems!.current[0]
+            ).x +
+            getItemSizes(miniCardItems!.current[0]).width / 2,
+          y:
+            getCenterTopPosition(
+              cardItems!.current[0],
+              miniCardItems!.current[0]
+            ).y +
+            getItemSizes(miniCardItems!.current[0]).height / 2,
+          duration: 0.8,
+        },
+        'showFirstMiniCardWithBackground'
+      );
+  }, []);
 
   return (
     <Root ref={rootRef}>
@@ -66,32 +169,72 @@ const Fear: FC = () => {
                 miniCardItems.current[3] = item;
               }}
             >
-              <MiniCardBg />
-              <MiniCardTitle>{t('card1.title')}</MiniCardTitle>
+              <MiniCardBg
+                ref={(item: HTMLDivElement) => {
+                  miniCardBackgrounds.current[3] = item;
+                }}
+              />
+              <MiniCardTitle
+                ref={(item: HTMLParagraphElement) => {
+                  miniCardTitles.current[3] = item;
+                }}
+              >
+                {t('card1.title')}
+              </MiniCardTitle>
             </MiniCard>
             <MiniCard
               ref={(item: HTMLDivElement) => {
                 miniCardItems.current[2] = item;
               }}
             >
-              <MiniCardBg />
-              <MiniCardTitle>{t('card3.title')}</MiniCardTitle>
+              <MiniCardBg
+                ref={(item: HTMLDivElement) => {
+                  miniCardBackgrounds.current[2] = item;
+                }}
+              />
+              <MiniCardTitle
+                ref={(item: HTMLParagraphElement) => {
+                  miniCardTitles.current[2] = item;
+                }}
+              >
+                {t('card3.title')}
+              </MiniCardTitle>
             </MiniCard>
             <MiniCard
               ref={(item: HTMLDivElement) => {
                 miniCardItems.current[1] = item;
               }}
             >
-              <MiniCardBg />
-              <MiniCardTitle>{t('card2.title')}</MiniCardTitle>
+              <MiniCardBg
+                ref={(item: HTMLDivElement) => {
+                  miniCardBackgrounds.current[1] = item;
+                }}
+              />
+              <MiniCardTitle
+                ref={(item: HTMLParagraphElement) => {
+                  miniCardTitles.current[1] = item;
+                }}
+              >
+                {t('card2.title')}
+              </MiniCardTitle>
             </MiniCard>
             <MiniCard
               ref={(item: HTMLDivElement) => {
                 miniCardItems.current[0] = item;
               }}
             >
-              <MiniCardBg />
-              <MiniCardTitle>{t('card1.title')}</MiniCardTitle>
+              <MiniCardBg
+                ref={(item: HTMLDivElement) => {
+                  miniCardBackgrounds.current[0] = item;
+                }}
+              />
+              <MiniCardTitle
+                ref={(item: HTMLParagraphElement) => {
+                  miniCardTitles.current[0] = item;
+                }}
+              >
+                {t('card1.title')}
+              </MiniCardTitle>
             </MiniCard>
           </MessagePhoneWrap>
         </MessagesBlock>
@@ -142,6 +285,8 @@ const MessageItem = styled.li`
   background-color: var(--white);
   border-radius: 30px;
   max-width: 505px;
+
+  opacity: 0;
 `;
 
 const MessageItemTitle = styled.p`
@@ -182,6 +327,8 @@ const MiniCard = styled.div`
   top: 30%;
   left: 50%;
   transform: translateX(-50%);
+
+  opacity: 0;
 `;
 
 const MiniCardBg = styled.div`
@@ -193,7 +340,7 @@ const MiniCardBg = styled.div`
   transform: translate(-50%, -50%);
   will-change: transform, background-color;
   border-radius: 23px;
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0);
 `;
 
 const MiniCardTitle = styled.p`
