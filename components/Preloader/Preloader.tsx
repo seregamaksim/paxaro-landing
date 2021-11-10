@@ -6,19 +6,22 @@ const Preloader: FC = () => {
   let [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    document.documentElement.style.overflow = 'hidden';
     window.addEventListener('load', function () {
       setIsLoading(false);
+      document.documentElement.style.overflow = '';
     });
     return () => {
       window.removeEventListener('load', function () {
         setIsLoading(false);
+        document.documentElement.style.overflow = '';
       });
     };
   }, []);
 
   return (
     <Root className={isLoading ? 'active' : ''}>
-      <BeatLoader color="#48BE9C" size={70} />
+      <BeatLoader color="#48BE9C" size={60} />
     </Root>
   );
 };
