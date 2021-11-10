@@ -11,27 +11,10 @@ import algorithmImg1 from '@/assets/images/algorithm-img1.svg';
 import algorithmImg2 from '@/assets/images/algorithm-img2.svg';
 import algorithmImg3 from '@/assets/images/algorithm-img3.svg';
 import algorithmImg4 from '@/assets/images/algorithm-img4.svg';
+import { getCenterTopPosition } from '@/helpers/getCenterTopPosition';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
-}
-
-function getCenterTopPosition(
-  toElement: HTMLElement,
-  targetElement: HTMLElement
-) {
-  const targetElemPosition = {
-    left: targetElement.getBoundingClientRect().left,
-    top: targetElement.getBoundingClientRect().top,
-  };
-  const toElemPosition = {
-    left: toElement.getBoundingClientRect().left,
-    top: toElement.getBoundingClientRect().top,
-  };
-  return {
-    x: toElemPosition.left - targetElemPosition.left,
-    y: toElemPosition.top - targetElemPosition.top,
-  };
 }
 
 const Algorithm: FC = () => {
