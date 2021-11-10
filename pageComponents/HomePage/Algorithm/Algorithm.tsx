@@ -245,8 +245,8 @@ const Algorithm: FC = () => {
       <StoreBannerSection ref={storeBannerSectionRef}>
         <StoreBanner ref={storeBannerRef}>
           <StoreBannerText>
-            <Trans t={t} i18nKey="">
-              Ваш <span>личный карманный</span> трейдер — <span>мобильное</span>{' '}
+            <Trans t={t} i18nKey="storesText">
+              Ваш <span>личный карманный</span> брокер — <span>мобильное</span>{' '}
               приложение <span>Paxaro App.</span> Скачивайте{' '}
               <span>и управляйте инвестициями</span> на ходу.
             </Trans>

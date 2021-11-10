@@ -7,16 +7,10 @@ const Preloader: FC = () => {
 
   useEffect(() => {
     document.documentElement.style.overflow = 'hidden';
-    window.addEventListener('load', function () {
+    setTimeout(() => {
       setIsLoading(false);
       document.documentElement.style.overflow = '';
-    });
-    return () => {
-      window.removeEventListener('load', function () {
-        setIsLoading(false);
-        document.documentElement.style.overflow = '';
-      });
-    };
+    }, 1000);
   }, []);
 
   return (
