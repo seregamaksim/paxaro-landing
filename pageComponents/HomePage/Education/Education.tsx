@@ -50,9 +50,6 @@ const Education: FC = () => {
           },
         },
       });
-      console.log(
-        getCenterTopPosition(rootRef!.current!, notebookWrapperRef!.current!)
-      );
 
       educationTimeline
         .addLabel('start')
