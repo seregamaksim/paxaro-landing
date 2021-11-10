@@ -40,6 +40,7 @@ const Advantages: FC = () => {
         end: () => (innerWidth > 768 ? `+=5000` : `+=2000`),
         pin: true,
         scrub: innerWidth > 768 ? 1 : 0,
+
         snap: {
           snapTo: 'labels',
           duration: { min: 0.2, max: 2 },

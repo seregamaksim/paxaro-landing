@@ -42,6 +42,10 @@ const Root = styled.div`
 
 const StyledContainer = styled(Container)`
   padding: 75px 14%;
+  @media (min-width: 900px) and (max-height: 750px) {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
   @media (max-width: 1300px) {
     padding-left: 50px;
     padding-right: 50px;
