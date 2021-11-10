@@ -1,66 +1,47 @@
 import { FC, useEffect, useState } from 'react';
-import Script from 'next/script';
+import BeatLoader from 'react-spinners/BeatLoader';
+import styled from 'styled-components';
 
 const Preloader: FC = () => {
-  const [isActive, setIsActive] = useState(true);
+  let [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsActive(false);
-  }, [isActive]);
-  return (
-    <section className={`case-preloader ${isActive ? 'active' : ''}`}>
-      <svg
-        className="case-preloader__img"
-        id="e9Beg70Orta1"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlnsXlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 900 900"
-        shapeRendering="geometricPrecision"
-        textRendering="geometricPrecision"
-      >
-        <g id="e9Beg70Orta2" transform="matrix(1 0 0 1 16 21)">
-          <circle
-            id="e9Beg70Orta3"
-            r="150"
-            transform="matrix(1 0 0 1 234 219)"
-            fill="#ffffff"
-            stroke="none"
-            strokeWidth="1"
-          />
-          <circle
-            id="e9Beg70Orta4"
-            r="150"
-            transform="matrix(1 0 0 1 234 598)"
-            fill="#48BE9C"
-            stroke="none"
-            strokeWidth="1"
-          />
-          <circle
-            id="e9Beg70Orta5"
-            r="150"
-            transform="matrix(1 0 0 1 604 219)"
-            fill="#247074"
-            stroke="none"
-            strokeWidth="1"
-          />
-          <circle
-            id="e9Beg70Orta6"
-            r="150"
-            transform="matrix(1 0 0 1 604 598)"
-            fill="#1D1D1D"
-            stroke="none"
-            strokeWidth="1"
-          />
-        </g>
+    window.addEventListener('load', function () {
+      setIsLoading(false);
+    });
+    return () => {
+      window.removeEventListener('load', function () {
+        setIsLoading(false);
+      });
+    };
+  }, []);
 
-        <Script
-          id="preloader-script"
-          src="/js/preloader.js"
-          strategy="beforeInteractive"
-        />
-      </svg>
-    </section>
+  return (
+    <Root className={isLoading ? 'active' : ''}>
+      <BeatLoader color="#48BE9C" size={70} />
+    </Root>
   );
 };
+
+const Root = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--black1);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s;
+  &.active {
+    opacity: 1;
+  }
+`;
 
 export default Preloader;
