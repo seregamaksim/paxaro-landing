@@ -314,6 +314,10 @@ const Advantages: FC = () => {
           }
         );
     }
+
+    window.addEventListener('resize', function () {
+      ScrollTrigger.refresh();
+    });
   }, []);
 
   return (
