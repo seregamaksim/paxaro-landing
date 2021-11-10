@@ -24,6 +24,9 @@ const CalculatorSection: FC = () => {
 
 const StyledContainer = styled(Container)`
   padding-top: 40px;
+  @media (min-width: 320px) and (max-width: 768px) and (max-height: 700px) {
+    padding-top: 90px;
+  }
 `;
 
 const SectionHead = styled.div`
