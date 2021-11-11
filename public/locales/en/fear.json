@@ -1,20 +1,20 @@
 {
-  "label": "Инвестиции — это не страшно",
-  "title": "Не бойтесь начать",
+  "label": "Investments are not scary",
+  "title": "Don't be afraid to start",
   "card1": {
-    "title": "Как быть, если у меня нет знаний о трейдинге и опыта инвестиций?",
-    "description": "Они не нужны. Наш алгоритм автоматизирует большинство процессов. Вы пользуетесь готовым решением, получая прибыль. При этом вы учитесь новому и сами становитесь экспертом. Команда опытных специалистов поможет разобраться со сложными вопросами и охотно поделится всеми знаниями."
+    "title": "What if I have no trading knowledge and investment experience?",
+    "description": "They are not needed. Our algorithm automates most of the processes. You use a ready-made solution, making a profit. In doing so, you learn new things and become an expert yourself. A team of experienced professionals will help you deal with complex issues and will gladly share all the knowledge."
   },
   "card2": {
-    "title": "Смогу ли я начать с небольшими деньгами?",
-    "description": "Да. Мы рассчитаем самые выгодные стратегии, исходя из ваших возможностей. Это позволит максимально эффективно использовать имеющийся бюджет."
+    "title": "Will I be able to start with little money?",
+    "description": "Yes. We will calculate the most profitable strategies based on your capabilities. This will allow you to make the most of your available budget."
   },
   "card3": {
-    "title": "Насколько велик риск, что я все потеряю?",
-    "description": "В инвестициях риск есть всегда. Мы лишь предлагаем инструмент, который позволяет инвестировать удобно, быстро и с высокой отдачей. Этот инструмент проверен и показывает свою эффективность, в том числе на наших портфелях. Но все решения о ваших инвестициях принимаете только вы, и ответственность за них тоже лежит на вас."
+    "title": "How big is the risk that I will lose everything?",
+    "description": "There is always risk in investments. We only offer a tool that allows you to invest conveniently, quickly and with high returns. This tool has been tested and shows its effectiveness, including in our portfolios. But all decisions about your investments are made only by you, and the responsibility for them also lies with you."
   },
   "card4": {
-    "title": "Для инвестиций нужно много времени?",
-    "description": "Нет. Вам не придется бросать работу и целыми днями следить за котировками. Вложения приносят прибыль, даже если вы ничего не делаете."
+    "title": "Does it take a long time to invest?",
+    "description": "No. You do not have to quit your job and monitor quotes all day. Investments are profitable even if you do nothing."
   }
 }

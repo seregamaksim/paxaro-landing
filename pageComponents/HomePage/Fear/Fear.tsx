@@ -18,10 +18,6 @@ function getItemSizes(item: HTMLElement) {
   return { width: item.offsetWidth, height: item.offsetHeight };
 }
 
-// function getPositionElemRelativeOtherElem(targetElem:HTMLElement, otherElem: HTMLElement) {
-
-// }
-
 function getScaleParams(targetElem: HTMLElement, toElem: HTMLElement) {
   return {
     scaleX: getItemSizes(toElem).width / getItemSizes(targetElem).width,
@@ -32,92 +28,887 @@ function getScaleParams(targetElem: HTMLElement, toElem: HTMLElement) {
 const Fear: FC = () => {
   const { t } = useTranslation('fear');
   const rootRef = useRef<HTMLElement>(null);
+  const messagesListRef = useRef<HTMLUListElement>(null);
   const cardItems = useRef<HTMLLIElement[]>([]);
   const miniCardItems = useRef<HTMLDivElement[]>([]);
   const miniCardTitles = useRef<HTMLParagraphElement[]>([]);
   const miniCardBackgrounds = useRef<HTMLDivElement[]>([]);
+  const messagesBlockRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.log(
-      getCenterTopPosition(cardItems!.current[0], miniCardItems!.current[0])
-    );
-    const fearTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: rootRef.current,
-        start: 'top top',
-        end: () => '+=5000',
-        markers: true,
-        pin: true,
-        scrub: 1,
-        snap: {
-          snapTo: 'labels',
-          duration: { min: 0.2, max: 2 },
-          delay: 0.2,
-          ease: 'sine.out',
-        },
-      },
-    });
-
-    fearTimeline
-      .addLabel('start')
-      .to(
-        miniCardItems.current[0],
-        {
-          opacity: 1,
-          duration: 0.5,
-        },
-        'start+=0.2'
-      )
-      .to(
-        miniCardTitles.current[0],
-        {
-          color: '#1d1d1d',
-          duration: 0.5,
-        },
-        '>'
-      )
-      .to(
-        miniCardBackgrounds.current[0],
-        {
-          backgroundColor: '#fff',
-        },
-        '<'
-      )
-      .addLabel('showFirstMiniCardWithBackground')
-      .to(
-        miniCardBackgrounds.current[0],
-        {
-          scaleX: getScaleParams(
-            miniCardItems!.current[0],
-            cardItems!.current[0]
-          ).scaleX,
-          scaleY: getScaleParams(
-            miniCardItems!.current[0],
-            cardItems!.current[0]
-          ).scaleY,
-          duration: 0.8,
-        },
-        'showFirstMiniCardWithBackground'
-      )
-      .to(
-        miniCardItems.current[0],
-        {
-          x:
-            getCenterTopPosition(
-              cardItems!.current[0],
-              miniCardItems!.current[0]
-            ).x +
-            getItemSizes(miniCardItems!.current[0]).width / 2,
-          y:
-            getCenterTopPosition(
-              cardItems!.current[0],
-              miniCardItems!.current[0]
-            ).y +
-            getItemSizes(miniCardItems!.current[0]).height / 2,
-          duration: 0.8,
-        },
-        'showFirstMiniCardWithBackground'
+    function getCoordsForMiniCard(miniCard: HTMLElement, card: HTMLElement) {
+      const coordsList = getCenterTopPosition(
+        messagesListRef!.current!,
+        messagesBlockRef!.current!
       );
+      const coordsCardOfList = getCenterTopPosition(
+        card,
+        messagesBlockRef!.current!
+      );
+      const coordsMiniCard = getCenterTopPosition(
+        miniCard,
+        messagesBlockRef!.current!
+      );
+      const coordCard = getCenterTopPosition(miniCard, card);
+
+      const result = {
+        x: coordsList.x - coordsMiniCard.x + getItemSizes(miniCard).width / 2,
+        y:
+          coordsList.y * 2 +
+          card.offsetHeight -
+          getItemSizes(miniCard).height / 2,
+      };
+      console.log('coordsList', coordsList);
+      console.log('coordsMiniCard', coordsMiniCard);
+      console.log('coordCard', coordCard);
+      console.log('coordsCardOfList', coordsCardOfList);
+
+      return result;
+    }
+
+    // console.log(
+    //   'test',
+    //   getCoordsForMiniCard(miniCardItems!.current[0], cardItems!.current[0])
+    // );
+
+    // console.log(
+    //   'list of parent',
+    //   getCenterTopPosition(
+    //     messagesListRef!.current!,
+    //     messagesBlockRef!.current!
+    //   )
+    // );
+    // console.log(
+    //   'miniCardItems of messagesBlockRef',
+    //   getCenterTopPosition(
+    //     miniCardItems!.current[0],
+    //     messagesBlockRef!.current!
+    //   )
+    // );
+    // console.log(
+    //   'miniCardItems of cardItems',
+    //   getCenterTopPosition(miniCardItems!.current[0], cardItems!.current[0])
+    // );
+
+    if (innerWidth > 1024) {
+      const fearTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: rootRef.current,
+          start: 'top top',
+          end: () => '+=5000',
+          markers: true,
+          pin: true,
+          scrub: 0.3,
+          snap: {
+            snapTo: 'labels',
+            duration: { min: 0.2, max: 2 },
+            delay: 0.2,
+            ease: 'sine.out',
+          },
+        },
+      });
+
+      fearTimeline
+        .set(cardItems.current[1], {
+          y: getItemSizes(cardItems.current[0]).height + 24,
+        })
+        .set(cardItems.current[2], {
+          y: getItemSizes(cardItems.current[1]).height + 24,
+        })
+        .set(cardItems.current[3], {
+          y: getItemSizes(cardItems.current[2]).height + 24,
+        })
+
+        .addLabel('start')
+        .to(
+          miniCardItems.current[0],
+          {
+            opacity: 1,
+            duration: 0.5,
+          },
+          'start+=0.2'
+        )
+        .to(
+          miniCardTitles.current[0],
+          {
+            color: '#1d1d1d',
+            duration: 0.5,
+          },
+          '>'
+        )
+        .to(
+          miniCardBackgrounds.current[0],
+          {
+            backgroundColor: '#fff',
+          },
+          '<'
+        )
+        .addLabel('showFirstMiniCardWithBackground')
+        .fromTo(
+          miniCardBackgrounds.current[0],
+          {
+            scaleX: getScaleParams(
+              miniCardBackgrounds.current[0],
+              miniCardItems!.current[0]
+            ).scaleX,
+            scaleY: getScaleParams(
+              miniCardBackgrounds.current[0],
+              miniCardItems!.current[0]
+            ).scaleY,
+          },
+          {
+            scaleX: getScaleParams(
+              miniCardItems!.current[0],
+              cardItems!.current[0]
+            ).scaleX,
+            scaleY: getScaleParams(
+              miniCardItems!.current[0],
+              cardItems!.current[0]
+            ).scaleY,
+            duration: 0.8,
+          },
+          'showFirstMiniCardWithBackground'
+        )
+        .to(
+          miniCardItems.current[0],
+          {
+            x:
+              getCenterTopPosition(
+                cardItems!.current[0],
+                miniCardBackgrounds!.current[0]
+              ).x +
+              getItemSizes(miniCardBackgrounds!.current[0]).width / 2 -
+              7,
+            y: getItemSizes(miniCardBackgrounds!.current[0]).height / 2 - 32,
+            duration: 0.8,
+          },
+          'showFirstMiniCardWithBackground'
+        )
+        .to(
+          miniCardTitles.current[0],
+          {
+            opacity: 0,
+            duration: 0.3,
+          },
+          '>-0.3'
+        )
+        .addLabel('finishMoveFirstMiniCard')
+
+        .to(
+          cardItems.current[0],
+          {
+            opacity: 1,
+            duration: 0.3,
+          },
+          'finishMoveFirstMiniCard'
+        )
+        .to(
+          miniCardItems.current[0],
+          {
+            opacity: 0,
+            duration: 0.3,
+          },
+          'finishMoveFirstMiniCard'
+        )
+        .addLabel('showFirstCard')
+        .to(
+          miniCardItems.current[1],
+          {
+            opacity: 1,
+            duration: 0.5,
+          },
+          'showFirstCard+=0.2'
+        )
+        .to(
+          miniCardTitles.current[1],
+          {
+            color: '#1d1d1d',
+            duration: 0.5,
+          },
+          '>'
+        )
+        .to(
+          miniCardBackgrounds.current[1],
+          {
+            backgroundColor: '#fff',
+          },
+          '<'
+        )
+        .addLabel('showSecondMiniCardWithBackground')
+        .to(
+          miniCardBackgrounds.current[1],
+          {
+            scaleX: getScaleParams(
+              miniCardItems!.current[1],
+              cardItems!.current[1]
+            ).scaleX,
+            scaleY: getScaleParams(
+              miniCardItems!.current[1],
+              cardItems!.current[1]
+            ).scaleY,
+            duration: 0.8,
+          },
+          'showSecondMiniCardWithBackground'
+        )
+        .to(
+          miniCardItems.current[1],
+          {
+            x:
+              getCenterTopPosition(
+                cardItems!.current[1],
+                miniCardItems!.current[1]
+              ).x +
+              getItemSizes(miniCardItems!.current[1]).width / 2 -
+              7,
+
+            y:
+              getItemSizes(cardItems!.current[0]).height +
+              getItemSizes(miniCardItems!.current[1]).height / 2 -
+              33,
+
+            duration: 0.8,
+          },
+          'showSecondMiniCardWithBackground'
+        )
+        .to(
+          miniCardTitles.current[1],
+          {
+            opacity: 0,
+            duration: 0.3,
+          },
+          '>-0.3'
+        )
+        .addLabel('finishMoveSecondtMiniCard')
+
+        .to(
+          cardItems.current[1],
+          {
+            opacity: 1,
+            duration: 0.3,
+          },
+          'finishMoveSecondtMiniCard'
+        )
+        .to(
+          miniCardItems.current[1],
+          {
+            opacity: 0,
+            duration: 0.3,
+          },
+          'finishMoveSecondtMiniCard'
+        )
+        .addLabel('showSecondCard')
+        .to(
+          [cardItems.current[0], miniCardItems.current[0]],
+          {
+            yPercent: -100,
+            opacity: 0,
+            duration: 0.4,
+          },
+          'showSecondCard'
+        )
+        .to(
+          [cardItems.current[1], miniCardItems.current[1]],
+          {
+            y: 0,
+            duration: 0.4,
+          },
+          'showSecondCard'
+        )
+        .addLabel('removeFirstCards')
+        .to(
+          miniCardItems.current[2],
+          {
+            opacity: 1,
+            duration: 0.5,
+          },
+          'removeFirstCards+=0.2'
+        )
+        .to(
+          miniCardTitles.current[2],
+          {
+            color: '#1d1d1d',
+            duration: 0.5,
+          },
+          '>'
+        )
+        .to(
+          miniCardBackgrounds.current[2],
+          {
+            backgroundColor: '#fff',
+          },
+          '<'
+        )
+        .addLabel('showThirdMiniCardWithBackground')
+        .to(
+          miniCardBackgrounds.current[2],
+          {
+            scaleX: getScaleParams(
+              miniCardItems!.current[2],
+              cardItems!.current[2]
+            ).scaleX,
+            scaleY: getScaleParams(
+              miniCardItems!.current[2],
+              cardItems!.current[2]
+            ).scaleY,
+            duration: 0.8,
+          },
+          'showThirdMiniCardWithBackground'
+        )
+        .to(
+          miniCardItems.current[2],
+          {
+            x:
+              getCenterTopPosition(
+                cardItems!.current[2],
+                miniCardItems!.current[2]
+              ).x +
+              getItemSizes(miniCardItems!.current[2]).width / 2 -
+              7,
+            y:
+              getItemSizes(cardItems!.current[2]).height +
+              getItemSizes(miniCardItems!.current[2]).height / 2 -
+              82,
+            duration: 0.8,
+          },
+          'showThirdMiniCardWithBackground'
+        )
+        .to(
+          miniCardTitles.current[2],
+          {
+            opacity: 0,
+            duration: 0.3,
+          },
+          '>-0.3'
+        )
+        .addLabel('finishMoveThirdtMiniCard')
+
+        .to(
+          cardItems.current[2],
+          {
+            opacity: 1,
+            duration: 0.3,
+          },
+          'finishMoveThirdtMiniCard'
+        )
+        .to(
+          miniCardItems.current[2],
+          {
+            opacity: 0,
+            duration: 0.3,
+          },
+          'finishMoveThirdtMiniCard'
+        )
+        .addLabel('showThirdCard')
+        .to(
+          [cardItems.current[1], miniCardItems.current[1]],
+          {
+            yPercent: -100,
+            opacity: 0,
+            duration: 0.4,
+          },
+          'showThirdCard'
+        )
+        .to(
+          [cardItems.current[2], miniCardItems.current[2]],
+          {
+            y: 0,
+            duration: 0.4,
+          },
+          'showThirdCard'
+        )
+        .addLabel('removeSecondCards')
+        .to(
+          miniCardItems.current[3],
+          {
+            opacity: 1,
+            duration: 0.5,
+          },
+          'removeSecondCards+=0.2'
+        )
+        .to(
+          miniCardTitles.current[3],
+          {
+            color: '#1d1d1d',
+            duration: 0.5,
+          },
+          '>'
+        )
+        .to(
+          miniCardBackgrounds.current[3],
+          {
+            backgroundColor: '#fff',
+          },
+          '<'
+        )
+        .addLabel('showFourthMiniCardWithBackground')
+        .to(
+          miniCardBackgrounds.current[3],
+          {
+            scaleX: getScaleParams(
+              miniCardItems!.current[3],
+              cardItems!.current[3]
+            ).scaleX,
+            scaleY: getScaleParams(
+              miniCardItems!.current[3],
+              cardItems!.current[3]
+            ).scaleY,
+            duration: 0.8,
+          },
+          'showFourthMiniCardWithBackground'
+        )
+        .to(
+          miniCardItems.current[3],
+          {
+            x:
+              getCenterTopPosition(
+                cardItems!.current[3],
+                miniCardItems!.current[3]
+              ).x +
+              getItemSizes(miniCardItems!.current[3]).width / 2 -
+              7,
+            y:
+              getItemSizes(cardItems!.current[3]).height +
+              getItemSizes(miniCardItems!.current[3]).height / 2 +
+              80,
+            duration: 0.8,
+          },
+          'showFourthMiniCardWithBackground'
+        )
+        .to(
+          miniCardTitles.current[3],
+          {
+            opacity: 0,
+            duration: 0.3,
+          },
+          '>-0.3'
+        )
+        .addLabel('finishMoveFourthtMiniCard')
+
+        .to(
+          cardItems.current[3],
+          {
+            opacity: 1,
+            duration: 0.3,
+          },
+          'finishMoveFourthtMiniCard'
+        )
+        .to(
+          miniCardItems.current[3],
+          {
+            opacity: 0,
+            duration: 0.3,
+          },
+          'finishMoveFourthtMiniCard'
+        )
+        .addLabel('showFourthCard');
+    } else {
+      const fearTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: rootRef.current,
+          start: 'top top',
+          end: () => '+=2500',
+          markers: true,
+          pin: true,
+          scrub: 0.3,
+          snap: {
+            snapTo: 'labels',
+            duration: { min: 0.2, max: 2 },
+            delay: 0.2,
+            ease: 'sine.out',
+          },
+        },
+      });
+
+      fearTimeline
+        .addLabel('start')
+        .to(
+          miniCardItems.current[0],
+          {
+            opacity: 1,
+            duration: 0.5,
+          },
+          'start+=0.2'
+        )
+        .to(
+          miniCardTitles.current[0],
+          {
+            color: '#1d1d1d',
+            duration: 0.5,
+          },
+          '>'
+        )
+        .to(
+          miniCardBackgrounds.current[0],
+          {
+            backgroundColor: '#fff',
+          },
+          '<'
+        )
+        .addLabel('showFirstMiniCardWithBackground')
+        .fromTo(
+          miniCardBackgrounds.current[0],
+          {
+            scaleX: getScaleParams(
+              miniCardBackgrounds.current[0],
+              miniCardItems!.current[0]
+            ).scaleX,
+            scaleY: getScaleParams(
+              miniCardBackgrounds.current[0],
+              miniCardItems!.current[0]
+            ).scaleY,
+          },
+          {
+            scaleX: getScaleParams(
+              miniCardItems!.current[0],
+              cardItems!.current[0]
+            ).scaleX,
+            scaleY: getScaleParams(
+              miniCardItems!.current[0],
+              cardItems!.current[0]
+            ).scaleY,
+            duration: 0.8,
+          },
+          'showFirstMiniCardWithBackground'
+        )
+        .to(
+          miniCardItems.current[0],
+          {
+            y:
+              getCenterTopPosition(
+                cardItems!.current[0],
+                miniCardBackgrounds!.current[0]
+              ).y +
+              getItemSizes(miniCardBackgrounds!.current[0]).width / 2 -
+              10,
+            duration: 0.8,
+          },
+          'showFirstMiniCardWithBackground'
+        )
+        .to(
+          miniCardTitles.current[0],
+          {
+            opacity: 0,
+            duration: 0.3,
+          },
+          '>-0.3'
+        )
+        .addLabel('finishMoveFirstMiniCard')
+
+        .to(
+          cardItems.current[0],
+          {
+            opacity: 1,
+            duration: 0.3,
+          },
+          'finishMoveFirstMiniCard'
+        )
+        .to(
+          miniCardItems.current[0],
+          {
+            opacity: 0,
+            duration: 0.3,
+          },
+          'finishMoveFirstMiniCard'
+        )
+        .addLabel('showFirstCard')
+        .to(
+          miniCardItems.current[1],
+          {
+            opacity: 1,
+            duration: 0.5,
+          },
+          'showFirstCard+=0.2'
+        )
+        .to(
+          miniCardTitles.current[1],
+          {
+            color: '#1d1d1d',
+            duration: 0.5,
+          },
+          '>'
+        )
+        .to(
+          miniCardBackgrounds.current[1],
+          {
+            backgroundColor: '#fff',
+          },
+          '<'
+        )
+        .addLabel('showSecondtMiniCardWithBackground')
+        .to(
+          [cardItems.current[0], miniCardItems.current[0]],
+          {
+            yPercent: -100,
+            opacity: 0,
+            duration: 0.4,
+          },
+          'showSecondtMiniCardWithBackground'
+        )
+        .fromTo(
+          miniCardBackgrounds.current[1],
+          {
+            scaleX: getScaleParams(
+              miniCardBackgrounds.current[1],
+              miniCardItems!.current[1]
+            ).scaleX,
+            scaleY: getScaleParams(
+              miniCardBackgrounds.current[1],
+              miniCardItems!.current[1]
+            ).scaleY,
+          },
+          {
+            scaleX: getScaleParams(
+              miniCardItems!.current[1],
+              cardItems!.current[1]
+            ).scaleX,
+            scaleY: getScaleParams(
+              miniCardItems!.current[1],
+              cardItems!.current[1]
+            ).scaleY,
+            duration: 0.8,
+          },
+          'showSecondtMiniCardWithBackground'
+        )
+        .to(
+          miniCardItems.current[1],
+          {
+            y:
+              getCenterTopPosition(
+                cardItems!.current[1],
+                miniCardBackgrounds!.current[1]
+              ).y +
+              getItemSizes(miniCardBackgrounds!.current[1]).width / 2 -
+              10,
+            duration: 0.8,
+          },
+          'showSecondtMiniCardWithBackground'
+        )
+        .to(
+          miniCardTitles.current[1],
+          {
+            opacity: 0,
+            duration: 0.3,
+          },
+          '>-0.3'
+        )
+        .addLabel('finishMoveSecondMiniCard')
+
+        .to(
+          cardItems.current[1],
+          {
+            opacity: 1,
+            duration: 0.3,
+          },
+          'finishMoveSecondMiniCard'
+        )
+        .to(
+          miniCardItems.current[1],
+          {
+            opacity: 0,
+            duration: 0.3,
+          },
+          'finishMoveSecondMiniCard'
+        )
+        .addLabel('showSecondCard')
+        .to(
+          miniCardItems.current[2],
+          {
+            opacity: 1,
+            duration: 0.5,
+          },
+          'showSecondCard+=0.2'
+        )
+        .to(
+          miniCardTitles.current[2],
+          {
+            color: '#1d1d1d',
+            duration: 0.5,
+          },
+          '>'
+        )
+        .to(
+          miniCardBackgrounds.current[2],
+          {
+            backgroundColor: '#fff',
+          },
+          '<'
+        )
+        .addLabel('showThirdMiniCardWithBackground')
+        .to(
+          [cardItems.current[1], miniCardItems.current[1]],
+          {
+            yPercent: -100,
+            opacity: 0,
+            duration: 0.4,
+          },
+          'showThirdMiniCardWithBackground'
+        )
+        .fromTo(
+          miniCardBackgrounds.current[2],
+          {
+            scaleX: getScaleParams(
+              miniCardBackgrounds.current[2],
+              miniCardItems!.current[2]
+            ).scaleX,
+            scaleY: getScaleParams(
+              miniCardBackgrounds.current[2],
+              miniCardItems!.current[2]
+            ).scaleY,
+          },
+          {
+            scaleX: getScaleParams(
+              miniCardItems!.current[2],
+              cardItems!.current[2]
+            ).scaleX,
+            scaleY: getScaleParams(
+              miniCardItems!.current[2],
+              cardItems!.current[2]
+            ).scaleY,
+            duration: 0.8,
+          },
+          'showThirdMiniCardWithBackground'
+        )
+        .to(
+          miniCardItems.current[2],
+          {
+            y:
+              getCenterTopPosition(
+                cardItems!.current[2],
+                miniCardBackgrounds!.current[2]
+              ).y +
+              getItemSizes(miniCardBackgrounds!.current[2]).width / 2 -
+              10,
+            duration: 0.8,
+          },
+          'showThirdMiniCardWithBackground'
+        )
+        .to(
+          miniCardTitles.current[2],
+          {
+            opacity: 0,
+            duration: 0.3,
+          },
+          '>-0.3'
+        )
+        .addLabel('finishMoveThirdMiniCard')
+
+        .to(
+          cardItems.current[2],
+          {
+            opacity: 1,
+            duration: 0.3,
+          },
+          'finishMoveThirdMiniCard'
+        )
+        .to(
+          miniCardItems.current[2],
+          {
+            opacity: 0,
+            duration: 0.3,
+          },
+          'finishMoveThirdMiniCard'
+        )
+        .addLabel('showThirdCard')
+        .to(
+          miniCardItems.current[3],
+          {
+            opacity: 1,
+            duration: 0.5,
+          },
+          'showThirdCard+=0.2'
+        )
+        .to(
+          miniCardTitles.current[3],
+          {
+            color: '#1d1d1d',
+            duration: 0.5,
+          },
+          '>'
+        )
+        .to(
+          miniCardBackgrounds.current[3],
+          {
+            backgroundColor: '#fff',
+          },
+          '<'
+        )
+        .addLabel('showFourthMiniCardWithBackground')
+        .to(
+          [cardItems.current[2], miniCardItems.current[2]],
+          {
+            yPercent: -100,
+            opacity: 0,
+            duration: 0.4,
+          },
+          'showFourthMiniCardWithBackground'
+        )
+        .fromTo(
+          miniCardBackgrounds.current[3],
+          {
+            scaleX: getScaleParams(
+              miniCardBackgrounds.current[3],
+              miniCardItems!.current[3]
+            ).scaleX,
+            scaleY: getScaleParams(
+              miniCardBackgrounds.current[3],
+              miniCardItems!.current[3]
+            ).scaleY,
+          },
+          {
+            scaleX: getScaleParams(
+              miniCardItems!.current[3],
+              cardItems!.current[3]
+            ).scaleX,
+            scaleY: getScaleParams(
+              miniCardItems!.current[3],
+              cardItems!.current[3]
+            ).scaleY,
+            duration: 0.8,
+          },
+          'showFourthMiniCardWithBackground'
+        )
+        .to(
+          miniCardItems.current[3],
+          {
+            y:
+              getCenterTopPosition(
+                cardItems!.current[3],
+                miniCardBackgrounds!.current[3]
+              ).y +
+              getItemSizes(miniCardBackgrounds!.current[3]).width / 2 -
+              10,
+            duration: 0.8,
+          },
+          'showFourthMiniCardWithBackground'
+        )
+        .to(
+          miniCardTitles.current[3],
+          {
+            opacity: 0,
+            duration: 0.3,
+          },
+          '>-0.3'
+        )
+        .addLabel('finishMoveFourthMiniCard')
+
+        .to(
+          cardItems.current[3],
+          {
+            opacity: 1,
+            duration: 0.3,
+          },
+          'finishMoveFourthMiniCard'
+        )
+        .to(
+          miniCardItems.current[3],
+          {
+            opacity: 0,
+            duration: 0.3,
+          },
+          'finishMoveFourthMiniCard'
+        )
+        .addLabel('showFourthCard');
+    }
   }, []);
 
   return (
@@ -127,8 +918,8 @@ const Fear: FC = () => {
           <StyledSectionLabel text={t('label')} />
           <SectionTitle text={t('title')} />
         </SectionHead>
-        <MessagesBlock>
-          <MessagesList>
+        <MessagesBlock ref={messagesBlockRef}>
+          <MessagesList ref={messagesListRef}>
             <MessageItem
               ref={(item: HTMLLIElement) => {
                 cardItems.current[0] = item;
@@ -179,7 +970,7 @@ const Fear: FC = () => {
                   miniCardTitles.current[3] = item;
                 }}
               >
-                {t('card1.title')}
+                {t('card4.title')}
               </MiniCardTitle>
             </MiniCard>
             <MiniCard
@@ -252,12 +1043,18 @@ const StyledContainer = styled(Container)`
   height: 100%;
   display: flex;
   flex-direction: column;
+  @media (max-width: 1024px) {
+    padding-top: 40px;
+  }
 `;
 
 const SectionHead = styled.div`
   margin-bottom: 60px;
   align-self: center;
   text-align: center;
+  @media (max-width: 1024px) {
+    margin-bottom: 40px;
+  }
 `;
 
 const StyledSectionLabel = styled(SectionLabel)`
@@ -268,16 +1065,37 @@ const MessagesBlock = styled.div`
   background-color: var(--lightGray);
   flex-grow: 1;
   width: 100%;
-  border-top-right-radius: 65px;
-  border-top-left-radius: 65px;
+  border-radius: 65px;
   position: relative;
   overflow: hidden;
+  @media (max-width: 1024px) {
+    border-radius: 40px;
+  }
 `;
 
 const MessagesList = styled.ul`
   position: absolute;
   top: 10%;
   left: 6.85%;
+  z-index: 10;
+
+  @media (max-width: 1300px) {
+    left: 40px;
+  }
+  @media (max-width: 1024px) {
+    left: 32px;
+    right: 32px;
+  }
+  @media (max-width: 768px) {
+    left: 20px;
+    right: 20px;
+    top: 20px;
+  }
+  @media (min-width: 320px) and (max-width: 1024px) and (max-height: 700px) {
+    left: 20px;
+    right: 20px;
+    top: 20px;
+  }
 `;
 
 const MessageItem = styled.li`
@@ -285,8 +1103,19 @@ const MessageItem = styled.li`
   background-color: var(--white);
   border-radius: 30px;
   max-width: 505px;
-
   opacity: 0;
+  &:not(:first-child) {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  @media (max-width: 1024px) {
+    max-width: none;
+  }
+  @media (min-width: 320px) and (max-width: 1024px) and (max-height: 700px) {
+    padding: 18px 12px;
+    border-radius: 20px;
+  }
 `;
 
 const MessageItemTitle = styled.p`
@@ -296,6 +1125,9 @@ const MessageItemTitle = styled.p`
   letter-spacing: 0.01em;
   color: var(--black2);
   margin-bottom: 14px;
+  @media (max-width: 1024px) {
+    margin-bottom: 12px;
+  }
 `;
 
 const MessageItemText = styled.p`
@@ -304,12 +1136,37 @@ const MessageItemText = styled.p`
   letter-spacing: 0.01em;
 
   color: var(--black2);
+  @media (max-width: 1024px) {
+    font-size: 14px;
+    line-height: 20px;
+  }
 `;
 
 const MessagePhoneWrap = styled.div`
   position: absolute;
   right: 10.4%;
   top: 17.7%;
+
+  @media (max-width: 1300px) {
+    right: 40px;
+  }
+  @media (max-width: 1024px) {
+    right: auto;
+    top: auto;
+    bottom: -400px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 265px;
+  }
+  @media (min-width: 320px) and (max-width: 1024px) and (max-height: 650px) {
+    bottom: -500px;
+  }
+  @media (min-width: 320px) and (max-width: 768px) and (max-height: 650px) {
+    bottom: -350px;
+  }
 `;
 
 const MessagePhoneImg = styled(Image).attrs(() => ({
@@ -324,11 +1181,19 @@ const MiniCard = styled.div`
   padding: 28px 20px;
   width: 100%;
   max-width: 260px;
-  top: 30%;
+  top: 0;
   left: 50%;
-  transform: translateX(-50%);
-
+  transform: translate(-50%, 150px);
   opacity: 0;
+  @media (max-width: 1024px) {
+    transform: translate(-50%, 100px);
+  }
+  @media (max-width: 768px) {
+    max-width: 210px;
+  }
+  @media (min-width: 320px) and (max-width: 1024px) and (max-height: 650px) {
+    transform: translate(-50%, 50px);
+  }
 `;
 
 const MiniCardBg = styled.div`
@@ -339,7 +1204,7 @@ const MiniCardBg = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   will-change: transform, background-color;
-  border-radius: 23px;
+  border-radius: 15px;
   background-color: rgba(255, 255, 255, 0);
 `;
 
@@ -352,6 +1217,10 @@ const MiniCardTitle = styled.p`
   color: var(--white);
   will-change: color;
   position: relative;
+  @media (max-width: 1024px) {
+    font-size: 14px;
+    line-height: 20px;
+  }
 `;
 
 export default Fear;
