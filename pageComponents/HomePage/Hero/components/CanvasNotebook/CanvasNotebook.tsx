@@ -113,26 +113,26 @@ const CanvasNotebook = ({ scrollHeight, numFrames, width, height }: any) => {
     // return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // useEffect(() => {
-  // if (!canvasRef.current || images.length < 1) {
-  //   return;
-  // }
-  // console.log('asd', frameIndex);
-  // const context = canvasRef.current.getContext('2d');
-  // let requestId: any;
-  // const render = () => {
-  //   context!.drawImage(
-  //     images[frameIndex],
-  //     0,
-  //     0,
-  //     1100,
-  //     (1100 * images[frameIndex].height) / images[frameIndex].width
-  //   );
-  //   requestId = requestAnimationFrame(render);
-  // };
-  // render();
-  // return () => cancelAnimationFrame(requestId);
-  // }, [frameIndex, images]);
+  useEffect(() => {
+    if (!canvasRef.current || images.length < 1) {
+      return;
+    }
+    console.log('asd', frameIndex);
+    const context = canvasRef.current.getContext('2d');
+    let requestId: any;
+    const render = () => {
+      context!.drawImage(
+        images[frameIndex],
+        0,
+        0,
+        1100,
+        (1100 * images[frameIndex].height) / images[frameIndex].width
+      );
+      requestId = requestAnimationFrame(render);
+    };
+    render();
+    return () => cancelAnimationFrame(requestId);
+  }, [frameIndex, images]);
   return (
     <div ref={canvasWrapRef} style={{ height: scrollHeight }}>
       <canvas ref={canvasRef} />

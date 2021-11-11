@@ -1,7 +1,7 @@
 import { Container } from '@/components/Container';
 import { SectionLabel } from '@/components/SectionLabel';
 import { Button } from '@/ui/components/Button';
-import { FC, useEffect, useRef } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import Link from 'next/link';
@@ -9,22 +9,73 @@ import { CanvasNotebook } from './components/CanvasNotebook';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
+if (typeof window !== undefined) {
+  gsap.registerPlugin(ScrollTrigger);
+}
+function getCurrentFrame(index: any) {
+  return `/notebook/notebook${index.toString().padStart(3, '0')}.png`;
+}
 const Hero: FC = () => {
   const { t } = useTranslation('hero');
   const rootRef = useRef(null);
-
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasWrapRef = useRef(null);
+  const [images, setImages] = useState<HTMLImageElement[]>([]);
+  const frameCount = 142;
+  const notebook = {
+    frame: 0,
+  };
   useEffect(() => {
-    // gsap.registerPlugin(ScrollTrigger);
-    // const heroTimeline = gsap.timeline({
-    //   scrollTrigger: {
-    //     trigger: rootRef.current,
-    //     start: 'top bottom',
-    //     // end: '+=4000',
-    //     markers: true,
-    //     scrub: 1,
-    //     // pin: true,
-    //   },
-    // });
+    const context = canvasRef!.current!.getContext('2d');
+
+    const renderCanvas = () => {
+      context!.canvas.width = innerWidth;
+      context!.canvas.height = innerHeight;
+    };
+
+    renderCanvas();
+    preloadImages();
+    function preloadImages() {
+      for (let i = 0; i <= frameCount; i++) {
+        const img = new Image();
+        const imgSrc = getCurrentFrame(i);
+        img.src = imgSrc;
+        setImages((prevImages: any) => [...prevImages, img]);
+      }
+    }
+
+    const heroTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: canvasWrapRef.current,
+        pinnedContainer: rootRef.current,
+        start: 'top top',
+        // end: '+=4000',
+        markers: true,
+        scrub: 1,
+        pin: true,
+      },
+    });
+
+    heroTimeline.to(notebook, {
+      frame: frameCount - 1,
+      snap: 'frame',
+      scrollTrigger: {
+        scrub: 0.5,
+      },
+      onUpdate: render, // use animation onUpdate instead of scrollTrigger's onUpdate
+    });
+
+    function render() {
+      console.log('render');
+
+      // context!.clearRect(
+      //   0,
+      //   0,
+      //   canvasRef!.current!.width,
+      //   canvasRef!.current!.height
+      // );
+      // context!.drawImage(images[notebook.frame], 0, 0);
+    }
   }, []);
 
   return (
@@ -38,12 +89,9 @@ const Hero: FC = () => {
           </Link>
         </Head>
 
-        <CanvasNotebook
-          scrollHeight={4000}
-          width={1158}
-          height={770}
-          numFrames={142}
-        />
+        <CanvasWrapper ref={canvasWrapRef}>
+          <canvas ref={canvasRef} />
+        </CanvasWrapper>
       </StyledContainer>
     </Root>
   );
@@ -95,5 +143,10 @@ const SectionText = styled.p`
 `;
 
 const StyledLink = styled(Button)``;
+
+const CanvasWrapper = styled.div`
+  height: 100vh;
+  background-color: red;
+`;
 
 export default Hero;
