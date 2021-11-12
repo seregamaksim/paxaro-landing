@@ -73,7 +73,7 @@ const Fear: FC = () => {
             opacity: 0,
             duration: 0.5,
           },
-          'start'
+          'start+=0.5'
         )
         .to(
           messagesBlockRef.current,
@@ -81,7 +81,7 @@ const Fear: FC = () => {
             y: -headRef!.current!.offsetHeight,
             duration: 0.5,
           },
-          'start'
+          'start+=0.5'
         )
         .addLabel('finishMoveToTop')
         .to(
@@ -470,7 +470,7 @@ const Fear: FC = () => {
         scrollTrigger: {
           trigger: rootRef.current,
           start: 'top top',
-          end: () => '+=2500',
+          end: () => '+=3500',
           pin: true,
           scrub: 0.3,
           snap: {
@@ -491,7 +491,7 @@ const Fear: FC = () => {
             opacity: 0,
             duration: 0.5,
           },
-          'start'
+          'start+=0.5'
         )
         .to(
           messagesBlockRef.current,
@@ -499,7 +499,7 @@ const Fear: FC = () => {
             y: -headRef!.current!.offsetHeight,
             duration: 0.5,
           },
-          'start'
+          'start+=0.5'
         )
         .addLabel('finishMoveToTop')
         .to(
@@ -574,7 +574,6 @@ const Fear: FC = () => {
           '>-0.3'
         )
         .addLabel('finishMoveFirstMiniCard')
-
         .to(
           cardItems.current[0],
           {
@@ -1145,12 +1144,7 @@ const MessagePhoneWrap = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     max-width: 265px;
-  }
-  @media (min-width: 320px) and (max-width: 1024px) and (max-height: 650px) {
-    bottom: -500px;
-  }
-  @media (min-width: 320px) and (max-width: 768px) and (max-height: 650px) {
-    bottom: -350px;
+    bottom: -250px;
   }
 `;
 

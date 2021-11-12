@@ -303,6 +303,9 @@ const StyledLabel = styled(SectionLabel)`
 
 const StyledTitle = styled(SectionTitle)`
   color: var(--white);
+  @media (max-width: 500px) {
+    max-width: 180px;
+  }
 `;
 
 const SectionContent = styled.div`
