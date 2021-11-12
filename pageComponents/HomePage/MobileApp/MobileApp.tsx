@@ -88,7 +88,7 @@ const Root = styled.section`
   @media (max-width: 1200px) {
     height: auto;
     min-height: auto;
-    max-heigth: none;
+    max-height: none;
   }
 `;
 
