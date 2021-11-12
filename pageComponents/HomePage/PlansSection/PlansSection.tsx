@@ -41,7 +41,7 @@ const PlansSection: FC = () => {
         </SectionHead>
         <StyledPlan
           title="Advanced"
-          price="1199"
+          price="1200"
           hrefLink={advancedPlanLink}
           data={data.advanced}
         />
