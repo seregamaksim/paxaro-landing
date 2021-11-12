@@ -12,6 +12,7 @@ import { Education } from '@/pageComponents/HomePage/Education';
 import { Advantages } from '@/pageComponents/HomePage/Advantages';
 import { getSelectorsByUserAgent } from 'react-device-detect';
 import { Algorithm } from '@/pageComponents/HomePage/Algorithm';
+import { Fear } from '@/pageComponents/HomePage/Fear';
 
 interface HomePageProps {
   userAgent: { [key: string]: any };
@@ -30,6 +31,7 @@ const Home: NextPage<HomePageProps> = ({ userAgent }) => {
         <Education />
         <Algorithm />
         <PlansSection />
+        <Fear />
         <MobileApp />
         <LeadForm />
       </main>
@@ -54,6 +56,7 @@ export const getServerSideProps = async ({ locale, req }: any) => ({
       'education',
       'advantages',
       'algorithm',
+      'fear',
     ])),
   },
 });
