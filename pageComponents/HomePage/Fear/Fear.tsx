@@ -1146,12 +1146,6 @@ const MessagePhoneWrap = styled.div`
     max-width: 265px;
     bottom: -250px;
   }
-  /* @media (min-width: 768px) and (max-width: 1024px) and (max-height: 650px) {
-    bottom: -500px;
-  }
-  @media (min-width: 320px) and (max-width: 768px) and (max-height: 650px) {
-    bottom: -350px;
-  } */
 `;
 
 const MessagePhoneImg = styled(Image).attrs(() => ({
