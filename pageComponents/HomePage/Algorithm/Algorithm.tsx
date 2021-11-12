@@ -153,7 +153,7 @@ const Algorithm: FC = () => {
       .from(
         storeBannerSectionRef.current,
         {
-          yPercent: 100,
+          yPercent: 150,
           duration: 0.8,
         },
         '<'
