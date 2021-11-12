@@ -28,6 +28,7 @@ function getScaleParams(targetElem: HTMLElement, toElem: HTMLElement) {
 const Fear: FC = () => {
   const { t } = useTranslation('fear');
   const rootRef = useRef<HTMLElement>(null);
+  const headRef = useRef<HTMLDivElement>(null);
   const messagesListRef = useRef<HTMLUListElement>(null);
   const cardItems = useRef<HTMLLIElement[]>([]);
   const miniCardItems = useRef<HTMLDivElement[]>([]);
@@ -121,12 +122,30 @@ const Fear: FC = () => {
 
         .addLabel('start')
         .to(
+          headRef.current,
+          {
+            yPercent: -100,
+            opacity: 0,
+            duration: 0.5,
+          },
+          'start'
+        )
+        .to(
+          messagesBlockRef.current,
+          {
+            y: -headRef!.current!.offsetHeight,
+            duration: 0.5,
+          },
+          'start'
+        )
+        .addLabel('finishMoveToTop')
+        .to(
           miniCardItems.current[0],
           {
             opacity: 1,
             duration: 0.5,
           },
-          'start+=0.2'
+          'finishMoveToTop+=0.2'
         )
         .to(
           miniCardTitles.current[0],
@@ -522,12 +541,30 @@ const Fear: FC = () => {
       fearTimeline
         .addLabel('start')
         .to(
+          headRef.current,
+          {
+            yPercent: -100,
+            opacity: 0,
+            duration: 0.5,
+          },
+          'start'
+        )
+        .to(
+          messagesBlockRef.current,
+          {
+            y: -headRef!.current!.offsetHeight,
+            duration: 0.5,
+          },
+          'start'
+        )
+        .addLabel('finishMoveToTop')
+        .to(
           miniCardItems.current[0],
           {
             opacity: 1,
             duration: 0.5,
           },
-          'start+=0.2'
+          'finishMoveToTop+=0.2'
         )
         .to(
           miniCardTitles.current[0],
@@ -914,7 +951,7 @@ const Fear: FC = () => {
   return (
     <Root ref={rootRef}>
       <StyledContainer>
-        <SectionHead>
+        <SectionHead ref={headRef}>
           <StyledSectionLabel text={t('label')} />
           <SectionTitle text={t('title')} />
         </SectionHead>
@@ -1036,6 +1073,7 @@ const Fear: FC = () => {
 
 const Root = styled.section`
   height: 100vh;
+  margin-bottom: 100px;
 `;
 
 const StyledContainer = styled(Container)`
@@ -1049,11 +1087,12 @@ const StyledContainer = styled(Container)`
 `;
 
 const SectionHead = styled.div`
-  margin-bottom: 60px;
+  padding-bottom: 60px;
   align-self: center;
   text-align: center;
+  will-change: transform, opacity;
   @media (max-width: 1024px) {
-    margin-bottom: 40px;
+    padding-bottom: 40px;
   }
 `;
 
@@ -1063,11 +1102,13 @@ const StyledSectionLabel = styled(SectionLabel)`
 
 const MessagesBlock = styled.div`
   background-color: var(--lightGray);
-  flex-grow: 1;
+  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   border-radius: 65px;
   position: relative;
   overflow: hidden;
+  will-change: transform;
   @media (max-width: 1024px) {
     border-radius: 40px;
   }
