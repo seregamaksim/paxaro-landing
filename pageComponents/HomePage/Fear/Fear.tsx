@@ -43,7 +43,6 @@ const Fear: FC = () => {
           trigger: rootRef.current,
           start: 'top top',
           end: () => '+=5000',
-          markers: true,
           pin: true,
           scrub: 0.3,
           snap: {
@@ -472,7 +471,6 @@ const Fear: FC = () => {
           trigger: rootRef.current,
           start: 'top top',
           end: () => '+=2500',
-          markers: true,
           pin: true,
           scrub: 0.3,
           snap: {
