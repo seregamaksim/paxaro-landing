@@ -28,6 +28,7 @@ const Advantages: FC = () => {
   const itemsTitleRef = useRef<HTMLParagraphElement[]>([]);
   const circleRef = useRef<HTMLDivElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
+  const descriptionSecondListRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     const advantagesTimeline = gsap.timeline({
@@ -40,7 +41,6 @@ const Advantages: FC = () => {
         end: () => (innerWidth > 768 ? `+=5000` : `+=2000`),
         pin: true,
         scrub: innerWidth > 768 ? 1 : 0,
-
         snap: {
           snapTo: 'labels',
           duration: { min: 0.2, max: 2 },
@@ -286,7 +286,7 @@ const Advantages: FC = () => {
             y: innerHeight + 50,
             duration: 0.5,
           },
-          'start'
+          'start+=0.5'
         )
         .addLabel('finishMoveFirstScreen')
         .from(
@@ -295,12 +295,21 @@ const Advantages: FC = () => {
             y: innerHeight + 50,
             duration: 0.5,
           },
-          'finishMoveFirstScreen'
+          'finishMoveFirstScreen+=0.5'
         )
         .addLabel('finishMoveSecondScreen')
         .set(circleRef.current, {
           opacity: 1,
         })
+        .to(
+          descriptionSecondListRef.current,
+          {
+            y: -50,
+            opacity: 0,
+            duration: 0.5,
+          },
+          'finishMoveSecondScreen+=0.2'
+        )
         .fromTo(
           circleRef.current,
           {
@@ -311,7 +320,8 @@ const Advantages: FC = () => {
               rootRef!.current!.scrollWidth / circleRef!.current!.offsetWidth +
               5,
             duration: 0.7,
-          }
+          },
+          'finishMoveSecondScreen+=0.2'
         );
     }
   }, []);
@@ -385,7 +395,7 @@ const Advantages: FC = () => {
           </GreenDescriptionItem>
         </DescriptionList>
 
-        <DescriptionSecondList>
+        <DescriptionSecondList ref={descriptionSecondListRef}>
           <GreenDescriptionSecondScreenItem
             ref={(element: HTMLLIElement) =>
               (listSecondScreens.current[2] = element)
@@ -441,8 +451,8 @@ const StyledContainer = styled(Container)`
   position: relative;
   height: 100%;
   @media (min-width: 1024px) and (max-height: 700px) {
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 50px;
+    padding-bottom: 50px;
   }
   @media (max-width: 768px) {
     padding-top: 40px;
@@ -559,7 +569,7 @@ const DescriptionItem = styled.li`
   padding: 40px 35px 143px 35px;
   position: relative;
   @media (min-width: 1024px) and (max-height: 700px) {
-    padding-bottom: 60px;
+    padding-bottom: 100px;
   }
   @media (max-width: 1100px) {
     padding-bottom: 100px;
@@ -620,6 +630,7 @@ const DescriptionSecondList = styled.ul`
   height: 100%;
   z-index: 2;
   pointer-events: none;
+  will-change: transform, opacity;
   @media (max-width: 768px) {
     position: relative;
     pointer-events: all;

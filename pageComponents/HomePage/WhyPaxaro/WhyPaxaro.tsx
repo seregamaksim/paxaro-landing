@@ -87,7 +87,7 @@ const WhyPaxaro: FC = () => {
       scrollTrigger: {
         trigger: mainRef.current,
         start: 'top top',
-        end: () => `+=3000`,
+        end: () => (innerWidth > 768 ? '+=3000' : '+=2000'),
         pin: true,
         scrub: 1,
 
@@ -349,7 +349,7 @@ const WhyPaxaro: FC = () => {
           [counterFirstNumberRef.current, descriptionTextWrapFirstRef.current],
           {
             opacity: 0,
-            duration: 0.1,
+            duration: 0.4,
           },
           'showDescriptionBlock'
         )
@@ -368,7 +368,7 @@ const WhyPaxaro: FC = () => {
           ],
           {
             opacity: 0,
-            duration: 0.1,
+            duration: 0.4,
           },
           '<'
         )
@@ -435,7 +435,7 @@ const WhyPaxaro: FC = () => {
           desciptionBlockRef.current,
           {
             opacity: 0,
-            duration: 0.3,
+            duration: 0.5,
           },
           'hideDescriptionBlock+=0.5'
         )
