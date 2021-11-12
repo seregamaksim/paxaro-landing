@@ -37,60 +37,6 @@ const Fear: FC = () => {
   const messagesBlockRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    function getCoordsForMiniCard(miniCard: HTMLElement, card: HTMLElement) {
-      const coordsList = getCenterTopPosition(
-        messagesListRef!.current!,
-        messagesBlockRef!.current!
-      );
-      const coordsCardOfList = getCenterTopPosition(
-        card,
-        messagesBlockRef!.current!
-      );
-      const coordsMiniCard = getCenterTopPosition(
-        miniCard,
-        messagesBlockRef!.current!
-      );
-      const coordCard = getCenterTopPosition(miniCard, card);
-
-      const result = {
-        x: coordsList.x - coordsMiniCard.x + getItemSizes(miniCard).width / 2,
-        y:
-          coordsList.y * 2 +
-          card.offsetHeight -
-          getItemSizes(miniCard).height / 2,
-      };
-      console.log('coordsList', coordsList);
-      console.log('coordsMiniCard', coordsMiniCard);
-      console.log('coordCard', coordCard);
-      console.log('coordsCardOfList', coordsCardOfList);
-
-      return result;
-    }
-
-    // console.log(
-    //   'test',
-    //   getCoordsForMiniCard(miniCardItems!.current[0], cardItems!.current[0])
-    // );
-
-    // console.log(
-    //   'list of parent',
-    //   getCenterTopPosition(
-    //     messagesListRef!.current!,
-    //     messagesBlockRef!.current!
-    //   )
-    // );
-    // console.log(
-    //   'miniCardItems of messagesBlockRef',
-    //   getCenterTopPosition(
-    //     miniCardItems!.current[0],
-    //     messagesBlockRef!.current!
-    //   )
-    // );
-    // console.log(
-    //   'miniCardItems of cardItems',
-    //   getCenterTopPosition(miniCardItems!.current[0], cardItems!.current[0])
-    // );
-
     if (innerWidth > 1024) {
       const fearTimeline = gsap.timeline({
         scrollTrigger: {
