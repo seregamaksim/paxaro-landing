@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import currency from 'currency.js';
-import Slider, { Handle, SliderTooltip } from 'rc-slider';
 import { useIsMounted } from '@/hooks/useIsMounted';
 
 if (typeof window !== 'undefined') {
@@ -25,41 +24,45 @@ const marks: { [key: string]: any } = {
 
 const PartnerProgramm: FC = () => {
   const { t } = useTranslation('partnerProgramm');
-  const isMounted = useIsMounted();
   const rootRef = useRef<HTMLElement>(null);
   const bonusTextRef = useRef<HTMLParagraphElement>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const sliderBarRef = useRef<HTMLDivElement>(null);
+  const sliderHandleWrapRef = useRef<HTMLDivElement>(null);
+  const firstCheckboxGradientRef = useRef<HTMLDivElement>(null);
+  const secondCheckboxGradientRef = useRef<HTMLDivElement>(null);
+  const profitItemLevels = useRef<HTMLLIElement[]>([]);
+  const profitItemPeople = useRef<HTMLLIElement[]>([]);
+
   const [bonus, setBonus] = useState({
     value: 0,
   });
-
-  const handle = (props: any) => {
-    const { value, dragging, index, ...restProps } = props;
-    const formatedValue = marks[value];
-
-    return (
-      <SliderTooltip
-        prefixCls="rc-slider-tooltip"
-        overlay={formatedValue}
-        visible={true}
-        placement="top"
-        key={index}
-      >
-        <Handle value={value} {...restProps} />
-      </SliderTooltip>
-    );
-  };
+  const [totalBonus, setTotalBonus] = useState({
+    value: 0,
+  });
+  const [sliderValue, setSliderValue] = useState({
+    value: 0,
+  });
 
   useEffect(() => {
-    const target = {
+    const bonusTarget = {
       value: bonus.value,
     };
+    const totalBonusTarget = {
+      value: totalBonus.value,
+    };
+    const sliderValueTarget = {
+      value: sliderValue.value,
+    };
+
     const partnerProgrammTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: rootRef.current,
         start: 'top top',
-        end: () => (innerWidth > 768 ? '+=3000' : '+=2000'),
+        end: () => (innerWidth > 768 ? '+=4000' : '+=2000'),
         pin: true,
         scrub: 1,
+        markers: true,
         snap: {
           snapTo: 'labels',
           duration: { min: 0.2, max: 2 },
@@ -68,14 +71,190 @@ const PartnerProgramm: FC = () => {
         },
       },
     });
-    partnerProgrammTimeline.addLabel('start').to(target, {
-      duration: 3,
-      value: '+=1236',
-      roundProps: 'value',
-      onUpdate() {
-        setBonus({ value: target.value });
-      },
-    });
+    partnerProgrammTimeline
+      .addLabel('start')
+      .to(
+        bonusTarget,
+        {
+          duration: 1,
+          value: '+=1236',
+          roundProps: 'value',
+          onUpdate() {
+            setBonus({ value: bonusTarget.value });
+          },
+        },
+        'start'
+      )
+      .to(
+        totalBonusTarget,
+        {
+          duration: 1,
+          value: '+=16456',
+          roundProps: 'value',
+          onUpdate() {
+            setTotalBonus({ value: totalBonusTarget.value });
+          },
+        },
+        'start'
+      )
+      .to(
+        sliderHandleWrapRef.current,
+        {
+          x: sliderRef!.current!.offsetWidth,
+          duration: 1,
+        },
+        'start'
+      )
+      .to(
+        sliderValueTarget,
+        {
+          duration: 1,
+          value: '+=5',
+          roundProps: 'value',
+          onUpdate() {
+            setSliderValue({ value: sliderValueTarget.value });
+          },
+        },
+        'start'
+      )
+      .from(
+        sliderBarRef.current,
+        {
+          scaleX: 0,
+          duration: 1,
+        },
+        'start'
+      )
+      .addLabel('firstMoveToFinish')
+      .to(
+        bonusTarget,
+        {
+          duration: 0.1,
+          value: '-=1236',
+          roundProps: 'value',
+          onUpdate() {
+            setBonus({ value: bonusTarget.value });
+          },
+        },
+        'start'
+      )
+      .to(
+        totalBonusTarget,
+        {
+          duration: 0.1,
+          value: '-=16456',
+          roundProps: 'value',
+          onUpdate() {
+            setTotalBonus({ value: totalBonusTarget.value });
+          },
+        },
+        'start'
+      )
+      .to(
+        sliderHandleWrapRef.current,
+        {
+          x: 0,
+          duration: 0.1,
+        },
+        'firstMoveToFinish'
+      )
+      .to(
+        sliderValueTarget,
+        {
+          duration: 0.1,
+          value: '-=5',
+          roundProps: 'value',
+          onUpdate() {
+            setSliderValue({ value: sliderValueTarget.value });
+          },
+        },
+        'firstMoveToFinish'
+      )
+      .to(
+        sliderBarRef.current,
+        {
+          scaleX: 0,
+          duration: 0.1,
+        },
+        'firstMoveToFinish'
+      )
+      .from(
+        [...profitItemLevels.current, ...profitItemPeople.current],
+        {
+          opacity: 0,
+          duration: 0.1,
+        },
+        'firstMoveToFinish'
+      )
+      .to(
+        firstCheckboxGradientRef.current,
+        {
+          opacity: 0,
+          duration: 0.1,
+        },
+        'firstMoveToFinish'
+      )
+      .from(
+        secondCheckboxGradientRef.current,
+        {
+          opacity: 0,
+          duration: 0.1,
+        },
+        'firstMoveToFinish'
+      )
+      .addLabel('firstResetSlider')
+      .to(
+        bonusTarget,
+        {
+          duration: 1,
+          value: `+=${1236 * 1.2}`,
+          roundProps: 'value',
+          onUpdate() {
+            setBonus({ value: bonusTarget.value });
+          },
+        },
+        'firstResetSlider'
+      )
+      .to(
+        totalBonusTarget,
+        {
+          duration: 1,
+          value: `+=${16456 * 1.2}`,
+          roundProps: 'value',
+          onUpdate() {
+            setTotalBonus({ value: totalBonusTarget.value });
+          },
+        },
+        'firstResetSlider'
+      )
+      .to(
+        sliderHandleWrapRef.current,
+        {
+          x: sliderRef!.current!.offsetWidth,
+          duration: 1,
+        },
+        'firstResetSlider'
+      )
+      .to(
+        sliderValueTarget,
+        {
+          duration: 1,
+          value: '+=5',
+          roundProps: 'value',
+          onUpdate() {
+            setSliderValue({ value: sliderValueTarget.value });
+          },
+        },
+        'firstResetSlider'
+      )
+      .to(
+        sliderBarRef.current,
+        {
+          scaleX: 1,
+          duration: 1,
+        },
+        'firstResetSlider'
+      );
   }, []);
   return (
     <Root ref={rootRef}>
@@ -96,14 +275,18 @@ const PartnerProgramm: FC = () => {
                 <SubsriptionItem>
                   <SubsriptionCheckbox>
                     <SubsriptionCheckboxInnerOpacity />
-                    <SubsriptionCheckboxInnerGreen />
+                    <SubsriptionCheckboxInnerGreen
+                      ref={firstCheckboxGradientRef}
+                    />
                   </SubsriptionCheckbox>
                   <CalculatorText>Prime</CalculatorText>
                 </SubsriptionItem>
                 <SubsriptionItem>
                   <SubsriptionCheckbox>
                     <SubsriptionCheckboxInnerOpacity />
-                    <SubsriptionCheckboxInnerGreen />
+                    <SubsriptionCheckboxInnerGreen
+                      ref={secondCheckboxGradientRef}
+                    />
                   </SubsriptionCheckbox>
                   <CalculatorText>Advanced</CalculatorText>
                 </SubsriptionItem>
@@ -125,10 +308,18 @@ const PartnerProgramm: FC = () => {
                   <ProfitItem>
                     <CalculatorText>3</CalculatorText>
                   </ProfitItem>
-                  <ProfitItem>
+                  <ProfitItem
+                    ref={(item: HTMLLIElement) => {
+                      profitItemLevels.current[0] = item;
+                    }}
+                  >
                     <CalculatorText>4</CalculatorText>
                   </ProfitItem>
-                  <ProfitItem>
+                  <ProfitItem
+                    ref={(item: HTMLLIElement) => {
+                      profitItemLevels.current[1] = item;
+                    }}
+                  >
                     <CalculatorText>5</CalculatorText>
                   </ProfitItem>
                 </ProfitList>
@@ -145,10 +336,18 @@ const PartnerProgramm: FC = () => {
                   <ProfitItemWithoutBorder>
                     <CalculatorText>64</CalculatorText>
                   </ProfitItemWithoutBorder>
-                  <ProfitItemWithoutBorder>
+                  <ProfitItemWithoutBorder
+                    ref={(item: HTMLLIElement) => {
+                      profitItemPeople.current[0] = item;
+                    }}
+                  >
                     <CalculatorText>256</CalculatorText>
                   </ProfitItemWithoutBorder>
-                  <ProfitItemWithoutBorder>
+                  <ProfitItemWithoutBorder
+                    ref={(item: HTMLLIElement) => {
+                      profitItemPeople.current[1] = item;
+                    }}
+                  >
                     <CalculatorText>1024</CalculatorText>
                   </ProfitItemWithoutBorder>
                 </ProfitList>
@@ -160,14 +359,15 @@ const PartnerProgramm: FC = () => {
               </CalculatorSectionTitleMargin>
               <SliderWrapper>
                 <SliderBorders>0</SliderBorders>
-                <StyledSlider
-                  marks={marks[0]}
-                  step={null}
-                  onChange={(e) => {
-                    return;
-                  }}
-                  handle={(e) => (isMounted ? handle(e) : <div></div>)}
-                />
+                <StyledSliderWrapper>
+                  <SliderHandleWrap ref={sliderHandleWrapRef}>
+                    <SliderCount>{sliderValue.value}</SliderCount>
+                    <SliderHandle />
+                  </SliderHandleWrap>
+                  <StyledSlider ref={sliderRef}>
+                    <SliderBar ref={sliderBarRef} />
+                  </StyledSlider>
+                </StyledSliderWrapper>
                 <SliderBorders>5</SliderBorders>
               </SliderWrapper>
             </CalculatorSection>
@@ -192,7 +392,7 @@ const PartnerProgramm: FC = () => {
                 </CalculatorSectionTitle>
                 <BonusWrap>
                   <BonusText>
-                    {currency(374562, {
+                    {currency(totalBonus.value, {
                       separator: ',',
                       precision: 0,
                     }).format()}
@@ -390,43 +590,71 @@ const BonusTextGreen = styled(BonusText)`
   color: var(--green);
 `;
 
-const StyledSlider = styled(Slider)`
-  margin-left: 12px;
-  margin-right: 12px;
-  .rc-slider-rail {
-    background-color: var(--darkGray);
-  }
+const StyledSliderWrapper = styled.div`
+  position: relative;
+  flex-grow: 1;
+`;
 
-  .rc-slider-track {
-    background-color: var(--green);
+const SliderHandleWrap = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 1;
+`;
+
+const SliderCount = styled.p`
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+  letter-spacing: 0.01em;
+  color: var(--green);
+`;
+
+const SliderHandle = styled.div`
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--black2);
+  background-image: var(--greenGradient);
+  border-radius: 50%;
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: var(--greenGradient);
+    filter: blur(18px);
   }
-  .rc-slider-handle {
-    width: 24px;
-    height: 24px;
-    margin-top: -12px;
-    border-width: 3px;
-    border-color: var(--black2);
-    background-image: var(--greenGradient);
-    &::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: var(--greenGradient);
-      filter: blur(18px);
-    }
-  }
-  .rc-slider-dot,
-  .rc-slider-mark {
-    display: none;
-  }
+`;
+
+const StyledSlider = styled.div`
+  margin-left: 16px;
+  margin-right: 16px;
+  width: auto;
+  height: 4px;
+  background-color: var(--darkGray);
+  border-radius: 3px;
+  position: relative;
+`;
+
+const SliderBar = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--green);
+  transform-origin: left;
 `;
 
 const SliderWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 356px;
 `;
 
 const SliderBorders = styled.p`
