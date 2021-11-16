@@ -13,6 +13,7 @@ import { Advantages } from '@/pageComponents/HomePage/Advantages';
 import { getSelectorsByUserAgent } from 'react-device-detect';
 import { Algorithm } from '@/pageComponents/HomePage/Algorithm';
 import { Fear } from '@/pageComponents/HomePage/Fear';
+import { PartnerProgramm } from '@/pageComponents/HomePage/PartnerProgramm';
 
 interface HomePageProps {
   userAgent: { [key: string]: any };
@@ -32,6 +33,7 @@ const Home: NextPage<HomePageProps> = ({ userAgent }) => {
         <Algorithm />
         <PlansSection />
         <Fear />
+        <PartnerProgramm />
         <MobileApp />
         <LeadForm />
       </main>
@@ -57,6 +59,7 @@ export const getServerSideProps = async ({ locale, req }: any) => ({
       'advantages',
       'algorithm',
       'fear',
+      'partnerProgramm',
     ])),
   },
 });

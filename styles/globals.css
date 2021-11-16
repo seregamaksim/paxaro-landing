@@ -138,6 +138,10 @@ body .rc-slider-tooltip-inner {
   color: var(--white);
 }
 
+body .rc-slider-tooltip-arrow {
+  display: none;
+}
+
 @media (max-width: 768px) {
   body .rc-slider-tooltip-inner {
     display: none;
