@@ -1,91 +1,136 @@
 import { Container } from '@/components/Container';
-import { SectionLabel } from '@/components/SectionLabel';
 import { Button } from '@/ui/components/Button';
 import { FC, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { CanvasNotebook } from './components/CanvasNotebook';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 if (typeof window !== undefined) {
   gsap.registerPlugin(ScrollTrigger);
 }
+
 function getCurrentFrame(index: any) {
   return `/notebook/notebook${index.toString().padStart(3, '0')}.png`;
 }
+
 const Hero: FC = () => {
   const { t } = useTranslation('hero');
-  const rootRef = useRef(null);
+
+  const rootRef = useRef<HTMLElement>(null);
+  const headRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const canvasWrapRef = useRef(null);
+  const canvasWrapRef = useRef<HTMLDivElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
+  const [isLoadImages, setIsLoadImages] = useState(false);
   const frameCount = 142;
   const notebook = {
     frame: 0,
   };
-  useEffect(() => {
+
+  const renderCanvas = () => {
     const context = canvasRef!.current!.getContext('2d');
-
-    const renderCanvas = () => {
-      context!.canvas.width = innerWidth;
-      context!.canvas.height = innerHeight;
+    context!.canvas.width = canvasWrapRef!.current!.offsetWidth;
+    context!.canvas.height = canvasWrapRef!.current!.offsetWidth * 0.5625;
+    const img = new Image();
+    const imgSrc = getCurrentFrame(0);
+    img.src = imgSrc;
+    img.onload = function () {
+      renderImage(img);
     };
+  };
 
-    renderCanvas();
-    preloadImages();
-    function preloadImages() {
-      for (let i = 0; i <= frameCount; i++) {
-        const img = new Image();
-        const imgSrc = getCurrentFrame(i);
-        img.src = imgSrc;
-        setImages((prevImages: any) => [...prevImages, img]);
+  function renderImage(image: HTMLImageElement) {
+    const context = canvasRef!.current!.getContext('2d');
+    context?.drawImage(
+      image,
+      0,
+      0,
+      canvasWrapRef!.current!.offsetWidth,
+      (canvasWrapRef!.current!.offsetWidth * image.height) / image.width
+    );
+  }
+
+  function preloadImages() {
+    for (let i = 0; i <= frameCount; i++) {
+      const img = new Image();
+      const imgSrc = getCurrentFrame(i);
+      img.src = imgSrc;
+      setImages((prevImages: HTMLImageElement[]) => [...prevImages, img]);
+      if (i === frameCount) {
+        setIsLoadImages(true);
       }
     }
+  }
 
+  useEffect(() => {
+    renderCanvas();
+    preloadImages();
+  }, []);
+
+  useEffect(() => {
+    if (!canvasRef.current || images.length < 1) {
+      return;
+    }
     const heroTimeline = gsap.timeline({
       scrollTrigger: {
-        trigger: canvasWrapRef.current,
-        pinnedContainer: rootRef.current,
-        start: 'top top',
-        // end: '+=4000',
+        trigger: rootRef.current,
+        start: `${
+          (headRef!.current!.offsetHeight / rootRef!.current!.offsetHeight) *
+          100
+        }% top`,
+
         markers: true,
-        scrub: 1,
+        scrub: true,
         pin: true,
       },
     });
 
-    heroTimeline.to(notebook, {
-      frame: frameCount - 1,
-      snap: 'frame',
-      scrollTrigger: {
-        scrub: 0.5,
-      },
-      onUpdate: render, // use animation onUpdate instead of scrollTrigger's onUpdate
-    });
-
-    function render() {
-      console.log('render');
-
-      // context!.clearRect(
-      //   0,
-      //   0,
-      //   canvasRef!.current!.width,
-      //   canvasRef!.current!.height
-      // );
-      // context!.drawImage(images[notebook.frame], 0, 0);
-    }
-  }, []);
+    heroTimeline
+      .addLabel('start')
+      .from(
+        canvasWrapRef.current,
+        {
+          yPercent: -60,
+          duration: 1,
+        },
+        'start'
+      )
+      .to(
+        headRef.current,
+        {
+          yPercent: 60,
+          opacity: 0,
+          duration: 1,
+        },
+        'start'
+      )
+      .to(
+        notebook,
+        {
+          frame: frameCount - 1,
+          snap: 'frame',
+          onUpdate: () => {
+            if (heroTimeline.scrollTrigger?.progress === 0) {
+              renderImage(images[0]);
+              return;
+            }
+            renderImage(images[notebook.frame]);
+          },
+        },
+        'start'
+      );
+  }, [isLoadImages]);
 
   return (
-    <Root ref={rootRef}>
+    <section ref={rootRef}>
       <StyledContainer>
-        <Head>
+        <Head ref={headRef}>
           <SectionTitle>{t('title')}</SectionTitle>
           <SectionText>{t('subtitle')}</SectionText>
           <Link href="#" passHref>
-            <StyledLink text={t('btnText')} isLink />
+            <Button text={t('btnText')} isLink />
           </Link>
         </Head>
 
@@ -93,22 +138,22 @@ const Hero: FC = () => {
           <canvas ref={canvasRef} />
         </CanvasWrapper>
       </StyledContainer>
-    </Root>
+    </section>
   );
 };
-
-const Root = styled.section``;
 
 const StyledContainer = styled(Container)`
   padding-top: 66px;
 `;
 
 const Head = styled.div`
-  margin-bottom: 66px;
+  margin-bottom: 86px;
   color: var(--black2);
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  z-index: 1;
 `;
 
 const SectionTitle = styled.h2`
@@ -142,11 +187,17 @@ const SectionText = styled.p`
   }
 `;
 
-const StyledLink = styled(Button)``;
-
 const CanvasWrapper = styled.div`
-  height: 100vh;
-  background-color: red;
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0) 50%);
+  }
 `;
 
 export default Hero;
