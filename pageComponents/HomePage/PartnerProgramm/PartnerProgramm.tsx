@@ -13,15 +13,6 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const marks: { [key: string]: any } = {
-  0: 0,
-  20: 1,
-  40: 2,
-  60: 3,
-  80: 4,
-  100: 5,
-};
-
 const PartnerProgramm: FC = () => {
   const { t } = useTranslation('partnerProgramm');
   const rootRef = useRef<HTMLElement>(null);
@@ -35,26 +26,19 @@ const PartnerProgramm: FC = () => {
   const profitItemLevels = useRef<HTMLLIElement[]>([]);
   const profitItemPeople = useRef<HTMLLIElement[]>([]);
   const calculatorRef = useRef<HTMLDivElement>(null);
-
-  const [bonus, setBonus] = useState({
-    value: 0,
-  });
-  const [totalBonus, setTotalBonus] = useState({
-    value: 0,
-  });
-  const [sliderValue, setSliderValue] = useState({
-    value: 0,
-  });
+  const [bonusValue, setBonus] = useState(0);
+  const [totalBonusValue, setTotalBonus] = useState(0);
+  const [sliderValue, setSliderValue] = useState(0);
 
   useEffect(() => {
     const bonusTarget = {
-      value: bonus.value,
+      value: bonusValue,
     };
     const totalBonusTarget = {
-      value: totalBonus.value,
+      value: totalBonusValue,
     };
     const sliderValueTarget = {
-      value: sliderValue.value,
+      value: sliderValue,
     };
 
     const partnerProgrammTimeline = gsap.timeline({
@@ -64,7 +48,6 @@ const PartnerProgramm: FC = () => {
         end: () => (innerWidth > 768 ? '+=3000' : '+=2000'),
         pin: true,
         scrub: 0,
-
         snap: {
           snapTo: 'labels',
           duration: { min: 0.2, max: 2 },
@@ -72,9 +55,9 @@ const PartnerProgramm: FC = () => {
           ease: 'power3.out',
         },
         onUpdate: () => {
-          setBonus({ value: bonusTarget.value });
-          setTotalBonus({ value: totalBonusTarget.value });
-          setSliderValue({ value: sliderValueTarget.value });
+          setBonus(bonusTarget.value);
+          setTotalBonus(totalBonusTarget.value);
+          setSliderValue(sliderValueTarget.value);
         },
       },
     });
@@ -522,7 +505,7 @@ const PartnerProgramm: FC = () => {
                 <SliderBorders>0</SliderBorders>
                 <StyledSliderWrapper>
                   <SliderHandleWrap ref={sliderHandleWrapRef}>
-                    <SliderCount>{sliderValue.value}</SliderCount>
+                    <SliderCount>{sliderValue}</SliderCount>
                     <SliderHandle />
                   </SliderHandleWrap>
                   <StyledSlider ref={sliderRef}>
@@ -540,7 +523,7 @@ const PartnerProgramm: FC = () => {
                 <BonusWrap>
                   <BonusBlur />
                   <BonusTextGreen ref={bonusTextRef}>
-                    {currency(bonus.value, {
+                    {currency(bonusValue, {
                       separator: ',',
                       precision: 0,
                     }).format()}
@@ -553,7 +536,7 @@ const PartnerProgramm: FC = () => {
                 </CalculatorSectionTitle>
                 <BonusWrap>
                   <BonusText>
-                    {currency(totalBonus.value, {
+                    {currency(totalBonusValue, {
                       separator: ',',
                       precision: 0,
                     }).format()}
