@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import ImageNext from 'next/image';
+import heroCollageImg from '@/assets/images/hero-collage.png';
 
 if (typeof window !== undefined) {
   gsap.registerPlugin(ScrollTrigger);
@@ -17,7 +19,6 @@ function getCurrentFrame(index: any) {
 
 const Hero: FC = () => {
   const { t } = useTranslation('hero');
-
   const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -65,66 +66,62 @@ const Hero: FC = () => {
   }
 
   useEffect(() => {
-    renderCanvas();
-    preloadImages();
+    if (innerWidth > 1024) {
+      renderCanvas();
+      preloadImages();
+    }
   }, []);
 
   useEffect(() => {
-    if (!canvasRef.current || images.length < 1) {
-      return;
-    }
-    const heroTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: rootRef.current,
-        start: `${
-          (headRef!.current!.offsetHeight / rootRef!.current!.offsetHeight) *
-          100
-        }% top`,
-
-        markers: true,
-        scrub: true,
-        pin: true,
-      },
-    });
-
-    heroTimeline
-      .addLabel('start')
-      .from(
-        canvasWrapRef.current,
-        {
-          yPercent: -60,
-          duration: 1,
+    if (innerWidth > 1024) {
+      if (!canvasRef.current || images.length < 1) {
+        return;
+      }
+      const heroTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: rootRef.current,
+          start: 'top top',
+          snap: 'labels',
+          markers: true,
+          scrub: true,
+          pin: true,
         },
-        'start'
-      )
-      .to(
-        headRef.current,
-        {
-          yPercent: 60,
-          opacity: 0,
-          duration: 1,
-        },
-        'start'
-      )
-      .to(
-        notebook,
-        {
-          frame: frameCount - 1,
-          snap: 'frame',
-          onUpdate: () => {
-            if (heroTimeline.scrollTrigger?.progress === 0) {
-              renderImage(images[0]);
-              return;
-            }
-            renderImage(images[notebook.frame]);
+      });
+
+      heroTimeline
+        .addLabel('start')
+
+        .to(
+          headRef.current,
+          {
+            yPercent: -60,
+            opacity: 0,
+            duration: 0.5,
           },
-        },
-        'start'
-      );
+          'start'
+        )
+        .addLabel('hideHead')
+        .to(
+          notebook,
+          {
+            frame: frameCount - 1,
+            snap: 'frame',
+            duration: 2,
+            onUpdate: () => {
+              if (heroTimeline.scrollTrigger?.progress === 0) {
+                renderImage(images[0]);
+                return;
+              }
+              renderImage(images[notebook.frame]);
+            },
+          },
+          'hideHead-=0.2'
+        );
+    }
   }, [isLoadImages]);
 
   return (
-    <section ref={rootRef}>
+    <Root ref={rootRef}>
       <StyledContainer>
         <Head ref={headRef}>
           <SectionTitle>{t('title')}</SectionTitle>
@@ -137,13 +134,27 @@ const Hero: FC = () => {
         <CanvasWrapper ref={canvasWrapRef}>
           <canvas ref={canvasRef} />
         </CanvasWrapper>
+        <NotebookImageWrap>
+          <ImageNext src={heroCollageImg} alt="Macbook and iPhone" />
+        </NotebookImageWrap>
       </StyledContainer>
-    </section>
+    </Root>
   );
 };
 
+const Root = styled.section`
+  height: 90vh;
+  @media (max-width: 1024px) {
+    height: auto;
+  }
+`;
+
 const StyledContainer = styled(Container)`
   padding-top: 66px;
+  @media (max-width: 768px) {
+    padding-top: 56px;
+    padding-bottom: 40px;
+  }
 `;
 
 const Head = styled.div`
@@ -154,6 +165,10 @@ const Head = styled.div`
   align-items: center;
   position: relative;
   z-index: 1;
+  will-change: transform, opacity;
+  @media (max-width: 1024px) {
+    margin-bottom: 30px;
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -161,7 +176,6 @@ const SectionTitle = styled.h2`
   font-size: 48px;
   line-height: 67px;
   text-align: center;
-
   max-width: 635px;
   margin-bottom: 24px;
   @media (max-width: 768px) {
@@ -189,6 +203,7 @@ const SectionText = styled.p`
 
 const CanvasWrapper = styled.div`
   position: relative;
+  transform: translateY(-60%);
   &::before {
     content: '';
     position: absolute;
@@ -197,6 +212,22 @@ const CanvasWrapper = styled.div`
     width: 100px;
     height: 100%;
     background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0) 50%);
+  }
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const NotebookImageWrap = styled.div`
+  display: none;
+  @media (max-width: 1024px) {
+    display: block;
+  }
+  @media (max-width: 768px) {
+    width: 700px;
+  }
+  @media (max-width: 500px) {
+    width: 521px;
   }
 `;
 
