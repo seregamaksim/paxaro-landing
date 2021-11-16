@@ -469,30 +469,30 @@ const PartnerProgramm: FC = () => {
                 </ProfitList>
               </ProfitSection>
               <ProfitSection>
-                <ProfitTitle>{t('calculator.people')}</ProfitTitle>
+                <ProfitTitle>{t('calculator.percent')}</ProfitTitle>
                 <ProfitList>
                   <ProfitItemWithoutBorder>
-                    <CalculatorText>4</CalculatorText>
+                    <CalculatorText>20%</CalculatorText>
                   </ProfitItemWithoutBorder>
                   <ProfitItemWithoutBorder>
-                    <CalculatorText>16</CalculatorText>
+                    <CalculatorText>10%</CalculatorText>
                   </ProfitItemWithoutBorder>
                   <ProfitItemWithoutBorder>
-                    <CalculatorText>64</CalculatorText>
+                    <CalculatorText>7%</CalculatorText>
                   </ProfitItemWithoutBorder>
                   <ProfitItemWithoutBorder
                     ref={(item: HTMLLIElement) => {
                       profitItemPeople.current[0] = item;
                     }}
                   >
-                    <CalculatorText>256</CalculatorText>
+                    <CalculatorText>5%</CalculatorText>
                   </ProfitItemWithoutBorder>
                   <ProfitItemWithoutBorder
                     ref={(item: HTMLLIElement) => {
                       profitItemPeople.current[1] = item;
                     }}
                   >
-                    <CalculatorText>1024</CalculatorText>
+                    <CalculatorText>3%</CalculatorText>
                   </ProfitItemWithoutBorder>
                 </ProfitList>
               </ProfitSection>
@@ -772,7 +772,7 @@ const SubsriptionCheckboxInnerGreen = styled(SubsriptionCheckboxInner)`
 `;
 
 const ProfitTitle = styled(CalculatorText)`
-  min-width: 65px;
+  min-width: 75px;
   margin-right: 24px;
   @media (max-width: 768px) {
     margin-right: 18px;
