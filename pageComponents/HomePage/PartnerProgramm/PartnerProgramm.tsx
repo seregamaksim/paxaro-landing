@@ -26,8 +26,8 @@ const PartnerProgramm: FC = () => {
   const profitItemLevels = useRef<HTMLLIElement[]>([]);
   const profitItemPeople = useRef<HTMLLIElement[]>([]);
   const calculatorRef = useRef<HTMLDivElement>(null);
-  const [bonusValue, setBonus] = useState(0);
-  const [totalBonusValue, setTotalBonus] = useState(0);
+  const [bonusValue, setBonusValue] = useState(0);
+  const [totalBonusValue, setTotalBonusValue] = useState(0);
   const [sliderValue, setSliderValue] = useState(0);
 
   useEffect(() => {
@@ -55,8 +55,8 @@ const PartnerProgramm: FC = () => {
           ease: 'power3.out',
         },
         onUpdate: () => {
-          setBonus(bonusTarget.value);
-          setTotalBonus(totalBonusTarget.value);
+          setBonusValue(bonusTarget.value);
+          setTotalBonusValue(totalBonusTarget.value);
           setSliderValue(sliderValueTarget.value);
         },
       },
