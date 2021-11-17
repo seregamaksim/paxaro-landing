@@ -81,6 +81,7 @@ const Hero: FC = () => {
         scrollTrigger: {
           trigger: rootRef.current,
           start: 'top top',
+          end: () => `+=${innerHeight * 1.5}`,
           snap: 'labels',
           markers: true,
           scrub: true,
@@ -90,7 +91,6 @@ const Hero: FC = () => {
 
       heroTimeline
         .addLabel('start')
-
         .to(
           headRef.current,
           {
