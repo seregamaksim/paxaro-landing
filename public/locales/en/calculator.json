@@ -1,15 +1,15 @@
 {
-  "title": "Расчет вероятной прибыли",
-  "subTitle": "Узнайте, сколько вы могли заработать, если бы начали пользоваться Paxaro App раньше",
+  "title": "Calculation of anticipated profit",
+  "subTitle": "Find out how much you could earn if you started using the Paxaro App earlier",
   "calculator": {
-    "index": "Индекс",
-    "period": "Период",
-    "investmentsAmount": "Сумма вложения",
-    "profit": "Ваша прибыль:",
-    "month": "Месяц",
-    "halfYear": "Пол года",
-    "year": "Год",
-    "allTime": "Все время",
-    "calculate": "Рассчитать"
+    "index": "Index",
+    "period": "Period",
+    "investmentsAmount": "Amount",
+    "profit": "Your profit:",
+    "month": "Month",
+    "halfYear": "A half of year",
+    "year": "Year",
+    "allTime": "All time",
+    "calculate": "Calculate"
   }
 }

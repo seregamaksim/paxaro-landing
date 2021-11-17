@@ -16,7 +16,6 @@ import { Algorithm } from '@/pageComponents/HomePage/Algorithm';
 import { Fear } from '@/pageComponents/HomePage/Fear';
 import { PartnerProgramm } from '@/pageComponents/HomePage/PartnerProgramm';
 
-
 interface HomePageProps {
   userAgent: { [key: string]: any };
 }
