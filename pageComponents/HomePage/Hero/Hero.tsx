@@ -87,7 +87,6 @@ const Hero: FC = () => {
           trigger: rootRef.current,
           start: 'top top',
           end: () => `+=${innerHeight * 1.5}`,
-          markers: true,
           refreshPriority: 1,
           scrub: true,
           pin: true,
