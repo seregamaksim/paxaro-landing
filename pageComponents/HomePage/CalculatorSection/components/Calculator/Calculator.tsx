@@ -15,6 +15,8 @@ import {
   portfolioTypeOptions,
 } from './staticData';
 
+import axios from 'axios';
+
 const SelectUiNoSSR = dynamic(
   () => import('@/ui/components/SelectUI/SelectUI'),
   {
@@ -27,58 +29,58 @@ interface CalculatorProps {
 }
 
 interface Values {
-  porfolio_type: string;
-  date_days: string;
+  title: string;
+  period: string;
   cash?: string;
 }
 
 const secondData = [
   {
-    name: '2001-12-27',
+    date: '2001-12-27',
     value: 2400,
   },
   {
-    name: '2002-01-27',
+    date: '2002-01-27',
     value: 1398,
   },
   {
-    name: '2002-01-27',
+    date: '2002-01-27',
     value: 9800,
   },
   {
-    name: '2002-01-27',
+    date: '2002-01-27',
     value: 3908,
   },
   {
-    name: '2002-01-27',
+    date: '2002-01-27',
     value: 4800,
   },
   {
-    name: '2002-01-27',
+    date: '2002-01-27',
     value: 3800,
   },
   {
-    name: '2002-01-27',
+    date: '2002-01-27',
     value: 4300,
   },
   {
-    name: '2002-01-27',
+    date: '2002-01-27',
     value: 4800,
   },
   {
-    name: '2002-01-27',
+    date: '2002-01-27',
     value: 3800,
   },
   {
-    name: '2002-01-27',
+    date: '2002-01-27',
     value: 5639,
   },
   {
-    name: '2002-01-27',
+    date: '2002-01-27',
     value: 1639,
   },
   {
-    name: '2002-01-27',
+    date: '2002-01-27',
     value: 3639,
   },
 ];
@@ -88,8 +90,8 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
   const { t } = useTranslation('calculator');
   const [cashValue, setCashValue] = useState(0);
   const [initiaFormlValue, setInitiaFormlValue] = useState<Values>({
-    porfolio_type: 'i30',
-    date_days: '30',
+    title: 'i30',
+    period: '30',
     cash: '1000',
   });
 
@@ -99,14 +101,28 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
     { value: '360', label: t('calculator.year') },
   ];
 
-  function submit(e: any) {
+  function submit(values: Values) {
     if (innerWidth > 768) {
       console.log('submit', {
-        ...e,
+        ...values,
         cash: cashValue.toString(),
       });
+      axios({
+        method: 'post',
+        url: 'https://web-api-test.kadex.io//backtest/chart',
+        data: values,
+      }).then(({ data }: any) => {
+        console.log('data', data);
+      });
     } else {
-      console.log('submit', e);
+      console.log('submit', values);
+      axios({
+        method: 'post',
+        url: 'https://web-api-test.kadex.io//backtest/chart',
+        data: values,
+      }).then(({ data }: any) => {
+        console.log('data', data);
+      });
     }
   }
 
@@ -137,13 +153,13 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
   function getInitialValues() {
     if (innerWidth > 768) {
       return {
-        porfolio_type: 'i30',
-        date_days: '30',
+        title: 'i30',
+        period: '30',
       };
     } else {
       return {
-        porfolio_type: 'i30',
-        date_days: '30',
+        title: 'i30',
+        period: '30',
         cash: '1000',
       };
     }
@@ -164,17 +180,17 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                   <HeadSection>
                     <HeadLabel>{t('calculator.index')}</HeadLabel>
                     <SelectUiNoSSR
-                      name="porfolio_type"
+                      name="title"
                       options={portfolioTypeOptions}
-                      id="porfolio_type"
+                      id="title"
                     />
                   </HeadSection>
                   <HeadSection>
                     <HeadLabel>{t('calculator.period')}</HeadLabel>
                     <SelectUiNoSSR
-                      name="date_days"
+                      name="period"
                       options={dateDaysOptions}
-                      id="date_days"
+                      id="period"
                     />
                   </HeadSection>
 
@@ -182,7 +198,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                     <HeadLabel>{t('calculator.investmentsAmount')}</HeadLabel>
                     <SelectUiNoSSR
                       name="cash"
-                      options={investmentsAmountOptions[values.porfolio_type]}
+                      options={investmentsAmountOptions[values.title]}
                       id="cash"
                     />
                   </CashSelectSection>
@@ -192,8 +208,8 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                     <SliderWrapper>
                       <SliderBorders>
                         {currency(
-                          marks[values.porfolio_type][
-                            Object.keys(marks[values.porfolio_type])[0]
+                          marks[values.title][
+                            Object.keys(marks[values.title])[0]
                           ],
                           {
                             precision: 0,
@@ -201,25 +217,20 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                         ).format()}
                       </SliderBorders>
                       <StyledSlider
-                        marks={marks[values.porfolio_type]}
+                        marks={marks[values.title]}
                         step={null}
                         onChange={(e) => {
-                          onChange(e, values.porfolio_type);
+                          onChange(e, values.title);
                         }}
                         handle={(e) =>
-                          isMounted ? (
-                            handle(e, values.porfolio_type)
-                          ) : (
-                            <div></div>
-                          )
+                          isMounted ? handle(e, values.title) : <div></div>
                         }
                       />
                       <SliderBorders>
                         {currency(
-                          marks[values.porfolio_type][
-                            Object.keys(marks[values.porfolio_type])[
-                              Object.keys(marks[values.porfolio_type]).length -
-                                1
+                          marks[values.title][
+                            Object.keys(marks[values.title])[
+                              Object.keys(marks[values.title]).length - 1
                             ]
                           ],
                           {

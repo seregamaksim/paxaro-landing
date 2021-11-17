@@ -14,7 +14,7 @@ import moment from 'moment';
 import currency from 'currency.js';
 
 interface Data {
-  name: string;
+  date: string;
   value: number;
 }
 interface ChartProps {
@@ -49,7 +49,7 @@ const Chart: FC<ChartProps> = ({ className, data }) => {
             stroke="#B5B5B5"
           />
           <XAxis
-            dataKey="name"
+            dataKey="date"
             fontSize="12px"
             fontWeight="600"
             color="#8F8F8F"
