@@ -82,8 +82,6 @@ const Hero: FC = () => {
           trigger: rootRef.current,
           start: 'top top',
           end: () => `+=${innerHeight * 1.5}`,
-          snap: 'labels',
-          markers: true,
           scrub: true,
           pin: true,
         },
@@ -116,7 +114,8 @@ const Hero: FC = () => {
             },
           },
           'hideHead-=0.2'
-        );
+        )
+        .addLabel('finish');
     }
   }, [isLoadImages]);
 
