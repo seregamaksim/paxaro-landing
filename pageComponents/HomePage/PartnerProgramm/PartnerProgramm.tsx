@@ -26,14 +26,19 @@ const PartnerProgramm: FC = () => {
   const [totalBonusValue, setTotalBonusValue] = useState(
     getAllSum(sliderValue)
   );
+  const firstLevelAmount = 239.8;
+  const secondLevelAmount = 119.9;
+  const thirdLevelAmount = 83.93;
+  const fourthtLevelAmount = 59.95;
+  const fivethLevelAmount = 35.97;
 
   function getSums(factor: number): { [key: string]: number } {
     return {
-      sum1: factor * 239.8,
-      sum2: Math.pow(factor, 2) * 119.9,
-      sum3: Math.pow(factor, 3) * 83.93,
-      sum4: Math.pow(factor, 4) * 59.95,
-      sum5: Math.pow(factor, 5) * 35.97,
+      sum1: factor * firstLevelAmount,
+      sum2: Math.pow(factor, 2) * secondLevelAmount,
+      sum3: Math.pow(factor, 3) * thirdLevelAmount,
+      sum4: Math.pow(factor, 4) * fourthtLevelAmount,
+      sum5: Math.pow(factor, 5) * fivethLevelAmount,
     };
   }
 
