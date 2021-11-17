@@ -13,7 +13,7 @@ if (typeof window !== undefined) {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-function getCurrentSrcFrame(index: number) {
+function getCurrentFrameSrc(index: number) {
   return `/notebook/notebook${index.toString().padStart(3, '0')}.png`;
 }
 
@@ -31,13 +31,13 @@ const Hero: FC = () => {
   };
 
   const renderCanvas = () => {
-    const context = canvasRef.current!.getContext('2d');
+    const context = canvasRef.current!.getContext('2d')!;
     const canvasWrapCurrent = canvasWrapRef.current!;
-    context!.canvas.width = canvasWrapCurrent.offsetWidth;
-    context!.canvas.height = canvasWrapCurrent.offsetWidth * 0.5625;
+    context.canvas.width = canvasWrapCurrent.offsetWidth;
+    context.canvas.height = canvasWrapCurrent.offsetWidth * 0.5625;
 
     const img = new Image();
-    img.src = getCurrentSrcFrame(0);
+    img.src = getCurrentFrameSrc(0);
 
     img.onload = function () {
       renderImage(img);
@@ -45,10 +45,10 @@ const Hero: FC = () => {
   };
 
   function renderImage(image: HTMLImageElement) {
-    const context = canvasRef!.current!.getContext('2d');
+    const context = canvasRef!.current!.getContext('2d')!;
     const canvasWrapCurrent = canvasWrapRef.current!;
 
-    context?.drawImage(
+    context.drawImage(
       image,
       0,
       0,
@@ -60,7 +60,7 @@ const Hero: FC = () => {
   function preloadImages() {
     for (let i = 0; i <= frameCount; i++) {
       const img = new Image();
-      img.src = getCurrentSrcFrame(i);
+      img.src = getCurrentFrameSrc(i);
 
       setImages((prevImages: HTMLImageElement[]) => [...prevImages, img]);
 
