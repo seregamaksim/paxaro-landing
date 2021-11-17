@@ -30,6 +30,8 @@ const PartnerProgramm: FC = () => {
   const [totalBonusValue, setTotalBonusValue] = useState(0);
   const [sliderValue, setSliderValue] = useState(0);
 
+  const nominals = [239.8, 119.9, 83.93, 59.95, 35.97];
+
   useEffect(() => {
     const bonusTarget = {
       value: bonusValue,
@@ -46,19 +48,20 @@ const PartnerProgramm: FC = () => {
     const num4 = Math.pow(sliderValue + 1, 4);
     const num5 = Math.pow(sliderValue + 1, 5);
     const sum1 = num1 * 239.8;
-
     //Бонус за 2 уровень
-    var sum2 = num2 * 119.9;
+    const sum2 = num2 * 119.9;
     //Бонус за 3 уровень
-    var sum3 = num3 * 83.93;
+    const sum3 = num3 * 83.93;
     //Бонус за 4 уровень
-    var sum4 = num4 * 59.95;
+    const sum4 = num4 * 59.95;
     //Бонус за 5 уровень
-    var sum5 = num5 * 35.97;
+    const sum5 = num5 * 35.97;
     //Общая прибыль
-    var allSum = sum1 + sum2 + sum3 + sum4 + sum5;
+    const allSumPrime = sum1 + sum2 + sum3;
+    const allSumAdvanced = sum1 + sum2 + sum3 + sum4 + sum5;
+
     console.log('sum1', sum1);
-    console.log('allSum', allSum);
+    console.log('allSum', allSumAdvanced);
     const partnerProgrammTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: rootRef.current,
@@ -87,7 +90,7 @@ const PartnerProgramm: FC = () => {
           bonusTarget,
           {
             duration: 1,
-            value: 1236,
+            value: `+=${sum1}`,
             roundProps: 'value',
           },
           'start+=0.2'
@@ -96,7 +99,7 @@ const PartnerProgramm: FC = () => {
           totalBonusTarget,
           {
             duration: 1,
-            value: 16456,
+            value: `+=${sum1}`,
             roundProps: 'value',
           },
           'start+=0.2'
@@ -104,7 +107,7 @@ const PartnerProgramm: FC = () => {
         .to(
           sliderHandleWrapRef.current,
           {
-            x: sliderRef!.current!.offsetWidth,
+            x: sliderRef!.current!.offsetWidth / 5,
             duration: 1,
           },
           'start+=0.2'
@@ -113,19 +116,64 @@ const PartnerProgramm: FC = () => {
           sliderValueTarget,
           {
             duration: 1,
-            value: 5,
+            value: '+=1',
             roundProps: 'value',
           },
           'start+=0.2'
         )
-        .from(
+        .to(
           sliderBarRef.current,
           {
-            scaleX: 0,
+            scaleX: 0.2,
             duration: 1,
           },
           'start+=0.2'
         )
+        .addLabel('moveToFirstLevel')
+        .to(
+          bonusTarget,
+          {
+            duration: 1,
+            value: `+=${sum2}`,
+            roundProps: 'value',
+          },
+          'moveToFirstLevel+=0.2'
+        )
+        .to(
+          totalBonusTarget,
+          {
+            duration: 1,
+            value: `+=${sum1 + sum2}`,
+            roundProps: 'value',
+          },
+          'moveToFirstLevel+=0.2'
+        )
+        .to(
+          sliderHandleWrapRef.current,
+          {
+            x: sliderRef!.current!.offsetWidth / 4,
+            duration: 1,
+          },
+          'moveToFirstLevel+=0.2'
+        )
+        .to(
+          sliderValueTarget,
+          {
+            duration: 1,
+            value: '+=2',
+            roundProps: 'value',
+          },
+          'moveToFirstLevel+=0.2'
+        )
+        .to(
+          sliderBarRef.current,
+          {
+            scaleX: 0.4,
+            duration: 1,
+          },
+          'moveToFirstLevel+=0.2'
+        )
+        .addLabel('moveToSecondLevel')
         .addLabel('firstMoveToFinish')
         .to(
           bonusTarget,
@@ -939,6 +987,7 @@ const SliderBar = styled.div`
   height: 100%;
   background-color: var(--green);
   transform-origin: left;
+  transform: scaleX(0);
   will-change: transform;
 `;
 
