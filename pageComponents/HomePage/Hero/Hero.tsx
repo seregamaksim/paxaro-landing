@@ -19,6 +19,7 @@ function getCurrentFrameSrc(index: number) {
 
 const Hero: FC = () => {
   const { t } = useTranslation('hero');
+
   const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);

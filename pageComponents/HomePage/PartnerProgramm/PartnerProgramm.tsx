@@ -15,6 +15,9 @@ if (typeof window !== 'undefined') {
 
 const PartnerProgramm: FC = () => {
   const { t } = useTranslation('partnerProgramm');
+  const test = useTranslation('partnerProgramm');
+  console.log('test', test.t('', { returnObjects: true }));
+
   const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const bonusTextRef = useRef<HTMLParagraphElement>(null);
