@@ -1,12 +1,12 @@
 import React, { ButtonHTMLAttributes, FC, LinkHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   isLink?: boolean;
   className?: string;
 }
-const Button: FC<IButtonProps> = React.forwardRef(
+const Button: FC<ButtonProps> = React.forwardRef(
   ({ text, className, isLink = false, ...props }, ref) => {
     return (
       <Root className={className} as={isLink ? 'a' : 'button'} {...props}>

@@ -1,18 +1,21 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { Footer } from '@/components/Footer';
-import { Header } from '@/components/Header';
 
-interface IMainLayoutProps {}
+import { Cookies } from '@/components/Cookies';
 
-const MainLayout: FC<IMainLayoutProps> = ({ children }) => {
+const MainLayout: FC = ({ children }) => {
   return (
     <Root>
       {children}
       <Footer />
+      <Cookies />
     </Root>
   );
 };
 
-const Root = styled.div``;
+const Root = styled.div`
+  position: relative;
+`;
+
 export default MainLayout;

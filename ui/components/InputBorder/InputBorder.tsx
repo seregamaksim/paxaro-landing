@@ -2,14 +2,14 @@ import { useField } from 'formik';
 import { FC, useState } from 'react';
 import styled from 'styled-components';
 
-interface IInputBorderProps {
+interface InputBorderProps {
   className?: string;
   name: string;
   label: string;
   id: string;
 }
 
-const InputBorder: FC<JSX.IntrinsicElements['input'] & IInputBorderProps> = ({
+const InputBorder: FC<JSX.IntrinsicElements['input'] & InputBorderProps> = ({
   className,
   name,
   label,

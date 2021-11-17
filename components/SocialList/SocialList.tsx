@@ -2,10 +2,10 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import { ActiveLink } from '@/components/ActiveLink';
 
-interface ISocialListProps {
+interface SocialListProps {
   className?: string;
 }
-const SocialList: FC<ISocialListProps> = ({ className }) => {
+const SocialList: FC<SocialListProps> = ({ className }) => {
   return (
     <Root className={className}>
       <Item>

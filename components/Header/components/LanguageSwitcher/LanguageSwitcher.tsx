@@ -2,17 +2,17 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { FC, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-
 import russiaIcon from '@/assets/images/russia.svg';
 import kazakhstanIcon from '@/assets/images/kazakhstan.svg';
 import usaIcon from '@/assets/images/usa.svg';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import { ActiveLink } from '@/components/ActiveLink';
-interface ILanguageSwitcherProps {
+
+interface LanguageSwitcherProps {
   className?: string;
 }
 
-const LanguageSwitcher: FC<ILanguageSwitcherProps> = ({ className }) => {
+const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ className }) => {
   const router = useRouter();
   const { pathname, query, asPath } = router;
   const [isOpen, setIsOpen] = useState(false);
@@ -50,7 +50,7 @@ const LanguageSwitcher: FC<ILanguageSwitcherProps> = ({ className }) => {
                 locale="ru"
               >
                 <LanguagesDropdownLink>
-                  <Image src={russiaIcon} />
+                  <Image src={russiaIcon} alt="Russia" />
                   <LanguagesDropdownLinkText>Россия</LanguagesDropdownLinkText>
                 </LanguagesDropdownLink>
               </ActiveLink>
@@ -63,7 +63,7 @@ const LanguageSwitcher: FC<ILanguageSwitcherProps> = ({ className }) => {
                 locale="en"
               >
                 <LanguagesDropdownLink>
-                  <Image src={usaIcon} />
+                  <Image src={usaIcon} alt="English" />
                   <LanguagesDropdownLinkText>English</LanguagesDropdownLinkText>
                 </LanguagesDropdownLink>
               </ActiveLink>
@@ -76,7 +76,7 @@ const LanguageSwitcher: FC<ILanguageSwitcherProps> = ({ className }) => {
                 locale="kz"
               >
                 <LanguagesDropdownLink>
-                  <Image src={kazakhstanIcon} />
+                  <Image src={kazakhstanIcon} alt="Қазақстан" />
                   <LanguagesDropdownLinkText>
                     Қазақстан
                   </LanguagesDropdownLinkText>
@@ -145,6 +145,7 @@ const LanguagesDropdown = styled.div.attrs(() => ({
   border-radius: 8px;
   padding-bottom: 7px;
   overflow: hidden;
+  z-index: 2;
   @media (max-width: 900px) {
     top: auto;
     bottom: 100%;

@@ -15,7 +15,7 @@ interface FormValues {
   phone: string;
 }
 
-interface ILeadFormProps {
+interface LeadFormProps {
   className?: string;
 }
 
@@ -34,7 +34,7 @@ export const LinkText = ({ href, children, ...props }: any) => {
   );
 };
 
-const LeadForm: FC<ILeadFormProps> = ({ className }) => {
+const LeadForm: FC<LeadFormProps> = ({ className }) => {
   const { t } = useTranslation('leadForm');
   const [isSuccess, setIsSuccess] = useState(false);
 

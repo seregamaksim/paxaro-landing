@@ -5,40 +5,50 @@ import { Container } from '../Container';
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '@/assets/images/logo.svg';
-import { useRouter } from 'next/dist/client/router';
+
 import { ActiveLink } from '../ActiveLink';
 import { Button } from '@/ui/components/Button';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
-
 import LogoMini from '@/ui/icons/LogoMini';
 import { useIsDesktop } from '@/hooks/useIsDesktop';
 import SocialList from '../SocialList/SocialList';
 import Headroom from 'react-headroom';
-import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 
-interface IHeaderWrapper {
+import { MobileStore } from './components/MobileStore';
+
+interface HeaderWrapperProps {
   isActiveMenu: boolean;
 }
+interface IHeaderProps {
+  userAgent: { [key: string]: any };
+}
 
-const Header: FC = ({ children }) => {
+const Header: FC<IHeaderProps> = ({ children, userAgent }) => {
   const { t } = useTranslation('header');
-  const router = useRouter();
   const isDesktop = useIsDesktop();
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-
-  useOnClickOutside(ref, () => handleBurgerClick());
 
   function handleBurgerClick() {
     if (innerWidth < 900) {
       setIsOpenMenu(!isOpenMenu);
     }
   }
+
   useEffect(() => {
-    window.innerWidth > 900 ? setIsOpenMenu(true) : setIsOpenMenu(false);
+    if (isOpenMenu && innerWidth < 900) {
+      document.documentElement.style.overflow = 'hidden';
+    } else if (!isOpenMenu && innerWidth < 900) {
+      document.documentElement.style.overflow = '';
+    }
+  }, [isOpenMenu]);
+
+  useEffect(() => {
+    innerWidth > 900 ? setIsOpenMenu(true) : setIsOpenMenu(false);
   }, []);
   return (
     <Headroom>
+      <MobileStore userAgent={userAgent} />
       <Root ref={ref}>
         <HeaderBurgerNavContainer>
           <Link href="/" passHref>
@@ -60,8 +70,7 @@ const Header: FC = ({ children }) => {
               <HeaderTopContainer>
                 <Link href="/" passHref>
                   <HeaderLogoLink>
-                    <Image src={logo} alt={t('logoAlt')} />
-                    {/* <Logo width={148} height={46} /> */}
+                    <Image src={logo} alt={t('logoAlt')} loading="eager" />
                   </HeaderLogoLink>
                 </Link>
                 <HeaderTopNav>
@@ -157,29 +166,38 @@ const Header: FC = ({ children }) => {
 };
 
 const Root = styled.header`
-  background: var(--black3);
+  background: var(--black1);
   box-shadow: 0px 30px 36px -15px rgba(0, 0, 0, 0.15);
   @media (max-width: 900px) {
+    position: relative;
   }
 `;
 
 const HeaderScroller = styled.div`
   @media (max-width: 900px) {
-    padding-bottom: 200px;
+    padding-bottom: 150px;
     overflow: scroll;
   }
 `;
 
-const HeaderWrapper = styled.div.attrs<IHeaderWrapper>((props) => ({
-  className: props.isActiveMenu ? 'mobile-menu active' : 'mobile-menu',
-}))`
-  display: ${(props: IHeaderWrapper) =>
-    props.isActiveMenu ? 'block' : 'none'};
+const HeaderWrapper = styled.div.attrs<HeaderWrapperProps>(
+  ({ isActiveMenu }) => ({
+    className: isActiveMenu ? 'mobile-menu active' : 'mobile-menu',
+  })
+)`
+  display: ${({ isActiveMenu }: HeaderWrapperProps) =>
+    isActiveMenu ? 'block' : 'none'};
   @media (max-width: 900px) {
-    display: ${(props: IHeaderWrapper) =>
-      props.isActiveMenu ? 'flex' : 'none'};
+    display: ${({ isActiveMenu }: HeaderWrapperProps) =>
+      isActiveMenu ? 'flex' : 'none'};
     flex-direction: column;
     height: 100vh;
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    background: var(--black1);
+    z-index: 10;
   }
 `;
 
