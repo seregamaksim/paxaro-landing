@@ -168,6 +168,9 @@ const Algorithm: FC = () => {
         'finishShowStoreBanner'
       )
       .addLabel('finish');
+    return () => {
+      algorithmTimeline.kill();
+    };
   }, []);
 
   return (

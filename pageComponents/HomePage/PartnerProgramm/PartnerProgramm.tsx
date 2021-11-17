@@ -15,8 +15,6 @@ if (typeof window !== 'undefined') {
 
 const PartnerProgramm: FC = () => {
   const { t } = useTranslation('partnerProgramm');
-  const test = useTranslation('partnerProgramm');
-  console.log('test', test.t('', { returnObjects: true }));
 
   const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
@@ -34,6 +32,8 @@ const PartnerProgramm: FC = () => {
   const [sliderValue, setSliderValue] = useState(0);
 
   useEffect(() => {
+    console.log('mount partner programm');
+
     const bonusTarget = {
       value: bonusValue,
     };
@@ -402,6 +402,10 @@ const PartnerProgramm: FC = () => {
         )
         .addLabel('finish');
     }
+    return () => {
+      console.log('unmount partner programm');
+      partnerProgrammTimeline.kill();
+    };
   }, []);
   return (
     <Root ref={rootRef}>

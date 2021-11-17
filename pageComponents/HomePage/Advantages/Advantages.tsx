@@ -324,6 +324,9 @@ const Advantages: FC = () => {
           'finishMoveSecondScreen+=0.2'
         );
     }
+    return () => {
+      advantagesTimeline.kill();
+    };
   }, []);
 
   return (

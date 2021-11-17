@@ -31,26 +31,29 @@ const Education: FC = () => {
   const mobileVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (innerWidth > 900) {
-      const educationTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: 'top top',
-          end: () => '+=2000',
-          pin: true,
-          scrub: 1,
-          snap: {
-            snapTo: 'labels',
-            duration: { min: 0.2, max: 2 },
-            delay: 0.2,
-            ease: 'sine.out',
-          },
-          onEnter: () => {
-            videoRef?.current?.play();
-          },
+    const educationTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: rootRef.current,
+        start: 'top top',
+        end: () => (innerWidth > 900 ? '+=2000' : '+=500'),
+        pin: true,
+        scrub: 1,
+        snap: {
+          snapTo: 'labels',
+          duration: { min: 0.2, max: 2 },
+          delay: 0.2,
+          ease: 'sine.out',
         },
-      });
-
+        onEnter: () => {
+          if (innerWidth > 900) {
+            videoRef?.current?.play();
+          } else {
+            mobileVideoRef?.current?.play();
+          }
+        },
+      },
+    });
+    if (innerWidth > 900) {
       educationTimeline
         .addLabel('start')
         .to(
@@ -181,25 +184,6 @@ const Education: FC = () => {
         )
         .addLabel('finish');
     } else {
-      const educationTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: 'top top',
-          end: () => '+=500',
-          pin: true,
-          scrub: 1,
-          snap: {
-            snapTo: 'labels',
-            duration: { min: 0.2, max: 2 },
-            delay: 0.2,
-            ease: 'sine.out',
-          },
-          onEnter: () => {
-            mobileVideoRef?.current?.play();
-          },
-        },
-      });
-
       educationTimeline
         .addLabel('start')
         .to(
@@ -220,6 +204,9 @@ const Education: FC = () => {
         )
         .addLabel('finish');
     }
+    return () => {
+      educationTimeline.kill();
+    };
   }, []);
 
   return (

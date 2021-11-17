@@ -19,7 +19,6 @@ function getCurrentFrameSrc(index: number) {
 
 const Hero: FC = () => {
   const { t } = useTranslation('hero');
-
   const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -79,20 +78,20 @@ const Hero: FC = () => {
   }, []);
 
   useEffect(() => {
+    const heroTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: rootRef.current,
+        start: 'top top',
+        end: () => `+=${innerHeight * 1.5}`,
+
+        scrub: true,
+        pin: true,
+      },
+    });
     if (innerWidth > 1024) {
       if (!canvasRef.current || images.length < 1) {
         return;
       }
-      const heroTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: 'top top',
-          end: () => `+=${innerHeight * 1.5}`,
-          refreshPriority: 1,
-          scrub: true,
-          pin: true,
-        },
-      });
 
       heroTimeline
         .addLabel('start')
@@ -124,27 +123,34 @@ const Hero: FC = () => {
         )
         .addLabel('finish');
     }
+    return () => {
+      console.log('unmount hero');
+
+      heroTimeline.kill();
+    };
   }, [isLoadImages]);
 
   return (
-    <Root ref={rootRef}>
-      <StyledContainer>
-        <Head ref={headRef}>
-          <SectionTitle>{t('title')}</SectionTitle>
-          <SectionText>{t('subtitle')}</SectionText>
-          <Link href="#" passHref>
-            <Button text={t('btnText')} isLink />
-          </Link>
-        </Head>
+    <div>
+      <Root ref={rootRef}>
+        <StyledContainer>
+          <Head ref={headRef}>
+            <SectionTitle>{t('title')}</SectionTitle>
+            <SectionText>{t('subtitle')}</SectionText>
+            <Link href="#" passHref>
+              <Button text={t('btnText')} isLink />
+            </Link>
+          </Head>
 
-        <CanvasWrapper ref={canvasWrapRef}>
-          <canvas ref={canvasRef} />
-        </CanvasWrapper>
-        <NotebookImageWrap>
-          <ImageNext src={heroCollageImg} alt="Macbook and iPhone" />
-        </NotebookImageWrap>
-      </StyledContainer>
-    </Root>
+          <CanvasWrapper ref={canvasWrapRef}>
+            <canvas ref={canvasRef} />
+          </CanvasWrapper>
+          <NotebookImageWrap>
+            <ImageNext src={heroCollageImg} alt="Macbook and iPhone" />
+          </NotebookImageWrap>
+        </StyledContainer>
+      </Root>
+    </div>
   );
 };
 

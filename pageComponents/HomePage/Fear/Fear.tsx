@@ -37,23 +37,22 @@ const Fear: FC = () => {
   const messagesBlockRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (innerWidth > 1024) {
-      const fearTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: 'top top',
-          end: () => '+=5000',
-          pin: true,
-          scrub: 0.3,
-          snap: {
-            snapTo: 'labels',
-            duration: { min: 0.2, max: 2 },
-            delay: 0.2,
-            ease: 'sine.out',
-          },
+    const fearTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: rootRef.current,
+        start: 'top top',
+        end: () => (innerWidth > 1024 ? '+=5000' : '+=3500'),
+        pin: true,
+        scrub: 0.3,
+        snap: {
+          snapTo: 'labels',
+          duration: { min: 0.2, max: 2 },
+          delay: 0.2,
+          ease: 'sine.out',
         },
-      });
-
+      },
+    });
+    if (innerWidth > 1024) {
       fearTimeline
         .set(cardItems.current[1], {
           y: getItemSizes(cardItems.current[0]).height + 24,
@@ -466,22 +465,6 @@ const Fear: FC = () => {
         )
         .addLabel('showFourthCard');
     } else {
-      const fearTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: 'top top',
-          end: () => '+=3500',
-          pin: true,
-          scrub: 0.3,
-          snap: {
-            snapTo: 'labels',
-            duration: { min: 0.2, max: 2 },
-            delay: 0.2,
-            ease: 'sine.out',
-          },
-        },
-      });
-
       fearTimeline
         .addLabel('start')
         .to(
@@ -889,6 +872,9 @@ const Fear: FC = () => {
         )
         .addLabel('showFourthCard');
     }
+    return () => {
+      fearTimeline.kill();
+    };
   }, []);
 
   return (

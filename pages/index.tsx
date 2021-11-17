@@ -15,7 +15,7 @@ import { getSelectorsByUserAgent } from 'react-device-detect';
 import { Algorithm } from '@/pageComponents/HomePage/Algorithm';
 import { Fear } from '@/pageComponents/HomePage/Fear';
 import { PartnerProgramm } from '@/pageComponents/HomePage/PartnerProgramm';
-
+import { Preloader } from '@/components/Preloader';
 
 interface HomePageProps {
   userAgent: { [key: string]: any };
@@ -23,6 +23,7 @@ interface HomePageProps {
 const Home: NextPage<HomePageProps> = ({ userAgent }) => {
   return (
     <MainLayout>
+      <Preloader />
       <Header userAgent={userAgent}>
         <HeaderBottom />
       </Header>

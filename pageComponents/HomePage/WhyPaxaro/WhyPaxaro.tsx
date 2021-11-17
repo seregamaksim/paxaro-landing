@@ -90,7 +90,6 @@ const WhyPaxaro: FC = () => {
         end: () => (innerWidth > 768 ? '+=3000' : '+=2000'),
         pin: true,
         scrub: 1,
-
         snap: {
           snapTo: 'labels',
           duration: { min: 0.2, max: 2 },
@@ -506,74 +505,81 @@ const WhyPaxaro: FC = () => {
         )
         .addLabel('showSecondDescriptionBlock');
     }
+    return () => {
+      console.log('unmount why paxaro');
+
+      WhyPaxaroTimeline.kill();
+    };
   }, []);
 
   return (
-    <Root ref={mainRef}>
-      <StyledContainer>
-        <SectionHead>
-          <StyledSectionLabel text={t('label')} />
-          <StyledSectionTitle text={t('title')} />
-        </SectionHead>
+    <div>
+      <Root ref={mainRef}>
+        <StyledContainer>
+          <SectionHead>
+            <StyledSectionLabel text={t('label')} />
+            <StyledSectionTitle text={t('title')} />
+          </SectionHead>
 
-        <GridWithArrowWrap ref={gridWithArrowRef}>
-          <GridWithArrow loading="eager" />
-        </GridWithArrowWrap>
-        <BitcoinWrap ref={bitcoinRef}>
-          <Bitcoin loading="eager" />
-        </BitcoinWrap>
-        <EthereumWrap ref={ethereumRef}>
-          <Ethereum loading="eager" />
-        </EthereumWrap>
-        <Coin1Wrap ref={coin1Ref}>
-          <Coin1 loading="eager" />
-        </Coin1Wrap>
-        <Coin2Wrap ref={coin2Ref}>
-          <Coin2 loading="eager" />
-        </Coin2Wrap>
-        <Coin3Wrap ref={coin3Ref}>
-          <Coin3 loading="eager" />
-        </Coin3Wrap>
+          <GridWithArrowWrap ref={gridWithArrowRef}>
+            <GridWithArrow loading="eager" />
+          </GridWithArrowWrap>
+          <BitcoinWrap ref={bitcoinRef}>
+            <Bitcoin loading="eager" />
+          </BitcoinWrap>
+          <EthereumWrap ref={ethereumRef}>
+            <Ethereum loading="eager" />
+          </EthereumWrap>
+          <Coin1Wrap ref={coin1Ref}>
+            <Coin1 loading="eager" />
+          </Coin1Wrap>
+          <Coin2Wrap ref={coin2Ref}>
+            <Coin2 loading="eager" />
+          </Coin2Wrap>
+          <Coin3Wrap ref={coin3Ref}>
+            <Coin3 loading="eager" />
+          </Coin3Wrap>
 
-        <Content>
-          <ContentTitle ref={whyPaxaroTitleRef}>
-            <Trans t={t} i18nKey="whyPaxaro">
-              <span>Почему именно</span>
-              <br /> Paxaro App?
-            </Trans>
-          </ContentTitle>
-          <DescriptionsWrapper ref={desciptionBlockRef}>
-            <DescriptionsCounter>
-              <DescriptionCounterNumbersWrap>
-                <DescriptionCounterText ref={counterFirstNumberRef}>
-                  1
-                </DescriptionCounterText>
-                <DescriptionCounterTextAbsolute ref={counterSecondNumberRef}>
-                  2
-                </DescriptionCounterTextAbsolute>
-              </DescriptionCounterNumbersWrap>
-              <DescriptionCounterLineWrap>
-                <span ref={counterLineBarRef}></span>
-              </DescriptionCounterLineWrap>
-            </DescriptionsCounter>
-            <DescriptionCounterTextsWrapper>
-              <DescriptionCounterTextWrap ref={descriptionTextWrapFirstRef}>
-                <DescriptionText>{t('description1.text1')}</DescriptionText>
-                <DescriptionText>{t('description1.text2')}</DescriptionText>
-              </DescriptionCounterTextWrap>
-              <DescriptionCounterTextWrapAbsolute
-                ref={descriptionTextWrapSecondRef}
-              >
-                <DescriptionText>{t('description2.text1')}</DescriptionText>
-              </DescriptionCounterTextWrapAbsolute>
-            </DescriptionCounterTextsWrapper>
-          </DescriptionsWrapper>
-          <SecondDescriptionBlockRef ref={secondDescriptionBlockRef}>
-            <DescriptionText>{t('description3.text1')}</DescriptionText>
-          </SecondDescriptionBlockRef>
-        </Content>
-      </StyledContainer>
-    </Root>
+          <Content>
+            <ContentTitle ref={whyPaxaroTitleRef}>
+              <Trans t={t} i18nKey="whyPaxaro">
+                <span>Почему именно</span>
+                <br /> Paxaro App?
+              </Trans>
+            </ContentTitle>
+            <DescriptionsWrapper ref={desciptionBlockRef}>
+              <DescriptionsCounter>
+                <DescriptionCounterNumbersWrap>
+                  <DescriptionCounterText ref={counterFirstNumberRef}>
+                    1
+                  </DescriptionCounterText>
+                  <DescriptionCounterTextAbsolute ref={counterSecondNumberRef}>
+                    2
+                  </DescriptionCounterTextAbsolute>
+                </DescriptionCounterNumbersWrap>
+                <DescriptionCounterLineWrap>
+                  <span ref={counterLineBarRef}></span>
+                </DescriptionCounterLineWrap>
+              </DescriptionsCounter>
+              <DescriptionCounterTextsWrapper>
+                <DescriptionCounterTextWrap ref={descriptionTextWrapFirstRef}>
+                  <DescriptionText>{t('description1.text1')}</DescriptionText>
+                  <DescriptionText>{t('description1.text2')}</DescriptionText>
+                </DescriptionCounterTextWrap>
+                <DescriptionCounterTextWrapAbsolute
+                  ref={descriptionTextWrapSecondRef}
+                >
+                  <DescriptionText>{t('description2.text1')}</DescriptionText>
+                </DescriptionCounterTextWrapAbsolute>
+              </DescriptionCounterTextsWrapper>
+            </DescriptionsWrapper>
+            <SecondDescriptionBlockRef ref={secondDescriptionBlockRef}>
+              <DescriptionText>{t('description3.text1')}</DescriptionText>
+            </SecondDescriptionBlockRef>
+          </Content>
+        </StyledContainer>
+      </Root>
+    </div>
   );
 };
 
