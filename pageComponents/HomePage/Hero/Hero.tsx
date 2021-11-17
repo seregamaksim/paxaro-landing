@@ -13,7 +13,7 @@ if (typeof window !== undefined) {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-function getCurrentFrame(index: any) {
+function getCurrentSrcFrame(index: number) {
   return `/notebook/notebook${index.toString().padStart(3, '0')}.png`;
 }
 
@@ -31,12 +31,14 @@ const Hero: FC = () => {
   };
 
   const renderCanvas = () => {
-    const context = canvasRef!.current!.getContext('2d');
-    context!.canvas.width = canvasWrapRef!.current!.offsetWidth;
-    context!.canvas.height = canvasWrapRef!.current!.offsetWidth * 0.5625;
+    const context = canvasRef.current!.getContext('2d');
+    const canvasWrapCurrent = canvasWrapRef.current!;
+    context!.canvas.width = canvasWrapCurrent.offsetWidth;
+    context!.canvas.height = canvasWrapCurrent.offsetWidth * 0.5625;
+
     const img = new Image();
-    const imgSrc = getCurrentFrame(0);
-    img.src = imgSrc;
+    img.src = getCurrentSrcFrame(0);
+
     img.onload = function () {
       renderImage(img);
     };
@@ -44,21 +46,24 @@ const Hero: FC = () => {
 
   function renderImage(image: HTMLImageElement) {
     const context = canvasRef!.current!.getContext('2d');
+    const canvasWrapCurrent = canvasWrapRef.current!;
+
     context?.drawImage(
       image,
       0,
       0,
-      canvasWrapRef!.current!.offsetWidth,
-      (canvasWrapRef!.current!.offsetWidth * image.height) / image.width
+      canvasWrapCurrent.offsetWidth,
+      (canvasWrapCurrent.offsetWidth * image.height) / image.width
     );
   }
 
   function preloadImages() {
     for (let i = 0; i <= frameCount; i++) {
       const img = new Image();
-      const imgSrc = getCurrentFrame(i);
-      img.src = imgSrc;
+      img.src = getCurrentSrcFrame(i);
+
       setImages((prevImages: HTMLImageElement[]) => [...prevImages, img]);
+
       if (i === frameCount) {
         setIsLoadImages(true);
       }
@@ -82,6 +87,8 @@ const Hero: FC = () => {
           trigger: rootRef.current,
           start: 'top top',
           end: () => `+=${innerHeight * 1.5}`,
+          markers: true,
+          refreshPriority: 1,
           scrub: true,
           pin: true,
         },
@@ -143,6 +150,10 @@ const Hero: FC = () => {
 
 const Root = styled.section`
   height: 90vh;
+
+  @media (min-width: 1024px) and (max-height: 700px) {
+    height: 100vh;
+  }
   @media (max-width: 1024px) {
     height: auto;
   }
