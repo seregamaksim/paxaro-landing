@@ -40,7 +40,25 @@ const PartnerProgramm: FC = () => {
     const sliderValueTarget = {
       value: sliderValue,
     };
+    const num1 = sliderValue + 1;
+    const num2 = Math.pow(sliderValue + 1, 2);
+    const num3 = Math.pow(sliderValue + 1, 3);
+    const num4 = Math.pow(sliderValue + 1, 4);
+    const num5 = Math.pow(sliderValue + 1, 5);
+    const sum1 = num1 * 239.8;
 
+    //Бонус за 2 уровень
+    var sum2 = num2 * 119.9;
+    //Бонус за 3 уровень
+    var sum3 = num3 * 83.93;
+    //Бонус за 4 уровень
+    var sum4 = num4 * 59.95;
+    //Бонус за 5 уровень
+    var sum5 = num5 * 35.97;
+    //Общая прибыль
+    var allSum = sum1 + sum2 + sum3 + sum4 + sum5;
+    console.log('sum1', sum1);
+    console.log('allSum', allSum);
     const partnerProgrammTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: rootRef.current,
