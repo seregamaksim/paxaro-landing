@@ -475,6 +475,9 @@ const DescriptionText = styled.p`
     font-size: 14px;
     line-height: 20px;
   }
+  @media (max-width: 400px) {
+    max-width: 300px;
+  }
 `;
 
 const InfoLinkWrapper = styled.div`

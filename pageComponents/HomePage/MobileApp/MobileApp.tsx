@@ -23,35 +23,21 @@ const MobileApp: FC = () => {
   const phoneImgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (innerWidth > 1024) {
-      gsap.from(phoneImgRef.current, {
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: '20% 90%',
-          end: '21% 90%',
-          toggleActions: 'play none reverse none',
-        },
-        opacity: 0,
-        yPercent: 50,
-        duration: 1,
-      });
-    } else {
-      gsap.from(phoneImgRef.current, {
-        scrollTrigger: {
-          trigger: phoneBlockRef.current,
-          start: '20% 70%',
-          end: '21% 70%',
-          toggleActions: 'play none reverse none',
-        },
-        opacity: 0,
-        yPercent: 50,
-        duration: 1,
-      });
-    }
+    gsap.from(phoneImgRef.current, {
+      scrollTrigger: {
+        trigger: innerWidth > 1024 ? rootRef.current : phoneBlockRef.current,
+        start: innerWidth > 1024 ? '20% 90%' : '20% 70%',
+        end: innerWidth > 1024 ? '21% 90%' : '21% 70%',
+        toggleActions: 'play none reverse none',
+      },
+      opacity: 0,
+      yPercent: 50,
+      duration: 1,
+    });
   }, []);
 
   return (
-    <Root ref={rootRef}>
+    <Root className="modile-app-section" ref={rootRef}>
       <StyledContainer>
         <PhoneBlock ref={phoneBlockRef}>
           <PhoneImgWrap ref={phoneImgRef}>

@@ -372,6 +372,15 @@ const PartnerProgramm: FC = () => {
           'moveToFourthLevel+=0.2'
         )
         .addLabel('moveToFivethLevel');
+      // .to(
+      //   '.modile-app-section',
+      //   {
+      //     y: -headRef!.current!.offsetHeight,
+      //     duration: 1,
+      //   },
+      //   'moveToFivethLevel'
+      // )
+      // .addLabel('finish');
     }
   }, []);
   return (
@@ -506,10 +515,10 @@ const PartnerProgramm: FC = () => {
 };
 
 const Root = styled.section`
-  height: 100vh;
+  /* height: 100vh;
   @media (max-width: 1024px) {
     height: auto;
-  }
+  } */
 `;
 
 const StyledContainer = styled(Container)`
@@ -583,6 +592,7 @@ const CalculatorWrapper = styled.div`
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
+    gap: 0;
   }
   @media (max-width: 500px) {
     padding: 40px 20px;
@@ -591,6 +601,10 @@ const CalculatorWrapper = styled.div`
 
 const CalculatorSection = styled.div`
   position: relative;
+  margin-bottom: 30px;
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 const CalculatorSectionTitle = styled.p`
