@@ -1,24 +1,24 @@
 {
-  "label": "Предложения",
-  "title": "Пакеты подписки",
-  "buy": "Купить",
+  "label": "Offers",
+  "title": "Subscription packages",
+  "buy": "Buy",
   "advanced": {
-    "item1": "Ребалансировка",
-    "item2": "Базовая стратегия ведения портфеля",
-    "item3": "5 реферальных уровней",
-    "item4": "Специальный раздел обучения Paxaro education",
+    "item1": "Rebalancing",
+    "item2": "Basic strategy to build a portfolio",
+    "item3": "5 referral levels",
+    "item4": "Special section of Paxaro education",
     "item5": "i30 - index",
     "item6": "i50 - index",
     "item7": "i100 - index",
-    "item8": "Кастомизированный index iCustom",
-    "item9": "Привилегия участия в новых продуктах платформы",
-    "item10": "Возможность настройки базовых индексов"
+    "item8": "Customized index iCustom",
+    "item9": "Privileged access to platform products",
+    "item10": "Set up basic indexes"
   },
   "prime": {
-    "item1": "Ребалансировка",
-    "item2": "Базовая стратегия ведения портфеля",
+    "item1": "Rebalancing",
+    "item2": "Basic strategy to build a portfolio",
     "item3": "i30 - index",
-    "item4": "3 реферальных уровня",
-    "item5": "Специальный раздел обучения Paxaro Education"
+    "item4": "3 referral levels",
+    "item5": "Special section of Paxaro education"
   }
 }

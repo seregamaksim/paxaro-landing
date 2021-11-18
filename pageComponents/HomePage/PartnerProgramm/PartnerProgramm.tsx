@@ -21,16 +21,38 @@ const PartnerProgramm: FC = () => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const sliderBarRef = useRef<HTMLDivElement>(null);
   const sliderHandleWrapRef = useRef<HTMLDivElement>(null);
-  const firstCheckboxGradientRef = useRef<HTMLDivElement>(null);
-  const secondCheckboxGradientRef = useRef<HTMLDivElement>(null);
-  const profitItemLevels = useRef<HTMLLIElement[]>([]);
-  const profitItemPeople = useRef<HTMLLIElement[]>([]);
   const calculatorRef = useRef<HTMLDivElement>(null);
-  const [bonusValue, setBonusValue] = useState(0);
-  const [totalBonusValue, setTotalBonusValue] = useState(0);
-  const [sliderValue, setSliderValue] = useState(0);
+  const firstLevelAmount = 239.8;
+  const secondLevelAmount = 119.9;
+  const thirdLevelAmount = 83.93;
+  const fourthtLevelAmount = 59.95;
+  const fivethLevelAmount = 35.97;
+
+  const [sliderValue, setSliderValue] = useState(2);
+  const [bonusValue, setBonusValue] = useState(getSums(sliderValue).sum1);
+  const [totalBonusValue, setTotalBonusValue] = useState(
+    getAllSum(sliderValue)
+  );
+
+  function getSums(factor: number): { [key: string]: number } {
+    return {
+      sum1: factor * firstLevelAmount,
+      sum2: Math.pow(factor, 2) * secondLevelAmount,
+      sum3: Math.pow(factor, 3) * thirdLevelAmount,
+      sum4: Math.pow(factor, 4) * fourthtLevelAmount,
+      sum5: Math.pow(factor, 5) * fivethLevelAmount,
+    };
+  }
+
+  function getAllSum(factor: number) {
+    const allSums = getSums(factor);
+    return (
+      allSums.sum1 + allSums.sum2 + allSums.sum3 + allSums.sum4 + allSums.sum5
+    );
+  }
 
   useEffect(() => {
+
     setTimeout(() => {
       const bonusTarget = {
         value: bonusValue,
@@ -401,6 +423,7 @@ const PartnerProgramm: FC = () => {
           .addLabel('finish');
       }
     }, 0);
+    
   }, []);
   return (
     <Root ref={rootRef}>
@@ -421,18 +444,14 @@ const PartnerProgramm: FC = () => {
                 <SubsriptionItem>
                   <SubsriptionCheckbox>
                     <SubsriptionCheckboxInnerOpacity />
-                    <SubsriptionCheckboxInnerGreen
-                      ref={firstCheckboxGradientRef}
-                    />
+                    <SubsriptionCheckboxInnerGreen />
                   </SubsriptionCheckbox>
                   <CalculatorText>Prime</CalculatorText>
                 </SubsriptionItem>
                 <SubsriptionItem>
                   <SubsriptionCheckbox>
                     <SubsriptionCheckboxInnerOpacity />
-                    <SubsriptionCheckboxInnerGreen
-                      ref={secondCheckboxGradientRef}
-                    />
+                    <SubsriptionCheckboxInnerGreen />
                   </SubsriptionCheckbox>
                   <CalculatorText>Advanced</CalculatorText>
                 </SubsriptionItem>
@@ -454,18 +473,10 @@ const PartnerProgramm: FC = () => {
                   <ProfitItem>
                     <CalculatorText>3</CalculatorText>
                   </ProfitItem>
-                  <ProfitItem
-                    ref={(item: HTMLLIElement) => {
-                      profitItemLevels.current[0] = item;
-                    }}
-                  >
+                  <ProfitItem>
                     <CalculatorText>4</CalculatorText>
                   </ProfitItem>
-                  <ProfitItem
-                    ref={(item: HTMLLIElement) => {
-                      profitItemLevels.current[1] = item;
-                    }}
-                  >
+                  <ProfitItem>
                     <CalculatorText>5</CalculatorText>
                   </ProfitItem>
                 </ProfitList>
@@ -482,18 +493,10 @@ const PartnerProgramm: FC = () => {
                   <ProfitItemWithoutBorder>
                     <CalculatorText>7%</CalculatorText>
                   </ProfitItemWithoutBorder>
-                  <ProfitItemWithoutBorder
-                    ref={(item: HTMLLIElement) => {
-                      profitItemPeople.current[0] = item;
-                    }}
-                  >
+                  <ProfitItemWithoutBorder>
                     <CalculatorText>5%</CalculatorText>
                   </ProfitItemWithoutBorder>
-                  <ProfitItemWithoutBorder
-                    ref={(item: HTMLLIElement) => {
-                      profitItemPeople.current[1] = item;
-                    }}
-                  >
+                  <ProfitItemWithoutBorder>
                     <CalculatorText>3%</CalculatorText>
                   </ProfitItemWithoutBorder>
                 </ProfitList>
@@ -504,7 +507,7 @@ const PartnerProgramm: FC = () => {
                 {t('calculator.countFriend')}
               </CalculatorSectionTitleMargin>
               <SliderWrapper>
-                <SliderBorders>0</SliderBorders>
+                <SliderBorders>2</SliderBorders>
                 <StyledSliderWrapper>
                   <SliderHandleWrap ref={sliderHandleWrapRef}>
                     <SliderCount>{sliderValue}</SliderCount>
@@ -721,35 +724,6 @@ const SubscriptionList = styled.ul`
   align-items: center;
 `;
 
-const SubsriptionItem = styled.li`
-  display: flex;
-  align-items: center;
-  margin-right: 100px;
-  &:last-child {
-    margin-right: 0;
-  }
-  @media (max-width: 1024px) {
-    margin-right: 50px;
-  }
-  @media (max-width: 374px) {
-    margin-right: 30px;
-  }
-`;
-
-const SubsriptionCheckbox = styled.div`
-  width: 30px;
-  height: 30px;
-  border: 1px solid var(--green);
-  position: relative;
-  margin-right: 14px;
-  border-radius: 50%;
-  @media (max-width: 900px) {
-    width: 24px;
-    height: 24px;
-    margin-right: 12px;
-  }
-`;
-
 const SubsriptionCheckboxInner = styled.div`
   position: absolute;
   width: 24px;
@@ -768,9 +742,45 @@ const SubsriptionCheckboxInner = styled.div`
 const SubsriptionCheckboxInnerOpacity = styled(SubsriptionCheckboxInner)`
   background-color: rgba(255, 255, 255, 0.2);
 `;
+
 const SubsriptionCheckboxInnerGreen = styled(SubsriptionCheckboxInner)`
   background-image: var(--greenGradient);
   z-index: 2;
+`;
+
+const SubsriptionCheckbox = styled.div`
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--green);
+  position: relative;
+  margin-right: 14px;
+  border-radius: 50%;
+
+  @media (max-width: 900px) {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+  }
+`;
+
+const SubsriptionItem = styled.li`
+  display: flex;
+  align-items: center;
+  margin-right: 100px;
+  &:first-child {
+    ${SubsriptionCheckboxInnerGreen} {
+      opacity: 0;
+    }
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+  @media (max-width: 1024px) {
+    margin-right: 50px;
+  }
+  @media (max-width: 374px) {
+    margin-right: 30px;
+  }
 `;
 
 const ProfitTitle = styled(CalculatorText)`
@@ -923,6 +933,7 @@ const SliderBar = styled.div`
   height: 100%;
   background-color: var(--green);
   transform-origin: left;
+  transform: scaleX(0);
   will-change: transform;
 `;
 
