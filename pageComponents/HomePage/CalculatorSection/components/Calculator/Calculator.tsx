@@ -109,7 +109,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
       });
       axios({
         method: 'post',
-        url: 'https://web-api-test.kadex.io//backtest/chart',
+        url: 'https://web-api-test.kadex.io/backtest/chart',
         data: values,
       }).then(({ data }: any) => {
         console.log('data', data);
@@ -118,7 +118,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
       console.log('submit', values);
       axios({
         method: 'post',
-        url: 'https://web-api-test.kadex.io//backtest/chart',
+        url: 'https://web-api-test.kadex.io/backtest/chart',
         data: values,
       }).then(({ data }: any) => {
         console.log('data', data);
@@ -146,8 +146,8 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
     );
   };
 
-  function onChange(e: any, type: string) {
-    setCashValue(marks[type][e]);
+  function onChange(e: number, type: string) {
+    setCashValue(Number(marks[type][e]));
   }
 
   function getInitialValues() {
@@ -167,6 +167,17 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
 
   useEffect(() => {
     setInitiaFormlValue(getInitialValues());
+    axios({
+      method: 'post',
+      url: 'https://web-api-test.kadex.io/backtest/chart',
+      data: {
+        title: 'i30',
+        period: 30,
+        cash: 1000,
+      },
+    }).then(({ data }: any) => {
+      console.log('data', data);
+    });
   }, []);
 
   return (
