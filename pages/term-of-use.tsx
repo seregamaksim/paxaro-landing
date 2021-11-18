@@ -3,19 +3,21 @@ import MainLayout from '@/layouts/MainLayout';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Header } from '@/components/Header';
 import HeaderBottom from '@/pageComponents/OtherPage/HeaderBottom/HeaderBottom';
-
+import { Content } from '@/pageComponents/TermOfUse/Content';
 import { getSelectorsByUserAgent } from 'react-device-detect';
 
-interface HomePageProps {
+interface TermOfUsePageProps {
   userAgent: { [key: string]: any };
 }
-const Home: NextPage<HomePageProps> = ({ userAgent }) => {
+const TermOfUse: NextPage<TermOfUsePageProps> = ({ userAgent }) => {
   return (
     <MainLayout>
       <Header userAgent={userAgent}>
         <HeaderBottom />
       </Header>
-      <main></main>
+      <main>
+        <Content />
+      </main>
     </MainLayout>
   );
 };
@@ -30,9 +32,9 @@ export const getServerSideProps = async ({ locale, req }: any) => ({
       'header',
       'footer',
       'cookies',
-      'agreement',
+      'term-of-use',
     ])),
   },
 });
 
-export default Home;
+export default TermOfUse;

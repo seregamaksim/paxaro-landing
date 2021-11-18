@@ -10,7 +10,7 @@ interface ISectionContent {
 }
 
 const Content: FC = () => {
-  const { t } = useTranslation('privacyPolicy');
+  const { t } = useTranslation('term-of-use');
   const content: ISectionContent[] = t('content', { returnObjects: true });
 
   return (

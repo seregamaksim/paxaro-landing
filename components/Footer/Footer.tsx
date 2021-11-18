@@ -150,7 +150,7 @@ const Footer: FC = () => {
           <FooterBottomWrapper>
             <DocumentsList>
               <DocumentItem>
-                <ActiveLink href="/agreement">
+                <ActiveLink href="/term-of-use">
                   <DocumentLink>{t('term', { ns: 'footer' })}</DocumentLink>
                 </ActiveLink>
               </DocumentItem>

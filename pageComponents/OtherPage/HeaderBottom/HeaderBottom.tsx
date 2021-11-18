@@ -8,7 +8,7 @@ const HeaderBottom: FC = () => {
   return (
     <HeaderBottomMenu>
       <HeaderBottomMenuItem>
-        <ActiveLink href="/agreement" activeClassName="active">
+        <ActiveLink href="/term-of-use" activeClassName="active">
           <HeaderBottomMenuLink>{t('term')}</HeaderBottomMenuLink>
         </ActiveLink>
       </HeaderBottomMenuItem>
