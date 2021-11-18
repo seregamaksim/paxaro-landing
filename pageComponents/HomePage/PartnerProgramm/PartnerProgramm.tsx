@@ -32,8 +32,6 @@ const PartnerProgramm: FC = () => {
   const [sliderValue, setSliderValue] = useState(0);
 
   useEffect(() => {
-    console.log('mount partner programm');
-
     const bonusTarget = {
       value: bonusValue,
     };
@@ -403,7 +401,6 @@ const PartnerProgramm: FC = () => {
         .addLabel('finish');
     }
     return () => {
-      console.log('unmount partner programm');
       partnerProgrammTimeline.kill();
     };
   }, []);

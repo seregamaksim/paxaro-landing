@@ -124,8 +124,6 @@ const Hero: FC = () => {
         .addLabel('finish');
     }
     return () => {
-      console.log('unmount hero');
-
       heroTimeline.kill();
     };
   }, [isLoadImages]);

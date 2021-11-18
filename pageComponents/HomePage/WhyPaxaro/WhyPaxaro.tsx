@@ -506,8 +506,6 @@ const WhyPaxaro: FC = () => {
         .addLabel('showSecondDescriptionBlock');
     }
     return () => {
-      console.log('unmount why paxaro');
-
       WhyPaxaroTimeline.kill();
     };
   }, []);
