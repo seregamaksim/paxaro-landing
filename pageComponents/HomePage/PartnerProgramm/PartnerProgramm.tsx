@@ -21,16 +21,17 @@ const PartnerProgramm: FC = () => {
   const sliderBarRef = useRef<HTMLDivElement>(null);
   const sliderHandleWrapRef = useRef<HTMLDivElement>(null);
   const calculatorRef = useRef<HTMLDivElement>(null);
-  const [sliderValue, setSliderValue] = useState(2);
-  const [bonusValue, setBonusValue] = useState(getSums(sliderValue).sum1);
-  const [totalBonusValue, setTotalBonusValue] = useState(
-    getAllSum(sliderValue)
-  );
   const firstLevelAmount = 239.8;
   const secondLevelAmount = 119.9;
   const thirdLevelAmount = 83.93;
   const fourthtLevelAmount = 59.95;
   const fivethLevelAmount = 35.97;
+
+  const [sliderValue, setSliderValue] = useState(2);
+  const [bonusValue, setBonusValue] = useState(getSums(sliderValue).sum1);
+  const [totalBonusValue, setTotalBonusValue] = useState(
+    getAllSum(sliderValue)
+  );
 
   function getSums(factor: number): { [key: string]: number } {
     return {
