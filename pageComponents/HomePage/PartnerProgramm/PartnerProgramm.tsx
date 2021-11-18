@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import currency from 'currency.js';
-import { useIsMounted } from '@/hooks/useIsMounted';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -21,14 +20,34 @@ const PartnerProgramm: FC = () => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const sliderBarRef = useRef<HTMLDivElement>(null);
   const sliderHandleWrapRef = useRef<HTMLDivElement>(null);
-  const firstCheckboxGradientRef = useRef<HTMLDivElement>(null);
-  const secondCheckboxGradientRef = useRef<HTMLDivElement>(null);
-  const profitItemLevels = useRef<HTMLLIElement[]>([]);
-  const profitItemPeople = useRef<HTMLLIElement[]>([]);
   const calculatorRef = useRef<HTMLDivElement>(null);
-  const [bonusValue, setBonusValue] = useState(0);
-  const [totalBonusValue, setTotalBonusValue] = useState(0);
-  const [sliderValue, setSliderValue] = useState(0);
+  const [sliderValue, setSliderValue] = useState(2);
+  const [bonusValue, setBonusValue] = useState(getSums(sliderValue).sum1);
+  const [totalBonusValue, setTotalBonusValue] = useState(
+    getAllSum(sliderValue)
+  );
+  const firstLevelAmount = 239.8;
+  const secondLevelAmount = 119.9;
+  const thirdLevelAmount = 83.93;
+  const fourthtLevelAmount = 59.95;
+  const fivethLevelAmount = 35.97;
+
+  function getSums(factor: number): { [key: string]: number } {
+    return {
+      sum1: factor * firstLevelAmount,
+      sum2: Math.pow(factor, 2) * secondLevelAmount,
+      sum3: Math.pow(factor, 3) * thirdLevelAmount,
+      sum4: Math.pow(factor, 4) * fourthtLevelAmount,
+      sum5: Math.pow(factor, 5) * fivethLevelAmount,
+    };
+  }
+
+  function getAllSum(factor: number) {
+    const allSums = getSums(factor);
+    return (
+      allSums.sum1 + allSums.sum2 + allSums.sum3 + allSums.sum4 + allSums.sum5
+    );
+  }
 
   useEffect(() => {
     const bonusTarget = {
@@ -40,17 +59,16 @@ const PartnerProgramm: FC = () => {
     const sliderValueTarget = {
       value: sliderValue,
     };
-
     const partnerProgrammTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: rootRef.current,
         start: 'top top',
-        end: () => (innerWidth > 768 ? '+=3000' : '+=2000'),
+        end: () => (innerWidth > 768 ? '+=2000' : '+=1500'),
         pin: true,
         scrub: 0,
         snap: {
           snapTo: 'labels',
-          duration: { min: 0.2, max: 2 },
+          duration: { min: 0.2, max: 1 },
           delay: 0.2,
           ease: 'power3.out',
         },
@@ -61,6 +79,7 @@ const PartnerProgramm: FC = () => {
         },
       },
     });
+
     if (innerWidth > 768) {
       partnerProgrammTimeline
         .addLabel('start')
@@ -69,7 +88,7 @@ const PartnerProgramm: FC = () => {
           bonusTarget,
           {
             duration: 1,
-            value: 1236,
+            value: getSums(3).sum1,
             roundProps: 'value',
           },
           'start+=0.2'
@@ -78,7 +97,7 @@ const PartnerProgramm: FC = () => {
           totalBonusTarget,
           {
             duration: 1,
-            value: 16456,
+            value: getAllSum(3),
             roundProps: 'value',
           },
           'start+=0.2'
@@ -86,10 +105,99 @@ const PartnerProgramm: FC = () => {
         .to(
           sliderHandleWrapRef.current,
           {
-            x: sliderRef!.current!.offsetWidth,
+            x: sliderRef!.current!.offsetWidth / 3,
             duration: 1,
           },
           'start+=0.2'
+        )
+        .to(
+          sliderValueTarget,
+          {
+            duration: 1,
+            value: 3,
+            roundProps: 'value',
+          },
+          'start+=0.2'
+        )
+        .to(
+          sliderBarRef.current,
+          {
+            scaleX: 0.33,
+            duration: 1,
+          },
+          'start+=0.2'
+        )
+        .addLabel('moveToThirdLevel')
+        .to(
+          bonusTarget,
+          {
+            duration: 1,
+            value: getSums(4).sum1,
+            roundProps: 'value',
+          },
+          'moveToThirdLevel+=0.2'
+        )
+        .to(
+          totalBonusTarget,
+          {
+            duration: 1,
+            value: getAllSum(4),
+            roundProps: 'value',
+          },
+          'moveToThirdLevel+=0.2'
+        )
+        .to(
+          sliderHandleWrapRef.current,
+          {
+            x: sliderRef!.current!.offsetWidth / 1.5,
+            duration: 1,
+          },
+          'moveToThirdLevel+=0.2'
+        )
+        .to(
+          sliderValueTarget,
+          {
+            duration: 1,
+            value: 4,
+            roundProps: 'value',
+          },
+          'moveToThirdLevel+=0.2'
+        )
+        .to(
+          sliderBarRef.current,
+          {
+            scaleX: 0.66,
+            duration: 1,
+          },
+          'moveToThirdLevel+=0.2'
+        )
+        .addLabel('moveToFourthLevel')
+
+        .to(
+          bonusTarget,
+          {
+            duration: 1,
+            value: getSums(5).sum1,
+            roundProps: 'value',
+          },
+          'moveToFourthLevel+=0.2'
+        )
+        .to(
+          totalBonusTarget,
+          {
+            duration: 1,
+            value: getAllSum(5),
+            roundProps: 'value',
+          },
+          'moveToFourthLevel+=0.2'
+        )
+        .to(
+          sliderHandleWrapRef.current,
+          {
+            x: sliderRef!.current!.offsetWidth,
+            duration: 1,
+          },
+          'moveToFourthLevel+=0.2'
         )
         .to(
           sliderValueTarget,
@@ -98,119 +206,7 @@ const PartnerProgramm: FC = () => {
             value: 5,
             roundProps: 'value',
           },
-          'start+=0.2'
-        )
-        .from(
-          sliderBarRef.current,
-          {
-            scaleX: 0,
-            duration: 1,
-          },
-          'start+=0.2'
-        )
-        .addLabel('firstMoveToFinish')
-        .to(
-          bonusTarget,
-          {
-            duration: 0.1,
-            value: 0,
-            roundProps: 'value',
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          totalBonusTarget,
-          {
-            duration: 0.1,
-            value: 0,
-            roundProps: 'value',
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          sliderHandleWrapRef.current,
-          {
-            x: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          sliderValueTarget,
-          {
-            duration: 0.1,
-            value: 0,
-            roundProps: 'value',
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          sliderBarRef.current,
-          {
-            scaleX: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .from(
-          [...profitItemLevels.current, ...profitItemPeople.current],
-          {
-            opacity: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          firstCheckboxGradientRef.current,
-          {
-            opacity: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .from(
-          secondCheckboxGradientRef.current,
-          {
-            opacity: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .addLabel('firstResetSlider')
-        .to(
-          bonusTarget,
-          {
-            duration: 1,
-            value: 1236 * 1.5,
-            roundProps: 'value',
-          },
-          'firstResetSlider'
-        )
-        .to(
-          totalBonusTarget,
-          {
-            duration: 1,
-            value: 16456 * 1.5,
-            roundProps: 'value',
-          },
-          'firstResetSlider'
-        )
-        .to(
-          sliderHandleWrapRef.current,
-          {
-            x: sliderRef!.current!.offsetWidth,
-            duration: 1,
-          },
-          'firstResetSlider'
-        )
-        .to(
-          sliderValueTarget,
-          {
-            duration: 1,
-            value: 5,
-            roundProps: 'value',
-          },
-          'firstResetSlider'
+          'moveToFourthLevel+=0.2'
         )
         .to(
           sliderBarRef.current,
@@ -218,9 +214,9 @@ const PartnerProgramm: FC = () => {
             scaleX: 1,
             duration: 1,
           },
-          'firstResetSlider'
+          'moveToFourthLevel+=0.2'
         )
-        .addLabel('finish');
+        .addLabel('moveToFivethLevel');
     } else {
       partnerProgrammTimeline
         .addLabel('start')
@@ -246,19 +242,108 @@ const PartnerProgramm: FC = () => {
           bonusTarget,
           {
             duration: 1,
-            value: 1236,
+            value: getSums(3).sum1,
             roundProps: 'value',
           },
-          'finishShowCalculator'
+          'finishShowCalculator+=0.2'
         )
         .to(
           totalBonusTarget,
           {
             duration: 1,
-            value: 16456,
+            value: getAllSum(3),
             roundProps: 'value',
           },
-          'finishShowCalculator'
+          'finishShowCalculator+=0.2'
+        )
+        .to(
+          sliderHandleWrapRef.current,
+          {
+            x: sliderRef!.current!.offsetWidth / 3,
+            duration: 1,
+          },
+          'finishShowCalculator+=0.2'
+        )
+        .to(
+          sliderValueTarget,
+          {
+            duration: 1,
+            value: 3,
+            roundProps: 'value',
+          },
+          'finishShowCalculator+=0.2'
+        )
+        .to(
+          sliderBarRef.current,
+          {
+            scaleX: 0.33,
+            duration: 1,
+          },
+          'finishShowCalculator+=0.2'
+        )
+        .addLabel('moveToThirdLevel')
+        .to(
+          bonusTarget,
+          {
+            duration: 1,
+            value: getSums(4).sum1,
+            roundProps: 'value',
+          },
+          'moveToThirdLevel+=0.2'
+        )
+        .to(
+          totalBonusTarget,
+          {
+            duration: 1,
+            value: getAllSum(4),
+            roundProps: 'value',
+          },
+          'moveToThirdLevel+=0.2'
+        )
+        .to(
+          sliderHandleWrapRef.current,
+          {
+            x: sliderRef!.current!.offsetWidth / 1.5,
+            duration: 1,
+          },
+          'moveToThirdLevel+=0.2'
+        )
+        .to(
+          sliderValueTarget,
+          {
+            duration: 1,
+            value: 4,
+            roundProps: 'value',
+          },
+          'moveToThirdLevel+=0.2'
+        )
+        .to(
+          sliderBarRef.current,
+          {
+            scaleX: 0.66,
+            duration: 1,
+          },
+          'moveToThirdLevel+=0.2'
+        )
+        .addLabel('moveToFourthLevel')
+
+        .to(
+          bonusTarget,
+          {
+            duration: 1,
+            value: getSums(5).sum1,
+            roundProps: 'value',
+          },
+          'moveToFourthLevel+=0.2'
+        )
+        .to(
+          totalBonusTarget,
+          {
+            duration: 1,
+            value: getAllSum(5),
+            roundProps: 'value',
+          },
+          'moveToFourthLevel+=0.2'
         )
         .to(
           sliderHandleWrapRef.current,
@@ -266,7 +351,7 @@ const PartnerProgramm: FC = () => {
             x: sliderRef!.current!.offsetWidth,
             duration: 1,
           },
-          'finishShowCalculator'
+          'moveToFourthLevel+=0.2'
         )
         .to(
           sliderValueTarget,
@@ -275,119 +360,7 @@ const PartnerProgramm: FC = () => {
             value: 5,
             roundProps: 'value',
           },
-          'finishShowCalculator'
-        )
-        .from(
-          sliderBarRef.current,
-          {
-            scaleX: 0,
-            duration: 1,
-          },
-          'finishShowCalculator'
-        )
-        .addLabel('firstMoveToFinish')
-        .to(
-          bonusTarget,
-          {
-            duration: 0.1,
-            value: 0,
-            roundProps: 'value',
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          totalBonusTarget,
-          {
-            duration: 0.1,
-            value: 0,
-            roundProps: 'value',
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          sliderHandleWrapRef.current,
-          {
-            x: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          sliderValueTarget,
-          {
-            duration: 0.1,
-            value: 0,
-            roundProps: 'value',
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          sliderBarRef.current,
-          {
-            scaleX: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .from(
-          [...profitItemLevels.current, ...profitItemPeople.current],
-          {
-            opacity: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          firstCheckboxGradientRef.current,
-          {
-            opacity: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .from(
-          secondCheckboxGradientRef.current,
-          {
-            opacity: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .addLabel('firstResetSlider')
-        .to(
-          bonusTarget,
-          {
-            duration: 1,
-            value: 1236 * 1.5,
-            roundProps: 'value',
-          },
-          'firstResetSlider'
-        )
-        .to(
-          totalBonusTarget,
-          {
-            duration: 1,
-            value: 16456 * 1.5,
-            roundProps: 'value',
-          },
-          'firstResetSlider'
-        )
-        .to(
-          sliderHandleWrapRef.current,
-          {
-            x: sliderRef!.current!.offsetWidth,
-            duration: 1,
-          },
-          'firstResetSlider'
-        )
-        .to(
-          sliderValueTarget,
-          {
-            duration: 1,
-            value: 5,
-            roundProps: 'value',
-          },
-          'firstResetSlider'
+          'moveToFourthLevel+=0.2'
         )
         .to(
           sliderBarRef.current,
@@ -395,9 +368,9 @@ const PartnerProgramm: FC = () => {
             scaleX: 1,
             duration: 1,
           },
-          'firstResetSlider'
+          'moveToFourthLevel+=0.2'
         )
-        .addLabel('finish');
+        .addLabel('moveToFivethLevel');
     }
   }, []);
   return (
@@ -419,18 +392,14 @@ const PartnerProgramm: FC = () => {
                 <SubsriptionItem>
                   <SubsriptionCheckbox>
                     <SubsriptionCheckboxInnerOpacity />
-                    <SubsriptionCheckboxInnerGreen
-                      ref={firstCheckboxGradientRef}
-                    />
+                    <SubsriptionCheckboxInnerGreen />
                   </SubsriptionCheckbox>
                   <CalculatorText>Prime</CalculatorText>
                 </SubsriptionItem>
                 <SubsriptionItem>
                   <SubsriptionCheckbox>
                     <SubsriptionCheckboxInnerOpacity />
-                    <SubsriptionCheckboxInnerGreen
-                      ref={secondCheckboxGradientRef}
-                    />
+                    <SubsriptionCheckboxInnerGreen />
                   </SubsriptionCheckbox>
                   <CalculatorText>Advanced</CalculatorText>
                 </SubsriptionItem>
@@ -452,18 +421,10 @@ const PartnerProgramm: FC = () => {
                   <ProfitItem>
                     <CalculatorText>3</CalculatorText>
                   </ProfitItem>
-                  <ProfitItem
-                    ref={(item: HTMLLIElement) => {
-                      profitItemLevels.current[0] = item;
-                    }}
-                  >
+                  <ProfitItem>
                     <CalculatorText>4</CalculatorText>
                   </ProfitItem>
-                  <ProfitItem
-                    ref={(item: HTMLLIElement) => {
-                      profitItemLevels.current[1] = item;
-                    }}
-                  >
+                  <ProfitItem>
                     <CalculatorText>5</CalculatorText>
                   </ProfitItem>
                 </ProfitList>
@@ -480,18 +441,10 @@ const PartnerProgramm: FC = () => {
                   <ProfitItemWithoutBorder>
                     <CalculatorText>7%</CalculatorText>
                   </ProfitItemWithoutBorder>
-                  <ProfitItemWithoutBorder
-                    ref={(item: HTMLLIElement) => {
-                      profitItemPeople.current[0] = item;
-                    }}
-                  >
+                  <ProfitItemWithoutBorder>
                     <CalculatorText>5%</CalculatorText>
                   </ProfitItemWithoutBorder>
-                  <ProfitItemWithoutBorder
-                    ref={(item: HTMLLIElement) => {
-                      profitItemPeople.current[1] = item;
-                    }}
-                  >
+                  <ProfitItemWithoutBorder>
                     <CalculatorText>3%</CalculatorText>
                   </ProfitItemWithoutBorder>
                 </ProfitList>
@@ -502,7 +455,7 @@ const PartnerProgramm: FC = () => {
                 {t('calculator.countFriend')}
               </CalculatorSectionTitleMargin>
               <SliderWrapper>
-                <SliderBorders>0</SliderBorders>
+                <SliderBorders>2</SliderBorders>
                 <StyledSliderWrapper>
                   <SliderHandleWrap ref={sliderHandleWrapRef}>
                     <SliderCount>{sliderValue}</SliderCount>
@@ -719,35 +672,6 @@ const SubscriptionList = styled.ul`
   align-items: center;
 `;
 
-const SubsriptionItem = styled.li`
-  display: flex;
-  align-items: center;
-  margin-right: 100px;
-  &:last-child {
-    margin-right: 0;
-  }
-  @media (max-width: 1024px) {
-    margin-right: 50px;
-  }
-  @media (max-width: 374px) {
-    margin-right: 30px;
-  }
-`;
-
-const SubsriptionCheckbox = styled.div`
-  width: 30px;
-  height: 30px;
-  border: 1px solid var(--green);
-  position: relative;
-  margin-right: 14px;
-  border-radius: 50%;
-  @media (max-width: 900px) {
-    width: 24px;
-    height: 24px;
-    margin-right: 12px;
-  }
-`;
-
 const SubsriptionCheckboxInner = styled.div`
   position: absolute;
   width: 24px;
@@ -766,9 +690,45 @@ const SubsriptionCheckboxInner = styled.div`
 const SubsriptionCheckboxInnerOpacity = styled(SubsriptionCheckboxInner)`
   background-color: rgba(255, 255, 255, 0.2);
 `;
+
 const SubsriptionCheckboxInnerGreen = styled(SubsriptionCheckboxInner)`
   background-image: var(--greenGradient);
   z-index: 2;
+`;
+
+const SubsriptionCheckbox = styled.div`
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--green);
+  position: relative;
+  margin-right: 14px;
+  border-radius: 50%;
+
+  @media (max-width: 900px) {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+  }
+`;
+
+const SubsriptionItem = styled.li`
+  display: flex;
+  align-items: center;
+  margin-right: 100px;
+  &:first-child {
+    ${SubsriptionCheckboxInnerGreen} {
+      opacity: 0;
+    }
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+  @media (max-width: 1024px) {
+    margin-right: 50px;
+  }
+  @media (max-width: 374px) {
+    margin-right: 30px;
+  }
 `;
 
 const ProfitTitle = styled(CalculatorText)`
@@ -921,6 +881,7 @@ const SliderBar = styled.div`
   height: 100%;
   background-color: var(--green);
   transform-origin: left;
+  transform: scaleX(0);
   will-change: transform;
 `;
 

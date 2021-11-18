@@ -1,20 +1,20 @@
 {
-  "label": "Investments are not scary",
-  "title": "Don't be afraid to start",
+  "label": "It is easy to make investments",
+  "title": "Don`t be afraid to start",
   "card1": {
-    "title": "What if I have no trading knowledge and investment experience?",
-    "description": "They are not needed. Our algorithm automates most of the processes. You use a ready-made solution, making a profit. In doing so, you learn new things and become an expert yourself. A team of experienced professionals will help you deal with complex issues and will gladly share all the knowledge."
+    "title": "What if I don`t have any trading knowledge and investment experience?",
+    "description": "You don`t need it. Our algorithm automates most of processes. You use the ready-made solution, while earning the profit. You will learn new things and become an expert. The team of the experiences specialists helps you to deal with complex issues and share its knowledge."
   },
   "card2": {
-    "title": "Will I be able to start with little money?",
-    "description": "Yes. We will calculate the most profitable strategies based on your capabilities. This will allow you to make the most of your available budget."
+    "title": "Can I start having a small amount of money?",
+    "description": "Yes. We design the most beneficial strategies depending on your opportunities. It enables using the current budget in the most efficient manner."
   },
   "card3": {
     "title": "How big is the risk that I will lose everything?",
-    "description": "There is always risk in investments. We only offer a tool that allows you to invest conveniently, quickly and with high returns. This tool has been tested and shows its effectiveness, including in our portfolios. But all decisions about your investments are made only by you, and the responsibility for them also lies with you."
+    "description": "There is always a risk in investing. We only offer a tool that allows you to invest conveniently, quickly and with high returns. This tool has been tested and shows its effectiveness, including on our portfolios. But only you make all decisions about your investments and be responsible for it."
   },
   "card4": {
-    "title": "Does it take a long time to invest?",
-    "description": "No. You do not have to quit your job and monitor quotes all day. Investments are profitable even if you do nothing."
+    "title": "Does making investments take a lot of time?",
+    "description": "No. You can have a full-time job without tracking quotations. Investments make profit, even if you do nothing."
   }
 }
