@@ -31,182 +31,181 @@ const Education: FC = () => {
   const mobileVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const educationTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: rootRef.current,
-        start: 'top top',
-        end: () => (innerWidth > 900 ? '+=2000' : '+=500'),
-        pin: true,
-        scrub: 1,
-        snap: {
-          snapTo: 'labels',
-          duration: { min: 0.2, max: 2 },
-          delay: 0.2,
-          ease: 'sine.out',
-        },
-        onEnter: () => {
-          if (innerWidth > 900) {
-            videoRef?.current?.play();
-          } else {
-            mobileVideoRef?.current?.play();
-          }
-        },
-      },
-    });
-    if (innerWidth > 900) {
-      educationTimeline
-        .addLabel('start')
-        .to(
-          descriptionFirstRef.current,
-          {
-            opacity: 0,
-            yPercent: -50,
-            duration: 0.5,
+    setTimeout(() => {
+      const educationTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: rootRef.current,
+          start: 'top top',
+          end: () => (innerWidth > 900 ? '+=2000' : '+=500'),
+          pin: true,
+          scrub: 1,
+          snap: {
+            snapTo: 'labels',
+            duration: { min: 0.2, max: 2 },
+            delay: 0.2,
+            ease: 'sine.out',
           },
-
-          'start'
-        )
-        .addLabel('finishHideFirstDescription')
-        .to(
-          descriptionSecondRef.current,
-          {
-            opacity: 1,
-            yPercent: -100,
-            duration: 0.5,
+          onEnter: () => {
+            if (innerWidth > 900) {
+              videoRef?.current?.play();
+            } else {
+              mobileVideoRef?.current?.play();
+            }
           },
-          '<'
-        )
-        .addLabel('finishChangeDescription')
-        .to(
-          videoRef.current,
-          {
-            yPercent: -100,
-            duration: 0.5,
-            opacity: 0,
-            onStart: () => {
-              videoRef.current?.pause();
+        },
+      });
+      if (innerWidth > 900) {
+        educationTimeline
+          .addLabel('start')
+          .to(
+            descriptionFirstRef.current,
+            {
+              opacity: 0,
+              yPercent: -50,
+              duration: 0.5,
             },
-          },
-          'finishChangeDescription'
-        )
-        .to(
-          infoLinkWrapperRef.current,
-          {
-            y: 0,
-            duration: 0.5,
-          },
-          'finishChangeDescription'
-        )
-        .set(notebookWrapperRef.current, { overflow: 'initial' })
-        .addLabel('finishChangeInfoLinkPosition')
-        .to(
-          descriptionWrapperRef.current,
-          {
-            xPercent: 100,
-            opacity: 0,
-            duration: 0.5,
-          },
-          'finishChangeInfoLinkPosition'
-        )
-        .to(
-          notebookWrapperRef.current,
-          {
-            x:
-              contentRef!.current!.offsetWidth / 2 -
-              notebookWrapperRef!.current!.getBoundingClientRect().width / 2,
 
-            duration: 0.5,
-          },
-          'finishChangeInfoLinkPosition'
-        )
-        .addLabel('finishMoveNotebook')
-        .to(
-          headRef.current,
-          {
-            yPercent: -100,
-            opacity: 0,
-            duration: 0.5,
-          },
-          'finishMoveNotebook'
-        )
-        .to(
-          notebookWrapperRef.current,
-          {
-            x: 0,
-            y: () =>
-              getCenterTopPosition(
-                rootRef!.current!,
-                notebookWrapperRef!.current!
-              ).y,
-            scale: 1,
-            duration: 0.5,
-          },
-          'finishMoveNotebook'
-        )
-        .to(
-          notebookImageWrapperRef.current,
-          {
-            scale:
-              innerWidth > 1440
-                ? document.documentElement.offsetWidth /
-                    contentRef!.current!.offsetWidth +
-                  1
-                : 1.242,
-            duration: 0.5,
-          },
-          '>-0.1'
-        )
-        .to(
-          infoLinkBackgroundRef.current,
-          {
-            scaleX:
-              document.documentElement.offsetWidth /
-              contentRef!.current!.offsetWidth,
-            duration: 0.5,
-          },
-          '<'
-        )
-        .to(
-          infoLinkWrapperRef.current,
-          {
-            scale: 1,
-            duration: 0.5,
-          },
-          '<'
-        )
-        .to(
-          notebookImageWrapperRef.current,
-          {
-            opacity: 0,
-            duration: 0.2,
-          },
-          '>-0.1'
-        )
-        .addLabel('finish');
-    } else {
-      educationTimeline
-        .addLabel('start')
-        .to(
-          descriptionFirstRef.current,
-          {
-            opacity: 0,
-            duration: 0.5,
-          },
-          'start'
-        )
-        .to(
-          descriptionSecondRef.current,
-          {
-            opacity: 1,
-            duration: 0.5,
-          },
-          '<'
-        )
-        .addLabel('finish');
-    }
-    return () => {
-      educationTimeline.kill();
-    };
+            'start'
+          )
+          .addLabel('finishHideFirstDescription')
+          .to(
+            descriptionSecondRef.current,
+            {
+              opacity: 1,
+              yPercent: -100,
+              duration: 0.5,
+            },
+            '<'
+          )
+          .addLabel('finishChangeDescription')
+          .to(
+            videoRef.current,
+            {
+              yPercent: -100,
+              duration: 0.5,
+              opacity: 0,
+              onStart: () => {
+                videoRef.current?.pause();
+              },
+            },
+            'finishChangeDescription'
+          )
+          .to(
+            infoLinkWrapperRef.current,
+            {
+              y: 0,
+              duration: 0.5,
+            },
+            'finishChangeDescription'
+          )
+          .set(notebookWrapperRef.current, { overflow: 'initial' })
+          .addLabel('finishChangeInfoLinkPosition')
+          .to(
+            descriptionWrapperRef.current,
+            {
+              xPercent: 100,
+              opacity: 0,
+              duration: 0.5,
+            },
+            'finishChangeInfoLinkPosition'
+          )
+          .to(
+            notebookWrapperRef.current,
+            {
+              x:
+                contentRef!.current!.offsetWidth / 2 -
+                notebookWrapperRef!.current!.getBoundingClientRect().width / 2,
+
+              duration: 0.5,
+            },
+            'finishChangeInfoLinkPosition'
+          )
+          .addLabel('finishMoveNotebook')
+          .to(
+            headRef.current,
+            {
+              yPercent: -100,
+              opacity: 0,
+              duration: 0.5,
+            },
+            'finishMoveNotebook'
+          )
+          .to(
+            notebookWrapperRef.current,
+            {
+              x: 0,
+              y: () =>
+                getCenterTopPosition(
+                  rootRef!.current!,
+                  notebookWrapperRef!.current!
+                ).y,
+              scale: 1,
+              duration: 0.5,
+            },
+            'finishMoveNotebook'
+          )
+          .to(
+            notebookImageWrapperRef.current,
+            {
+              scale:
+                innerWidth > 1440
+                  ? document.documentElement.offsetWidth /
+                      contentRef!.current!.offsetWidth +
+                    1
+                  : 1.242,
+              duration: 0.5,
+            },
+            '>-0.1'
+          )
+          .to(
+            infoLinkBackgroundRef.current,
+            {
+              scaleX:
+                document.documentElement.offsetWidth /
+                contentRef!.current!.offsetWidth,
+              duration: 0.5,
+            },
+            '<'
+          )
+          .to(
+            infoLinkWrapperRef.current,
+            {
+              scale: 1,
+              duration: 0.5,
+            },
+            '<'
+          )
+          .to(
+            notebookImageWrapperRef.current,
+            {
+              opacity: 0,
+              duration: 0.2,
+            },
+            '>-0.1'
+          )
+          .addLabel('finish');
+      } else {
+        educationTimeline
+          .addLabel('start')
+          .to(
+            descriptionFirstRef.current,
+            {
+              opacity: 0,
+              duration: 0.5,
+            },
+            'start'
+          )
+          .to(
+            descriptionSecondRef.current,
+            {
+              opacity: 1,
+              duration: 0.5,
+            },
+            '<'
+          )
+          .addLabel('finish');
+      }
+    }, 0);
   }, []);
 
   return (

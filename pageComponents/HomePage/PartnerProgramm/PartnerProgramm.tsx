@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import currency from 'currency.js';
-import { useIsMounted } from '@/hooks/useIsMounted';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -32,377 +31,376 @@ const PartnerProgramm: FC = () => {
   const [sliderValue, setSliderValue] = useState(0);
 
   useEffect(() => {
-    const bonusTarget = {
-      value: bonusValue,
-    };
-    const totalBonusTarget = {
-      value: totalBonusValue,
-    };
-    const sliderValueTarget = {
-      value: sliderValue,
-    };
+    setTimeout(() => {
+      const bonusTarget = {
+        value: bonusValue,
+      };
+      const totalBonusTarget = {
+        value: totalBonusValue,
+      };
+      const sliderValueTarget = {
+        value: sliderValue,
+      };
 
-    const partnerProgrammTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: rootRef.current,
-        start: 'top top',
-        end: () => (innerWidth > 768 ? '+=3000' : '+=2000'),
-        pin: true,
-        scrub: 0,
-        snap: {
-          snapTo: 'labels',
-          duration: { min: 0.2, max: 2 },
-          delay: 0.2,
-          ease: 'power3.out',
+      const partnerProgrammTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: rootRef.current,
+          start: 'top top',
+          end: () => (innerWidth > 768 ? '+=3000' : '+=2000'),
+          pin: true,
+          scrub: 0,
+          snap: {
+            snapTo: 'labels',
+            duration: { min: 0.2, max: 2 },
+            delay: 0.2,
+            ease: 'power3.out',
+          },
+          onUpdate: () => {
+            setBonusValue(bonusTarget.value);
+            setTotalBonusValue(totalBonusTarget.value);
+            setSliderValue(sliderValueTarget.value);
+          },
         },
-        onUpdate: () => {
-          setBonusValue(bonusTarget.value);
-          setTotalBonusValue(totalBonusTarget.value);
-          setSliderValue(sliderValueTarget.value);
-        },
-      },
-    });
-    if (innerWidth > 768) {
-      partnerProgrammTimeline
-        .addLabel('start')
+      });
+      if (innerWidth > 768) {
+        partnerProgrammTimeline
+          .addLabel('start')
 
-        .to(
-          bonusTarget,
-          {
-            duration: 1,
-            value: 1236,
-            roundProps: 'value',
-          },
-          'start+=0.2'
-        )
-        .to(
-          totalBonusTarget,
-          {
-            duration: 1,
-            value: 16456,
-            roundProps: 'value',
-          },
-          'start+=0.2'
-        )
-        .to(
-          sliderHandleWrapRef.current,
-          {
-            x: sliderRef!.current!.offsetWidth,
-            duration: 1,
-          },
-          'start+=0.2'
-        )
-        .to(
-          sliderValueTarget,
-          {
-            duration: 1,
-            value: 5,
-            roundProps: 'value',
-          },
-          'start+=0.2'
-        )
-        .from(
-          sliderBarRef.current,
-          {
-            scaleX: 0,
-            duration: 1,
-          },
-          'start+=0.2'
-        )
-        .addLabel('firstMoveToFinish')
-        .to(
-          bonusTarget,
-          {
-            duration: 0.1,
-            value: 0,
-            roundProps: 'value',
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          totalBonusTarget,
-          {
-            duration: 0.1,
-            value: 0,
-            roundProps: 'value',
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          sliderHandleWrapRef.current,
-          {
-            x: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          sliderValueTarget,
-          {
-            duration: 0.1,
-            value: 0,
-            roundProps: 'value',
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          sliderBarRef.current,
-          {
-            scaleX: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .from(
-          [...profitItemLevels.current, ...profitItemPeople.current],
-          {
-            opacity: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          firstCheckboxGradientRef.current,
-          {
-            opacity: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .from(
-          secondCheckboxGradientRef.current,
-          {
-            opacity: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .addLabel('firstResetSlider')
-        .to(
-          bonusTarget,
-          {
-            duration: 1,
-            value: 1236 * 1.5,
-            roundProps: 'value',
-          },
-          'firstResetSlider'
-        )
-        .to(
-          totalBonusTarget,
-          {
-            duration: 1,
-            value: 16456 * 1.5,
-            roundProps: 'value',
-          },
-          'firstResetSlider'
-        )
-        .to(
-          sliderHandleWrapRef.current,
-          {
-            x: sliderRef!.current!.offsetWidth,
-            duration: 1,
-          },
-          'firstResetSlider'
-        )
-        .to(
-          sliderValueTarget,
-          {
-            duration: 1,
-            value: 5,
-            roundProps: 'value',
-          },
-          'firstResetSlider'
-        )
-        .to(
-          sliderBarRef.current,
-          {
-            scaleX: 1,
-            duration: 1,
-          },
-          'firstResetSlider'
-        )
-        .addLabel('finish');
-    } else {
-      partnerProgrammTimeline
-        .addLabel('start')
-        .to(
-          headRef.current,
-          {
-            yPercent: -100,
-            opacity: 0,
-            duration: 0.5,
-          },
-          'start+=0.3'
-        )
-        .to(
-          calculatorRef.current,
-          {
-            y: -headRef!.current!.offsetHeight,
-            duration: 0.5,
-          },
-          'start+=0.3'
-        )
-        .addLabel('finishShowCalculator')
-        .to(
-          bonusTarget,
-          {
-            duration: 1,
-            value: 1236,
-            roundProps: 'value',
-          },
-          'finishShowCalculator'
-        )
-        .to(
-          totalBonusTarget,
-          {
-            duration: 1,
-            value: 16456,
-            roundProps: 'value',
-          },
-          'finishShowCalculator'
-        )
-        .to(
-          sliderHandleWrapRef.current,
-          {
-            x: sliderRef!.current!.offsetWidth,
-            duration: 1,
-          },
-          'finishShowCalculator'
-        )
-        .to(
-          sliderValueTarget,
-          {
-            duration: 1,
-            value: 5,
-            roundProps: 'value',
-          },
-          'finishShowCalculator'
-        )
-        .from(
-          sliderBarRef.current,
-          {
-            scaleX: 0,
-            duration: 1,
-          },
-          'finishShowCalculator'
-        )
-        .addLabel('firstMoveToFinish')
-        .to(
-          bonusTarget,
-          {
-            duration: 0.1,
-            value: 0,
-            roundProps: 'value',
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          totalBonusTarget,
-          {
-            duration: 0.1,
-            value: 0,
-            roundProps: 'value',
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          sliderHandleWrapRef.current,
-          {
-            x: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          sliderValueTarget,
-          {
-            duration: 0.1,
-            value: 0,
-            roundProps: 'value',
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          sliderBarRef.current,
-          {
-            scaleX: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .from(
-          [...profitItemLevels.current, ...profitItemPeople.current],
-          {
-            opacity: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .to(
-          firstCheckboxGradientRef.current,
-          {
-            opacity: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .from(
-          secondCheckboxGradientRef.current,
-          {
-            opacity: 0,
-            duration: 0.1,
-          },
-          'firstMoveToFinish'
-        )
-        .addLabel('firstResetSlider')
-        .to(
-          bonusTarget,
-          {
-            duration: 1,
-            value: 1236 * 1.5,
-            roundProps: 'value',
-          },
-          'firstResetSlider'
-        )
-        .to(
-          totalBonusTarget,
-          {
-            duration: 1,
-            value: 16456 * 1.5,
-            roundProps: 'value',
-          },
-          'firstResetSlider'
-        )
-        .to(
-          sliderHandleWrapRef.current,
-          {
-            x: sliderRef!.current!.offsetWidth,
-            duration: 1,
-          },
-          'firstResetSlider'
-        )
-        .to(
-          sliderValueTarget,
-          {
-            duration: 1,
-            value: 5,
-            roundProps: 'value',
-          },
-          'firstResetSlider'
-        )
-        .to(
-          sliderBarRef.current,
-          {
-            scaleX: 1,
-            duration: 1,
-          },
-          'firstResetSlider'
-        )
-        .addLabel('finish');
-    }
-    return () => {
-      partnerProgrammTimeline.kill();
-    };
+          .to(
+            bonusTarget,
+            {
+              duration: 1,
+              value: 1236,
+              roundProps: 'value',
+            },
+            'start+=0.2'
+          )
+          .to(
+            totalBonusTarget,
+            {
+              duration: 1,
+              value: 16456,
+              roundProps: 'value',
+            },
+            'start+=0.2'
+          )
+          .to(
+            sliderHandleWrapRef.current,
+            {
+              x: sliderRef!.current!.offsetWidth,
+              duration: 1,
+            },
+            'start+=0.2'
+          )
+          .to(
+            sliderValueTarget,
+            {
+              duration: 1,
+              value: 5,
+              roundProps: 'value',
+            },
+            'start+=0.2'
+          )
+          .from(
+            sliderBarRef.current,
+            {
+              scaleX: 0,
+              duration: 1,
+            },
+            'start+=0.2'
+          )
+          .addLabel('firstMoveToFinish')
+          .to(
+            bonusTarget,
+            {
+              duration: 0.1,
+              value: 0,
+              roundProps: 'value',
+            },
+            'firstMoveToFinish'
+          )
+          .to(
+            totalBonusTarget,
+            {
+              duration: 0.1,
+              value: 0,
+              roundProps: 'value',
+            },
+            'firstMoveToFinish'
+          )
+          .to(
+            sliderHandleWrapRef.current,
+            {
+              x: 0,
+              duration: 0.1,
+            },
+            'firstMoveToFinish'
+          )
+          .to(
+            sliderValueTarget,
+            {
+              duration: 0.1,
+              value: 0,
+              roundProps: 'value',
+            },
+            'firstMoveToFinish'
+          )
+          .to(
+            sliderBarRef.current,
+            {
+              scaleX: 0,
+              duration: 0.1,
+            },
+            'firstMoveToFinish'
+          )
+          .from(
+            [...profitItemLevels.current, ...profitItemPeople.current],
+            {
+              opacity: 0,
+              duration: 0.1,
+            },
+            'firstMoveToFinish'
+          )
+          .to(
+            firstCheckboxGradientRef.current,
+            {
+              opacity: 0,
+              duration: 0.1,
+            },
+            'firstMoveToFinish'
+          )
+          .from(
+            secondCheckboxGradientRef.current,
+            {
+              opacity: 0,
+              duration: 0.1,
+            },
+            'firstMoveToFinish'
+          )
+          .addLabel('firstResetSlider')
+          .to(
+            bonusTarget,
+            {
+              duration: 1,
+              value: 1236 * 1.5,
+              roundProps: 'value',
+            },
+            'firstResetSlider'
+          )
+          .to(
+            totalBonusTarget,
+            {
+              duration: 1,
+              value: 16456 * 1.5,
+              roundProps: 'value',
+            },
+            'firstResetSlider'
+          )
+          .to(
+            sliderHandleWrapRef.current,
+            {
+              x: sliderRef!.current!.offsetWidth,
+              duration: 1,
+            },
+            'firstResetSlider'
+          )
+          .to(
+            sliderValueTarget,
+            {
+              duration: 1,
+              value: 5,
+              roundProps: 'value',
+            },
+            'firstResetSlider'
+          )
+          .to(
+            sliderBarRef.current,
+            {
+              scaleX: 1,
+              duration: 1,
+            },
+            'firstResetSlider'
+          )
+          .addLabel('finish');
+      } else {
+        partnerProgrammTimeline
+          .addLabel('start')
+          .to(
+            headRef.current,
+            {
+              yPercent: -100,
+              opacity: 0,
+              duration: 0.5,
+            },
+            'start+=0.3'
+          )
+          .to(
+            calculatorRef.current,
+            {
+              y: -headRef!.current!.offsetHeight,
+              duration: 0.5,
+            },
+            'start+=0.3'
+          )
+          .addLabel('finishShowCalculator')
+          .to(
+            bonusTarget,
+            {
+              duration: 1,
+              value: 1236,
+              roundProps: 'value',
+            },
+            'finishShowCalculator'
+          )
+          .to(
+            totalBonusTarget,
+            {
+              duration: 1,
+              value: 16456,
+              roundProps: 'value',
+            },
+            'finishShowCalculator'
+          )
+          .to(
+            sliderHandleWrapRef.current,
+            {
+              x: sliderRef!.current!.offsetWidth,
+              duration: 1,
+            },
+            'finishShowCalculator'
+          )
+          .to(
+            sliderValueTarget,
+            {
+              duration: 1,
+              value: 5,
+              roundProps: 'value',
+            },
+            'finishShowCalculator'
+          )
+          .from(
+            sliderBarRef.current,
+            {
+              scaleX: 0,
+              duration: 1,
+            },
+            'finishShowCalculator'
+          )
+          .addLabel('firstMoveToFinish')
+          .to(
+            bonusTarget,
+            {
+              duration: 0.1,
+              value: 0,
+              roundProps: 'value',
+            },
+            'firstMoveToFinish'
+          )
+          .to(
+            totalBonusTarget,
+            {
+              duration: 0.1,
+              value: 0,
+              roundProps: 'value',
+            },
+            'firstMoveToFinish'
+          )
+          .to(
+            sliderHandleWrapRef.current,
+            {
+              x: 0,
+              duration: 0.1,
+            },
+            'firstMoveToFinish'
+          )
+          .to(
+            sliderValueTarget,
+            {
+              duration: 0.1,
+              value: 0,
+              roundProps: 'value',
+            },
+            'firstMoveToFinish'
+          )
+          .to(
+            sliderBarRef.current,
+            {
+              scaleX: 0,
+              duration: 0.1,
+            },
+            'firstMoveToFinish'
+          )
+          .from(
+            [...profitItemLevels.current, ...profitItemPeople.current],
+            {
+              opacity: 0,
+              duration: 0.1,
+            },
+            'firstMoveToFinish'
+          )
+          .to(
+            firstCheckboxGradientRef.current,
+            {
+              opacity: 0,
+              duration: 0.1,
+            },
+            'firstMoveToFinish'
+          )
+          .from(
+            secondCheckboxGradientRef.current,
+            {
+              opacity: 0,
+              duration: 0.1,
+            },
+            'firstMoveToFinish'
+          )
+          .addLabel('firstResetSlider')
+          .to(
+            bonusTarget,
+            {
+              duration: 1,
+              value: 1236 * 1.5,
+              roundProps: 'value',
+            },
+            'firstResetSlider'
+          )
+          .to(
+            totalBonusTarget,
+            {
+              duration: 1,
+              value: 16456 * 1.5,
+              roundProps: 'value',
+            },
+            'firstResetSlider'
+          )
+          .to(
+            sliderHandleWrapRef.current,
+            {
+              x: sliderRef!.current!.offsetWidth,
+              duration: 1,
+            },
+            'firstResetSlider'
+          )
+          .to(
+            sliderValueTarget,
+            {
+              duration: 1,
+              value: 5,
+              roundProps: 'value',
+            },
+            'firstResetSlider'
+          )
+          .to(
+            sliderBarRef.current,
+            {
+              scaleX: 1,
+              duration: 1,
+            },
+            'firstResetSlider'
+          )
+          .addLabel('finish');
+      }
+    }, 0);
   }, []);
   return (
     <Root ref={rootRef}>
