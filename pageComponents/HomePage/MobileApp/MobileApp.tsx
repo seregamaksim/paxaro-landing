@@ -134,6 +134,7 @@ const PhoneImgWrap = styled.div`
 const PhoneImg = styled(Image).attrs(() => ({
   src: phoneImg,
   alt: 'Paxaro App',
+  loading: 'eager',
 }))``;
 
 const StoresBlock = styled.div`
