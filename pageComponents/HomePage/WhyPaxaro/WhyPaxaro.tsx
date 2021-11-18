@@ -811,6 +811,12 @@ const SecondDescriptionBlockRef = styled.div`
   & ${DescriptionText} {
     text-align: center;
   }
+  & ${DescriptionText}:last-child {
+    font-size: 14px;
+    line-height: 20px;
+    max-width: 456px;
+    margin: 0 auto;
+  }
   @media (max-height: 700px) {
     top: 35%;
   }
