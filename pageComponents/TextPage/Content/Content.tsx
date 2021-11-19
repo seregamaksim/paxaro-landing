@@ -4,14 +4,18 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-interface ISectionContent {
+interface SectionContent {
   title?: string;
   texts: string[];
 }
 
-const Content: FC = () => {
-  const { t } = useTranslation('privacyPolicy');
-  const content: ISectionContent[] = t('content', { returnObjects: true });
+interface ContentProps {
+  translateName: string;
+}
+
+const Content: FC<ContentProps> = ({ translateName }) => {
+  const { t } = useTranslation(translateName);
+  const content: SectionContent[] = t('content', { returnObjects: true });
 
   return (
     <StyledContainer>

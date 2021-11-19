@@ -1,25 +1,19 @@
 import type { NextPage } from 'next';
-import MainLayout from '@/layouts/MainLayout';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Header } from '@/components/Header';
-import HeaderBottom from '@/pageComponents/OtherPage/HeaderBottom/HeaderBottom';
-
 import { getSelectorsByUserAgent } from 'react-device-detect';
-import { Content } from '@/pageComponents/TrialPage/Content';
+import { Content } from '@/pageComponents/TextPage/Content';
+import TextPageLayout from '@/layouts/TextPageLayout';
 
 interface TrialPageProps {
   userAgent: { [key: string]: any };
 }
 const Trial: NextPage<TrialPageProps> = ({ userAgent }) => {
   return (
-    <MainLayout>
-      <Header userAgent={userAgent}>
-        <HeaderBottom />
-      </Header>
+    <TextPageLayout userAgent={userAgent}>
       <main>
-        <Content />
+        <Content translateName="trial" />
       </main>
-    </MainLayout>
+    </TextPageLayout>
   );
 };
 

@@ -3,10 +3,10 @@ export function getSplitString(stringToSplit: string, separator: string) {
   if (arrayOfStrings.length > 1) {
     return arrayOfStrings
       .map((text, index) =>
-        index === arrayOfStrings.length - 1 ? `${text}` : `${text};<br/>`
+        index === arrayOfStrings.length - 1 ? text : `${text};<br/>`
       )
       .join(' ');
   } else {
-    return arrayOfStrings.map((text) => text).join(' ');
+    return arrayOfStrings.join(' ');
   }
 }
