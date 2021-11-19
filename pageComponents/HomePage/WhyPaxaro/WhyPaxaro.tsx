@@ -1,6 +1,5 @@
 import { Container } from '@/components/Container';
 import { SectionLabel } from '@/components/SectionLabel';
-import { SectionTitle } from '@/components/SectionTitle';
 import { FC, useEffect, useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -13,6 +12,7 @@ import coin1Icon from '@/assets/images/coin-icon1.svg';
 import coin2Icon from '@/assets/images/coin-icon2.svg';
 import coin3Icon from '@/assets/images/coin-icon3.svg';
 import gridWithArrow from '@/assets/images/grid-with-arrow.svg';
+import { useRouter } from 'next/router';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -20,7 +20,7 @@ if (typeof window !== 'undefined') {
 
 const WhyPaxaro: FC = () => {
   const { t } = useTranslation('whyPaxaro');
-
+  const { locale } = useRouter();
   const mainRef = useRef<HTMLElement>(null);
   const whyPaxaroTitleRef = useRef<HTMLParagraphElement>(null);
   const desciptionBlockRef = useRef<HTMLDivElement>(null);
@@ -79,433 +79,439 @@ const WhyPaxaro: FC = () => {
         y: getPixelsByVw(25.4),
       };
     }
-
-    const WhyPaxaroTimeline = gsap.timeline({
-      defaults: {
-        ease: 'power3.out',
-      },
-      scrollTrigger: {
-        trigger: mainRef.current,
-        start: 'top top',
-        end: () => (innerWidth > 768 ? '+=3000' : '+=2000'),
-        pin: true,
-        scrub: 1,
-
-        snap: {
-          snapTo: 'labels',
-          duration: { min: 0.2, max: 2 },
-          delay: 0.2,
+    setTimeout(() => {
+      const WhyPaxaroTimeline = gsap.timeline({
+        defaults: {
           ease: 'power3.out',
         },
-      },
-    });
-    if (innerWidth > 1024) {
-      WhyPaxaroTimeline.addLabel('start')
-        .set(gridWithArrowRef.current, getGridPixels())
-        .set(bitcoinRef.current, {
-          x: getPixelsByVw(68.75),
-          y: getPixelsByVw(32.7),
-        })
-        .set(ethereumRef.current, {
-          x: getPixelsByVw(58.6),
-          y: getPixelsByVw(27.7),
-        })
-        .set(coin1Ref.current, {
-          x: getPixelsByVw(75),
-          y: getPixelsByVw(20.3),
-        })
-        .set(coin2Ref.current, {
-          x: getPixelsByVw(57.9),
-          y: getPixelsByVw(42.8),
-        })
-        .set(coin3Ref.current, {
-          x: getPixelsByVw(80.4),
-          y: getPixelsByVw(39.2),
-        })
-        .to(
-          whyPaxaroTitleRef.current,
-          {
-            x: -100,
-            opacity: 0,
-            duration: 0.3,
+        scrollTrigger: {
+          trigger: mainRef.current,
+          start: 'top top',
+          end: () => (innerWidth > 768 ? '+=3000' : '+=2000'),
+          pin: true,
+          scrub: 1,
+          snap: {
+            snapTo: 'labels',
+            duration: { min: 0.2, max: 2 },
+            delay: 0.2,
+            ease: 'power3.out',
           },
-          0
-        )
-        .from(
-          desciptionBlockRef.current,
-          {
-            opacity: 0,
-            duration: 0.3,
-          },
-          '>-0.1'
-        )
-        .addLabel('showDescriptionBlock')
-        .to(
-          [counterFirstNumberRef.current, descriptionTextWrapFirstRef.current],
-          {
-            opacity: 0,
-            duration: 0.1,
-          },
-          'showDescriptionBlock'
-        )
-        .to(
-          counterLineBarRef.current,
-          {
-            x: 35,
-            duration: 0.1,
-          },
-          'showDescriptionBlock'
-        )
-        .from(
-          [
-            counterSecondNumberRef.current,
-            descriptionTextWrapSecondRef.current,
-          ],
-          {
-            opacity: 0,
-            duration: 0.1,
-          },
-          '<'
-        )
-        .addLabel('showSecondDescriptionBlockItem')
-        .from(
-          gridWithArrowRef.current,
-          {
-            opacity: 0,
-            duration: 0.6,
-          },
-          '>-0.3'
-        )
-        .to(
-          bitcoinRef.current,
-          {
-            x: getPixelsByVw(79.4),
-            y: getPixelsByVw(30.2),
-            duration: 0.6,
-            scale: 0.7,
-          },
-          '<'
-        )
-        .to(
-          ethereumRef.current,
-          {
-            x: getPixelsByVw(63.2),
-            y: getPixelsByVw(34.5),
-            duration: 0.6,
-          },
-          '<'
-        )
-        .to(
-          coin1Ref.current,
-          {
-            x: getPixelsByVw(71.4),
-            y: getPixelsByVw(30.7),
-            scale: 0.6,
-            duration: 0.6,
-          },
-          '<'
-        )
-        .to(
-          coin2Ref.current,
-          {
-            x: getPixelsByVw(74.3),
-            y: getPixelsByVw(32.9),
-            scale: 0.6,
-            duration: 0.6,
-          },
-          '<'
-        )
-        .to(
-          coin3Ref.current,
-          {
-            x: getPixelsByVw(70.4),
-            y: getPixelsByVw(37.8),
-            duration: 0.6,
-          },
-          '<'
-        )
-        .addLabel('hideDescriptionBlock')
+        },
+      });
+      if (innerWidth > 1024) {
+        WhyPaxaroTimeline.addLabel('start')
+          .set(gridWithArrowRef.current, getGridPixels())
+          .set(bitcoinRef.current, {
+            x: getPixelsByVw(68.75),
+            y: getPixelsByVw(32.7),
+          })
+          .set(ethereumRef.current, {
+            x: getPixelsByVw(58.6),
+            y: getPixelsByVw(27.7),
+          })
+          .set(coin1Ref.current, {
+            x: getPixelsByVw(75),
+            y: getPixelsByVw(20.3),
+          })
+          .set(coin2Ref.current, {
+            x: getPixelsByVw(57.9),
+            y: getPixelsByVw(42.8),
+          })
+          .set(coin3Ref.current, {
+            x: getPixelsByVw(80.4),
+            y: getPixelsByVw(39.2),
+          })
+          .to(
+            whyPaxaroTitleRef.current,
+            {
+              x: -100,
+              opacity: 0,
+              duration: 0.3,
+            },
+            0
+          )
+          .from(
+            desciptionBlockRef.current,
+            {
+              opacity: 0,
+              duration: 0.3,
+            },
+            '>-0.1'
+          )
+          .addLabel('showDescriptionBlock')
+          .to(
+            [
+              counterFirstNumberRef.current,
+              descriptionTextWrapFirstRef.current,
+            ],
+            {
+              opacity: 0,
+              duration: 0.1,
+            },
+            'showDescriptionBlock'
+          )
+          .to(
+            counterLineBarRef.current,
+            {
+              x: 35,
+              duration: 0.1,
+            },
+            'showDescriptionBlock'
+          )
+          .from(
+            [
+              counterSecondNumberRef.current,
+              descriptionTextWrapSecondRef.current,
+            ],
+            {
+              opacity: 0,
+              duration: 0.1,
+            },
+            '<'
+          )
+          .addLabel('showSecondDescriptionBlockItem')
+          .from(
+            gridWithArrowRef.current,
+            {
+              opacity: 0,
+              duration: 0.6,
+            },
+            '>-0.3'
+          )
+          .to(
+            bitcoinRef.current,
+            {
+              x: getPixelsByVw(79.4),
+              y: getPixelsByVw(30.2),
+              duration: 0.6,
+              scale: 0.7,
+            },
+            '<'
+          )
+          .to(
+            ethereumRef.current,
+            {
+              x: getPixelsByVw(63.2),
+              y: getPixelsByVw(34.5),
+              duration: 0.6,
+            },
+            '<'
+          )
+          .to(
+            coin1Ref.current,
+            {
+              x: getPixelsByVw(71.4),
+              y: getPixelsByVw(30.7),
+              scale: 0.6,
+              duration: 0.6,
+            },
+            '<'
+          )
+          .to(
+            coin2Ref.current,
+            {
+              x: getPixelsByVw(74.3),
+              y: getPixelsByVw(32.9),
+              scale: 0.6,
+              duration: 0.6,
+            },
+            '<'
+          )
+          .to(
+            coin3Ref.current,
+            {
+              x: getPixelsByVw(70.4),
+              y: getPixelsByVw(37.8),
+              duration: 0.6,
+            },
+            '<'
+          )
+          .addLabel('hideDescriptionBlock')
 
-        .to(
-          desciptionBlockRef.current,
-          {
-            opacity: 0,
-            duration: 0.3,
-          },
-          'hideDescriptionBlock+=0.5'
-        )
-        .to(
-          gridWithArrowRef.current,
-          {
-            opacity: 0,
-            duration: 0.6,
-          },
-          '>-0.3'
-        )
-        .to(
-          bitcoinRef.current,
-          {
-            x: getPixelsByVw(77.5),
-            y: getPixelsByVw(15.7),
-            scale: 1,
-            duration: 0.6,
-          },
-          '<'
-        )
-        .to(
-          ethereumRef.current,
-          {
-            x: getPixelsByVw(14.9),
-            y: getPixelsByVw(19),
-            duration: 0.6,
-          },
-          '<'
-        )
-        .to(
-          coin1Ref.current,
-          {
-            x: getPixelsByVw(5.4),
-            y: getPixelsByVw(32.4),
-            scale: 1,
-            duration: 0.6,
-          },
-          '<'
-        )
-        .to(
-          coin2Ref.current,
-          {
-            x: getPixelsByVw(85.5),
-            y: getPixelsByVw(21.5),
-            scale: 1,
-            duration: 0.6,
-          },
-          '<'
-        )
-        .to(
-          coin3Ref.current,
-          {
-            x: getPixelsByVw(66.3),
-            y: getPixelsByVw(45.3),
-            duration: 0.6,
-          },
-          '<'
-        )
-        .from(
-          secondDescriptionBlockRef.current,
-          {
-            opacity: 0,
-            duration: 0.3,
-            y: 30,
-          },
-          '>'
-        )
-        .addLabel('showSecondDescriptionBlock');
-    } else {
-      const isMore600px = innerWidth > 600 ? true : false;
-      // ---------
-      // MOBILE
-      // ---------
-      WhyPaxaroTimeline.addLabel('start')
-        .set(gridWithArrowRef.current, getGridPixels())
-        .set(bitcoinRef.current, {
-          x: isMore600px ? getPixelsByVw(46.2) : 150,
-          y: isMore600px ? getPixelsByVw(56.7) : 350,
-        })
-        .set(ethereumRef.current, {
-          x: isMore600px ? getPixelsByVw(38.6) : 80,
-          y: isMore600px ? getPixelsByVw(50.5) : 300,
-        })
-        .set(coin1Ref.current, {
-          x: isMore600px ? getPixelsByVw(52.6) : 230,
-          y: isMore600px ? getPixelsByVw(46.7) : 300,
-        })
-        .set(coin2Ref.current, {
-          x: isMore600px ? getPixelsByVw(35.9) : 50,
-          y: isMore600px ? getPixelsByVw(63.9) : 430,
-        })
-        .set(coin3Ref.current, {
-          x: isMore600px ? getPixelsByVw(57.4) : 250,
-          y: isMore600px ? getPixelsByVw(62) : 450,
-        })
-        .to(
-          whyPaxaroTitleRef.current,
-          {
-            x: -100,
-            opacity: 0,
-            duration: 0.3,
-          },
-          0
-        )
-        .from(
-          desciptionBlockRef.current,
-          {
-            opacity: 0,
-            duration: 0.3,
-          },
-          '>-0.1'
-        )
-        .addLabel('showDescriptionBlock')
-        .to(
-          [counterFirstNumberRef.current, descriptionTextWrapFirstRef.current],
-          {
-            opacity: 0,
-            duration: 0.4,
-          },
-          'showDescriptionBlock'
-        )
-        .to(
-          counterLineBarRef.current,
-          {
-            x: 35,
-            duration: 0.1,
-          },
-          'showDescriptionBlock'
-        )
-        .from(
-          [
-            counterSecondNumberRef.current,
-            descriptionTextWrapSecondRef.current,
-          ],
-          {
-            opacity: 0,
-            duration: 0.4,
-          },
-          '<'
-        )
-        .addLabel('showSecondDescriptionBlockItem')
-        .from(
-          gridWithArrowRef.current,
-          {
-            opacity: 0,
-            duration: 0.6,
-          },
-          '>-0.3'
-        )
-        .to(
-          bitcoinRef.current,
-          {
-            x: getPixelsByVw(70.4),
-            y: 470,
-            duration: 0.6,
-            // scale: 0.7,
-          },
-          '<'
-        )
-        .to(
-          ethereumRef.current,
-          {
-            x: getPixelsByVw(29.4),
-            y: 510,
-            duration: 0.6,
-          },
-          '<'
-        )
-        .to(
-          coin1Ref.current,
-          {
-            x: getPixelsByVw(48.6),
-            y: 490,
-            // scale: 0.6,
-            duration: 0.6,
-          },
-          '<'
-        )
-        .to(
-          coin2Ref.current,
-          {
-            x: getPixelsByVw(62.5),
-            y: 520,
-            // scale: 0.6,
-            duration: 0.6,
-          },
-          '<'
-        )
-        .to(
-          coin3Ref.current,
-          {
-            x: getPixelsByVw(47.7),
-            y: 530,
-            duration: 0.6,
-          },
-          '<'
-        )
-        .addLabel('hideDescriptionBlock')
+          .to(
+            desciptionBlockRef.current,
+            {
+              opacity: 0,
+              duration: 0.3,
+            },
+            'hideDescriptionBlock+=0.5'
+          )
+          .to(
+            gridWithArrowRef.current,
+            {
+              opacity: 0,
+              duration: 0.6,
+            },
+            '>-0.3'
+          )
+          .to(
+            bitcoinRef.current,
+            {
+              x: getPixelsByVw(77.5),
+              y: getPixelsByVw(15.7),
+              scale: 1,
+              duration: 0.6,
+            },
+            '<'
+          )
+          .to(
+            ethereumRef.current,
+            {
+              x: getPixelsByVw(14.9),
+              y: getPixelsByVw(19),
+              duration: 0.6,
+            },
+            '<'
+          )
+          .to(
+            coin1Ref.current,
+            {
+              x: getPixelsByVw(5.4),
+              y: getPixelsByVw(32.4),
+              scale: 1,
+              duration: 0.6,
+            },
+            '<'
+          )
+          .to(
+            coin2Ref.current,
+            {
+              x: getPixelsByVw(85.5),
+              y: getPixelsByVw(21.5),
+              scale: 1,
+              duration: 0.6,
+            },
+            '<'
+          )
+          .to(
+            coin3Ref.current,
+            {
+              x: getPixelsByVw(66.3),
+              y: getPixelsByVw(45.3),
+              duration: 0.6,
+            },
+            '<'
+          )
+          .from(
+            secondDescriptionBlockRef.current,
+            {
+              opacity: 0,
+              duration: 0.3,
+              y: 30,
+            },
+            '>'
+          )
+          .addLabel('showSecondDescriptionBlock');
+      } else {
+        const isMore600px = innerWidth > 600 ? true : false;
+        // ---------
+        // MOBILE
+        // ---------
+        WhyPaxaroTimeline.addLabel('start')
+          .set(gridWithArrowRef.current, getGridPixels())
+          .set(bitcoinRef.current, {
+            x: isMore600px ? getPixelsByVw(46.2) : 150,
+            y: isMore600px ? getPixelsByVw(56.7) : 350,
+          })
+          .set(ethereumRef.current, {
+            x: isMore600px ? getPixelsByVw(38.6) : 80,
+            y: isMore600px ? getPixelsByVw(50.5) : 300,
+          })
+          .set(coin1Ref.current, {
+            x: isMore600px ? getPixelsByVw(52.6) : 230,
+            y: isMore600px ? getPixelsByVw(46.7) : 300,
+          })
+          .set(coin2Ref.current, {
+            x: isMore600px ? getPixelsByVw(35.9) : 50,
+            y: isMore600px ? getPixelsByVw(63.9) : 430,
+          })
+          .set(coin3Ref.current, {
+            x: isMore600px ? getPixelsByVw(57.4) : 250,
+            y: isMore600px ? getPixelsByVw(62) : 450,
+          })
+          .to(
+            whyPaxaroTitleRef.current,
+            {
+              x: -100,
+              opacity: 0,
+              duration: 0.3,
+            },
+            0
+          )
+          .from(
+            desciptionBlockRef.current,
+            {
+              opacity: 0,
+              duration: 0.3,
+            },
+            '>-0.1'
+          )
+          .addLabel('showDescriptionBlock')
+          .to(
+            [
+              counterFirstNumberRef.current,
+              descriptionTextWrapFirstRef.current,
+            ],
+            {
+              opacity: 0,
+              duration: 0.4,
+            },
+            'showDescriptionBlock'
+          )
+          .to(
+            counterLineBarRef.current,
+            {
+              x: 35,
+              duration: 0.1,
+            },
+            'showDescriptionBlock'
+          )
+          .from(
+            [
+              counterSecondNumberRef.current,
+              descriptionTextWrapSecondRef.current,
+            ],
+            {
+              opacity: 0,
+              duration: 0.4,
+            },
+            '<'
+          )
+          .addLabel('showSecondDescriptionBlockItem')
+          .from(
+            gridWithArrowRef.current,
+            {
+              opacity: 0,
+              duration: 0.6,
+            },
+            '>-0.3'
+          )
+          .to(
+            bitcoinRef.current,
+            {
+              x: getPixelsByVw(70.4),
+              y: 470,
+              duration: 0.6,
+              // scale: 0.7,
+            },
+            '<'
+          )
+          .to(
+            ethereumRef.current,
+            {
+              x: getPixelsByVw(29.4),
+              y: 510,
+              duration: 0.6,
+            },
+            '<'
+          )
+          .to(
+            coin1Ref.current,
+            {
+              x: getPixelsByVw(48.6),
+              y: 490,
+              // scale: 0.6,
+              duration: 0.6,
+            },
+            '<'
+          )
+          .to(
+            coin2Ref.current,
+            {
+              x: getPixelsByVw(62.5),
+              y: 520,
+              // scale: 0.6,
+              duration: 0.6,
+            },
+            '<'
+          )
+          .to(
+            coin3Ref.current,
+            {
+              x: getPixelsByVw(47.7),
+              y: 530,
+              duration: 0.6,
+            },
+            '<'
+          )
+          .addLabel('hideDescriptionBlock')
 
-        .to(
-          desciptionBlockRef.current,
-          {
-            opacity: 0,
-            duration: 0.5,
-          },
-          'hideDescriptionBlock+=0.5'
-        )
-        .to(
-          gridWithArrowRef.current,
-          {
-            opacity: 0,
-            duration: 0.6,
-          },
-          '>-0.3'
-        )
-        .to(
-          bitcoinRef.current,
-          {
-            x: getPixelsByVw(80.5),
-            y: isMore600px ? getPixelsByVw(15.7) : 150,
-            scale: 1,
-            duration: 0.6,
-          },
-          '<'
-        )
-        .to(
-          ethereumRef.current,
-          {
-            x: getPixelsByVw(8.9),
-            y: isMore600px ? getPixelsByVw(19) : 180,
-            duration: 0.6,
-          },
-          '<'
-        )
-        .to(
-          coin1Ref.current,
-          {
-            x: getPixelsByVw(2.4),
-            y: isMore600px ? getPixelsByVw(42.4) : 550,
-            scale: 1,
-            duration: 0.6,
-          },
-          '<'
-        )
-        .to(
-          coin2Ref.current,
-          {
-            x: getPixelsByVw(88.5),
-            y: isMore600px ? getPixelsByVw(27.5) : 500,
-            scale: 1,
-            duration: 0.6,
-          },
-          '<'
-        )
-        .to(
-          coin3Ref.current,
-          {
-            x: getPixelsByVw(66.3),
-            y: isMore600px ? getPixelsByVw(55.3) : 550,
-            duration: 0.6,
-          },
-          '<'
-        )
-        .from(
-          secondDescriptionBlockRef.current,
-          {
-            opacity: 0,
-            duration: 0.3,
-            y: 30,
-          },
-          '>'
-        )
-        .addLabel('showSecondDescriptionBlock');
-    }
+          .to(
+            desciptionBlockRef.current,
+            {
+              opacity: 0,
+              duration: 0.5,
+            },
+            'hideDescriptionBlock+=0.5'
+          )
+          .to(
+            gridWithArrowRef.current,
+            {
+              opacity: 0,
+              duration: 0.6,
+            },
+            '>-0.3'
+          )
+          .to(
+            bitcoinRef.current,
+            {
+              x: getPixelsByVw(80.5),
+              y: isMore600px ? getPixelsByVw(15.7) : 150,
+              scale: 1,
+              duration: 0.6,
+            },
+            '<'
+          )
+          .to(
+            ethereumRef.current,
+            {
+              x: getPixelsByVw(8.9),
+              y: isMore600px ? getPixelsByVw(19) : 180,
+              duration: 0.6,
+            },
+            '<'
+          )
+          .to(
+            coin1Ref.current,
+            {
+              x: getPixelsByVw(2.4),
+              y: isMore600px ? getPixelsByVw(42.4) : 550,
+              scale: 1,
+              duration: 0.6,
+            },
+            '<'
+          )
+          .to(
+            coin2Ref.current,
+            {
+              x: getPixelsByVw(88.5),
+              y: isMore600px ? getPixelsByVw(27.5) : 500,
+              scale: 1,
+              duration: 0.6,
+            },
+            '<'
+          )
+          .to(
+            coin3Ref.current,
+            {
+              x: getPixelsByVw(66.3),
+              y: isMore600px ? getPixelsByVw(55.3) : 550,
+              duration: 0.6,
+            },
+            '<'
+          )
+          .from(
+            secondDescriptionBlockRef.current,
+            {
+              opacity: 0,
+              duration: 0.3,
+              y: 30,
+            },
+            '>'
+          )
+          .addLabel('showSecondDescriptionBlock');
+      }
+    }, 0);
   }, []);
 
   return (
@@ -513,7 +519,11 @@ const WhyPaxaro: FC = () => {
       <StyledContainer>
         <SectionHead>
           <StyledSectionLabel text={t('label')} />
-          <StyledSectionTitle text={t('title')} />
+          <SectionTitle>
+            <Trans t={t} i18nKey="title">
+              Почему мы <br /> уверены в Paxaro App?
+            </Trans>
+          </SectionTitle>
         </SectionHead>
 
         <GridWithArrowWrap ref={gridWithArrowRef}>
@@ -559,17 +569,50 @@ const WhyPaxaro: FC = () => {
             <DescriptionCounterTextsWrapper>
               <DescriptionCounterTextWrap ref={descriptionTextWrapFirstRef}>
                 <DescriptionText>{t('description1.text1')}</DescriptionText>
-                <DescriptionText>{t('description1.text2')}</DescriptionText>
+                {locale === 'ru' ? (
+                  <DescriptionText>
+                    В случае с альтернативными монетами вы скорее покупаете
+                    акции, чем валюту.
+                    <br />
+                    За каждой из них стоит технология,
+                    <br /> которая решает определенную проблему
+                    <br /> — похоже на инвестиции в стартап.
+                  </DescriptionText>
+                ) : (
+                  <DescriptionText>{t('description1.text2')}</DescriptionText>
+                )}
               </DescriptionCounterTextWrap>
               <DescriptionCounterTextWrapAbsolute
                 ref={descriptionTextWrapSecondRef}
               >
-                <DescriptionText>{t('description2.text1')}</DescriptionText>
+                {locale === 'ru' ? (
+                  <DescriptionText>
+                    У проектов с капитализацией ниже <br />
+                    чем у Bitcoin, более высокий потенциальный <br /> рост.
+                    Альтернативные токены, у которых <br />
+                    есть преимущество по стоимости <br />и скорости транзакций,
+                    повышают <br />
+                    интерес к индустрии. Такие компании <br />
+                    могут обрести капитализацию свыше <br />1 млрд $ за
+                    сравнительно короткий <br /> промежуток времени.
+                  </DescriptionText>
+                ) : (
+                  <DescriptionText>{t('description2.text1')}</DescriptionText>
+                )}
               </DescriptionCounterTextWrapAbsolute>
             </DescriptionCounterTextsWrapper>
           </DescriptionsWrapper>
           <SecondDescriptionBlockRef ref={secondDescriptionBlockRef}>
-            <DescriptionText>{t('description3.text1')}</DescriptionText>
+            <DescriptionText>
+              <Trans t={t} i18nKey="description3.text1">
+                Индустрия растет, вместе с ней растет и индекс. За пя Bitcoin
+                вырос <b>в 144 раза</b>, а индексы Paxaro A доходность{' '}
+                <b>в 700+ раз*</b>. С Paxaro App вы охватываете <b>до 95%</b>{' '}
+                рыночной капитализации криптовалют постоянно обновляется и вы
+                всегда находитесь в топе индустрии.
+              </Trans>
+            </DescriptionText>
+            <DescriptionText>{t('description3.text2')}</DescriptionText>
           </SecondDescriptionBlockRef>
         </Content>
       </StyledContainer>
@@ -580,6 +623,7 @@ const WhyPaxaro: FC = () => {
 const Root = styled.section`
   height: 100vh;
 `;
+
 const StyledContainer = styled(Container)`
   padding-top: 86px;
   position: relative;
@@ -601,8 +645,17 @@ const StyledSectionLabel = styled(SectionLabel)`
   margin-bottom: 15px;
 `;
 
-const StyledSectionTitle = styled(SectionTitle)`
-  max-width: 454px;
+const SectionTitle = styled.h2`
+  font-size: 36px;
+  line-height: 50px;
+  font-weight: bold;
+  color: var(--black2);
+  margin-bottom: 24px;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+    line-height: 34px;
+  }
 `;
 
 const Content = styled.div`
@@ -734,10 +787,17 @@ const DescriptionText = styled.p`
   &:last-child {
     margin-bottom: 0;
   }
-
+  br {
+    display: none;
+  }
   @media (max-width: 1024px) {
     font-size: 14px;
     line-height: 20px;
+  }
+  @media (max-width: 375px) {
+    br {
+      display: block;
+    }
   }
 `;
 
@@ -747,21 +807,29 @@ const SecondDescriptionBlockRef = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  max-width: 720px;
-  padding: 58px 35px;
+  max-width: 757px;
+  padding: 40px;
   background: var(--white);
   box-shadow: 0px 6px 36px rgba(104, 104, 104, 0.08);
   border-radius: 40px;
   will-change: transform, opacity;
   & ${DescriptionText} {
-    font-weight: 600;
     text-align: center;
+  }
+  & ${DescriptionText}:last-child {
+    font-size: 14px;
+    line-height: 20px;
+    max-width: 456px;
+    margin: 0 auto;
   }
   @media (max-height: 700px) {
     top: 35%;
   }
   @media (max-width: 1024px) {
     top: 75%;
+  }
+  @media (max-width: 600px) {
+    padding: 33px 14px;
   }
 `;
 

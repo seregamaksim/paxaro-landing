@@ -19,9 +19,17 @@ interface PlanProps {
   hrefLink: string;
   className?: string;
   data: ItemType[];
+  countRows: number;
 }
 
-const Plan: FC<PlanProps> = ({ title, price, hrefLink, className, data }) => {
+const Plan: FC<PlanProps> = ({
+  title,
+  price,
+  hrefLink,
+  className,
+  data,
+  countRows,
+}) => {
   const { t } = useTranslation('plans');
 
   const mainRef = useRef<HTMLDivElement>(null);
@@ -36,44 +44,46 @@ const Plan: FC<PlanProps> = ({ title, price, hrefLink, className, data }) => {
   };
 
   useEffect(() => {
-    const planTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: mainRef.current,
-        start: 'top 70%',
-        end: '1% 71%',
-        toggleActions: 'play none reverse none',
-      },
-    });
+    setTimeout(() => {
+      const planTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: mainRef.current,
+          start: 'top 70%',
+          end: '1% 71%',
+          toggleActions: 'play none reverse none',
+        },
+      });
 
-    planTimeline
-      .addLabel('start')
-      .from(
-        headRef.current,
-        {
-          width: '70%',
-          opacity: 0,
-          duration: 1,
-        },
-        'start'
-      )
-      .from(
-        priceRef.current,
-        {
-          opacity: 0,
-          duration: 0.7,
-        },
-        '>-0.8'
-      )
-      .from(
-        listRef.current,
-        {
-          opacity: 0,
-          x: 15,
-          duration: 0.7,
-          stagger: 0.1,
-        },
-        '>'
-      );
+      planTimeline
+        .addLabel('start')
+        .from(
+          headRef.current,
+          {
+            width: '70%',
+            opacity: 0,
+            duration: 1,
+          },
+          'start'
+        )
+        .from(
+          priceRef.current,
+          {
+            opacity: 0,
+            duration: 0.7,
+          },
+          '>-0.8'
+        )
+        .from(
+          listRef.current,
+          {
+            opacity: 0,
+            x: 15,
+            duration: 0.7,
+            stagger: 0.1,
+          },
+          '>'
+        );
+    }, 0);
   }, []);
   return (
     <Root className={className} ref={mainRef}>
@@ -86,7 +96,7 @@ const Plan: FC<PlanProps> = ({ title, price, hrefLink, className, data }) => {
           </Link>
         </PlanHeadWrap>
       </PlanHead>
-      <PlanList>
+      <PlanList $rows={countRows}>
         {data.map((item, index) => (
           <PlanItem key={index} ref={addToRefs}>
             {item.text}
@@ -177,9 +187,10 @@ const PlanLink = styled(Button)`
   }
 `;
 
-const PlanList = styled.ul`
+const PlanList = styled.ul<{ $rows: number }>`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-rows: ${(props) => 'repeat(' + props.$rows + ', 1fr)'};
+  grid-auto-flow: column;
   gap: 30px 50px;
   @media (max-width: 1024px) {
     column-gap: 30px;

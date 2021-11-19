@@ -47,7 +47,7 @@ const Header: FC<IHeaderProps> = ({ children, userAgent }) => {
     innerWidth > 900 ? setIsOpenMenu(true) : setIsOpenMenu(false);
   }, []);
   return (
-    <Headroom>
+    <Headroom style={{ zIndex: 10 }}>
       <MobileStore userAgent={userAgent} />
       <Root ref={ref}>
         <HeaderBurgerNavContainer>

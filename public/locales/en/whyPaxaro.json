@@ -1,15 +1,16 @@
 {
-  "label": "История",
-  "title": "Paxaro App в теории и на практике",
-  "whyPaxaro": "<0>Почему именно</0> <1 /> Paxaro App?",
+  "label": "History",
+  "title": "Paxaro App <1 /> in theory and in practice",
+  "whyPaxaro": "<0>Why you should choose</0> <1 /> Paxaro App?",
   "description1": {
-    "text1": "Влияние Bitcoin на рынке криптовалют снижается и будет продолжать снижаться",
-    "text2": "В случае с альтернативными монетами вы скорее покупаете акции, чем валюту. За каждой из них стоит технология, которая решает определенную проблему — похоже на инвестиции в стартап."
+    "text1": "The influence of Bitcoin on the cryptocurrency market is declining and will continue to decline",
+    "text2": "In the case of alternative coins, you are more likely to buy stocks than currency. Each of them is a technology that solves a specific problem - it looks like investing in a startup."
   },
   "description2": {
-    "text1": "У проектов с капитализацией ниже чем у Bitcoin, более высокий потенциальный рост. Альтернативные токены, у которых есть преимущество по стоимости и скорости транзакций, повышают интерес к индустрии. Такие компании могут обрести капитализацию свыше 1 млрд $ за сравнительно короткий промежуток времени."
+    "text1": "Projects with a capitalization lower than Bitcoin have a higher potential growth. Alternative tokens, which have an advantage in terms of cost and transaction speed, increase interest in the industry. Such companies can gain a capitalization of over $1 billion in a relatively short period of time."
   },
   "description3": {
-    "text1": "Индустрия растет, вместе с ней растет и индекс. За три года Bitcoin вырос в 45 раз, а индекс Paxaro App показал доходность в 300+ раз (данные 03/2016 - 01/2018). С Paxaro App вы охватываете 92% рыночной капитализации криптовалют — индекс постоянно обновляется и вы всегда находитесь в топе индустрии."
+    "text1": "The industry is growing, and so is the index. Over the past five years, Bitcoin has grown <1>144 times</1>, and the Paxaro App indices have shown profitability <4>700+ times*</4>. With the Paxaro App, you cover up to <6>95%</6> of the market capitalization of cryptocurrencies - the index is constantly updated and you are always at the top of the industry.",
+    "text2": "* The period from 01/03/2016 to 03/11/2021 according to Coinmarketcap data, more than 5000 variants of backtests and tests were carried out."
   }
 }

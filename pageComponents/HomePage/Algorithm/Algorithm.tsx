@@ -35,139 +35,141 @@ const Algorithm: FC = () => {
   const phoneRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const algorithmTimeline = gsap.timeline({
-      defaults: {
-        ease: 'sine.out',
-      },
-      scrollTrigger: {
-        trigger: rootRef.current,
-        start: 'top top',
-        end: () => (innerWidth > 768 ? '+=3500' : '+=3000'),
-        pin: true,
-        scrub: 1,
-        snap: {
-          snapTo: 'labels',
-          duration: { min: 0.2, max: 2 },
-          delay: 0.2,
+    setTimeout(() => {
+      const algorithmTimeline = gsap.timeline({
+        defaults: {
           ease: 'sine.out',
         },
-      },
-    });
+        scrollTrigger: {
+          trigger: rootRef.current,
+          start: 'top top',
+          end: () => (innerWidth > 768 ? '+=3500' : '+=3000'),
+          pin: true,
+          scrub: 1,
+          snap: {
+            snapTo: 'labels',
+            duration: { min: 0.2, max: 2 },
+            delay: 0.2,
+            ease: 'sine.out',
+          },
+        },
+      });
 
-    algorithmTimeline
-      .addLabel('start')
-      .set(circleRef.current, {
-        scale: innerWidth / innerHeight + 15,
-      })
-      .to(
-        headRef.current,
-        {
-          yPercent: -100,
-          opacity: 0,
-          duration: 0.5,
-        },
-        'start+=0.1'
-      )
-      .to(
-        contentRef.current,
-        {
-          y:
-            innerWidth > 768
-              ? getCenterTopPosition(rootRef!.current!, contentRef!.current!)
-                  .y / 2
-              : getCenterTopPosition(rootRef!.current!, contentRef!.current!)
-                  .y + 20,
-          duration: 0.5,
-        },
-        '<'
-      )
-      .addLabel('finishMoveContent')
-      .to(
-        [imageListRef.current[0], descriptionListRef.current[0]],
-        {
-          yPercent: -100,
-          duration: 0.6,
-        },
-        'finishMoveContent+=0.1'
-      )
-      .to(
-        [imageListRef.current[1], descriptionListRef.current[1]],
-        {
-          y: 0,
-          duration: 0.6,
-        },
-        '<'
-      )
-      .addLabel('finishHideFirstAndShowSecondCards')
-      .to(
-        [imageListRef.current[1], descriptionListRef.current[1]],
-        {
-          yPercent: -100,
-          duration: 0.6,
-        },
-        'finishHideFirstAndShowSecondCards+=0.2'
-      )
-      .to(
-        [imageListRef.current[2], descriptionListRef.current[2]],
-        {
-          y: 0,
-          duration: 0.6,
-        },
-        '<'
-      )
-      .addLabel('finishHideSecondAndShowThirdCards')
-      .to(
-        [imageListRef.current[2], descriptionListRef.current[2]],
-        {
-          yPercent: -100,
-          duration: 0.6,
-        },
-        'finishHideSecondAndShowThirdCards+=0.2'
-      )
-      .to(
-        [imageListRef.current[3], descriptionListRef.current[3]],
-        {
-          y: 0,
-          duration: 0.6,
-        },
-        '<'
-      )
-      .addLabel('finishHideThirdAndShowFourthCards')
-      .to(
-        circleRef.current,
-        {
-          scale: 0,
-          duration: 0.8,
-        },
-        'finishHideThirdAndShowFourthCards'
-      )
-      .to(
-        contentRef.current,
-        {
-          yPercent: -150,
-          opacity: 0,
-          duration: 0.8,
-        },
-        '<'
-      )
-      .from(
-        storeBannerSectionRef.current,
-        {
-          yPercent: 150,
-          duration: 1,
-        },
-        '<'
-      )
-      .addLabel('finishShowStoreBanner')
-      .from(
-        phoneRef.current,
-        {
-          yPercent: 80,
-          duration: 0.5,
-        },
-        'finishShowStoreBanner'
-      )
-      .addLabel('finish');
+      algorithmTimeline
+        .addLabel('start')
+        .set(circleRef.current, {
+          scale: innerWidth / innerHeight + 15,
+        })
+        .to(
+          headRef.current,
+          {
+            yPercent: -100,
+            opacity: 0,
+            duration: 0.5,
+          },
+          'start+=0.1'
+        )
+        .to(
+          contentRef.current,
+          {
+            y:
+              innerWidth > 768
+                ? getCenterTopPosition(rootRef!.current!, contentRef!.current!)
+                    .y / 2
+                : getCenterTopPosition(rootRef!.current!, contentRef!.current!)
+                    .y + 20,
+            duration: 0.5,
+          },
+          '<'
+        )
+        .addLabel('finishMoveContent')
+        .to(
+          [imageListRef.current[0], descriptionListRef.current[0]],
+          {
+            yPercent: -100,
+            duration: 0.6,
+          },
+          'finishMoveContent+=0.1'
+        )
+        .to(
+          [imageListRef.current[1], descriptionListRef.current[1]],
+          {
+            y: 0,
+            duration: 0.6,
+          },
+          '<'
+        )
+        .addLabel('finishHideFirstAndShowSecondCards')
+        .to(
+          [imageListRef.current[1], descriptionListRef.current[1]],
+          {
+            yPercent: -100,
+            duration: 0.6,
+          },
+          'finishHideFirstAndShowSecondCards+=0.2'
+        )
+        .to(
+          [imageListRef.current[2], descriptionListRef.current[2]],
+          {
+            y: 0,
+            duration: 0.6,
+          },
+          '<'
+        )
+        .addLabel('finishHideSecondAndShowThirdCards')
+        .to(
+          [imageListRef.current[2], descriptionListRef.current[2]],
+          {
+            yPercent: -100,
+            duration: 0.6,
+          },
+          'finishHideSecondAndShowThirdCards+=0.2'
+        )
+        .to(
+          [imageListRef.current[3], descriptionListRef.current[3]],
+          {
+            y: 0,
+            duration: 0.6,
+          },
+          '<'
+        )
+        .addLabel('finishHideThirdAndShowFourthCards')
+        .to(
+          circleRef.current,
+          {
+            scale: 0,
+            duration: 0.8,
+          },
+          'finishHideThirdAndShowFourthCards'
+        )
+        .to(
+          contentRef.current,
+          {
+            yPercent: -150,
+            opacity: 0,
+            duration: 0.8,
+          },
+          '<'
+        )
+        .from(
+          storeBannerSectionRef.current,
+          {
+            yPercent: 150,
+            duration: 1,
+          },
+          '<'
+        )
+        .addLabel('finishShowStoreBanner')
+        .from(
+          phoneRef.current,
+          {
+            yPercent: 80,
+            duration: 0.5,
+          },
+          'finishShowStoreBanner'
+        )
+        .addLabel('finish');
+    }, 0);
   }, []);
 
   return (

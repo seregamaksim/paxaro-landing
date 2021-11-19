@@ -4,6 +4,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Header } from '@/components/Header';
 import HeaderBottom from '@/pageComponents/HomePage/HeaderBottom/HeaderBottom';
 import LeadForm from '@/pageComponents/HomePage/LeadFormSection/LeadFormSection';
+import { Hero } from '@/pageComponents/HomePage/Hero';
 import { WhyPaxaro } from '@/pageComponents/HomePage/WhyPaxaro';
 import { CalculatorSection } from '@/pageComponents/HomePage/CalculatorSection';
 import { MobileApp } from '@/pageComponents/HomePage/MobileApp';
@@ -14,6 +15,7 @@ import { getSelectorsByUserAgent } from 'react-device-detect';
 import { Algorithm } from '@/pageComponents/HomePage/Algorithm';
 import { Fear } from '@/pageComponents/HomePage/Fear';
 import { PartnerProgramm } from '@/pageComponents/HomePage/PartnerProgramm';
+import { Preloader } from '@/components/Preloader';
 
 interface HomePageProps {
   userAgent: { [key: string]: any };
@@ -21,12 +23,13 @@ interface HomePageProps {
 const Home: NextPage<HomePageProps> = ({ userAgent }) => {
   return (
     <MainLayout>
+      <Preloader />
       <Header userAgent={userAgent}>
         <HeaderBottom />
       </Header>
       <main>
+        <Hero />
         <WhyPaxaro />
-
         <CalculatorSection />
         <Advantages />
         <Education />
@@ -52,6 +55,7 @@ export const getServerSideProps = async ({ locale, req }: any) => ({
       'footer',
       'cookies',
       'leadForm',
+      'hero',
       'whyPaxaro',
       'calculator',
       'plans',

@@ -64,14 +64,15 @@ const LeadForm: FC<LeadFormProps> = ({ className }) => {
       validationSchema={LeadFormSchema}
     >
       <StyledForm className={className}>
-        <FormBlock>
+        <NameFormBlock>
           <InputBorder
             id="leadform-firstname"
             name="firstname"
             type="text"
             label={t('inputNameLabel')}
           />
-        </FormBlock>
+        </NameFormBlock>
+
         <FormBlock>
           <InputBorder
             id="leadform-email"
@@ -80,14 +81,14 @@ const LeadForm: FC<LeadFormProps> = ({ className }) => {
             label={t('inputEmailLabel')}
           />
         </FormBlock>
-        <FormBlock>
+        <SurnameFormBlock>
           <InputBorder
             id="leadform-surname"
             name="surname"
             type="text"
             label={t('inputSurnameLabel')}
           />
-        </FormBlock>
+        </SurnameFormBlock>
         <FormBlock>
           <InputBorder
             id="leadform-phone"
@@ -136,6 +137,17 @@ const FormBlock = styled.div`
     &:last-child {
       margin-bottom: 0;
     }
+  }
+`;
+
+const NameFormBlock = styled(FormBlock)`
+  @media (max-width: 768px) {
+    order: -2;
+  }
+`;
+const SurnameFormBlock = styled(FormBlock)`
+  @media (max-width: 768px) {
+    order: -1;
   }
 `;
 

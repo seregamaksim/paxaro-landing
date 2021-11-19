@@ -44,12 +44,14 @@ const PlansSection: FC = () => {
           price="1200"
           hrefLink={advancedPlanLink}
           data={data.advanced}
+          countRows={5}
         />
         <StyledPlan
           title="Prime"
           price="740"
           hrefLink={primePlanLink}
           data={data.prime}
+          countRows={3}
         />
       </StyledContainer>
     </section>
@@ -58,7 +60,10 @@ const PlansSection: FC = () => {
 
 const StyledContainer = styled(Container)`
   padding-top: 40px;
-  padding-bottom: 40px;
+  padding-bottom: 100px;
+  @media (max-width: 1024px) {
+    padding-bottom: 60px;
+  }
 `;
 
 const SectionHead = styled.div`
