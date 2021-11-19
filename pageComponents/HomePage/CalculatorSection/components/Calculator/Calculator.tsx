@@ -29,10 +29,10 @@ interface CalculatorProps {
   className?: string;
 }
 
-interface Values {
+interface FormValues {
   title: string;
   period: string | number;
-  cash?: string | number;
+  cash: string | number;
 }
 
 export interface ChartValue {
@@ -44,14 +44,14 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
   const isMounted = useIsMounted();
   const { t } = useTranslation('calculator');
   const [dataChart, setDataChart] = useState<ChartValue[]>([]);
-  const [cashValue, setCashValue] = useState(0);
-  const [initiaFormlValue, setInitiaFormlValue] = useState<Values>({
+  const [cashValue, setCashValue] = useState(5000);
+  const [initiaFormlValue, setInitiaFormlValue] = useState<FormValues>({
     title: 'i30',
     period: '360',
     cash: '5000',
   });
 
-  function postData(values: Values) {
+  function requestAndSetChartData(values: FormValues) {
     axios({
       method: 'post',
       url: `${baseUrl}/backtest/chart`,
@@ -67,27 +67,18 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
     { value: '360', label: t('calculator.year') },
   ];
 
-  function submit(values: Values) {
-    if (innerWidth > 768) {
-      const currentValues = {
-        ...values,
-        period: Number(values.period),
-        cash: cashValue,
-      };
+  function handleSubmit(values: FormValues) {
+    const currentValues = {
+      ...values,
+      period: Number(values.period),
+    };
 
-      postData(currentValues);
-    } else {
-      const currentValues = {
-        ...values,
-        period: Number(values.period),
-        cash: Number(values.cash),
-      };
+    currentValues.cash = innerWidth > 768 ? cashValue : Number(values.cash);
 
-      postData(currentValues);
-    }
+    requestAndSetChartData(currentValues);
   }
 
-  const handle = (props: any, type: string) => {
+  const handleSliderRangeChange = (props: any, type: string) => {
     const { value, dragging, index, ...restProps } = props;
     const formatedValue = currency(marks[type][value], {
       separator: '.',
@@ -115,20 +106,21 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
     if (innerWidth > 768) {
       return {
         title: 'i30',
-        period: '30',
+        period: '360',
+        cash: '5000',
       };
     } else {
       return {
         title: 'i30',
-        period: '30',
-        cash: '1000',
+        period: '360',
+        cash: '5000',
       };
     }
   }
 
   useEffect(() => {
     setInitiaFormlValue(getInitialValues());
-    postData({
+    requestAndSetChartData({
       title: 'i30',
       period: 360,
       cash: 5000,
@@ -138,8 +130,8 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
   return (
     <Root className={className}>
       <Wrapper>
-        <Formik initialValues={initiaFormlValue} onSubmit={submit}>
-          {({ values }: FormikProps<Values>) => {
+        <Formik initialValues={initiaFormlValue} onSubmit={handleSubmit}>
+          {({ values }: FormikProps<FormValues>) => {
             return (
               <Form>
                 <Head>
@@ -190,7 +182,11 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                           onChange(e, values.title);
                         }}
                         handle={(e) =>
-                          isMounted ? handle(e, values.title) : <div></div>
+                          isMounted ? (
+                            handleSliderRangeChange(e, values.title)
+                          ) : (
+                            <div></div>
+                          )
                         }
                       />
                       <SliderBorders>
