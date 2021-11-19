@@ -44,44 +44,46 @@ const Plan: FC<PlanProps> = ({
   };
 
   useEffect(() => {
-    const planTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: mainRef.current,
-        start: 'top 70%',
-        end: '1% 71%',
-        toggleActions: 'play none reverse none',
-      },
-    });
+    setTimeout(() => {
+      const planTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: mainRef.current,
+          start: 'top 70%',
+          end: '1% 71%',
+          toggleActions: 'play none reverse none',
+        },
+      });
 
-    planTimeline
-      .addLabel('start')
-      .from(
-        headRef.current,
-        {
-          width: '70%',
-          opacity: 0,
-          duration: 1,
-        },
-        'start'
-      )
-      .from(
-        priceRef.current,
-        {
-          opacity: 0,
-          duration: 0.7,
-        },
-        '>-0.8'
-      )
-      .from(
-        listRef.current,
-        {
-          opacity: 0,
-          x: 15,
-          duration: 0.7,
-          stagger: 0.1,
-        },
-        '>'
-      );
+      planTimeline
+        .addLabel('start')
+        .from(
+          headRef.current,
+          {
+            width: '70%',
+            opacity: 0,
+            duration: 1,
+          },
+          'start'
+        )
+        .from(
+          priceRef.current,
+          {
+            opacity: 0,
+            duration: 0.7,
+          },
+          '>-0.8'
+        )
+        .from(
+          listRef.current,
+          {
+            opacity: 0,
+            x: 15,
+            duration: 0.7,
+            stagger: 0.1,
+          },
+          '>'
+        );
+    }, 0);
   }, []);
   return (
     <Root className={className} ref={mainRef}>

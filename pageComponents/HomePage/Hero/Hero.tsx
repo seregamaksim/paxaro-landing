@@ -31,6 +31,9 @@ const Hero: FC = () => {
   };
 
   const renderCanvas = () => {
+    if (!canvasRef.current) {
+      return;
+    }
     const context = canvasRef.current!.getContext('2d')!;
     const canvasWrapCurrent = canvasWrapRef.current!;
     context.canvas.width = canvasWrapCurrent.offsetWidth;
@@ -45,7 +48,10 @@ const Hero: FC = () => {
   };
 
   function renderImage(image: HTMLImageElement) {
-    const context = canvasRef!.current!.getContext('2d')!;
+    if (!canvasRef.current) {
+      return;
+    }
+    const context = canvasRef.current!.getContext('2d')!;
     const canvasWrapCurrent = canvasWrapRef.current!;
 
     context.drawImage(
@@ -56,7 +62,6 @@ const Hero: FC = () => {
       (canvasWrapCurrent.offsetWidth * image.height) / image.width
     );
   }
-
   function preloadImages() {
     for (let i = 0; i <= frameCount; i++) {
       const img = new Image();
@@ -78,72 +83,76 @@ const Hero: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (innerWidth > 1024) {
-      if (!canvasRef.current || images.length < 1) {
-        return;
-      }
+    setTimeout(() => {
       const heroTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: rootRef.current,
           start: 'top top',
           end: () => `+=${innerHeight * 1.5}`,
-          refreshPriority: 1,
+
           scrub: true,
           pin: true,
         },
       });
+      if (innerWidth > 1024) {
+        if (!canvasRef.current || images.length < 1) {
+          return;
+        }
 
-      heroTimeline
-        .addLabel('start')
-        .to(
-          headRef.current,
-          {
-            yPercent: -60,
-            opacity: 0,
-            duration: 0.5,
-          },
-          'start'
-        )
-        .addLabel('hideHead')
-        .to(
-          notebook,
-          {
-            frame: frameCount - 1,
-            snap: 'frame',
-            duration: 2,
-            onUpdate: () => {
-              if (heroTimeline.scrollTrigger?.progress === 0) {
-                renderImage(images[0]);
-                return;
-              }
-              renderImage(images[notebook.frame]);
+        heroTimeline
+          .addLabel('start')
+          .to(
+            headRef.current,
+            {
+              yPercent: -60,
+              opacity: 0,
+              duration: 0.5,
             },
-          },
-          'hideHead-=0.2'
-        )
-        .addLabel('finish');
-    }
+            'start'
+          )
+          .addLabel('hideHead')
+          .to(
+            notebook,
+            {
+              frame: frameCount - 1,
+              snap: 'frame',
+              duration: 2,
+              onUpdate: () => {
+                if (heroTimeline.scrollTrigger?.progress === 0) {
+                  renderImage(images[0]);
+                  return;
+                }
+                renderImage(images[notebook.frame]);
+              },
+            },
+            'hideHead-=0.2'
+          )
+          .addLabel('finish');
+      }
+    }, 0);
   }, [isLoadImages]);
 
   return (
-    <Root ref={rootRef}>
-      <StyledContainer>
-        <Head ref={headRef}>
-          <SectionTitle>{t('title')}</SectionTitle>
-          <SectionText>{t('subtitle')}</SectionText>
-          <Link href="#" passHref>
-            <Button text={t('btnText')} isLink />
-          </Link>
-        </Head>
+    <div>
+      <Root ref={rootRef}>
+        <StyledContainer>
+          <Head ref={headRef}>
+            <SectionTitle>{t('title')}</SectionTitle>
+            <SectionText>{t('subtitle')}</SectionText>
+            <Link href="#" passHref>
+              <Button text={t('btnText')} isLink />
+            </Link>
+          </Head>
 
-        <CanvasWrapper ref={canvasWrapRef}>
-          <canvas ref={canvasRef} />
-        </CanvasWrapper>
-        <NotebookImageWrap>
-          <ImageNext src={heroCollageImg} alt="Macbook and iPhone" />
-        </NotebookImageWrap>
-      </StyledContainer>
-    </Root>
+          <CanvasWrapper ref={canvasWrapRef}>
+            <canvas ref={canvasRef} />
+          </CanvasWrapper>
+          <NotebookImageWrap>
+            <ImageNext src={heroCollageImg} alt="Macbook and iPhone" />
+          </NotebookImageWrap>
+        </StyledContainer>
+      </Root>
+    </div>
   );
 };
 
