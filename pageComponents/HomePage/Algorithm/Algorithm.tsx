@@ -256,7 +256,7 @@ const Algorithm: FC = () => {
           <StoresList>
             <StoreItem>
               <Link href={appStoreLink} passHref>
-                <StoreLink>
+                <StoreLink target="_blank">
                   <AppStoreImgWrapper>
                     <AppStoreImg />
                   </AppStoreImgWrapper>
@@ -265,7 +265,7 @@ const Algorithm: FC = () => {
             </StoreItem>
             <StoreItem>
               <Link href={googlePlayLink} passHref>
-                <StoreLink>
+                <StoreLink target="_blank">
                   <GooglePlayImgWrapper>
                     <GooglePlayImg />
                   </GooglePlayImgWrapper>

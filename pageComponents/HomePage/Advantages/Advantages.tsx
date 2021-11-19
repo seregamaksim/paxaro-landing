@@ -1,6 +1,5 @@
 import { Container } from '@/components/Container';
 import { SectionLabel } from '@/components/SectionLabel';
-import { SectionTitle } from '@/components/SectionTitle';
 import { FC, useEffect, useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -336,7 +335,11 @@ const Advantages: FC = () => {
         <Cirle ref={circleRef} />
         <SectionHead ref={headRef}>
           <StyledLabel text={t('label')} />
-          <StyledTitle text={t('title')} />
+          <SectionTitle>
+            <Trans t={t} i18nKey="title">
+              Почему мы <br /> уверены в Paxaro App?
+            </Trans>
+          </SectionTitle>
           <Subtitle>{t('subtitle')}</Subtitle>
         </SectionHead>
         <DescriptionList>
@@ -504,8 +507,22 @@ const StyledLabel = styled(SectionLabel)`
   }
 `;
 
-const StyledTitle = styled(SectionTitle)`
+const SectionTitle = styled.h2`
+  font-size: 36px;
+  line-height: 50px;
+  font-weight: bold;
+  color: var(--black2);
   margin-bottom: 24px;
+  br {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    font-size: 24px;
+    line-height: 34px;
+    br {
+      display: block;
+    }
+  }
 `;
 
 const Subtitle = styled.p`

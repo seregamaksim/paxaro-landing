@@ -1,6 +1,5 @@
 import { Container } from '@/components/Container';
 import { SectionLabel } from '@/components/SectionLabel';
-import { SectionTitle } from '@/components/SectionTitle';
 import { FC, useEffect, useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -13,6 +12,7 @@ import coin1Icon from '@/assets/images/coin-icon1.svg';
 import coin2Icon from '@/assets/images/coin-icon2.svg';
 import coin3Icon from '@/assets/images/coin-icon3.svg';
 import gridWithArrow from '@/assets/images/grid-with-arrow.svg';
+import { useRouter } from 'next/router';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -20,7 +20,7 @@ if (typeof window !== 'undefined') {
 
 const WhyPaxaro: FC = () => {
   const { t } = useTranslation('whyPaxaro');
-
+  const { locale } = useRouter();
   const mainRef = useRef<HTMLElement>(null);
   const whyPaxaroTitleRef = useRef<HTMLParagraphElement>(null);
   const desciptionBlockRef = useRef<HTMLDivElement>(null);
@@ -392,7 +392,6 @@ const WhyPaxaro: FC = () => {
               x: getPixelsByVw(70.4),
               y: 470,
               duration: 0.6,
-              // scale: 0.7,
             },
             '<'
           )
@@ -410,7 +409,7 @@ const WhyPaxaro: FC = () => {
             {
               x: getPixelsByVw(48.6),
               y: 490,
-              // scale: 0.6,
+
               duration: 0.6,
             },
             '<'
@@ -420,7 +419,7 @@ const WhyPaxaro: FC = () => {
             {
               x: getPixelsByVw(62.5),
               y: 520,
-              // scale: 0.6,
+
               duration: 0.6,
             },
             '<'
@@ -515,79 +514,115 @@ const WhyPaxaro: FC = () => {
   }, []);
 
   return (
-    <div>
-      <Root ref={mainRef}>
-        <StyledContainer>
-          <SectionHead>
-            <StyledSectionLabel text={t('label')} />
-            <StyledSectionTitle text={t('title')} />
-          </SectionHead>
+    <Root ref={mainRef}>
+      <StyledContainer>
+        <SectionHead>
+          <StyledSectionLabel text={t('label')} />
+          <SectionTitle>
+            <Trans t={t} i18nKey="title">
+              Почему мы <br /> уверены в Paxaro App?
+            </Trans>
+          </SectionTitle>
+        </SectionHead>
 
-          <GridWithArrowWrap ref={gridWithArrowRef}>
-            <GridWithArrow loading="eager" />
-          </GridWithArrowWrap>
-          <BitcoinWrap ref={bitcoinRef}>
-            <Bitcoin loading="eager" />
-          </BitcoinWrap>
-          <EthereumWrap ref={ethereumRef}>
-            <Ethereum loading="eager" />
-          </EthereumWrap>
-          <Coin1Wrap ref={coin1Ref}>
-            <Coin1 loading="eager" />
-          </Coin1Wrap>
-          <Coin2Wrap ref={coin2Ref}>
-            <Coin2 loading="eager" />
-          </Coin2Wrap>
-          <Coin3Wrap ref={coin3Ref}>
-            <Coin3 loading="eager" />
-          </Coin3Wrap>
+        <GridWithArrowWrap ref={gridWithArrowRef}>
+          <GridWithArrow loading="eager" />
+        </GridWithArrowWrap>
+        <BitcoinWrap ref={bitcoinRef}>
+          <Bitcoin loading="eager" />
+        </BitcoinWrap>
+        <EthereumWrap ref={ethereumRef}>
+          <Ethereum loading="eager" />
+        </EthereumWrap>
+        <Coin1Wrap ref={coin1Ref}>
+          <Coin1 loading="eager" />
+        </Coin1Wrap>
+        <Coin2Wrap ref={coin2Ref}>
+          <Coin2 loading="eager" />
+        </Coin2Wrap>
+        <Coin3Wrap ref={coin3Ref}>
+          <Coin3 loading="eager" />
+        </Coin3Wrap>
 
-          <Content>
-            <ContentTitle ref={whyPaxaroTitleRef}>
-              <Trans t={t} i18nKey="whyPaxaro">
-                <span>Почему именно</span>
-                <br /> Paxaro App?
-              </Trans>
-            </ContentTitle>
-            <DescriptionsWrapper ref={desciptionBlockRef}>
-              <DescriptionsCounter>
-                <DescriptionCounterNumbersWrap>
-                  <DescriptionCounterText ref={counterFirstNumberRef}>
-                    1
-                  </DescriptionCounterText>
-                  <DescriptionCounterTextAbsolute ref={counterSecondNumberRef}>
-                    2
-                  </DescriptionCounterTextAbsolute>
-                </DescriptionCounterNumbersWrap>
-                <DescriptionCounterLineWrap>
-                  <span ref={counterLineBarRef}></span>
-                </DescriptionCounterLineWrap>
-              </DescriptionsCounter>
-              <DescriptionCounterTextsWrapper>
-                <DescriptionCounterTextWrap ref={descriptionTextWrapFirstRef}>
-                  <DescriptionText>{t('description1.text1')}</DescriptionText>
+        <Content>
+          <ContentTitle ref={whyPaxaroTitleRef}>
+            <Trans t={t} i18nKey="whyPaxaro">
+              <span>Почему именно</span>
+              <br /> Paxaro App?
+            </Trans>
+          </ContentTitle>
+          <DescriptionsWrapper ref={desciptionBlockRef}>
+            <DescriptionsCounter>
+              <DescriptionCounterNumbersWrap>
+                <DescriptionCounterText ref={counterFirstNumberRef}>
+                  1
+                </DescriptionCounterText>
+                <DescriptionCounterTextAbsolute ref={counterSecondNumberRef}>
+                  2
+                </DescriptionCounterTextAbsolute>
+              </DescriptionCounterNumbersWrap>
+              <DescriptionCounterLineWrap>
+                <span ref={counterLineBarRef}></span>
+              </DescriptionCounterLineWrap>
+            </DescriptionsCounter>
+            <DescriptionCounterTextsWrapper>
+              <DescriptionCounterTextWrap ref={descriptionTextWrapFirstRef}>
+                <DescriptionText>{t('description1.text1')}</DescriptionText>
+                {locale === 'ru' ? (
+                  <DescriptionText>
+                    В случае с альтернативными монетами вы скорее покупаете
+                    акции, чем валюту.
+                    <br />
+                    За каждой из них стоит технология,
+                    <br /> которая решает определенную проблему
+                    <br /> — похоже на инвестиции в стартап.
+                  </DescriptionText>
+                ) : (
                   <DescriptionText>{t('description1.text2')}</DescriptionText>
-                </DescriptionCounterTextWrap>
-                <DescriptionCounterTextWrapAbsolute
-                  ref={descriptionTextWrapSecondRef}
-                >
+                )}
+              </DescriptionCounterTextWrap>
+              <DescriptionCounterTextWrapAbsolute
+                ref={descriptionTextWrapSecondRef}
+              >
+                {locale === 'ru' ? (
+                  <DescriptionText>
+                    У проектов с капитализацией ниже <br />
+                    чем у Bitcoin, более высокий потенциальный <br /> рост.
+                    Альтернативные токены, у которых <br />
+                    есть преимущество по стоимости <br />и скорости транзакций,
+                    повышают <br />
+                    интерес к индустрии. Такие компании <br />
+                    могут обрести капитализацию свыше <br />1 млрд $ за
+                    сравнительно короткий <br /> промежуток времени.
+                  </DescriptionText>
+                ) : (
                   <DescriptionText>{t('description2.text1')}</DescriptionText>
-                </DescriptionCounterTextWrapAbsolute>
-              </DescriptionCounterTextsWrapper>
-            </DescriptionsWrapper>
-            <SecondDescriptionBlockRef ref={secondDescriptionBlockRef}>
-              <DescriptionText>{t('description3.text1')}</DescriptionText>
-            </SecondDescriptionBlockRef>
-          </Content>
-        </StyledContainer>
-      </Root>
-    </div>
+                )}
+              </DescriptionCounterTextWrapAbsolute>
+            </DescriptionCounterTextsWrapper>
+          </DescriptionsWrapper>
+          <SecondDescriptionBlockRef ref={secondDescriptionBlockRef}>
+            <DescriptionText>
+              <Trans t={t} i18nKey="description3.text1">
+                Индустрия растет, вместе с ней растет и индекс. За пя Bitcoin
+                вырос <b>в 144 раза</b>, а индексы Paxaro A доходность{' '}
+                <b>в 700+ раз*</b>. С Paxaro App вы охватываете <b>до 95%</b>{' '}
+                рыночной капитализации криптовалют постоянно обновляется и вы
+                всегда находитесь в топе индустрии.
+              </Trans>
+            </DescriptionText>
+            <DescriptionText>{t('description3.text2')}</DescriptionText>
+          </SecondDescriptionBlockRef>
+        </Content>
+      </StyledContainer>
+    </Root>
   );
 };
 
 const Root = styled.section`
   height: 100vh;
 `;
+
 const StyledContainer = styled(Container)`
   padding-top: 86px;
   position: relative;
@@ -609,8 +644,17 @@ const StyledSectionLabel = styled(SectionLabel)`
   margin-bottom: 15px;
 `;
 
-const StyledSectionTitle = styled(SectionTitle)`
-  max-width: 454px;
+const SectionTitle = styled.h2`
+  font-size: 36px;
+  line-height: 50px;
+  font-weight: bold;
+  color: var(--black2);
+  margin-bottom: 24px;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+    line-height: 34px;
+  }
 `;
 
 const Content = styled.div`
@@ -742,10 +786,17 @@ const DescriptionText = styled.p`
   &:last-child {
     margin-bottom: 0;
   }
-
+  br {
+    display: none;
+  }
   @media (max-width: 1024px) {
     font-size: 14px;
     line-height: 20px;
+  }
+  @media (max-width: 375px) {
+    br {
+      display: block;
+    }
   }
 `;
 
@@ -755,21 +806,29 @@ const SecondDescriptionBlockRef = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  max-width: 720px;
-  padding: 58px 35px;
+  max-width: 757px;
+  padding: 40px;
   background: var(--white);
   box-shadow: 0px 6px 36px rgba(104, 104, 104, 0.08);
   border-radius: 40px;
   will-change: transform, opacity;
   & ${DescriptionText} {
-    font-weight: 600;
     text-align: center;
+  }
+  & ${DescriptionText}:last-child {
+    font-size: 14px;
+    line-height: 20px;
+    max-width: 456px;
+    margin: 0 auto;
   }
   @media (max-height: 700px) {
     top: 35%;
   }
   @media (max-width: 1024px) {
     top: 75%;
+  }
+  @media (max-width: 600px) {
+    padding: 33px 14px;
   }
 `;
 

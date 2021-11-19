@@ -1,6 +1,14 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { ActiveLink } from '@/components/ActiveLink';
+import Link from 'next/link';
+import {
+  instagramLink,
+  telegramLink,
+  twitterLink,
+  vkLink,
+  youtubeLink,
+} from '@/constants';
 
 interface SocialListProps {
   className?: string;
@@ -9,29 +17,29 @@ const SocialList: FC<SocialListProps> = ({ className }) => {
   return (
     <Root className={className}>
       <Item>
-        <ActiveLink href="https://dev.to/">
-          <ItemLink>Instagram</ItemLink>
-        </ActiveLink>
+        <Link href={instagramLink} passHref>
+          <ItemLink target="_blank">Instagram</ItemLink>
+        </Link>
       </Item>
       <Item>
-        <ActiveLink href="https://dev.to/">
-          <ItemLink>VC</ItemLink>
-        </ActiveLink>
+        <Link href={vkLink} passHref>
+          <ItemLink target="_blank">VC</ItemLink>
+        </Link>
       </Item>
       <Item>
-        <ActiveLink href="https://dev.to/">
-          <ItemLink>Twitter</ItemLink>
-        </ActiveLink>
+        <Link href={twitterLink} passHref>
+          <ItemLink target="_blank">Twitter</ItemLink>
+        </Link>
       </Item>
       <Item>
-        <ActiveLink href="https://dev.to/">
-          <ItemLink>YouTube</ItemLink>
-        </ActiveLink>
+        <Link href={youtubeLink} passHref>
+          <ItemLink target="_blank">YouTube</ItemLink>
+        </Link>
       </Item>
       <Item>
-        <ActiveLink href="https://dev.to/">
-          <ItemLink>Telegram</ItemLink>
-        </ActiveLink>
+        <Link href={telegramLink} passHref>
+          <ItemLink target="_blank">Telegram</ItemLink>
+        </Link>
       </Item>
     </Root>
   );

@@ -44,12 +44,14 @@ const PlansSection: FC = () => {
           price="1200"
           hrefLink={advancedPlanLink}
           data={data.advanced}
+          countRows={5}
         />
         <StyledPlan
           title="Prime"
           price="740"
           hrefLink={primePlanLink}
           data={data.prime}
+          countRows={3}
         />
       </StyledContainer>
     </section>

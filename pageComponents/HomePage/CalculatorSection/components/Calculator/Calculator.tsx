@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import { Form, Formik, FormikProps, useField } from 'formik';
-import Slider, { Handle, SliderTooltip } from 'rc-slider';
+import Slider, { Handle, HandleProps, SliderTooltip } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import currency from 'currency.js';
 import { useTranslation } from 'react-i18next';
@@ -15,6 +15,9 @@ import {
   portfolioTypeOptions,
 } from './staticData';
 
+import axios, { AxiosResponse } from 'axios';
+import { baseUrl } from '@/constants';
+
 const SelectUiNoSSR = dynamic(
   () => import('@/ui/components/SelectUI/SelectUI'),
   {
@@ -26,72 +29,37 @@ interface CalculatorProps {
   className?: string;
 }
 
-interface Values {
-  porfolio_type: string;
-  date_days: string;
-  cash?: string;
+interface FormValues {
+  title: string;
+  period: string | number;
+  cash: string | number;
 }
 
-const secondData = [
-  {
-    name: '2001-12-27',
-    value: 2400,
-  },
-  {
-    name: '2002-01-27',
-    value: 1398,
-  },
-  {
-    name: '2002-01-27',
-    value: 9800,
-  },
-  {
-    name: '2002-01-27',
-    value: 3908,
-  },
-  {
-    name: '2002-01-27',
-    value: 4800,
-  },
-  {
-    name: '2002-01-27',
-    value: 3800,
-  },
-  {
-    name: '2002-01-27',
-    value: 4300,
-  },
-  {
-    name: '2002-01-27',
-    value: 4800,
-  },
-  {
-    name: '2002-01-27',
-    value: 3800,
-  },
-  {
-    name: '2002-01-27',
-    value: 5639,
-  },
-  {
-    name: '2002-01-27',
-    value: 1639,
-  },
-  {
-    name: '2002-01-27',
-    value: 3639,
-  },
-];
+export interface ChartValue {
+  date: string;
+  profit: number;
+}
 
 const Calculator: FC<CalculatorProps> = ({ className }) => {
   const isMounted = useIsMounted();
   const { t } = useTranslation('calculator');
-  const [cashValue, setCashValue] = useState(0);
-  const [initiaFormlValue, setInitiaFormlValue] = useState<Values>({
-    porfolio_type: 'i30',
-    date_days: '30',
-    cash: '1000',
+  const [dataChart, setDataChart] = useState<ChartValue[]>([]);
+  const [cashValue, setCashValue] = useState(5000);
+  const [initiaFormlValue, setInitiaFormlValue] = useState<FormValues>({
+    title: 'i30',
+    period: '360',
+    cash: '5000',
   });
+
+  function requestAndSetChartData(values: FormValues) {
+    axios({
+      method: 'post',
+      url: `${baseUrl}/backtest/chart`,
+      data: values,
+    }).then(({ data }: AxiosResponse<ChartValue[]>) => {
+      setDataChart(data);
+    });
+  }
 
   const dateDaysOptions = [
     { value: '30', label: t('calculator.month') },
@@ -99,18 +67,18 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
     { value: '360', label: t('calculator.year') },
   ];
 
-  function submit(e: any) {
-    if (innerWidth > 768) {
-      console.log('submit', {
-        ...e,
-        cash: cashValue.toString(),
-      });
-    } else {
-      console.log('submit', e);
-    }
+  function handleSubmit(values: FormValues) {
+    const currentValues = {
+      ...values,
+      period: Number(values.period),
+    };
+
+    currentValues.cash = innerWidth > 768 ? cashValue : Number(values.cash);
+
+    requestAndSetChartData(currentValues);
   }
 
-  const handle = (props: any, type: any) => {
+  const handleSliderRangeChange = (props: any, type: string) => {
     const { value, dragging, index, ...restProps } = props;
     const formatedValue = currency(marks[type][value], {
       separator: '.',
@@ -130,51 +98,51 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
     );
   };
 
-  function onChange(e: any, type: string) {
-    setCashValue(marks[type][e]);
-  }
-
-  function getInitialValues() {
-    if (innerWidth > 768) {
-      return {
-        porfolio_type: 'i30',
-        date_days: '30',
-      };
-    } else {
-      return {
-        porfolio_type: 'i30',
-        date_days: '30',
-        cash: '1000',
-      };
-    }
+  function onChange(e: number, type: string) {
+    setCashValue(Number(marks[type][e]));
   }
 
   useEffect(() => {
-    setInitiaFormlValue(getInitialValues());
+    requestAndSetChartData({
+      title: 'i30',
+      period: 360,
+      cash: 5000,
+    });
   }, []);
 
   return (
     <Root className={className}>
       <Wrapper>
-        <Formik initialValues={initiaFormlValue} onSubmit={submit}>
-          {({ values }: FormikProps<Values>) => {
+        <Formik initialValues={initiaFormlValue} onSubmit={handleSubmit}>
+          {({ values }: FormikProps<FormValues>) => {
+            const currentPlanMarksObject = marks[values.title];
+            const currentPlanMarksArray = Object.keys(currentPlanMarksObject);
+
+            const bottomBorderSliderValue =
+              currentPlanMarksObject[currentPlanMarksArray[0]];
+
+            const upperBorderSliderValue =
+              currentPlanMarksObject[
+                currentPlanMarksArray[currentPlanMarksArray.length - 1]
+              ];
+
             return (
               <Form>
                 <Head>
                   <HeadSection>
                     <HeadLabel>{t('calculator.index')}</HeadLabel>
                     <SelectUiNoSSR
-                      name="porfolio_type"
+                      name="title"
                       options={portfolioTypeOptions}
-                      id="porfolio_type"
+                      id="title"
                     />
                   </HeadSection>
                   <HeadSection>
                     <HeadLabel>{t('calculator.period')}</HeadLabel>
                     <SelectUiNoSSR
-                      name="date_days"
+                      name="period"
                       options={dateDaysOptions}
-                      id="date_days"
+                      id="period"
                     />
                   </HeadSection>
 
@@ -182,7 +150,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                     <HeadLabel>{t('calculator.investmentsAmount')}</HeadLabel>
                     <SelectUiNoSSR
                       name="cash"
-                      options={investmentsAmountOptions[values.porfolio_type]}
+                      options={investmentsAmountOptions[values.title]}
                       id="cash"
                     />
                   </CashSelectSection>
@@ -191,42 +159,30 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                     <HeadLabel>{t('calculator.investmentsAmount')}</HeadLabel>
                     <SliderWrapper>
                       <SliderBorders>
-                        {currency(
-                          marks[values.porfolio_type][
-                            Object.keys(marks[values.porfolio_type])[0]
-                          ],
-                          {
-                            precision: 0,
-                          }
-                        ).format()}
+                        {currency(bottomBorderSliderValue, {
+                          precision: 0,
+                        }).format()}
                       </SliderBorders>
                       <StyledSlider
-                        marks={marks[values.porfolio_type]}
+                        marks={marks[values.title]}
+                        defaultValue={14}
                         step={null}
                         onChange={(e) => {
-                          onChange(e, values.porfolio_type);
+                          onChange(e, values.title);
                         }}
                         handle={(e) =>
                           isMounted ? (
-                            handle(e, values.porfolio_type)
+                            handleSliderRangeChange(e, values.title)
                           ) : (
                             <div></div>
                           )
                         }
                       />
                       <SliderBorders>
-                        {currency(
-                          marks[values.porfolio_type][
-                            Object.keys(marks[values.porfolio_type])[
-                              Object.keys(marks[values.porfolio_type]).length -
-                                1
-                            ]
-                          ],
-                          {
-                            separator: '.',
-                            precision: 0,
-                          }
-                        ).format()}
+                        {currency(upperBorderSliderValue, {
+                          separator: '.',
+                          precision: 0,
+                        }).format()}
                       </SliderBorders>
                     </SliderWrapper>
                   </FullHeadSection>
@@ -239,7 +195,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                   </HeadSection>
                 </Head>
                 <ChartWrap>
-                  <StyledChart data={secondData} />
+                  <StyledChart data={dataChart} />
                 </ChartWrap>
                 <Footer>
                   <ProfitBlock>
