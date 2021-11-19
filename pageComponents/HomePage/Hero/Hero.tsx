@@ -84,17 +84,17 @@ const Hero: FC = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      const heroTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: 'top top',
-          end: () => `+=${innerHeight * 1.5}`,
-
-          scrub: true,
-          pin: true,
-        },
-      });
       if (innerWidth > 1024) {
+        const heroTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: rootRef.current,
+            start: 'top top',
+            end: () => `+=${innerHeight * 1.5}`,
+
+            scrub: true,
+            pin: true,
+          },
+        });
         if (!canvasRef.current || images.length < 1) {
           return;
         }
