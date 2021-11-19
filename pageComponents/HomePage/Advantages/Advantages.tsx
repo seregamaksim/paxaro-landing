@@ -277,7 +277,8 @@ const Advantages: FC = () => {
                 10,
               duration: 1,
             }
-          );
+          )
+          .addLabel('finish');
       } else {
         advantagesTimeline
           .addLabel('start')
@@ -324,7 +325,8 @@ const Advantages: FC = () => {
               duration: 0.7,
             },
             'finishMoveSecondScreen+=0.2'
-          );
+          )
+          .addLabel('finish');
       }
     }, 0);
   }, []);
