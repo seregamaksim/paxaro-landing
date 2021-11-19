@@ -50,12 +50,12 @@ const MobileApp: FC = () => {
             <StoresBlockText>{t('mobileApp')}</StoresBlockText>
             <StoresBlockList>
               <Link href={appStoreLink} passHref>
-                <StoresBlockLink>
+                <StoresBlockLink target="_blank">
                   <AppStoreImg />
                 </StoresBlockLink>
               </Link>
               <Link href={googlePlayLink} passHref>
-                <StoresBlockLink>
+                <StoresBlockLink target="_blank">
                   <GooglePlayImg />
                 </StoresBlockLink>
               </Link>

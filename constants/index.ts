@@ -6,3 +6,11 @@ export const advancedPlanLink = 'https://kadex.io/calculator';
 export const primePlanLink = 'https://kadex.io/calculator';
 
 export const educationLink = '#';
+
+export const baseUrl = 'https://web-api-test.kadex.io';
+
+export const instagramLink = '#';
+export const vkLink = '#';
+export const twitterLink = '#';
+export const youtubeLink = '#';
+export const telegramLink = '#';
