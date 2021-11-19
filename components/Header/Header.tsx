@@ -17,6 +17,7 @@ const Header: FC<HeaderProps> = ({ children, userAgent }) => {
   const throttleHandleResize = throttle(500, handleResize);
 
   useEffect(() => {
+    handleResize();
     window.addEventListener('resize', throttleHandleResize);
     return () => window.removeEventListener('resize', throttleHandleResize);
   }, []);
