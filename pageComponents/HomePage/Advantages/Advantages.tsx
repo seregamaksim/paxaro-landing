@@ -521,10 +521,6 @@ const SectionTitle = styled.h2`
   }
 `;
 
-// const StyledTitle = styled(SectionTitle)`
-//   margin-bottom: 24px;
-// `;
-
 const Subtitle = styled.p`
   font-size: 24px;
   line-height: 34px;

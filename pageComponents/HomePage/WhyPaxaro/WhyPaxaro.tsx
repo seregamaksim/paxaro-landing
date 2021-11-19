@@ -1,6 +1,5 @@
 import { Container } from '@/components/Container';
 import { SectionLabel } from '@/components/SectionLabel';
-// import { SectionTitle } from '@/components/SectionTitle';
 import { FC, useEffect, useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import styled from 'styled-components';

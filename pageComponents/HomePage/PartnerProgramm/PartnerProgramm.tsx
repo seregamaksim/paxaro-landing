@@ -514,12 +514,7 @@ const PartnerProgramm: FC = () => {
   );
 };
 
-const Root = styled.section`
-  /* height: 100vh;
-  @media (max-width: 1024px) {
-    height: auto;
-  } */
-`;
+const Root = styled.section``;
 
 const StyledContainer = styled(Container)`
   padding-bottom: 20px;
