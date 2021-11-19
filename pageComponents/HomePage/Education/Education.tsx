@@ -236,7 +236,7 @@ const Education: FC = () => {
               <source src="/videos/education-mobile.webm" />
             </MobileVideo>
             <IphoneImgWrapper>
-              <Image src={mockupIphone} alt="Iphone" />
+              <Image src={mockupIphone} alt="Iphone" loading="eager" />
             </IphoneImgWrapper>
           </MobileVideoWrapper>
           <InfoLinkWrapper ref={infoLinkWrapperRef}>
@@ -246,7 +246,7 @@ const Education: FC = () => {
             </InfoLinkContent>
           </InfoLinkWrapper>
           <NotebookImageWrapper ref={notebookImageWrapperRef}>
-            <Image src={mockupMackbook} alt="Mackbook Pro" />
+            <Image src={mockupMackbook} alt="Mackbook Pro" loading="eager" />
           </NotebookImageWrapper>
         </NotebookWrapper>
       </SectionContent>
@@ -460,6 +460,9 @@ const DescriptionText = styled.p`
   @media (max-width: 768px) {
     font-size: 14px;
     line-height: 20px;
+  }
+  @media (max-width: 400px) {
+    max-width: 300px;
   }
 `;
 
