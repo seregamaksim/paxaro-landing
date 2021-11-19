@@ -1,20 +1,20 @@
 {
-  "label": "Преимущества",
-  "title": "Почему мы уверены в Paxaro App?",
-  "subtitle": "Мы проверили инструмент на реальных инвестициях - он позволяет управлять активами просто и быстро",
+  "label": "Advantages",
+  "title": "Why do we believe in Paxaro App?",
+  "subtitle": "We tested the tool against the real investments and found out that it allows managing the assets in simple and quick manner",
   "card1": {
-    "styledTitle": "<0>Активы</0><1/> хранятся <3/> на бирже",
-    "normalTitle": "Активы хранятся на бирже",
-    "description": "Ваши деньги не хранятся у нас. Все активы размещены на официальной бирже. Она страхует их и шифрует данные. Взлом этих систем невозможен."
+    "styledTitle": "<0>The assets</0><1/> are kept <3/> on the stock exchange",
+    "normalTitle": "The assets are kept on the stock exchange",
+    "description": "You do not keep your money. All assets are allocated on the official stock exchange. It secures it and encodes the data. It is impossible to crack these systems."
   },
   "card2": {
-    "styledTitle": "<0>Алгоритм</0><1/> минимизирует <3/> риски",
-    "normalTitle": "Алгоритм минимизирует риски",
-    "description": "Риски минимизированы. Наш алгоритм умеет учитывать все изменения курсов и рыночные тренды. Поэтому пакет постоянно диверсифицируется в соответствии с ситуацией на бирже."
+    "styledTitle": "<0>The algorithm</0><1/> minimizes <3/> the risks",
+    "normalTitle": "The algorithm minimizes the risks",
+    "description": "The risks are minimized. Our algorithm can take into account all changes in exchange rates and market trends. That`s why the package is to be diversified all the time depending on the exchange stock situation."
   },
   "card3": {
-    "styledTitle": "<0>Доходность</0><1/> зависит <3/> от сроков",
-    "normalTitle": "Доходность зависит от сроков",
-    "description": "Доходность зависит от сроков. Чем дольше инвестиции находятся в обороте, тем лучше алгоритм с ними работает. Практика показала, что инвестиции в долгую приносят большую прибыль."
+    "styledTitle": "<0>The profitability</0><1/> depends on <3/> the timing",
+    "normalTitle": "The profitability depends on the timing",
+    "description": "The profitability depends on the timing. The more investments are distributed, the better algorithm is cooperating with it. The practice showed that long investments are more profitable."
   }
 }
