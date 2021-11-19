@@ -51,328 +51,330 @@ const PartnerProgramm: FC = () => {
   }
 
   useEffect(() => {
-    const bonusTarget = {
-      value: bonusValue,
-    };
-    const totalBonusTarget = {
-      value: totalBonusValue,
-    };
-    const sliderValueTarget = {
-      value: sliderValue,
-    };
-    const partnerProgrammTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: rootRef.current,
-        start: 'top top',
-        end: () => (innerWidth > 768 ? '+=2000' : '+=1500'),
-        pin: true,
-        scrub: 0,
-        snap: {
-          snapTo: 'labels',
-          duration: { min: 0.2, max: 1 },
-          delay: 0.2,
-          ease: 'power3.out',
+    setTimeout(() => {
+      const bonusTarget = {
+        value: bonusValue,
+      };
+      const totalBonusTarget = {
+        value: totalBonusValue,
+      };
+      const sliderValueTarget = {
+        value: sliderValue,
+      };
+      const partnerProgrammTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: rootRef.current,
+          start: 'top top',
+          end: () => (innerWidth > 768 ? '+=2000' : '+=1500'),
+          pin: true,
+          scrub: 0,
+          snap: {
+            snapTo: 'labels',
+            duration: { min: 0.2, max: 1 },
+            delay: 0.2,
+            ease: 'power3.out',
+          },
+          onUpdate: () => {
+            setBonusValue(bonusTarget.value);
+            setTotalBonusValue(totalBonusTarget.value);
+            setSliderValue(sliderValueTarget.value);
+          },
         },
-        onUpdate: () => {
-          setBonusValue(bonusTarget.value);
-          setTotalBonusValue(totalBonusTarget.value);
-          setSliderValue(sliderValueTarget.value);
-        },
-      },
-    });
+      });
 
-    if (innerWidth > 768) {
-      partnerProgrammTimeline
-        .addLabel('start')
+      if (innerWidth > 768) {
+        partnerProgrammTimeline
+          .addLabel('start')
 
-        .to(
-          bonusTarget,
-          {
-            duration: 1,
-            value: getSums(3).sum1,
-            roundProps: 'value',
-          },
-          'start+=0.2'
-        )
-        .to(
-          totalBonusTarget,
-          {
-            duration: 1,
-            value: getAllSum(3),
-            roundProps: 'value',
-          },
-          'start+=0.2'
-        )
-        .to(
-          sliderHandleWrapRef.current,
-          {
-            x: sliderRef!.current!.offsetWidth / 3,
-            duration: 1,
-          },
-          'start+=0.2'
-        )
-        .to(
-          sliderValueTarget,
-          {
-            duration: 1,
-            value: 3,
-            roundProps: 'value',
-          },
-          'start+=0.2'
-        )
-        .to(
-          sliderBarRef.current,
-          {
-            scaleX: 0.33,
-            duration: 1,
-          },
-          'start+=0.2'
-        )
-        .addLabel('moveToThirdLevel')
-        .to(
-          bonusTarget,
-          {
-            duration: 1,
-            value: getSums(4).sum1,
-            roundProps: 'value',
-          },
-          'moveToThirdLevel+=0.2'
-        )
-        .to(
-          totalBonusTarget,
-          {
-            duration: 1,
-            value: getAllSum(4),
-            roundProps: 'value',
-          },
-          'moveToThirdLevel+=0.2'
-        )
-        .to(
-          sliderHandleWrapRef.current,
-          {
-            x: sliderRef!.current!.offsetWidth / 1.5,
-            duration: 1,
-          },
-          'moveToThirdLevel+=0.2'
-        )
-        .to(
-          sliderValueTarget,
-          {
-            duration: 1,
-            value: 4,
-            roundProps: 'value',
-          },
-          'moveToThirdLevel+=0.2'
-        )
-        .to(
-          sliderBarRef.current,
-          {
-            scaleX: 0.66,
-            duration: 1,
-          },
-          'moveToThirdLevel+=0.2'
-        )
-        .addLabel('moveToFourthLevel')
+          .to(
+            bonusTarget,
+            {
+              duration: 1,
+              value: getSums(3).sum1,
+              roundProps: 'value',
+            },
+            'start+=0.2'
+          )
+          .to(
+            totalBonusTarget,
+            {
+              duration: 1,
+              value: getAllSum(3),
+              roundProps: 'value',
+            },
+            'start+=0.2'
+          )
+          .to(
+            sliderHandleWrapRef.current,
+            {
+              x: sliderRef!.current!.offsetWidth / 3,
+              duration: 1,
+            },
+            'start+=0.2'
+          )
+          .to(
+            sliderValueTarget,
+            {
+              duration: 1,
+              value: 3,
+              roundProps: 'value',
+            },
+            'start+=0.2'
+          )
+          .to(
+            sliderBarRef.current,
+            {
+              scaleX: 0.33,
+              duration: 1,
+            },
+            'start+=0.2'
+          )
+          .addLabel('moveToThirdLevel')
+          .to(
+            bonusTarget,
+            {
+              duration: 1,
+              value: getSums(4).sum1,
+              roundProps: 'value',
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .to(
+            totalBonusTarget,
+            {
+              duration: 1,
+              value: getAllSum(4),
+              roundProps: 'value',
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .to(
+            sliderHandleWrapRef.current,
+            {
+              x: sliderRef!.current!.offsetWidth / 1.5,
+              duration: 1,
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .to(
+            sliderValueTarget,
+            {
+              duration: 1,
+              value: 4,
+              roundProps: 'value',
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .to(
+            sliderBarRef.current,
+            {
+              scaleX: 0.66,
+              duration: 1,
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .addLabel('moveToFourthLevel')
 
-        .to(
-          bonusTarget,
-          {
-            duration: 1,
-            value: getSums(5).sum1,
-            roundProps: 'value',
-          },
-          'moveToFourthLevel+=0.2'
-        )
-        .to(
-          totalBonusTarget,
-          {
-            duration: 1,
-            value: getAllSum(5),
-            roundProps: 'value',
-          },
-          'moveToFourthLevel+=0.2'
-        )
-        .to(
-          sliderHandleWrapRef.current,
-          {
-            x: sliderRef!.current!.offsetWidth,
-            duration: 1,
-          },
-          'moveToFourthLevel+=0.2'
-        )
-        .to(
-          sliderValueTarget,
-          {
-            duration: 1,
-            value: 5,
-            roundProps: 'value',
-          },
-          'moveToFourthLevel+=0.2'
-        )
-        .to(
-          sliderBarRef.current,
-          {
-            scaleX: 1,
-            duration: 1,
-          },
-          'moveToFourthLevel+=0.2'
-        )
-        .addLabel('moveToFivethLevel');
-    } else {
-      partnerProgrammTimeline
-        .addLabel('start')
-        .to(
-          headRef.current,
-          {
-            yPercent: -100,
-            opacity: 0,
-            duration: 0.5,
-          },
-          'start+=0.3'
-        )
-        .to(
-          calculatorRef.current,
-          {
-            y: -headRef!.current!.offsetHeight,
-            duration: 0.5,
-          },
-          'start+=0.3'
-        )
-        .addLabel('finishShowCalculator')
-        .to(
-          bonusTarget,
-          {
-            duration: 1,
-            value: getSums(3).sum1,
-            roundProps: 'value',
-          },
-          'finishShowCalculator+=0.2'
-        )
-        .to(
-          totalBonusTarget,
-          {
-            duration: 1,
-            value: getAllSum(3),
-            roundProps: 'value',
-          },
-          'finishShowCalculator+=0.2'
-        )
-        .to(
-          sliderHandleWrapRef.current,
-          {
-            x: sliderRef!.current!.offsetWidth / 3,
-            duration: 1,
-          },
-          'finishShowCalculator+=0.2'
-        )
-        .to(
-          sliderValueTarget,
-          {
-            duration: 1,
-            value: 3,
-            roundProps: 'value',
-          },
-          'finishShowCalculator+=0.2'
-        )
-        .to(
-          sliderBarRef.current,
-          {
-            scaleX: 0.33,
-            duration: 1,
-          },
-          'finishShowCalculator+=0.2'
-        )
-        .addLabel('moveToThirdLevel')
-        .to(
-          bonusTarget,
-          {
-            duration: 1,
-            value: getSums(4).sum1,
-            roundProps: 'value',
-          },
-          'moveToThirdLevel+=0.2'
-        )
-        .to(
-          totalBonusTarget,
-          {
-            duration: 1,
-            value: getAllSum(4),
-            roundProps: 'value',
-          },
-          'moveToThirdLevel+=0.2'
-        )
-        .to(
-          sliderHandleWrapRef.current,
-          {
-            x: sliderRef!.current!.offsetWidth / 1.5,
-            duration: 1,
-          },
-          'moveToThirdLevel+=0.2'
-        )
-        .to(
-          sliderValueTarget,
-          {
-            duration: 1,
-            value: 4,
-            roundProps: 'value',
-          },
-          'moveToThirdLevel+=0.2'
-        )
-        .to(
-          sliderBarRef.current,
-          {
-            scaleX: 0.66,
-            duration: 1,
-          },
-          'moveToThirdLevel+=0.2'
-        )
-        .addLabel('moveToFourthLevel')
+          .to(
+            bonusTarget,
+            {
+              duration: 1,
+              value: getSums(5).sum1,
+              roundProps: 'value',
+            },
+            'moveToFourthLevel+=0.2'
+          )
+          .to(
+            totalBonusTarget,
+            {
+              duration: 1,
+              value: getAllSum(5),
+              roundProps: 'value',
+            },
+            'moveToFourthLevel+=0.2'
+          )
+          .to(
+            sliderHandleWrapRef.current,
+            {
+              x: sliderRef!.current!.offsetWidth,
+              duration: 1,
+            },
+            'moveToFourthLevel+=0.2'
+          )
+          .to(
+            sliderValueTarget,
+            {
+              duration: 1,
+              value: 5,
+              roundProps: 'value',
+            },
+            'moveToFourthLevel+=0.2'
+          )
+          .to(
+            sliderBarRef.current,
+            {
+              scaleX: 1,
+              duration: 1,
+            },
+            'moveToFourthLevel+=0.2'
+          )
+          .addLabel('moveToFivethLevel');
+      } else {
+        partnerProgrammTimeline
+          .addLabel('start')
+          .to(
+            headRef.current,
+            {
+              yPercent: -100,
+              opacity: 0,
+              duration: 0.5,
+            },
+            'start+=0.3'
+          )
+          .to(
+            calculatorRef.current,
+            {
+              y: -headRef!.current!.offsetHeight,
+              duration: 0.5,
+            },
+            'start+=0.3'
+          )
+          .addLabel('finishShowCalculator')
+          .to(
+            bonusTarget,
+            {
+              duration: 1,
+              value: getSums(3).sum1,
+              roundProps: 'value',
+            },
+            'finishShowCalculator+=0.2'
+          )
+          .to(
+            totalBonusTarget,
+            {
+              duration: 1,
+              value: getAllSum(3),
+              roundProps: 'value',
+            },
+            'finishShowCalculator+=0.2'
+          )
+          .to(
+            sliderHandleWrapRef.current,
+            {
+              x: sliderRef!.current!.offsetWidth / 3,
+              duration: 1,
+            },
+            'finishShowCalculator+=0.2'
+          )
+          .to(
+            sliderValueTarget,
+            {
+              duration: 1,
+              value: 3,
+              roundProps: 'value',
+            },
+            'finishShowCalculator+=0.2'
+          )
+          .to(
+            sliderBarRef.current,
+            {
+              scaleX: 0.33,
+              duration: 1,
+            },
+            'finishShowCalculator+=0.2'
+          )
+          .addLabel('moveToThirdLevel')
+          .to(
+            bonusTarget,
+            {
+              duration: 1,
+              value: getSums(4).sum1,
+              roundProps: 'value',
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .to(
+            totalBonusTarget,
+            {
+              duration: 1,
+              value: getAllSum(4),
+              roundProps: 'value',
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .to(
+            sliderHandleWrapRef.current,
+            {
+              x: sliderRef!.current!.offsetWidth / 1.5,
+              duration: 1,
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .to(
+            sliderValueTarget,
+            {
+              duration: 1,
+              value: 4,
+              roundProps: 'value',
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .to(
+            sliderBarRef.current,
+            {
+              scaleX: 0.66,
+              duration: 1,
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .addLabel('moveToFourthLevel')
 
-        .to(
-          bonusTarget,
-          {
-            duration: 1,
-            value: getSums(5).sum1,
-            roundProps: 'value',
-          },
-          'moveToFourthLevel+=0.2'
-        )
-        .to(
-          totalBonusTarget,
-          {
-            duration: 1,
-            value: getAllSum(5),
-            roundProps: 'value',
-          },
-          'moveToFourthLevel+=0.2'
-        )
-        .to(
-          sliderHandleWrapRef.current,
-          {
-            x: sliderRef!.current!.offsetWidth,
-            duration: 1,
-          },
-          'moveToFourthLevel+=0.2'
-        )
-        .to(
-          sliderValueTarget,
-          {
-            duration: 1,
-            value: 5,
-            roundProps: 'value',
-          },
-          'moveToFourthLevel+=0.2'
-        )
-        .to(
-          sliderBarRef.current,
-          {
-            scaleX: 1,
-            duration: 1,
-          },
-          'moveToFourthLevel+=0.2'
-        )
-        .addLabel('moveToFivethLevel');
-    }
+          .to(
+            bonusTarget,
+            {
+              duration: 1,
+              value: getSums(5).sum1,
+              roundProps: 'value',
+            },
+            'moveToFourthLevel+=0.2'
+          )
+          .to(
+            totalBonusTarget,
+            {
+              duration: 1,
+              value: getAllSum(5),
+              roundProps: 'value',
+            },
+            'moveToFourthLevel+=0.2'
+          )
+          .to(
+            sliderHandleWrapRef.current,
+            {
+              x: sliderRef!.current!.offsetWidth,
+              duration: 1,
+            },
+            'moveToFourthLevel+=0.2'
+          )
+          .to(
+            sliderValueTarget,
+            {
+              duration: 1,
+              value: 5,
+              roundProps: 'value',
+            },
+            'moveToFourthLevel+=0.2'
+          )
+          .to(
+            sliderBarRef.current,
+            {
+              scaleX: 1,
+              duration: 1,
+            },
+            'moveToFourthLevel+=0.2'
+          )
+          .addLabel('moveToFivethLevel');
+      }
+    }, 0);
   }, []);
   return (
     <Root ref={rootRef}>
