@@ -11,15 +11,16 @@ import { appStoreLink, googlePlayLink } from '@/constants';
 
 interface MobileStoreProps {
   userAgent: { [key: string]: any };
+  onCloseMobileStoreButtonClick: () => void;
+  isOpen: boolean;
 }
 
-const MobileStore: FC<MobileStoreProps> = ({ userAgent }) => {
+const MobileStore: FC<MobileStoreProps> = ({
+  userAgent,
+  onCloseMobileStoreButtonClick,
+  isOpen,
+}) => {
   const { t } = useTranslation('cookies');
-  const [isOpen, setIsOpen] = useState(true);
-
-  function handleCloseButtonClick() {
-    setIsOpen(false);
-  }
 
   function getDeviceLink() {
     if (userAgent.isAndroid) {
@@ -35,7 +36,7 @@ const MobileStore: FC<MobileStoreProps> = ({ userAgent }) => {
     <Root $open={isOpen}>
       <Wrapper>
         <LogoTextWrap>
-          <CloseButton onClick={handleCloseButtonClick}>
+          <CloseButton onClick={onCloseMobileStoreButtonClick}>
             <Image src={closeIcon} alt="Paxaro" />
           </CloseButton>
           <LogoWrap>

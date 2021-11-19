@@ -18,23 +18,29 @@ import { MobileStore } from './components/MobileStore';
 
 interface HeaderWrapperProps {
   isActiveMenu: boolean;
+  $topPosition: number;
 }
-interface IHeaderProps {
+interface HeaderProps {
   userAgent: { [key: string]: any };
 }
 
-const Header: FC<IHeaderProps> = ({ children, userAgent }) => {
+const Header: FC<HeaderProps> = ({ children, userAgent }) => {
   const { t } = useTranslation('header');
   const isDesktop = useIsDesktop();
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [topPositionMenu, setTopPositionMenu] = useState(80);
+  const [isMobileStoreOpen, setIsMobileStoreOpen] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
+  const mainContentRef = useRef<HTMLDivElement>(null);
 
   function handleBurgerClick() {
     if (innerWidth < 900) {
       setIsOpenMenu(!isOpenMenu);
     }
   }
-
+  function onCloseMobileStoreButtonClick() {
+    setIsMobileStoreOpen(false);
+  }
   useEffect(() => {
     if (isOpenMenu && innerWidth < 900) {
       document.documentElement.style.overflow = 'hidden';
@@ -44,11 +50,23 @@ const Header: FC<IHeaderProps> = ({ children, userAgent }) => {
   }, [isOpenMenu]);
 
   useEffect(() => {
-    innerWidth > 900 ? setIsOpenMenu(true) : setIsOpenMenu(false);
+    setTopPositionMenu(mainContentRef.current!.offsetHeight);
+  }, [isMobileStoreOpen]);
+
+  useEffect(() => {
+    if (innerWidth > 900) {
+      setIsOpenMenu(true);
+    } else {
+      setIsOpenMenu(false);
+    }
   }, []);
   return (
-    <Headroom>
-      <MobileStore userAgent={userAgent} />
+    <div ref={mainContentRef}>
+      <MobileStore
+        isOpen={isMobileStoreOpen}
+        onCloseMobileStoreButtonClick={onCloseMobileStoreButtonClick}
+        userAgent={userAgent}
+      />
       <Root ref={ref}>
         <HeaderBurgerNavContainer>
           <Link href="/" passHref>
@@ -64,7 +82,7 @@ const Header: FC<IHeaderProps> = ({ children, userAgent }) => {
           </BurgerBtn>
         </HeaderBurgerNavContainer>
 
-        <HeaderWrapper isActiveMenu={isOpenMenu}>
+        <HeaderWrapper $topPosition={topPositionMenu} isActiveMenu={isOpenMenu}>
           <HeaderScroller>
             <HeaderTop>
               <HeaderTopContainer>
@@ -161,7 +179,7 @@ const Header: FC<IHeaderProps> = ({ children, userAgent }) => {
           </HeaderScroller>
         </HeaderWrapper>
       </Root>
-    </Headroom>
+    </div>
   );
 };
 
@@ -175,8 +193,8 @@ const Root = styled.header`
 
 const HeaderScroller = styled.div`
   @media (max-width: 900px) {
-    padding-bottom: 150px;
-    overflow: scroll;
+    /* padding-bottom: 150px;
+    overflow: scroll; */
   }
 `;
 
@@ -189,13 +207,16 @@ const HeaderWrapper = styled.div.attrs<HeaderWrapperProps>(
     isActiveMenu ? 'block' : 'none'};
   @media (max-width: 900px) {
     display: ${({ isActiveMenu }: HeaderWrapperProps) =>
-      isActiveMenu ? 'flex' : 'none'};
-    flex-direction: column;
-    height: 100vh;
-    position: absolute;
+      isActiveMenu ? 'block' : 'none'};
+    /* flex-direction: column; */
+    /* height: 100vh; */
+    position: fixed;
     width: 100%;
-    top: 100%;
+    top: ${({ $topPosition }: HeaderWrapperProps) => $topPosition + 'px'};
+    right: 0;
     left: 0;
+    bottom: 0;
+    overflow-y: auto;
     background: var(--black1);
     z-index: 10;
   }
