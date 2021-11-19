@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { MobileHeader } from './components/MobileHeader';
 import { DesktopHeader } from './components/DesktopHeader';
 import { throttle } from 'throttle-debounce';

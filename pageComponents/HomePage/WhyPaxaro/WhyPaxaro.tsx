@@ -13,6 +13,7 @@ import coin2Icon from '@/assets/images/coin-icon2.svg';
 import coin3Icon from '@/assets/images/coin-icon3.svg';
 import gridWithArrow from '@/assets/images/grid-with-arrow.svg';
 import { useRouter } from 'next/router';
+import { useIntersection } from '@/hooks/useIntersection';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -36,6 +37,7 @@ const WhyPaxaro: FC = () => {
   const coin2Ref = useRef<HTMLDivElement>(null);
   const coin3Ref = useRef<HTMLDivElement>(null);
   const gridWithArrowRef = useRef<HTMLDivElement>(null);
+  const isVisible = useIntersection(mainRef);
 
   useEffect(() => {
     function getPixelsByVw(vw: number) {
