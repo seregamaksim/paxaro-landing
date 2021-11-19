@@ -392,7 +392,6 @@ const WhyPaxaro: FC = () => {
               x: getPixelsByVw(70.4),
               y: 470,
               duration: 0.6,
-              // scale: 0.7,
             },
             '<'
           )
@@ -410,7 +409,7 @@ const WhyPaxaro: FC = () => {
             {
               x: getPixelsByVw(48.6),
               y: 490,
-              // scale: 0.6,
+
               duration: 0.6,
             },
             '<'
@@ -420,7 +419,7 @@ const WhyPaxaro: FC = () => {
             {
               x: getPixelsByVw(62.5),
               y: 520,
-              // scale: 0.6,
+
               duration: 0.6,
             },
             '<'
