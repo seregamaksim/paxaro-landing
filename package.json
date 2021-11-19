@@ -12,6 +12,7 @@
     "@emotion/react": "^11.5.0",
     "@types/react-headroom": "^2.2.2",
     "@types/styled-components": "^5.1.15",
+    "@types/throttle-debounce": "^2.1.0",
     "axios": "^0.24.0",
     "cookie": "^0.4.1",
     "currency.js": "^2.0.4",
@@ -33,6 +34,7 @@
     "react-spinners": "^0.11.0",
     "recharts": "^2.1.6",
     "styled-components": "^5.3.3",
+    "throttle-debounce": "^3.0.1",
     "universal-cookie": "^4.0.4",
     "yup": "^0.32.11"
   },
