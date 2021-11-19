@@ -173,7 +173,7 @@ const Algorithm: FC = () => {
   }, []);
 
   return (
-    <Root ref={rootRef}>
+    <Root ref={rootRef} id="howWork">
       <Circle ref={circleRef} />
       <StyledContainer>
         <SectionHead ref={headRef}>

@@ -33,7 +33,7 @@ const PlansSection: FC = () => {
   };
 
   return (
-    <section>
+    <section id="subscription">
       <StyledContainer>
         <SectionHead>
           <StyledLabel text={t('label')} />

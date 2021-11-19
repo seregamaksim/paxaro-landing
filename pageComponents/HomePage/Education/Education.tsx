@@ -209,7 +209,7 @@ const Education: FC = () => {
   }, []);
 
   return (
-    <Root ref={rootRef}>
+    <Root ref={rootRef} id="education">
       <SectionHead ref={headRef}>
         <StyledLabel text={t('label')} isDark />
         <StyledTitle text={t('title')} />

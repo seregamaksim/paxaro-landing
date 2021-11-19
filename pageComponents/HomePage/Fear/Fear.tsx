@@ -877,7 +877,7 @@ const Fear: FC = () => {
   }, []);
 
   return (
-    <Root ref={rootRef}>
+    <Root ref={rootRef} id="howToStart">
       <StyledContainer>
         <SectionHead ref={headRef}>
           <StyledSectionLabel text={t('label')} />

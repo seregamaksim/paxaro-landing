@@ -514,7 +514,7 @@ const WhyPaxaro: FC = () => {
   }, []);
 
   return (
-    <Root ref={mainRef}>
+    <Root ref={mainRef} id="history">
       <StyledContainer>
         <SectionHead>
           <StyledSectionLabel text={t('label')} />

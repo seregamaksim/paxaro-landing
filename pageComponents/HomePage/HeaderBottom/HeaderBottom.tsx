@@ -20,7 +20,7 @@ const HeaderBottom: FC = () => {
         </ActiveLink>
       </HeaderBottomMenuItem>
       <HeaderBottomMenuItem>
-        <ActiveLink href="/#knowledgeBase" activeClassName="active">
+        <ActiveLink href="/#education" activeClassName="active">
           <HeaderBottomMenuLink>
             {t('secondMain.knowledgeBase')}
           </HeaderBottomMenuLink>

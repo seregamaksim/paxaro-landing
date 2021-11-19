@@ -330,7 +330,7 @@ const Advantages: FC = () => {
   }, []);
 
   return (
-    <Root ref={rootRef}>
+    <Root ref={rootRef} id="advantages">
       <StyledContainer>
         <Cirle ref={circleRef} />
         <SectionHead ref={headRef}>
