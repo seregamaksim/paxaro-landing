@@ -102,24 +102,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
     setCashValue(Number(marks[type][e]));
   }
 
-  function getInitialValues() {
-    if (innerWidth > 768) {
-      return {
-        title: 'i30',
-        period: '360',
-        cash: '5000',
-      };
-    } else {
-      return {
-        title: 'i30',
-        period: '360',
-        cash: '5000',
-      };
-    }
-  }
-
   useEffect(() => {
-    setInitiaFormlValue(getInitialValues());
     requestAndSetChartData({
       title: 'i30',
       period: 360,
@@ -132,6 +115,17 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
       <Wrapper>
         <Formik initialValues={initiaFormlValue} onSubmit={handleSubmit}>
           {({ values }: FormikProps<FormValues>) => {
+            const currentPlanMarksObject = marks[values.title];
+            const currentPlanMarksArray = Object.keys(currentPlanMarksObject);
+
+            const bottomBorderSliderValue =
+              currentPlanMarksObject[currentPlanMarksArray[0]];
+
+            const upperBorderSliderValue =
+              currentPlanMarksObject[
+                currentPlanMarksArray[currentPlanMarksArray.length - 1]
+              ];
+
             return (
               <Form>
                 <Head>
@@ -165,14 +159,9 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                     <HeadLabel>{t('calculator.investmentsAmount')}</HeadLabel>
                     <SliderWrapper>
                       <SliderBorders>
-                        {currency(
-                          marks[values.title][
-                            Object.keys(marks[values.title])[0]
-                          ],
-                          {
-                            precision: 0,
-                          }
-                        ).format()}
+                        {currency(bottomBorderSliderValue, {
+                          precision: 0,
+                        }).format()}
                       </SliderBorders>
                       <StyledSlider
                         marks={marks[values.title]}
@@ -190,17 +179,10 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                         }
                       />
                       <SliderBorders>
-                        {currency(
-                          marks[values.title][
-                            Object.keys(marks[values.title])[
-                              Object.keys(marks[values.title]).length - 1
-                            ]
-                          ],
-                          {
-                            separator: '.',
-                            precision: 0,
-                          }
-                        ).format()}
+                        {currency(upperBorderSliderValue, {
+                          separator: '.',
+                          precision: 0,
+                        }).format()}
                       </SliderBorders>
                     </SliderWrapper>
                   </FullHeadSection>
