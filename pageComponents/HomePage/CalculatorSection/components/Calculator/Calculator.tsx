@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import { Form, Formik, FormikProps, useField } from 'formik';
-import Slider, { Handle, SliderTooltip } from 'rc-slider';
+import Slider, { Handle, HandleProps, SliderTooltip } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import currency from 'currency.js';
 import { useTranslation } from 'react-i18next';
@@ -15,7 +15,8 @@ import {
   portfolioTypeOptions,
 } from './staticData';
 
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import { baseUrl } from '@/constants';
 
 const SelectUiNoSSR = dynamic(
   () => import('@/ui/components/SelectUI/SelectUI'),
@@ -30,70 +31,35 @@ interface CalculatorProps {
 
 interface Values {
   title: string;
-  period: string;
-  cash?: string;
+  period: string | number;
+  cash?: string | number;
 }
 
-const secondData = [
-  {
-    date: '2001-12-27',
-    value: 2400,
-  },
-  {
-    date: '2002-01-27',
-    value: 1398,
-  },
-  {
-    date: '2002-01-27',
-    value: 9800,
-  },
-  {
-    date: '2002-01-27',
-    value: 3908,
-  },
-  {
-    date: '2002-01-27',
-    value: 4800,
-  },
-  {
-    date: '2002-01-27',
-    value: 3800,
-  },
-  {
-    date: '2002-01-27',
-    value: 4300,
-  },
-  {
-    date: '2002-01-27',
-    value: 4800,
-  },
-  {
-    date: '2002-01-27',
-    value: 3800,
-  },
-  {
-    date: '2002-01-27',
-    value: 5639,
-  },
-  {
-    date: '2002-01-27',
-    value: 1639,
-  },
-  {
-    date: '2002-01-27',
-    value: 3639,
-  },
-];
+export interface ChartValue {
+  date: string;
+  profit: number;
+}
 
 const Calculator: FC<CalculatorProps> = ({ className }) => {
   const isMounted = useIsMounted();
   const { t } = useTranslation('calculator');
+  const [dataChart, setDataChart] = useState<ChartValue[]>([]);
   const [cashValue, setCashValue] = useState(0);
   const [initiaFormlValue, setInitiaFormlValue] = useState<Values>({
     title: 'i30',
-    period: '30',
-    cash: '1000',
+    period: '360',
+    cash: '5000',
   });
+
+  function postData(values: Values) {
+    axios({
+      method: 'post',
+      url: `${baseUrl}/backtest/chart`,
+      data: values,
+    }).then(({ data }: AxiosResponse<ChartValue[]>) => {
+      setDataChart(data);
+    });
+  }
 
   const dateDaysOptions = [
     { value: '30', label: t('calculator.month') },
@@ -103,30 +69,25 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
 
   function submit(values: Values) {
     if (innerWidth > 768) {
-      console.log('submit', {
+      const currentValues = {
         ...values,
-        cash: cashValue.toString(),
-      });
-      axios({
-        method: 'post',
-        url: 'https://web-api-test.kadex.io/backtest/chart',
-        data: values,
-      }).then(({ data }: any) => {
-        console.log('data', data);
-      });
+        period: Number(values.period),
+        cash: cashValue,
+      };
+
+      postData(currentValues);
     } else {
-      console.log('submit', values);
-      axios({
-        method: 'post',
-        url: 'https://web-api-test.kadex.io/backtest/chart',
-        data: values,
-      }).then(({ data }: any) => {
-        console.log('data', data);
-      });
+      const currentValues = {
+        ...values,
+        period: Number(values.period),
+        cash: Number(values.cash),
+      };
+
+      postData(currentValues);
     }
   }
 
-  const handle = (props: any, type: any) => {
+  const handle = (props: any, type: string) => {
     const { value, dragging, index, ...restProps } = props;
     const formatedValue = currency(marks[type][value], {
       separator: '.',
@@ -167,16 +128,10 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
 
   useEffect(() => {
     setInitiaFormlValue(getInitialValues());
-    axios({
-      method: 'post',
-      url: 'https://web-api-test.kadex.io/backtest/chart',
-      data: {
-        title: 'i30',
-        period: 30,
-        cash: 1000,
-      },
-    }).then(({ data }: any) => {
-      console.log('data', data);
+    postData({
+      title: 'i30',
+      period: 360,
+      cash: 5000,
     });
   }, []);
 
@@ -229,6 +184,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                       </SliderBorders>
                       <StyledSlider
                         marks={marks[values.title]}
+                        defaultValue={14}
                         step={null}
                         onChange={(e) => {
                           onChange(e, values.title);
@@ -261,7 +217,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                   </HeadSection>
                 </Head>
                 <ChartWrap>
-                  <StyledChart data={secondData} />
+                  <StyledChart data={dataChart} />
                 </ChartWrap>
                 <Footer>
                   <ProfitBlock>

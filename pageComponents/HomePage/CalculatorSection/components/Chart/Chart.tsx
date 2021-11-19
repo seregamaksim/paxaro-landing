@@ -12,14 +12,11 @@ import styled from 'styled-components';
 import moment from 'moment';
 
 import currency from 'currency.js';
+import { ChartValue } from '../Calculator/Calculator';
 
-interface Data {
-  date: string;
-  value: number;
-}
 interface ChartProps {
   className?: string;
-  data: Data[];
+  data: ChartValue[];
 }
 
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -59,6 +56,7 @@ const Chart: FC<ChartProps> = ({ className, data }) => {
             tickMargin={18}
           />
           <YAxis
+            dataKey="profit"
             fontSize="12px"
             fontWeight="600"
             color="#8F8F8F"
@@ -77,7 +75,7 @@ const Chart: FC<ChartProps> = ({ className, data }) => {
 
           <Line
             type="monotone"
-            dataKey="value"
+            dataKey="profit"
             stroke="var(--green)"
             strokeWidth="3"
             activeDot={{ stroke: '#111', strokeWidth: 6, r: 8 }}
@@ -85,7 +83,7 @@ const Chart: FC<ChartProps> = ({ className, data }) => {
           />
           <Line
             type="monotone"
-            dataKey="value"
+            dataKey="profit"
             stroke="var(--green)"
             strokeWidth="3"
             style={{
