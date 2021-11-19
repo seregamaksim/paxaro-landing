@@ -66,87 +66,58 @@ const Header: FC<HeaderProps> = ({ children, userAgent }) => {
     }
   }, []);
   return (
-    <MainContainer className={`${hiddenStyle}`} ref={mainContentRef}>
-      <MobileStore
-        isOpen={isMobileStoreOpen}
-        onCloseMobileStoreButtonClick={onCloseMobileStoreButtonClick}
-        userAgent={userAgent}
-      />
-      <Root ref={ref}>
-        <HeaderBurgerNavContainer>
-          <Link href="/" passHref>
-            <a>
-              <LogoMini />
-            </a>
-          </Link>
-          <BurgerBtn
-            className={isOpenMenu ? 'active' : ''}
-            onClick={handleBurgerClick}
-          >
-            <span></span>
-          </BurgerBtn>
-        </HeaderBurgerNavContainer>
+    <Headroom disableInlineStyles>
+      <MainContainer ref={mainContentRef}>
+        <MobileStore
+          isOpen={isMobileStoreOpen}
+          onCloseMobileStoreButtonClick={onCloseMobileStoreButtonClick}
+          userAgent={userAgent}
+        />
+        <Root ref={ref}>
+          <HeaderBurgerNavContainer>
+            <Link href="/" passHref>
+              <a>
+                <LogoMini />
+              </a>
+            </Link>
+            <BurgerBtn
+              className={isOpenMenu ? 'active' : ''}
+              onClick={handleBurgerClick}
+            >
+              <span></span>
+            </BurgerBtn>
+          </HeaderBurgerNavContainer>
 
-        <HeaderWrapper $topPosition={topPositionMenu} isActiveMenu={isOpenMenu}>
-          <HeaderScroller>
-            <HeaderTop>
-              <HeaderTopContainer>
-                <Link href="/" passHref>
-                  <HeaderLogoLink>
-                    <Image src={logo} alt={t('logoAlt')} loading="eager" />
-                  </HeaderLogoLink>
-                </Link>
-                <HeaderTopNav>
-                  <HeaderTopItem>
-                    <ActiveLink href="/" activeClassName="active">
-                      <HeaderTopLink>{t('main.aboutProduct')}</HeaderTopLink>
-                    </ActiveLink>
-                  </HeaderTopItem>
-                  <HeaderTopItem>
-                    <ActiveLink href="/blog" activeClassName="active">
-                      <HeaderTopLink>{t('main.blog')}</HeaderTopLink>
-                    </ActiveLink>
-                  </HeaderTopItem>
-                  <HeaderTopItem>
-                    <ActiveLink href="/about" activeClassName="active">
-                      <HeaderTopLink>{t('main.aboutCompany')}</HeaderTopLink>
-                    </ActiveLink>
-                  </HeaderTopItem>
-                </HeaderTopNav>
-                {isDesktop && (
-                  <HeaderButtonsWrap>
-                    <HeaderButtonTitle>
-                      {t('main.accountTitle')}
-                    </HeaderButtonTitle>
-                    <HeaderButtons>
-                      <Link
-                        href="https://nextjs.org/docs/advanced-features/i18n-routing"
-                        passHref
-                      >
-                        <HeaderButtonRegistration
-                          isLink
-                          text={t('main.registration')}
-                        ></HeaderButtonRegistration>
-                      </Link>
-                      <Link
-                        href="https://nextjs.org/docs/advanced-features/i18n-routing"
-                        passHref
-                      >
-                        <HeaderLinkLogin>
-                          <span>{t('main.login')}</span>
-                        </HeaderLinkLogin>
-                      </Link>
-                      <LanguageSwitcher />
-                    </HeaderButtons>
-                  </HeaderButtonsWrap>
-                )}
-              </HeaderTopContainer>
-            </HeaderTop>
-            {children && (
-              <HeaderBottom>
-                <HeaderBottomContainer>
-                  {children}
-                  {!isDesktop && (
+          <HeaderWrapper
+            $topPosition={topPositionMenu}
+            isActiveMenu={isOpenMenu}
+          >
+            <HeaderScroller>
+              <HeaderTop>
+                <HeaderTopContainer>
+                  <Link href="/" passHref>
+                    <HeaderLogoLink>
+                      <Image src={logo} alt={t('logoAlt')} loading="eager" />
+                    </HeaderLogoLink>
+                  </Link>
+                  <HeaderTopNav>
+                    <HeaderTopItem>
+                      <ActiveLink href="/" activeClassName="active">
+                        <HeaderTopLink>{t('main.aboutProduct')}</HeaderTopLink>
+                      </ActiveLink>
+                    </HeaderTopItem>
+                    <HeaderTopItem>
+                      <ActiveLink href="/blog" activeClassName="active">
+                        <HeaderTopLink>{t('main.blog')}</HeaderTopLink>
+                      </ActiveLink>
+                    </HeaderTopItem>
+                    <HeaderTopItem>
+                      <ActiveLink href="/about" activeClassName="active">
+                        <HeaderTopLink>{t('main.aboutCompany')}</HeaderTopLink>
+                      </ActiveLink>
+                    </HeaderTopItem>
+                  </HeaderTopNav>
+                  {isDesktop && (
                     <HeaderButtonsWrap>
                       <HeaderButtonTitle>
                         {t('main.accountTitle')}
@@ -169,37 +140,60 @@ const Header: FC<HeaderProps> = ({ children, userAgent }) => {
                             <span>{t('main.login')}</span>
                           </HeaderLinkLogin>
                         </Link>
+                        <LanguageSwitcher />
                       </HeaderButtons>
                     </HeaderButtonsWrap>
                   )}
-                </HeaderBottomContainer>
-              </HeaderBottom>
-            )}
-            {!isDesktop && (
-              <>
-                <StyledSocialList />
-                <StyledLanguageSwitcher />
-              </>
-            )}
-          </HeaderScroller>
-        </HeaderWrapper>
-      </Root>
-    </MainContainer>
+                </HeaderTopContainer>
+              </HeaderTop>
+              {children && (
+                <HeaderBottom>
+                  <HeaderBottomContainer>
+                    {children}
+                    {!isDesktop && (
+                      <HeaderButtonsWrap>
+                        <HeaderButtonTitle>
+                          {t('main.accountTitle')}
+                        </HeaderButtonTitle>
+                        <HeaderButtons>
+                          <Link
+                            href="https://nextjs.org/docs/advanced-features/i18n-routing"
+                            passHref
+                          >
+                            <HeaderButtonRegistration
+                              isLink
+                              text={t('main.registration')}
+                            ></HeaderButtonRegistration>
+                          </Link>
+                          <Link
+                            href="https://nextjs.org/docs/advanced-features/i18n-routing"
+                            passHref
+                          >
+                            <HeaderLinkLogin>
+                              <span>{t('main.login')}</span>
+                            </HeaderLinkLogin>
+                          </Link>
+                        </HeaderButtons>
+                      </HeaderButtonsWrap>
+                    )}
+                  </HeaderBottomContainer>
+                </HeaderBottom>
+              )}
+              {!isDesktop && (
+                <>
+                  <StyledSocialList />
+                  <StyledLanguageSwitcher />
+                </>
+              )}
+            </HeaderScroller>
+          </HeaderWrapper>
+        </Root>
+      </MainContainer>
+    </Headroom>
   );
 };
 
-const MainContainer = styled.div`
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  width: 100%;
-  z-index: 100;
-  transition: transform 0.3s ease;
-  &.hidden {
-    transform: translateY(-110%);
-  }
-`;
+const MainContainer = styled.div``;
 const Root = styled.header`
   background: var(--black1);
   box-shadow: 0px 30px 36px -15px rgba(0, 0, 0, 0.15);
