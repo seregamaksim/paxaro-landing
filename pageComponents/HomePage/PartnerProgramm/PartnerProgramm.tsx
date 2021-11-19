@@ -14,7 +14,6 @@ if (typeof window !== 'undefined') {
 
 const PartnerProgramm: FC = () => {
   const { t } = useTranslation('partnerProgramm');
-
   const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const bonusTextRef = useRef<HTMLParagraphElement>(null);
@@ -52,7 +51,6 @@ const PartnerProgramm: FC = () => {
   }
 
   useEffect(() => {
-
     setTimeout(() => {
       const bonusTarget = {
         value: bonusValue,
@@ -63,17 +61,16 @@ const PartnerProgramm: FC = () => {
       const sliderValueTarget = {
         value: sliderValue,
       };
-
       const partnerProgrammTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: rootRef.current,
           start: 'top top',
-          end: () => (innerWidth > 768 ? '+=3000' : '+=2000'),
+          end: () => (innerWidth > 768 ? '+=2000' : '+=1500'),
           pin: true,
           scrub: 0,
           snap: {
             snapTo: 'labels',
-            duration: { min: 0.2, max: 2 },
+            duration: { min: 0.2, max: 1 },
             delay: 0.2,
             ease: 'power3.out',
           },
@@ -84,6 +81,7 @@ const PartnerProgramm: FC = () => {
           },
         },
       });
+
       if (innerWidth > 768) {
         partnerProgrammTimeline
           .addLabel('start')
@@ -92,7 +90,7 @@ const PartnerProgramm: FC = () => {
             bonusTarget,
             {
               duration: 1,
-              value: 1236,
+              value: getSums(3).sum1,
               roundProps: 'value',
             },
             'start+=0.2'
@@ -101,7 +99,7 @@ const PartnerProgramm: FC = () => {
             totalBonusTarget,
             {
               duration: 1,
-              value: 16456,
+              value: getAllSum(3),
               roundProps: 'value',
             },
             'start+=0.2'
@@ -109,10 +107,99 @@ const PartnerProgramm: FC = () => {
           .to(
             sliderHandleWrapRef.current,
             {
-              x: sliderRef!.current!.offsetWidth,
+              x: sliderRef!.current!.offsetWidth / 3,
               duration: 1,
             },
             'start+=0.2'
+          )
+          .to(
+            sliderValueTarget,
+            {
+              duration: 1,
+              value: 3,
+              roundProps: 'value',
+            },
+            'start+=0.2'
+          )
+          .to(
+            sliderBarRef.current,
+            {
+              scaleX: 0.33,
+              duration: 1,
+            },
+            'start+=0.2'
+          )
+          .addLabel('moveToThirdLevel')
+          .to(
+            bonusTarget,
+            {
+              duration: 1,
+              value: getSums(4).sum1,
+              roundProps: 'value',
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .to(
+            totalBonusTarget,
+            {
+              duration: 1,
+              value: getAllSum(4),
+              roundProps: 'value',
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .to(
+            sliderHandleWrapRef.current,
+            {
+              x: sliderRef!.current!.offsetWidth / 1.5,
+              duration: 1,
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .to(
+            sliderValueTarget,
+            {
+              duration: 1,
+              value: 4,
+              roundProps: 'value',
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .to(
+            sliderBarRef.current,
+            {
+              scaleX: 0.66,
+              duration: 1,
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .addLabel('moveToFourthLevel')
+
+          .to(
+            bonusTarget,
+            {
+              duration: 1,
+              value: getSums(5).sum1,
+              roundProps: 'value',
+            },
+            'moveToFourthLevel+=0.2'
+          )
+          .to(
+            totalBonusTarget,
+            {
+              duration: 1,
+              value: getAllSum(5),
+              roundProps: 'value',
+            },
+            'moveToFourthLevel+=0.2'
+          )
+          .to(
+            sliderHandleWrapRef.current,
+            {
+              x: sliderRef!.current!.offsetWidth,
+              duration: 1,
+            },
+            'moveToFourthLevel+=0.2'
           )
           .to(
             sliderValueTarget,
@@ -121,119 +208,7 @@ const PartnerProgramm: FC = () => {
               value: 5,
               roundProps: 'value',
             },
-            'start+=0.2'
-          )
-          .from(
-            sliderBarRef.current,
-            {
-              scaleX: 0,
-              duration: 1,
-            },
-            'start+=0.2'
-          )
-          .addLabel('firstMoveToFinish')
-          .to(
-            bonusTarget,
-            {
-              duration: 0.1,
-              value: 0,
-              roundProps: 'value',
-            },
-            'firstMoveToFinish'
-          )
-          .to(
-            totalBonusTarget,
-            {
-              duration: 0.1,
-              value: 0,
-              roundProps: 'value',
-            },
-            'firstMoveToFinish'
-          )
-          .to(
-            sliderHandleWrapRef.current,
-            {
-              x: 0,
-              duration: 0.1,
-            },
-            'firstMoveToFinish'
-          )
-          .to(
-            sliderValueTarget,
-            {
-              duration: 0.1,
-              value: 0,
-              roundProps: 'value',
-            },
-            'firstMoveToFinish'
-          )
-          .to(
-            sliderBarRef.current,
-            {
-              scaleX: 0,
-              duration: 0.1,
-            },
-            'firstMoveToFinish'
-          )
-          .from(
-            [...profitItemLevels.current, ...profitItemPeople.current],
-            {
-              opacity: 0,
-              duration: 0.1,
-            },
-            'firstMoveToFinish'
-          )
-          .to(
-            firstCheckboxGradientRef.current,
-            {
-              opacity: 0,
-              duration: 0.1,
-            },
-            'firstMoveToFinish'
-          )
-          .from(
-            secondCheckboxGradientRef.current,
-            {
-              opacity: 0,
-              duration: 0.1,
-            },
-            'firstMoveToFinish'
-          )
-          .addLabel('firstResetSlider')
-          .to(
-            bonusTarget,
-            {
-              duration: 1,
-              value: 1236 * 1.5,
-              roundProps: 'value',
-            },
-            'firstResetSlider'
-          )
-          .to(
-            totalBonusTarget,
-            {
-              duration: 1,
-              value: 16456 * 1.5,
-              roundProps: 'value',
-            },
-            'firstResetSlider'
-          )
-          .to(
-            sliderHandleWrapRef.current,
-            {
-              x: sliderRef!.current!.offsetWidth,
-              duration: 1,
-            },
-            'firstResetSlider'
-          )
-          .to(
-            sliderValueTarget,
-            {
-              duration: 1,
-              value: 5,
-              roundProps: 'value',
-            },
-            'firstResetSlider'
+            'moveToFourthLevel+=0.2'
           )
           .to(
             sliderBarRef.current,
@@ -241,9 +216,9 @@ const PartnerProgramm: FC = () => {
               scaleX: 1,
               duration: 1,
             },
-            'firstResetSlider'
+            'moveToFourthLevel+=0.2'
           )
-          .addLabel('finish');
+          .addLabel('moveToFivethLevel');
       } else {
         partnerProgrammTimeline
           .addLabel('start')
@@ -269,19 +244,108 @@ const PartnerProgramm: FC = () => {
             bonusTarget,
             {
               duration: 1,
-              value: 1236,
+              value: getSums(3).sum1,
               roundProps: 'value',
             },
-            'finishShowCalculator'
+            'finishShowCalculator+=0.2'
           )
           .to(
             totalBonusTarget,
             {
               duration: 1,
-              value: 16456,
+              value: getAllSum(3),
               roundProps: 'value',
             },
-            'finishShowCalculator'
+            'finishShowCalculator+=0.2'
+          )
+          .to(
+            sliderHandleWrapRef.current,
+            {
+              x: sliderRef!.current!.offsetWidth / 3,
+              duration: 1,
+            },
+            'finishShowCalculator+=0.2'
+          )
+          .to(
+            sliderValueTarget,
+            {
+              duration: 1,
+              value: 3,
+              roundProps: 'value',
+            },
+            'finishShowCalculator+=0.2'
+          )
+          .to(
+            sliderBarRef.current,
+            {
+              scaleX: 0.33,
+              duration: 1,
+            },
+            'finishShowCalculator+=0.2'
+          )
+          .addLabel('moveToThirdLevel')
+          .to(
+            bonusTarget,
+            {
+              duration: 1,
+              value: getSums(4).sum1,
+              roundProps: 'value',
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .to(
+            totalBonusTarget,
+            {
+              duration: 1,
+              value: getAllSum(4),
+              roundProps: 'value',
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .to(
+            sliderHandleWrapRef.current,
+            {
+              x: sliderRef!.current!.offsetWidth / 1.5,
+              duration: 1,
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .to(
+            sliderValueTarget,
+            {
+              duration: 1,
+              value: 4,
+              roundProps: 'value',
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .to(
+            sliderBarRef.current,
+            {
+              scaleX: 0.66,
+              duration: 1,
+            },
+            'moveToThirdLevel+=0.2'
+          )
+          .addLabel('moveToFourthLevel')
+
+          .to(
+            bonusTarget,
+            {
+              duration: 1,
+              value: getSums(5).sum1,
+              roundProps: 'value',
+            },
+            'moveToFourthLevel+=0.2'
+          )
+          .to(
+            totalBonusTarget,
+            {
+              duration: 1,
+              value: getAllSum(5),
+              roundProps: 'value',
+            },
+            'moveToFourthLevel+=0.2'
           )
           .to(
             sliderHandleWrapRef.current,
@@ -289,7 +353,7 @@ const PartnerProgramm: FC = () => {
               x: sliderRef!.current!.offsetWidth,
               duration: 1,
             },
-            'finishShowCalculator'
+            'moveToFourthLevel+=0.2'
           )
           .to(
             sliderValueTarget,
@@ -298,119 +362,7 @@ const PartnerProgramm: FC = () => {
               value: 5,
               roundProps: 'value',
             },
-            'finishShowCalculator'
-          )
-          .from(
-            sliderBarRef.current,
-            {
-              scaleX: 0,
-              duration: 1,
-            },
-            'finishShowCalculator'
-          )
-          .addLabel('firstMoveToFinish')
-          .to(
-            bonusTarget,
-            {
-              duration: 0.1,
-              value: 0,
-              roundProps: 'value',
-            },
-            'firstMoveToFinish'
-          )
-          .to(
-            totalBonusTarget,
-            {
-              duration: 0.1,
-              value: 0,
-              roundProps: 'value',
-            },
-            'firstMoveToFinish'
-          )
-          .to(
-            sliderHandleWrapRef.current,
-            {
-              x: 0,
-              duration: 0.1,
-            },
-            'firstMoveToFinish'
-          )
-          .to(
-            sliderValueTarget,
-            {
-              duration: 0.1,
-              value: 0,
-              roundProps: 'value',
-            },
-            'firstMoveToFinish'
-          )
-          .to(
-            sliderBarRef.current,
-            {
-              scaleX: 0,
-              duration: 0.1,
-            },
-            'firstMoveToFinish'
-          )
-          .from(
-            [...profitItemLevels.current, ...profitItemPeople.current],
-            {
-              opacity: 0,
-              duration: 0.1,
-            },
-            'firstMoveToFinish'
-          )
-          .to(
-            firstCheckboxGradientRef.current,
-            {
-              opacity: 0,
-              duration: 0.1,
-            },
-            'firstMoveToFinish'
-          )
-          .from(
-            secondCheckboxGradientRef.current,
-            {
-              opacity: 0,
-              duration: 0.1,
-            },
-            'firstMoveToFinish'
-          )
-          .addLabel('firstResetSlider')
-          .to(
-            bonusTarget,
-            {
-              duration: 1,
-              value: 1236 * 1.5,
-              roundProps: 'value',
-            },
-            'firstResetSlider'
-          )
-          .to(
-            totalBonusTarget,
-            {
-              duration: 1,
-              value: 16456 * 1.5,
-              roundProps: 'value',
-            },
-            'firstResetSlider'
-          )
-          .to(
-            sliderHandleWrapRef.current,
-            {
-              x: sliderRef!.current!.offsetWidth,
-              duration: 1,
-            },
-            'firstResetSlider'
-          )
-          .to(
-            sliderValueTarget,
-            {
-              duration: 1,
-              value: 5,
-              roundProps: 'value',
-            },
-            'firstResetSlider'
+            'moveToFourthLevel+=0.2'
           )
           .to(
             sliderBarRef.current,
@@ -418,12 +370,11 @@ const PartnerProgramm: FC = () => {
               scaleX: 1,
               duration: 1,
             },
-            'firstResetSlider'
+            'moveToFourthLevel+=0.2'
           )
-          .addLabel('finish');
+          .addLabel('moveToFivethLevel');
       }
     }, 0);
-    
   }, []);
   return (
     <Root ref={rootRef}>
