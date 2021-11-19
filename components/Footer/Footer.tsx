@@ -150,22 +150,22 @@ const Footer: FC = () => {
           <FooterBottomWrapper>
             <DocumentsList>
               <DocumentItem>
-                <ActiveLink href="#">
+                <ActiveLink href="/term-of-use">
                   <DocumentLink>{t('term', { ns: 'footer' })}</DocumentLink>
                 </ActiveLink>
               </DocumentItem>
               <DocumentItem>
-                <ActiveLink href="#">
+                <ActiveLink href="/privacy">
                   <DocumentLink>{t('privacy', { ns: 'footer' })}</DocumentLink>
                 </ActiveLink>
               </DocumentItem>
               <DocumentItem>
-                <ActiveLink href="#">
+                <ActiveLink href="/cookie">
                   <DocumentLink>{t('cookie', { ns: 'footer' })}</DocumentLink>
                 </ActiveLink>
               </DocumentItem>
               <DocumentItem>
-                <ActiveLink href="#">
+                <ActiveLink href="/trial">
                   <DocumentLink>
                     {t('testPeriod', { ns: 'footer' })}
                   </DocumentLink>
