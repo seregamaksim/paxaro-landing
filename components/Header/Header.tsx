@@ -15,6 +15,7 @@ import SocialList from '../SocialList/SocialList';
 import Headroom from 'react-headroom';
 
 import { MobileStore } from './components/MobileStore';
+import useDocumentScroll from '@/hooks/useDocumentScroll';
 
 interface HeaderWrapperProps {
   isActiveMenu: boolean;
@@ -32,6 +33,10 @@ const Header: FC<HeaderProps> = ({ children, userAgent }) => {
   const [isMobileStoreOpen, setIsMobileStoreOpen] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
   const mainContentRef = useRef<HTMLDivElement>(null);
+  const [shouldHideHeader, setShouldHideHeader] = useState(false);
+  const isDownDirection = useDocumentScroll();
+  const hiddenStyle = isDownDirection ? 'hidden' : '';
+  // console.log(test);
 
   function handleBurgerClick() {
     if (innerWidth < 900) {
@@ -61,7 +66,7 @@ const Header: FC<HeaderProps> = ({ children, userAgent }) => {
     }
   }, []);
   return (
-    <div ref={mainContentRef}>
+    <MainContainer className={`${hiddenStyle}`} ref={mainContentRef}>
       <MobileStore
         isOpen={isMobileStoreOpen}
         onCloseMobileStoreButtonClick={onCloseMobileStoreButtonClick}
@@ -179,10 +184,22 @@ const Header: FC<HeaderProps> = ({ children, userAgent }) => {
           </HeaderScroller>
         </HeaderWrapper>
       </Root>
-    </div>
+    </MainContainer>
   );
 };
 
+const MainContainer = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
+  transition: transform 0.3s ease;
+  &.hidden {
+    transform: translateY(-110%);
+  }
+`;
 const Root = styled.header`
   background: var(--black1);
   box-shadow: 0px 30px 36px -15px rgba(0, 0, 0, 0.15);
@@ -191,12 +208,7 @@ const Root = styled.header`
   }
 `;
 
-const HeaderScroller = styled.div`
-  @media (max-width: 900px) {
-    /* padding-bottom: 150px;
-    overflow: scroll; */
-  }
-`;
+const HeaderScroller = styled.div``;
 
 const HeaderWrapper = styled.div.attrs<HeaderWrapperProps>(
   ({ isActiveMenu }) => ({
@@ -208,8 +220,6 @@ const HeaderWrapper = styled.div.attrs<HeaderWrapperProps>(
   @media (max-width: 900px) {
     display: ${({ isActiveMenu }: HeaderWrapperProps) =>
       isActiveMenu ? 'block' : 'none'};
-    /* flex-direction: column; */
-    /* height: 100vh; */
     position: fixed;
     width: 100%;
     top: ${({ $topPosition }: HeaderWrapperProps) => $topPosition + 'px'};
