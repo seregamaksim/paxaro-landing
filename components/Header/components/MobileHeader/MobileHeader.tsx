@@ -12,6 +12,7 @@ import { ActiveLink } from '@/components/ActiveLink';
 import { MobileStore } from '../MobileStore';
 import LogoMini from '@/ui/icons/LogoMini';
 import Headroom from 'react-headroom';
+import { colors } from '@/constants';
 
 interface HeaderWrapperProps {
   isActiveMenu: boolean;
@@ -130,7 +131,7 @@ const MobileHeader: FC<MobileHeaderProps> = ({ children, userAgent }) => {
 };
 
 const Root = styled.header`
-  background: var(--black1);
+  background: ${colors.black1};
   box-shadow: 0px 30px 36px -15px rgba(0, 0, 0, 0.15);
   position: relative;
 `;
@@ -149,7 +150,7 @@ const HeaderWrapper = styled.div.attrs<HeaderWrapperProps>(
   left: 0;
   bottom: 0;
   overflow-y: auto;
-  background: var(--black1);
+  background: ${colors.black1};
   z-index: 10;
 `;
 
@@ -189,10 +190,10 @@ const HeaderTopLink = styled.a`
   font-size: 24px;
   line-height: 34px;
   letter-spacing: 0.01em;
-  color: var(--white);
+  color: ${colors.white};
   transition: color 0.3s ease;
   &.active {
-    color: var(--green);
+    color: ${colors.green};
   }
 `;
 
@@ -210,7 +211,7 @@ const HeaderButtonTitle = styled.p`
   font-size: 24px;
   line-height: 34px;
   letter-spacing: 0.01em;
-  color: var(--white);
+  color: ${colors.white};
   margin-bottom: 18px;
 `;
 
@@ -224,12 +225,12 @@ const HeaderButtonRegistration = styled(Button)`
 
 const HeaderLinkLogin = styled.a`
   border-radius: 8px;
-  background: var(--greenGradient);
+  background: ${colors.greenGradient};
   display: inline-flex;
   padding: 2px;
   min-height: 43px;
   min-width: 76px;
-  color: var(--white);
+  color: ${colors.white};
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
@@ -240,7 +241,7 @@ const HeaderLinkLogin = styled.a`
     box-shadow: 0px 14px 30px 0px rgba(27, 157, 120, 0.42);
   }
   span {
-    background-color: var(--black3);
+    background-color: ${colors.black3};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -265,7 +266,7 @@ const BurgerBtn = styled.button`
     position: absolute;
     width: 18px;
     height: 2px;
-    background-color: var(--white);
+    background-color: ${colors.white};
     transition: all 0.3s ease;
   }
   & span::before {

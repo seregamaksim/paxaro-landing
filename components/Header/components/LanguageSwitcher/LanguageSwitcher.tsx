@@ -7,6 +7,7 @@ import kazakhstanIcon from '@/assets/images/kazakhstan.svg';
 import usaIcon from '@/assets/images/usa.svg';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
 import { ActiveLink } from '@/components/ActiveLink';
+import { colors } from '@/constants';
 
 interface LanguageSwitcherProps {
   className?: string;
@@ -97,7 +98,7 @@ const Root = styled.div`
   }
 `;
 const ButtonLangIndicator = styled.button<{ $isOpen: boolean }>`
-  background: var(--white);
+  background: ${colors.white};
   border-radius: 8px;
   padding: 11px 13px;
   display: flex;
@@ -108,15 +109,15 @@ const ButtonLangIndicator = styled.button<{ $isOpen: boolean }>`
   line-height: 20px;
   letter-spacing: 0.01em;
   text-transform: capitalize;
-  color: var(--black3);
+  color: ${colors.black3};
   cursor: pointer;
   @media (max-width: 900px) {
     padding: 20px;
     width: 100%;
     border-radius: 0;
     background-color: ${(props) =>
-      props.$isOpen ? 'var(--black2)' : 'transparent'};
-    color: var(--white);
+      props.$isOpen ? colors.black1 : 'transparent'};
+    color: ${colors.white};
     justify-content: flex-start;
 
     position: relative;
@@ -140,7 +141,7 @@ const LanguagesDropdown = styled.div.attrs(() => ({
   right: 0;
   top: calc(100% + 8px);
   min-width: 133px;
-  background: var(--white);
+  background: ${colors.white};
   box-shadow: 0px 6px 23px rgba(0, 0, 0, 0.08);
   border-radius: 8px;
   padding-bottom: 7px;
@@ -152,7 +153,7 @@ const LanguagesDropdown = styled.div.attrs(() => ({
     left: 0;
     border-radius: 30px 30px 0px 0px;
     padding-top: 20px;
-    background-color: var(--black2);
+    background-color: ${colors.black1};
   }
 `;
 const LanguagesDropdownList = styled.ul``;
@@ -180,7 +181,7 @@ const LanguagesDropdownLink = styled.a`
     transform: translateX(-50%) scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease;
-    background-color: var(--green);
+    background-color: ${colors.green};
   }
   &:hover:not(.active) {
     &::before {
@@ -188,7 +189,7 @@ const LanguagesDropdownLink = styled.a`
     }
   }
   @media (max-width: 900px) {
-    color: var(--white);
+    color: ${colors.white};
 
     font-size: 18px;
     line-height: 24px;

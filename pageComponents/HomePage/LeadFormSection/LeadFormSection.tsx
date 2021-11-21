@@ -6,6 +6,7 @@ import { Container } from '@/components/Container';
 import { SectionLabel } from '@/components/SectionLabel';
 import { SectionTitle } from '@/components/SectionTitle';
 import { LeadForm } from './LeadForm';
+import { colors } from '@/constants';
 
 const LeadFormSection: FC = () => {
   const { t } = useTranslation('leadForm');
@@ -70,7 +71,7 @@ const LeadFormSubtitle = styled.p`
 
   letter-spacing: 0.01em;
 
-  color: var(--black2);
+  color: ${colors.black2};
   @media (max-width: 768px) {
     font-size: 14px;
     line-height: 20px;

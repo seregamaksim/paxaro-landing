@@ -9,6 +9,7 @@ import phoneImg from '@/assets/images/fear-phone.png';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { getCenterTopPosition } from '@/helpers/getCenterTopPosition';
+import { colors } from '@/constants';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -1029,7 +1030,7 @@ const StyledSectionLabel = styled(SectionLabel)`
 `;
 
 const MessagesBlock = styled.div`
-  background-color: var(--lightGray);
+  background-color: ${colors.lightGray};
   height: 100vh;
   min-height: 100vh;
   width: 100%;
@@ -1069,7 +1070,7 @@ const MessagesList = styled.ul`
 
 const MessageItem = styled.li`
   padding: 28px 24px;
-  background-color: var(--white);
+  background-color: ${colors.white};
   border-radius: 30px;
   max-width: 505px;
   opacity: 0;
@@ -1092,7 +1093,7 @@ const MessageItemTitle = styled.p`
   font-size: 18px;
   line-height: 25px;
   letter-spacing: 0.01em;
-  color: var(--black2);
+  color: ${colors.black2};
   margin-bottom: 14px;
   @media (max-width: 1024px) {
     margin-bottom: 12px;
@@ -1104,7 +1105,7 @@ const MessageItemText = styled.p`
   line-height: 25px;
   letter-spacing: 0.01em;
 
-  color: var(--black2);
+  color: ${colors.black2};
   @media (max-width: 1024px) {
     font-size: 14px;
     line-height: 20px;
@@ -1178,7 +1179,7 @@ const MiniCardTitle = styled.p`
   line-height: 25px;
   text-align: center;
   letter-spacing: 0.01em;
-  color: var(--white);
+  color: ${colors.white};
   will-change: color;
   position: relative;
   @media (max-width: 1024px) {

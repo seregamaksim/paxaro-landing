@@ -1,3 +1,4 @@
+import { colors } from '@/constants';
 import { useField } from 'formik';
 import { FC, useEffect } from 'react';
 import Select from 'react-select';
@@ -25,7 +26,7 @@ const SelectUI: FC<SelectUIProps & any> = ({
   const customStyles = {
     control: (provided: any, state: any) => ({
       ...provided,
-      borderColor: 'var(--darkGray)',
+      borderColor: colors.darkGray,
       borderRadius: 14,
       backgroundColor: 'transparent',
       minHeight: 47,
@@ -41,11 +42,11 @@ const SelectUI: FC<SelectUIProps & any> = ({
       lineHeight: '25px',
       letterSpacing: '0.01em',
       fontWeight: 600,
-      color: 'var(--white)',
+      color: colors.white,
     }),
     menu: (provided: any, state: any) => ({
       ...provided,
-      background: 'var(--black2)',
+      background: colors.black2,
       border: '1px solid #A3A3A3',
       borderRadius: 14,
       overflow: 'hidden',
@@ -61,13 +62,13 @@ const SelectUI: FC<SelectUIProps & any> = ({
       lineHeight: '25px',
       letterSpacing: '0.01em',
       fontWeight: 600,
-      color: state.isSelected ? 'var(--green)' : 'var(--white)',
+      color: state.isSelected ? colors.green : colors.white,
       backgroundColor:
-        state.isFocused && !state.isSelected ? 'var(--green)' : 'transparent',
+        state.isFocused && !state.isSelected ? colors.green : 'transparent',
       padding: '8px 13px',
       ':active': {
         backgroundColor:
-          state.isFocused && !state.isSelected ? 'var(--green)' : 'transparent',
+          state.isFocused && !state.isSelected ? colors.green : 'transparent',
       },
     }),
   };

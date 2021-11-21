@@ -1,4 +1,5 @@
 import { Container } from '@/components/Container';
+import { colors } from '@/constants';
 import { getSplitString } from '@/helpers/getSplitString';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -58,7 +59,7 @@ const Title = styled.h1`
   font-weight: bold;
   font-size: 48px;
   line-height: 67px;
-  color: var(--black2);
+  color: ${colors.black2};
   margin-bottom: 24px;
   @media (max-width: 768px) {
     font-size: 24px;
@@ -72,7 +73,7 @@ const Text = styled.p`
   line-height: 20px;
   letter-spacing: 0.01em;
 
-  color: var(--black1);
+  color: ${colors.black1};
   margin-bottom: 14px;
   &:last-child {
     margin-bottom: 0;

@@ -9,6 +9,7 @@ import { ActiveLink } from '@/components/ActiveLink';
 import { Button } from '@/ui/components/Button';
 import { LanguageSwitcher } from '../LanguageSwitcher';
 import Headroom from 'react-headroom';
+import { colors } from '@/constants';
 
 const DesktopHeader: FC = ({ children }) => {
   const { t } = useTranslation('header');
@@ -76,7 +77,7 @@ const DesktopHeader: FC = ({ children }) => {
 };
 
 const Root = styled.header`
-  background: var(--black1);
+  background: ${colors.black1};
   box-shadow: 0px 30px 36px -15px rgba(0, 0, 0, 0.15);
 `;
 
@@ -114,11 +115,11 @@ const HeaderTopLink = styled.a`
   font-size: 18px;
   line-height: 25px;
   letter-spacing: 0.01em;
-  color: var(--white);
+  color: ${colors.white};
   transition: color 0.3s ease;
   &.active,
   &:hover {
-    color: var(--green);
+    color: ${colors.green};
   }
 `;
 
@@ -136,7 +137,7 @@ const HeaderButtonTitle = styled.p`
   font-size: 24px;
   line-height: 34px;
   letter-spacing: 0.01em;
-  color: var(--white);
+  color: ${colors.white};
   margin-bottom: 18px;
   display: none;
 `;
@@ -151,12 +152,12 @@ const HeaderButtonRegistration = styled(Button)`
 
 const HeaderLinkLogin = styled.a`
   border-radius: 8px;
-  background: var(--greenGradient);
+  background: ${colors.greenGradient};
   display: inline-flex;
   padding: 2px;
   min-height: 43px;
   min-width: 76px;
-  color: var(--white);
+  color: ${colors.white};
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
@@ -168,7 +169,7 @@ const HeaderLinkLogin = styled.a`
   }
 
   span {
-    background-color: var(--black3);
+    background-color: ${colors.black3};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -178,7 +179,7 @@ const HeaderLinkLogin = styled.a`
 `;
 
 const HeaderBottom = styled.div`
-  background-color: var(--black2);
+  background-color: ${colors.black1};
 `;
 
 const HeaderBottomContainer = styled(Container)`

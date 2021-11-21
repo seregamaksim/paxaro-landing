@@ -16,7 +16,7 @@ import {
 } from './staticData';
 
 import axios, { AxiosResponse } from 'axios';
-import { baseUrl } from '@/constants';
+import { baseUrl, colors } from '@/constants';
 
 const SelectUiNoSSR = dynamic(
   () => import('@/ui/components/SelectUI/SelectUI'),
@@ -219,7 +219,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
 };
 
 const Root = styled.div`
-  background: var(--black2);
+  background: ${colors.black2};
   border-radius: 50px;
   @media (max-width: 768px) {
     border-radius: 24px;
@@ -304,33 +304,33 @@ const HeadLabel = styled.p`
 
   margin-bottom: 12px;
 
-  color: var(--white);
+  color: ${colors.white};
 `;
 
 const StyledSlider = styled(Slider)`
   margin-left: 12px;
   margin-right: 12px;
   .rc-slider-rail {
-    background-color: var(--darkGray);
+    background-color: ${colors.darkGray};
   }
 
   .rc-slider-track {
-    background-color: var(--green);
+    background-color: ${colors.green};
   }
   .rc-slider-handle {
     width: 24px;
     height: 24px;
     margin-top: -12px;
     border-width: 3px;
-    border-color: var(--black2);
-    background-image: var(--greenGradient);
+    border-color: ${colors.black2};
+    background-image: ${colors.greenGradient};
     &::before {
       content: '';
       position: absolute;
       width: 100%;
       height: 100%;
       z-index: -1;
-      background: var(--greenGradient);
+      background: ${colors.greenGradient};
       filter: blur(18px);
     }
   }
@@ -351,7 +351,7 @@ const SliderBorders = styled.p`
   font-size: 18px;
   line-height: 25px;
   letter-spacing: 0.01em;
-  color: var(--white);
+  color: ${colors.white};
 `;
 
 const ChartWrap = styled.div`
@@ -373,13 +373,13 @@ const ChartWrap = styled.div`
     }
 
     ::-webkit-scrollbar-thumb {
-      background-color: var(--green);
+      background-color: ${colors.green};
       border-radius: 10px;
     }
 
     ::-webkit-scrollbar-track {
       border-radius: 10px;
-      background-color: #ffffff;
+      background-color: ${colors.white};
     }
     padding-bottom: 20px;
   }
@@ -399,7 +399,7 @@ const Footer = styled.div`
 
 const ProfitBlock = styled.div`
   padding: 10px 20px;
-  border: 1px solid var(--darkGray);
+  border: 1px solid ${colors.darkGray};
   border-radius: 10px;
   @media (max-width: 768px) {
     display: flex;
@@ -416,9 +416,9 @@ const ProfitBlockText = styled.p`
   line-height: 34px;
   letter-spacing: 0.01em;
 
-  color: var(--white);
+  color: ${colors.white};
   span {
-    color: var(--green);
+    color: ${colors.green};
     margin-left: 24px;
   }
   @media (max-width: 768px) {

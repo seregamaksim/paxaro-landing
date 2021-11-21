@@ -10,7 +10,7 @@ import googleStoreImg from '@/assets/images/google-play.svg';
 import { useTranslation } from 'react-i18next';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { appStoreLink, googlePlayLink } from '@/constants';
+import { appStoreLink, colors, googlePlayLink } from '@/constants';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -95,7 +95,7 @@ const StyledContainer = styled(Container)`
 
 const PhoneBlock = styled.div`
   position: relative;
-  background-color: var(--black1);
+  background-color: ${colors.black1};
   overflow: hidden;
   border-radius: 45px;
   &::before {
@@ -177,7 +177,7 @@ const StoresBlockText = styled.p`
   font-size: 24px;
   line-height: 34px;
   letter-spacing: 0.01em;
-  color: var(--white);
+  color: ${colors.white};
   margin-bottom: 77px;
   @media (max-width: 768px) {
     font-weight: bold;

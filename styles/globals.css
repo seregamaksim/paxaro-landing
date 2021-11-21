@@ -1,21 +1,3 @@
-:root {
-  --black1: #000;
-  --black2: #1d1d1d;
-  --black3: #010202;
-  --black4: #333;
-  --black5: #1c1c1c;
-
-  --white: #fff;
-
-  --green: #48be9c;
-
-  --red: #ee6363;
-  --lightGray: #f4f4f4;
-  --darkGray: #999999;
-
-  --greenGradient: linear-gradient(269.41deg, #45c6a1 0.51%, #179a74 99.5%);
-}
-
 .case-preloader {
   transition: opacity 0.5s;
   opacity: 0;
@@ -31,7 +13,7 @@
   height: 100%;
   z-index: 100;
   pointer-events: none;
-  background-color: var(--black4);
+  background-color: #333;
 }
 .case-preloader.active {
   opacity: 1;
@@ -137,7 +119,7 @@ body .rc-slider-tooltip-inner {
   font-size: 18px;
   line-height: 25px;
   letter-spacing: 0.01em;
-  color: var(--white);
+  color: #fff;
 }
 
 body .rc-slider-tooltip-arrow {

@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { Trans } from 'react-i18next';
 import Link from 'next/link';
 import { Button } from '@/ui/components/Button';
+import { colors } from '@/constants';
 
 interface FormValues {
   firstname: string;
@@ -43,6 +44,15 @@ const LeadForm: FC<LeadFormProps> = ({ className }) => {
 
     setIsSuccess(true);
   }
+  console.log(
+    <Trans t={t} i18nKey="privacyText">
+      Нажимая на кнопку, вы даете согласие на{' '}
+      <LinkText href="/term-of-use">обработку персональных данных</LinkText> и
+      соглашаетесь с{' '}
+      <LinkText href="/privacy">политикой конфиденциальности</LinkText>
+    </Trans>
+  );
+
   return isSuccess ? (
     <SuccessBlock>
       <SuccessBlockText>
@@ -101,9 +111,11 @@ const LeadForm: FC<LeadFormProps> = ({ className }) => {
           <FormPrivacyText>
             <Trans t={t} i18nKey="privacyText">
               Нажимая на кнопку, вы даете согласие на{' '}
-              <LinkText href="#">обработку персональных данных</LinkText> и
-              соглашаетесь с{' '}
-              <LinkText href="#">политикой конфиденциальности</LinkText>
+              <LinkText href="/term-of-use">
+                обработку персональных данных
+              </LinkText>{' '}
+              и соглашаетесь с{' '}
+              <LinkText href="/privacy">политикой конфиденциальности</LinkText>
             </Trans>
           </FormPrivacyText>
         </FormBlock>
@@ -190,7 +202,7 @@ const SuccessBlockText = styled.p`
   text-align: center;
   letter-spacing: 0.01em;
 
-  color: var(--black1);
+  color: ${colors.black1};
   span {
     display: inline-block;
     position: relative;
@@ -202,7 +214,7 @@ const SuccessBlockText = styled.p`
       width: 105%;
       left: -3px;
       height: 100%;
-      background-color: var(--green);
+      background-color: ${colors.green};
     }
   }
   @media (max-width: 768px) {

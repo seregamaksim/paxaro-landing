@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { ActiveLink } from '@/components/ActiveLink';
+import { colors } from '@/constants';
 
 const HeaderBottom: FC = () => {
   const { t } = useTranslation('header');
@@ -82,11 +83,11 @@ const HeaderBottomMenuLink = styled.a`
   line-height: 20px;
   letter-spacing: 0.01em;
 
-  color: var(--white);
+  color: ${colors.white};
   transition: color 0.3s ease;
   &.active,
   &:hover {
-    color: var(--green);
+    color: ${colors.green};
   }
 `;
 

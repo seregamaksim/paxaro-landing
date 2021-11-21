@@ -1,3 +1,4 @@
+import { colors } from '@/constants';
 import { FC, useEffect, useState } from 'react';
 import BeatLoader from 'react-spinners/BeatLoader';
 import styled from 'styled-components';
@@ -32,7 +33,7 @@ const Root = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--black1);
+  background-color: ${colors.black1};
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.5s;

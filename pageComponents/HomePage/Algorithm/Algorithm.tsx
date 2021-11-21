@@ -16,7 +16,7 @@ import algorithmImg4 from '@/assets/images/algorithm-img4.svg';
 import storePhone from '@/assets/images/store-banner-phone.png';
 import appStoreImg from '@/assets/images/app-store.svg';
 import googleStoreImg from '@/assets/images/google-play.svg';
-import { appStoreLink, googlePlayLink } from '@/constants';
+import { appStoreLink, colors, googlePlayLink } from '@/constants';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -307,7 +307,7 @@ const Circle = styled.div`
   width: 530px;
   height: 530px;
   border-radius: 50%;
-  background-color: var(--black1);
+  background-color: ${colors.black1};
   transform-origin: left;
   will-change: transform;
 `;
@@ -329,7 +329,7 @@ const StyledSectionLabel = styled(SectionLabel)`
 `;
 
 const StyledSectionTitle = styled(SectionTitle)`
-  color: var(--white);
+  color: ${colors.white};
   margin-bottom: 24px;
 `;
 
@@ -338,7 +338,7 @@ const Subtitle = styled.p`
   line-height: 34px;
   text-align: center;
   letter-spacing: 0.01em;
-  color: var(--white);
+  color: ${colors.white};
   max-width: 671px;
   @media (max-width: 768px) {
     font-size: 14px;
@@ -371,7 +371,7 @@ const ContentSection = styled.div`
   overflow: hidden;
   z-index: 0;
   padding-bottom: 100%;
-  background: var(--lightGray);
+  background: ${colors.lightGray};
   counter-reset: counterDescription;
 `;
 
@@ -404,7 +404,7 @@ const DescriptionContentSectionItem = styled(ContentSectionItem)`
     line-height: 140%;
     letter-spacing: 0.01em;
 
-    color: var(--white);
+    color: ${colors.white};
   }
 
   @media (max-width: 1150px) {
@@ -426,7 +426,7 @@ const DescriptionText = styled.p`
   position: relative;
 
   text-align: center;
-  color: var(--black2);
+  color: ${colors.black2};
   max-width: 360px;
   @media (max-width: 1150px) {
     font-size: 36px;
@@ -440,7 +440,7 @@ const DescriptionText = styled.p`
 `;
 
 const GreenContentSection = styled(ContentSection)`
-  background: var(--greenGradient);
+  background: ${colors.greenGradient};
   @media (max-width: 768px) {
     margin-top: 20px;
   }
@@ -477,7 +477,7 @@ const StoreBannerSection = styled.div`
 
 const StoreBanner = styled.div`
   padding: 10.4% 6.45%;
-  background-color: var(--white);
+  background-color: ${colors.white};
   border-radius: 45px;
   position: relative;
   box-shadow: 0px 21px 161px -46px rgba(147, 147, 147, 0.25);
@@ -504,11 +504,11 @@ const StoreBannerText = styled.p`
   font-weight: bold;
   font-size: 48px;
   line-height: 58px;
-  color: var(--black3);
+  color: ${colors.black3};
   max-width: 76.6%;
   margin-bottom: 60px;
   span {
-    color: var(--darkGray);
+    color: ${colors.darkGray};
   }
   @media (max-width: 1200px) {
     font-size: 36px;

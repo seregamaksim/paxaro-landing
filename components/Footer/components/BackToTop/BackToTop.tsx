@@ -2,7 +2,8 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import Image from 'next/image';
-import arrowUp from '../../../../assets/images/arrow-up.svg';
+import arrowUp from '@/assets/images/arrow-up.svg';
+import { colors } from '@/constants';
 
 interface BackToTopProps {
   className?: string;
@@ -37,7 +38,7 @@ const Text = styled.p`
   line-height: 20px;
   letter-spacing: 0.01em;
   margin-right: 4px;
-  color: var(--white);
+  color: ${colors.white};
   @media (max-width: 900px) {
     font-size: 0;
     margin: 0;

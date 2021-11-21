@@ -8,6 +8,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import ImageNext from 'next/image';
 import heroCollageImg from '@/assets/images/hero-collage.png';
+import { colors } from '@/constants';
 
 if (typeof window !== undefined) {
   gsap.registerPlugin(ScrollTrigger);
@@ -177,7 +178,7 @@ const StyledContainer = styled(Container)`
 
 const Head = styled.div`
   margin-bottom: 86px;
-  color: var(--black2);
+  color: ${colors.black2};
   display: flex;
   flex-direction: column;
   align-items: center;

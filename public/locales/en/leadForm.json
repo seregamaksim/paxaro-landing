@@ -7,6 +7,6 @@
   "inputSurnameLabel": "Surname",
   "inputPhoneLabel": "Your phone number",
   "formButton": "Send form",
-  "privacyText": "By clicking the button, you give consent to <2><0>to process personal data</0><2> and agree with <5><0>the Privacy Policy</0></5>",
+  "privacyText": "By clicking the button, you give consent to <2>process personal data</2> and agree with <6>the Privacy Policy</6>",
   "successText": "The form <1>is successfully</1> sent.You will be contacted in the near future"
 }

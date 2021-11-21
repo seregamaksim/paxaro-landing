@@ -5,6 +5,7 @@ import { Button } from '@/ui/components/Button';
 import { useTranslation } from 'react-i18next';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { colors } from '@/constants';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -131,7 +132,7 @@ const PlanTitle = styled.p`
   text-align: center;
   letter-spacing: 0.01em;
 
-  color: var(--black2);
+  color: ${colors.black2};
   @media (max-width: 1024px) {
     font-size: 48px;
     line-height: 60px;
@@ -162,7 +163,7 @@ const PlanPrice = styled.p`
   text-align: center;
   letter-spacing: 0.01em;
   margin-right: 56px;
-  color: var(--black2);
+  color: ${colors.black2};
   @media (max-width: 1024px) {
     font-size: 48px;
     line-height: 60px;
@@ -210,7 +211,7 @@ const PlanItem = styled.li`
   line-height: 34px;
   letter-spacing: 0.01em;
 
-  color: var(--darkGray);
+  color: ${colors.darkGray};
   &::before,
   &::after {
     content: '';
@@ -223,13 +224,13 @@ const PlanItem = styled.li`
   &::before {
     width: 24px;
     height: 24px;
-    border: 1px solid var(--green);
+    border: 1px solid ${colors.green};
     left: 0;
   }
   &::after {
     width: 18px;
     height: 18px;
-    background-color: var(--green);
+    background-color: ${colors.green};
     left: 3px;
   }
   @media (max-width: 768px) {

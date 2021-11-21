@@ -14,6 +14,7 @@ import coin3Icon from '@/assets/images/coin-icon3.svg';
 import gridWithArrow from '@/assets/images/grid-with-arrow.svg';
 import { useRouter } from 'next/router';
 import { useIntersection } from '@/hooks/useIntersection';
+import { colors } from '@/constants';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -650,7 +651,7 @@ const SectionTitle = styled.h2`
   font-size: 36px;
   line-height: 50px;
   font-weight: bold;
-  color: var(--black2);
+  color: ${colors.black2};
   margin-bottom: 24px;
 
   @media (max-width: 768px) {
@@ -668,7 +669,7 @@ const ContentTitle = styled.p`
   font-weight: bold;
   font-size: 72px;
   line-height: 87px;
-  color: var(--black2);
+  color: ${colors.black2};
   position: absolute;
   z-index: 1;
   left: 0;
@@ -697,7 +698,7 @@ const DescriptionsWrapper = styled.div`
   max-width: 500px;
   padding: 50px;
 
-  background: var(--white);
+  background: ${colors.white};
   box-shadow: 0px 6px 36px rgba(104, 104, 104, 0.08);
   border-radius: 40px;
   will-change: opacity;
@@ -733,7 +734,7 @@ const DescriptionCounterText = styled.p`
 
   letter-spacing: 0.01em;
   will-change: opacity;
-  color: var(--black2);
+  color: ${colors.black2};
   @media (max-width: 1024px) {
     font-size: 14px;
     line-height: 20px;
@@ -759,7 +760,7 @@ const DescriptionCounterLineWrap = styled.div`
     width: 50%;
     left: 0;
     top: 0;
-    background-color: var(--green);
+    background-color: ${colors.green};
     will-change: transform;
   }
 `;
@@ -782,7 +783,7 @@ const DescriptionText = styled.p`
   font-size: 18px;
   line-height: 25px;
   letter-spacing: 0.01em;
-  color: var(--black2);
+  color: ${colors.black2};
   margin-bottom: 12px;
 
   &:last-child {
@@ -810,7 +811,7 @@ const SecondDescriptionBlockRef = styled.div`
   width: 100%;
   max-width: 757px;
   padding: 40px;
-  background: var(--white);
+  background: ${colors.white};
   box-shadow: 0px 6px 36px rgba(104, 104, 104, 0.08);
   border-radius: 40px;
   will-change: transform, opacity;

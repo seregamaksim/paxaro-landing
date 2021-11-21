@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { Button } from '@/ui/components/Button';
 import { useCookies } from 'react-cookie';
+import { colors } from '@/constants';
 
 const Cookies: FC = () => {
   const { t } = useTranslation('cookies');
@@ -60,7 +61,7 @@ const Text = styled.p`
   font-size: 12px;
   line-height: 17px;
 
-  color: var(--white);
+  color: ${colors.white};
   max-width: 610px;
   margin-right: 30px;
   @media (max-width: 768px) {
@@ -72,7 +73,7 @@ const Text = styled.p`
 const TextLink = styled.a`
   text-decoration-line: underline;
 
-  color: var(--white); ;
+  color: ${colors.white}; ;
 `;
 
 const ApplyButton = styled(Button)`

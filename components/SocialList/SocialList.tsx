@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ActiveLink } from '@/components/ActiveLink';
 import Link from 'next/link';
 import {
+  colors,
   instagramLink,
   telegramLink,
   twitterLink,
@@ -74,7 +75,7 @@ const ItemLink = styled.a`
 
   letter-spacing: 0.01em;
 
-  color: var(--white);
+  color: ${colors.white};
 `;
 
 export default SocialList;

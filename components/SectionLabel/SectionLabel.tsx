@@ -1,3 +1,4 @@
+import { colors } from '@/constants';
 import { FC } from 'react';
 import styled from 'styled-components';
 
@@ -28,9 +29,9 @@ const Label = styled.p<{ isDark: boolean }>`
 
   letter-spacing: 0.01em;
 
-  color: ${(props) => (props.isDark ? 'var(--white)' : 'var(--black2)')};
+  color: ${(props) => (props.isDark ? colors.white : colors.black1)};
   background-color: ${(props) =>
-    props.isDark ? 'var(--black4)' : 'var(--lightGray)'};
+    props.isDark ? colors.black4 : colors.lightGray};
   @media (max-width: 768px) {
     font-size: 12px;
     line-height: 17px;

@@ -9,6 +9,7 @@ import googlePlay from '@/assets/images/google-play-transparent.svg';
 import { Button } from '@/ui/components/Button';
 import { useTranslation } from 'react-i18next';
 import { BackToTop } from './components/BackToTop';
+import { colors } from '@/constants';
 
 const Footer: FC = () => {
   const { t } = useTranslation(['header', 'footer']);
@@ -181,7 +182,7 @@ const Footer: FC = () => {
 };
 
 const Root = styled.footer`
-  background-color: var(--black3);
+  background-color: ${colors.black3};
 `;
 
 const StyledContainer = styled(Container)`
@@ -240,7 +241,7 @@ const StoresItem = styled.li`
 
   transition: transform 0.3s ease;
   &:hover {
-    color: var(--green);
+    color: ${colors.green};
     transform: translateY(-3px);
   }
   &:last-child {
@@ -299,10 +300,10 @@ const MainMenuItemLink = styled.a`
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.01em;
-  color: var(--white);
+  color: ${colors.white};
   transition: color 0.3s ease;
   &:hover {
-    color: var(--green);
+    color: ${colors.green};
   }
 `;
 
@@ -343,7 +344,7 @@ const FooterCopyright = styled.p`
   line-height: 20px;
 
   letter-spacing: 0.01em;
-  color: var(--white);
+  color: ${colors.white};
   margin-bottom: 26px;
   @media (max-width: 600px) {
     margin-bottom: 0;
@@ -388,7 +389,7 @@ const DocumentItem = styled.li`
     transform: translateY(-50%);
     width: 1px;
     height: 100%;
-    background-color: var(--white);
+    background-color: ${colors.white};
   }
   &:last-child {
     margin-right: 0;
@@ -418,10 +419,10 @@ const DocumentLink = styled.a`
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.01em;
-  color: var(--white);
+  color: ${colors.white};
   transition: color 0.3s ease;
   &:hover {
-    color: var(--green);
+    color: ${colors.green};
   }
 `;
 

@@ -1,3 +1,4 @@
+import { colors } from '@/constants';
 import React, { ButtonHTMLAttributes, FC, LinkHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
@@ -17,13 +18,13 @@ const Button: FC<ButtonProps> = React.forwardRef(
 );
 
 const Root = styled.button`
-  background: var(--greenGradient);
+  background: ${colors.greenGradient};
   border-radius: 8px;
   transition: all 0.3s ease;
   font-weight: bold;
   font-size: 24px;
   line-height: 29px;
-  color: var(--white);
+  color: ${colors.white};
   padding: 25px 28px;
   cursor: pointer;
   &:hover {

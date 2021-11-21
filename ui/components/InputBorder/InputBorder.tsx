@@ -1,3 +1,4 @@
+import { colors } from '@/constants';
 import { useField } from 'formik';
 import { FC, useState } from 'react';
 import styled from 'styled-components';
@@ -62,7 +63,7 @@ const Label = styled.label<{ focus: boolean }>`
   line-height: ${(props) => (props.focus ? '20px' : '25px')};
   letter-spacing: 0.01em;
   pointer-events: none;
-  color: ${(props) => (props.focus ? 'var(--green)' : '#797979')};
+  color: ${(props) => (props.focus ? colors.green : '#797979')};
 `;
 const Input = styled.input<any>`
   font-weight: 600;
@@ -70,10 +71,10 @@ const Input = styled.input<any>`
   line-height: 25px;
   letter-spacing: 0.01em;
 
-  color: var(--black2);
+  color: ${colors.black2};
   padding: 8px 13px;
   border-bottom: 2px solid
-    ${(props) => (props.error ? 'var(--red)' : 'var(--green)')};
+    ${(props) => (props.error ? colors.red : colors.green)};
   transition: all 0.3s ease;
   outline: none;
   width: 100%;

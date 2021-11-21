@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/ui/components/Button';
-import { appStoreLink, googlePlayLink } from '@/constants';
+import { appStoreLink, colors, googlePlayLink } from '@/constants';
 
 interface MobileStoreProps {
   userAgent: { [key: string]: any };
@@ -54,7 +54,7 @@ const MobileStore: FC<MobileStoreProps> = ({
 };
 const Root = styled.div<{ $open: boolean }>`
   display: ${(props) => (props.$open ? 'block' : 'none')};
-  background-color: var(--black2);
+  background-color: ${colors.black1};
   @media (min-width: 900px) {
     display: none;
   }
@@ -86,7 +86,7 @@ const LogoWrap = styled.div`
   width: 100%;
   max-width: 60px;
   height: 60px;
-  background: var(--greenGradient);
+  background: ${colors.greenGradient};
   margin-right: 10px;
   border-radius: 20px;
 `;
@@ -95,7 +95,7 @@ const Text = styled.p`
   font-weight: 600;
   font-size: 12px;
   line-height: 17px;
-  color: var(--white);
+  color: ${colors.white};
   max-width: 138px;
   margin-right: 10px;
 `;

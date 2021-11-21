@@ -10,6 +10,7 @@ import { InfoLink } from './components/InfoLink';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { getCenterTopPosition } from '@/helpers/getCenterTopPosition';
+import { colors } from '@/constants';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -255,7 +256,7 @@ const Education: FC = () => {
 };
 
 const Root = styled.section`
-  background-color: var(--black1);
+  background-color: ${colors.black1};
   height: 100vh;
   overflow: hidden;
   @media (max-width: 900px) {
@@ -288,7 +289,7 @@ const StyledLabel = styled(SectionLabel)`
 `;
 
 const StyledTitle = styled(SectionTitle)`
-  color: var(--white);
+  color: ${colors.white};
   @media (max-width: 500px) {
     max-width: 180px;
   }
@@ -446,7 +447,7 @@ const DescriptionSection2 = styled(DescriptionSection)`
 const DescriptionLabel = styled(SectionLabel)`
   background-color: #168665;
   margin-bottom: 24px;
-  color: var(--white);
+  color: ${colors.white};
   @media (max-width: 900px) {
     display: none;
   }
@@ -456,7 +457,7 @@ const DescriptionText = styled.p`
   font-size: 18px;
   line-height: 25px;
   letter-spacing: 0.01em;
-  color: var(--white);
+  color: ${colors.white};
   @media (max-width: 768px) {
     font-size: 14px;
     line-height: 20px;
@@ -499,7 +500,7 @@ const StyledInfoLink = styled(InfoLink)`
 `;
 
 const InfoLinkBackground = styled.div`
-  background-color: var(--black5);
+  background-color: ${colors.black5};
   position: absolute;
   left: 50%;
   top: 0;
