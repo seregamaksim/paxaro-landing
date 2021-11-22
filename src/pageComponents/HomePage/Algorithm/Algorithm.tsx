@@ -17,8 +17,7 @@ import storePhone from '@/assets/images/store-banner-phone.png';
 import appStoreImg from '@/assets/images/app-store.svg';
 import googleStoreImg from '@/assets/images/google-play.svg';
 import { useIntersection } from '@/hooks/useIntersection';
-import { COLORS } from '@/constants';
-import { LINKS } from '@/constants';
+import { LINKS, COLORS } from '@/constants';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);

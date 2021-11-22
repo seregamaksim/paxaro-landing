@@ -7,8 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/ui/components/Button';
-import { LINKS } from '@/constants';
-import { COLORS } from '@/constants';
+import { LINKS, COLORS } from '@/constants';
 
 interface MobileStoreProps {
   userAgent: { [key: string]: any };

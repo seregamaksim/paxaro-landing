@@ -1,14 +1,12 @@
 import { Container } from '@/components/Container';
 import { SectionLabel } from '@/components/SectionLabel';
 import { SectionTitle } from '@/components/SectionTitle';
-
 import { useIntersection } from '@/hooks/useIntersection';
 import { FC, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { Plan } from './Plan';
 import { LINKS } from '@/constants';
-import { COLORS } from '@/constants';
 
 const PlansSection: FC = () => {
   const { t } = useTranslation('plans');

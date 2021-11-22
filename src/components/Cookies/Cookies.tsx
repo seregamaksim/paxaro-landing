@@ -6,8 +6,6 @@ import { Button } from '@/ui/components/Button';
 import { useCookies } from 'react-cookie';
 import { COLORS } from '@/constants';
 
-// import { COLORS } from '@/constants';
-
 const Cookies: FC = () => {
   const { t } = useTranslation('cookies');
   const [cookies, setCookie] = useCookies(['cookiesSite']);

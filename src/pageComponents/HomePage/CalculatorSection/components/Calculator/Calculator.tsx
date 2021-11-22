@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
-import { Form, Formik, FormikProps, useField } from 'formik';
-import Slider, { Handle, HandleProps, SliderTooltip } from 'rc-slider';
+import { Form, Formik, FormikProps } from 'formik';
+import Slider, { Handle, SliderTooltip } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import currency from 'currency.js';
 import { useTranslation } from 'react-i18next';
@@ -14,10 +14,8 @@ import {
   marks,
   portfolioTypeOptions,
 } from './staticData';
-
 import axios, { AxiosResponse } from 'axios';
-import { COLORS } from '@/constants';
-import { API } from '@/constants';
+import { COLORS, API } from '@/constants';
 
 const SelectUiNoSSR = dynamic(
   () => import('@/ui/components/SelectUI/SelectUI'),

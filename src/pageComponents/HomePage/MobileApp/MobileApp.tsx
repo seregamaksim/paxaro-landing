@@ -10,8 +10,7 @@ import googleStoreImg from '@/assets/images/google-play.svg';
 import { useTranslation } from 'react-i18next';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { COLORS } from '@/constants';
-import { LINKS } from '@/constants';
+import { LINKS, COLORS } from '@/constants';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);

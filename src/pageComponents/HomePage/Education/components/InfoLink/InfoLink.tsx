@@ -6,9 +6,7 @@ import Link from 'next/link';
 import educationLogo from '@/assets/images/education-logo.svg';
 import { Trans, useTranslation } from 'react-i18next';
 import { Button } from '@/ui/components/Button';
-
-import { COLORS } from '@/constants';
-import { LINKS } from '@/constants';
+import { LINKS, COLORS } from '@/constants';
 
 interface InfoLinkProps {
   className?: string;

@@ -9,8 +9,7 @@ import { ActiveLink } from '@/components/ActiveLink';
 import { Button } from '@/ui/components/Button';
 import { LanguageSwitcher } from '../LanguageSwitcher';
 import Headroom from 'react-headroom';
-import { LINKS } from '@/constants';
-import { COLORS } from '@/constants';
+import { LINKS, COLORS } from '@/constants';
 
 const DesktopHeader: FC = ({ children }) => {
   const { t } = useTranslation('header');

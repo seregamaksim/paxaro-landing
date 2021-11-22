@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { COLORS } from '@/constants';
-import { LINKS } from '@/constants';
+import { LINKS, COLORS } from '@/constants';
 
 interface SocialListProps {
   className?: string;

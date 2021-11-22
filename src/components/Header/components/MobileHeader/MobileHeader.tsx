@@ -10,8 +10,7 @@ import { ActiveLink } from '@/components/ActiveLink';
 import { MobileStore } from '../MobileStore';
 import LogoMini from '@/ui/icons/LogoMini';
 import Headroom from 'react-headroom';
-import { LINKS } from '@/constants';
-import { COLORS } from '@/constants';
+import { LINKS, COLORS } from '@/constants';
 
 interface HeaderWrapperProps {
   isActiveMenu: boolean;
