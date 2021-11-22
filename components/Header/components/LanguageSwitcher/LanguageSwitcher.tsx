@@ -116,7 +116,7 @@ const ButtonLangIndicator = styled.button<{ $isOpen: boolean }>`
     width: 100%;
     border-radius: 0;
     background-color: ${(props) =>
-      props.$isOpen ? colors.black1 : 'transparent'};
+      props.$isOpen ? colors.black2 : 'transparent'};
     color: ${colors.white};
     justify-content: flex-start;
 
@@ -153,7 +153,7 @@ const LanguagesDropdown = styled.div.attrs(() => ({
     left: 0;
     border-radius: 30px 30px 0px 0px;
     padding-top: 20px;
-    background-color: ${colors.black1};
+    background-color: ${colors.black2};
   }
 `;
 const LanguagesDropdownList = styled.ul``;

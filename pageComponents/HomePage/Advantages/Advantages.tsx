@@ -7,6 +7,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { getCenterTopPosition } from '@/helpers/getCenterTopPosition';
 import { colors } from '@/constants';
+import { useIntersection } from '@/hooks/useIntersection';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -21,6 +22,7 @@ function getItemSizes(item: HTMLElement) {
 
 const Advantages: FC = () => {
   const { t } = useTranslation('advantages');
+  const rootId = 'advantages';
   const rootRef = useRef<HTMLElement>(null);
   const itemsRef = useRef<HTMLLIElement[]>([]);
   const itemsBgRef = useRef<HTMLDivElement[]>([]);
@@ -29,6 +31,8 @@ const Advantages: FC = () => {
   const circleRef = useRef<HTMLDivElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const descriptionSecondListRef = useRef<HTMLUListElement>(null);
+
+  useIntersection(rootRef, rootId);
 
   useEffect(() => {
     setTimeout(() => {
@@ -333,7 +337,7 @@ const Advantages: FC = () => {
   }, []);
 
   return (
-    <Root ref={rootRef} id="advantages">
+    <Root ref={rootRef} id={rootId}>
       <StyledContainer>
         <Cirle ref={circleRef} />
         <SectionHead ref={headRef}>

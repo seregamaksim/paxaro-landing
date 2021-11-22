@@ -29,7 +29,7 @@ const MobileStore: FC<MobileStoreProps> = ({
     if (userAgent.isIOS) {
       return appStoreLink;
     }
-    return '';
+    return '/';
   }
 
   return (
@@ -54,7 +54,7 @@ const MobileStore: FC<MobileStoreProps> = ({
 };
 const Root = styled.div<{ $open: boolean }>`
   display: ${(props) => (props.$open ? 'block' : 'none')};
-  background-color: ${colors.black1};
+  background-color: ${colors.black2};
   @media (min-width: 900px) {
     display: none;
   }

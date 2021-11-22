@@ -10,6 +10,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { getCenterTopPosition } from '@/helpers/getCenterTopPosition';
 import { colors } from '@/constants';
+import { useIntersection } from '@/hooks/useIntersection';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -28,6 +29,7 @@ function getScaleParams(targetElem: HTMLElement, toElem: HTMLElement) {
 
 const Fear: FC = () => {
   const { t } = useTranslation('fear');
+  const rootId = 'howToStart';
   const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const messagesListRef = useRef<HTMLUListElement>(null);
@@ -36,6 +38,8 @@ const Fear: FC = () => {
   const miniCardTitles = useRef<HTMLParagraphElement[]>([]);
   const miniCardBackgrounds = useRef<HTMLDivElement[]>([]);
   const messagesBlockRef = useRef<HTMLDivElement>(null);
+
+  useIntersection(rootRef, rootId);
 
   useEffect(() => {
     setTimeout(() => {
@@ -878,7 +882,7 @@ const Fear: FC = () => {
   }, []);
 
   return (
-    <Root ref={rootRef} id="howToStart">
+    <Root ref={rootRef} id={rootId}>
       <StyledContainer>
         <SectionHead ref={headRef}>
           <StyledSectionLabel text={t('label')} />

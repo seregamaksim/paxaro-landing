@@ -4,12 +4,12 @@ import React, { Children, FC } from 'react';
 
 const ActiveLink: FC<any> = React.forwardRef(
   ({ children, activeClassName, ...props }, ref) => {
-    const { asPath } = useRouter();
+    const { pathname } = useRouter();
     const child = Children.only(children);
     const childClassName = child.props.className || '';
 
     const className =
-      asPath === props.href || asPath === props.as
+      pathname === props.href || pathname === props.as
         ? `${childClassName} ${activeClassName}`.trim()
         : childClassName;
 
@@ -24,4 +24,5 @@ const ActiveLink: FC<any> = React.forwardRef(
 );
 
 ActiveLink.displayName = 'ActiveLink';
+
 export default ActiveLink;

@@ -44,14 +44,6 @@ const LeadForm: FC<LeadFormProps> = ({ className }) => {
 
     setIsSuccess(true);
   }
-  console.log(
-    <Trans t={t} i18nKey="privacyText">
-      Нажимая на кнопку, вы даете согласие на{' '}
-      <LinkText href="/term-of-use">обработку персональных данных</LinkText> и
-      соглашаетесь с{' '}
-      <LinkText href="/privacy">политикой конфиденциальности</LinkText>
-    </Trans>
-  );
 
   return isSuccess ? (
     <SuccessBlock>

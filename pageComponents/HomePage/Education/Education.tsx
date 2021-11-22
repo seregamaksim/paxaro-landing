@@ -11,6 +11,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { getCenterTopPosition } from '@/helpers/getCenterTopPosition';
 import { colors } from '@/constants';
+import { useIntersection } from '@/hooks/useIntersection';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -18,6 +19,7 @@ if (typeof window !== 'undefined') {
 
 const Education: FC = () => {
   const { t } = useTranslation('education');
+  const rootId = 'education';
   const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -30,6 +32,8 @@ const Education: FC = () => {
   const infoLinkBackgroundRef = useRef<HTMLDivElement>(null);
   const notebookImageWrapperRef = useRef<HTMLDivElement>(null);
   const mobileVideoRef = useRef<HTMLVideoElement>(null);
+
+  useIntersection(rootRef, rootId);
 
   useEffect(() => {
     setTimeout(() => {
@@ -210,7 +214,7 @@ const Education: FC = () => {
   }, []);
 
   return (
-    <Root ref={rootRef} id="education">
+    <Root ref={rootRef} id={rootId}>
       <SectionHead ref={headRef}>
         <StyledLabel text={t('label')} isDark />
         <StyledTitle text={t('title')} />

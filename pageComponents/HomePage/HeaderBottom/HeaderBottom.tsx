@@ -1,51 +1,39 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { ActiveLink } from '@/components/ActiveLink';
 import { colors } from '@/constants';
+
+const anchors = [
+  'history',
+  'advantages',
+  'education',
+  'howWork',
+  'subscription',
+  'howToStart',
+];
 
 const HeaderBottom: FC = () => {
   const { t } = useTranslation('header');
+
+  const handleBtnClick = (id: string) => {
+    const element = document.getElementById(id);
+    element?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  };
+
   return (
     <HeaderBottomMenu>
-      <HeaderBottomMenuItem>
-        <ActiveLink href="/#history" activeClassName="active">
-          <HeaderBottomMenuLink>{t('secondMain.history')}</HeaderBottomMenuLink>
-        </ActiveLink>
-      </HeaderBottomMenuItem>
-      <HeaderBottomMenuItem>
-        <ActiveLink href="/#advantages" activeClassName="active">
-          <HeaderBottomMenuLink>
-            {t('secondMain.advantages')}
-          </HeaderBottomMenuLink>
-        </ActiveLink>
-      </HeaderBottomMenuItem>
-      <HeaderBottomMenuItem>
-        <ActiveLink href="/#education" activeClassName="active">
-          <HeaderBottomMenuLink>
-            {t('secondMain.knowledgeBase')}
-          </HeaderBottomMenuLink>
-        </ActiveLink>
-      </HeaderBottomMenuItem>
-      <HeaderBottomMenuItem>
-        <ActiveLink href="/#howWork" activeClassName="active">
-          <HeaderBottomMenuLink>{t('secondMain.howWork')}</HeaderBottomMenuLink>
-        </ActiveLink>
-      </HeaderBottomMenuItem>
-      <HeaderBottomMenuItem>
-        <ActiveLink href="/#subscription" activeClassName="active">
-          <HeaderBottomMenuLink>
-            {t('secondMain.subscription')}
-          </HeaderBottomMenuLink>
-        </ActiveLink>
-      </HeaderBottomMenuItem>
-      <HeaderBottomMenuItem>
-        <ActiveLink href="/#howToStart" activeClassName="active">
-          <HeaderBottomMenuLink>
-            {t('secondMain.howToStart')}
-          </HeaderBottomMenuLink>
-        </ActiveLink>
-      </HeaderBottomMenuItem>
+      {anchors.map((anchor, index) => {
+        return (
+          <HeaderBottomMenuItem key={index}>
+            <HeaderBottomMenuLink
+              data-section-id={anchor}
+              onClick={() => handleBtnClick(anchor)}
+            >
+              {t(`secondMain.${anchor}`)}
+            </HeaderBottomMenuLink>
+          </HeaderBottomMenuItem>
+        );
+      })}
     </HeaderBottomMenu>
   );
 };
@@ -77,16 +65,19 @@ const HeaderBottomMenuItem = styled.li`
   }
 `;
 
-const HeaderBottomMenuLink = styled.a`
+const HeaderBottomMenuLink = styled.button.attrs(() => ({
+  className: 'header-bottom-link',
+}))`
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.01em;
-
+  cursor: pointer;
   color: ${colors.white};
   transition: color 0.3s ease;
   &.active,
-  &:hover {
+  &:hover,
+  &:focus {
     color: ${colors.green};
   }
 `;

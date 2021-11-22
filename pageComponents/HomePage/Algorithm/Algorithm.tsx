@@ -17,6 +17,8 @@ import storePhone from '@/assets/images/store-banner-phone.png';
 import appStoreImg from '@/assets/images/app-store.svg';
 import googleStoreImg from '@/assets/images/google-play.svg';
 import { appStoreLink, colors, googlePlayLink } from '@/constants';
+import { useIntersection } from '@/hooks/useIntersection';
+import { useSetActiveClassMenu } from '@/hooks/useSetActiveClassMenu';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -24,6 +26,7 @@ if (typeof window !== 'undefined') {
 
 const Algorithm: FC = () => {
   const { t } = useTranslation('algorithm');
+  const rootId = 'howWork';
   const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -33,6 +36,8 @@ const Algorithm: FC = () => {
   const storeBannerSectionRef = useRef<HTMLDivElement>(null);
   const storeBannerRef = useRef<HTMLDivElement>(null);
   const phoneRef = useRef<HTMLDivElement>(null);
+
+  useIntersection(rootRef, rootId);
 
   useEffect(() => {
     setTimeout(() => {
@@ -173,7 +178,7 @@ const Algorithm: FC = () => {
   }, []);
 
   return (
-    <Root ref={rootRef} id="howWork">
+    <Root ref={rootRef} id={rootId}>
       <Circle ref={circleRef} />
       <StyledContainer>
         <SectionHead ref={headRef}>

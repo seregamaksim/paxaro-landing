@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
+import { useSetActiveClassMenu } from './useSetActiveClassMenu';
 
-export function useIntersection(ref: any) {
+export function useIntersection(ref: any, id: string) {
   const [isIntersecting, setIntersecting] = useState(false);
+
+  useSetActiveClassMenu(isIntersecting, id);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) =>
       setIntersecting(entry.isIntersecting)
     );
     observer.observe(ref.current);
-    // Remove the observer as soon as the component is unmounted
+
     return () => {
       observer.disconnect();
     };

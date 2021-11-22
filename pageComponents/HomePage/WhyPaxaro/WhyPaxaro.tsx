@@ -15,6 +15,7 @@ import gridWithArrow from '@/assets/images/grid-with-arrow.svg';
 import { useRouter } from 'next/router';
 import { useIntersection } from '@/hooks/useIntersection';
 import { colors } from '@/constants';
+import { useSetActiveClassMenu } from '@/hooks/useSetActiveClassMenu';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -23,6 +24,7 @@ if (typeof window !== 'undefined') {
 const WhyPaxaro: FC = () => {
   const { t } = useTranslation('whyPaxaro');
   const { locale } = useRouter();
+  const mainId = 'history';
   const mainRef = useRef<HTMLElement>(null);
   const whyPaxaroTitleRef = useRef<HTMLParagraphElement>(null);
   const desciptionBlockRef = useRef<HTMLDivElement>(null);
@@ -38,7 +40,8 @@ const WhyPaxaro: FC = () => {
   const coin2Ref = useRef<HTMLDivElement>(null);
   const coin3Ref = useRef<HTMLDivElement>(null);
   const gridWithArrowRef = useRef<HTMLDivElement>(null);
-  const isVisible = useIntersection(mainRef);
+
+  useIntersection(mainRef, mainId);
 
   useEffect(() => {
     function getPixelsByVw(vw: number) {
@@ -517,7 +520,7 @@ const WhyPaxaro: FC = () => {
   }, []);
 
   return (
-    <Root ref={mainRef} id="history">
+    <Root ref={mainRef} id={mainId}>
       <StyledContainer>
         <SectionHead>
           <StyledSectionLabel text={t('label')} />

@@ -2,13 +2,18 @@ import { Container } from '@/components/Container';
 import { SectionLabel } from '@/components/SectionLabel';
 import { SectionTitle } from '@/components/SectionTitle';
 import { advancedPlanLink, primePlanLink } from '@/constants';
-import { FC } from 'react';
+import { useIntersection } from '@/hooks/useIntersection';
+import { FC, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { Plan } from './Plan';
 
 const PlansSection: FC = () => {
   const { t } = useTranslation('plans');
+  const rootId = 'subscription';
+  const rootRef = useRef<HTMLElement>(null);
+
+  useIntersection(rootRef, rootId);
 
   const data = {
     advanced: [
@@ -33,7 +38,7 @@ const PlansSection: FC = () => {
   };
 
   return (
-    <section id="subscription">
+    <section ref={rootRef} id={rootId}>
       <StyledContainer>
         <SectionHead>
           <StyledLabel text={t('label')} />

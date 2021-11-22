@@ -179,7 +179,7 @@ const HeaderLinkLogin = styled.a`
 `;
 
 const HeaderBottom = styled.div`
-  background-color: ${colors.black1};
+  background-color: ${colors.black2};
 `;
 
 const HeaderBottomContainer = styled(Container)`

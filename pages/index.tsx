@@ -20,6 +20,7 @@ import { Preloader } from '@/components/Preloader';
 interface HomePageProps {
   userAgent: { [key: string]: any };
 }
+
 const Home: NextPage<HomePageProps> = ({ userAgent }) => {
   return (
     <MainLayout>
