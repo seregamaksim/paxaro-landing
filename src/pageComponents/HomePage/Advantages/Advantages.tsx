@@ -78,10 +78,11 @@ const Advantages: FC = () => {
                 listSecondScreens.current[0],
                 itemsRef.current[0]
               ).x,
-              y: getCenterTopPosition(
-                listSecondScreens.current[0],
-                itemsRef.current[0]
-              ).y,
+              y:
+                getCenterTopPosition(
+                  listSecondScreens.current[0],
+                  itemsRef.current[0]
+                ).y + 80,
               duration: 1,
             },
             'finishMoveItems'
