@@ -12,7 +12,7 @@ import { ActiveLink } from '@/components/ActiveLink';
 import { MobileStore } from '../MobileStore';
 import LogoMini from '@/ui/icons/LogoMini';
 import Headroom from 'react-headroom';
-import { colors } from '@/constants';
+import { colors, loginLink, registrationLink } from '@/constants';
 
 interface HeaderWrapperProps {
   isActiveMenu: boolean;
@@ -101,19 +101,13 @@ const MobileHeader: FC<MobileHeaderProps> = ({ children, userAgent }) => {
               <HeaderButtonsWrap>
                 <HeaderButtonTitle>{t('main.accountTitle')}</HeaderButtonTitle>
                 <HeaderButtons>
-                  <Link
-                    href="https://nextjs.org/docs/advanced-features/i18n-routing"
-                    passHref
-                  >
+                  <Link href={registrationLink} passHref>
                     <HeaderButtonRegistration
                       isLink
                       text={t('main.registration')}
                     ></HeaderButtonRegistration>
                   </Link>
-                  <Link
-                    href="https://nextjs.org/docs/advanced-features/i18n-routing"
-                    passHref
-                  >
+                  <Link href={loginLink} passHref>
                     <HeaderLinkLogin>
                       <span>{t('main.login')}</span>
                     </HeaderLinkLogin>

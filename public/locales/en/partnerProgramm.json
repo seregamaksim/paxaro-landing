@@ -1,14 +1,14 @@
 {
-  "label": "Партнерская программа",
-  "title": "Приглашайте друзей и получайте бонусы",
-  "subtitle": "Всего есть 5 реферальных уровней — вы получаете процент с каждого приведенного друга, а также с их друзей. Размер вознаграждения зависит от вашего плана подписки и количества приглашенных пользователей.",
+  "label": "Partner program",
+  "title": "Invite your friends and receive bonuses",
+  "subtitle": "There are 5 referral levels in total - you receive interests from every invited friend, as well as from the latter`s friends. The amount of the reward depends on your subscription plan and the number of invited users.",
   "calculator": {
-    "subsriptionPlan": "Ваш план подписки",
-    "countFriend": "Количество друзей",
-    "profit": "Ваша прибыль",
-    "levels": "Уровни",
-    "percent": "Процент",
-    "bonus": "Ваш бонус",
-    "totalBonus": "Общий бонус"
+    "subsriptionPlan": "Your subscription plan",
+    "countFriend": "Number of friends",
+    "profit": "Your profit",
+    "levels": "Levels",
+    "percent": "Percent",
+    "bonus": "Your bonus",
+    "totalBonus": "Total bonus"
   }
 }

@@ -9,7 +9,7 @@ import { ActiveLink } from '@/components/ActiveLink';
 import { Button } from '@/ui/components/Button';
 import { LanguageSwitcher } from '../LanguageSwitcher';
 import Headroom from 'react-headroom';
-import { colors } from '@/constants';
+import { colors, loginLink, registrationLink } from '@/constants';
 
 const DesktopHeader: FC = ({ children }) => {
   const { t } = useTranslation('header');
@@ -44,19 +44,13 @@ const DesktopHeader: FC = ({ children }) => {
           <HeaderButtonsWrap>
             <HeaderButtonTitle>{t('main.accountTitle')}</HeaderButtonTitle>
             <HeaderButtons>
-              <Link
-                href="https://nextjs.org/docs/advanced-features/i18n-routing"
-                passHref
-              >
+              <Link href={registrationLink} passHref>
                 <HeaderButtonRegistration
                   isLink
                   text={t('main.registration')}
                 ></HeaderButtonRegistration>
               </Link>
-              <Link
-                href="https://nextjs.org/docs/advanced-features/i18n-routing"
-                passHref
-              >
+              <Link href={loginLink} passHref>
                 <HeaderLinkLogin>
                   <span>{t('main.login')}</span>
                 </HeaderLinkLogin>

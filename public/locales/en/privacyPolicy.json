@@ -1,85 +1,85 @@
 {
-  "title": "Политика конфиденциальности",
-  "dateLastUpdate": "Дата обновления: 10 марта 2021 г.",
+  "title": "Privacy Policy",
+  "dateLastUpdate": "Last updated: March 10, 2021",
   "content": [
     {
       "texts": [
-        "Настоящая Политика конфиденциальности (далее – «Политика») определяет, каким образом Kadex Enterprise LTD (далее – «Компания», «мы») собирает, использует и распространяет информацию о Вас, полученную в рамках использования Вами сайта, расположенного по адресу kadex.io (далее – «Сайт»). Перед тем, как начать пользоваться Сайтом, просим Вас внимательно ознакомиться с Политикой. Используя любые функции, сервисы и возможности Сайта, в том числе просто просматривая страницы Сайта, Вы (Пользователь), независимо от прохождения процедуры регистрации, заявляете, что прочитали, поняли и согласны соблюдать условия Политики, включая все упомянутые в ней специальные условия и правила, без каких-либо изъятий и оговорок. Настоящая Политика конфиденциальности и Политика использования файлов cookie являются частью Пользовательского соглашения. Просим Вас внимательно ознакомиться с настоящей Политикой и принять их, поставив ☑ рядом с графой «Я ознакомился и принимаю условия Политики конфиденциальности».",
-        "Любое обращение «Вы», «Ваш», «Вами» и т. п. толкуется как отсылка к Пользователю Сайта, субъекту настоящей Политики и Пользовательского соглашения.",
-        "Компания соблюдает конфиденциальность Пользователей ее продуктов и услуг, а также положения действующих законов о защите частной жизни, в том числе, для Европейского Союза.",
-        "Любые термины, написание которых в настоящей Политике осуществляется с заглавной буквы, в случае если такое значение специально не определено в настоящей Политике, используются в том же значении, какое им придает Пользовательское соглашение."
+        "This Privacy Policy (the «Policy») defines how Kadex Enterprise LTD (hereinafter referred to as the «Company», «we») collects, uses and distributes information about you obtained through the online interfaces used by the Company on the site located at kadex.io (the «Site»). Before you start using the Site, please read the Policy carefully. Using any functions, services and Site features, including just browsing, you (the User), regardless of registration, declare that you have read, understood and agreed to abide by Policy terms, including any mentioned therein special conditions and rules without any exceptions and reservations. This Privacy Policy and the Cookie Policy shall be considered as part of the User Agreement. Please read this Policy carefully and accept it by placing ☑ next to the box «I have read and accepted the terms of the Privacy Policy».",
+        "Any reference to «You», «Your» etc. shall be interpreted as a reference to the User of the Site, the subject of this Policy, the Cookie Policy and the User Agreement.",
+        "The Company respects the confidentiality of Users of its products and services, as well as the provisions of current laws on the protection of privacy, including the laws of the European Union.",
+        "Any capitalized terms used in this Policy, to the extent not specifically defined in this Policy, shall have the meaning as provided in the User Agreement."
       ]
     },
     {
-      "title": "1. ПРАВИЛА ДОСТУПА К САЙТУ",
+      "title": "1. TERMS FOR ACCESS TO THE SITE",
       "texts": [
-        "Оказывая услуги посредством Сайта и его сервисов, Компания, действуя разумно и добросовестно, полагает, что Пользователь:","Аналитические и эксплуатационные файлы cookie: для предоставления наших продуктов Пользователям и повышения качества взаимодействия мы используем файлы cookie и другие идентификаторы, собирая данные об использовании Сайта и эффективности.",
-        "i. обладает всеми необходимыми правами, позволяющими ему осуществлять регистрацию и использовать настоящий Сайт и соответствующие услуги; ii. указывает достоверную информацию о себе в объемах, необходимых для пользования Сайтом."
+        "By providing services through the Site and its services, the Company, acting reasonably and in good faith, presumes that the User:",
+        "i. has all necessary rights permitting him/her to register and use this Site and related services; ii. provide accurate information about himself/herself to the extent necessary to use the Site."
       ]
     },
     {
-      "title": "2. ЦЕЛИ ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ ",
+      "title": "2. PURPOSES OF PERSONAL DATA PROCESSING",
       "texts": [
-        "Компания осуществляет обработку информации о Пользователях, в том числе их Персональных Данных, в целях выполнения обязательств Компании перед Пользователями в отношении использования Сайта.",
-        "Для целей настоящей Политики под Персональными Данными понимается любая информация, относящаяся к прямо или косвенно определенному или определяемому физическому лицу (субъекту Персональных Данных), а под обработкой – любое действие (операция) или совокупность действий (операций), совершаемых с использованием средств автоматизации или без использования таких средств с Персональными Данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение Персональных Данных."
+        "The Company processes information about Users, including their Personal Data, in order to fulfill the Company's obligations to Users regarding the use of the Site.",
+        "For the purposes of the Site use Personal Data shall mean any information related directly or indirectly to a specific or identifiable individual (Personal Data subject), and processing shall mean any action (operation) or set of actions (operations) performed with or without the use of automation tools with personal data, including collection, recording, systematization, accumulation, storage, clarification (updating, modification), extraction, use, transfer (distribution, provision, access), depersonalization, blocking, deletion, destruction of Personal Data."
       ]
     },
     {
-      "title": "3. ТИПЫ СОБИРАЕМЫХ ПЕРСОНАЛЬНЫХ ДАННЫХ И ЦЕЛЬ ИСПОЛЬЗОВАНИЯ",
+      "title": "3. TYPES OF PERSONAL DATA COLLECTED AND PURPOSE OF USE",
       "texts": [
-        "3.1. ТЕХНИЧЕСКИЕ ДАННЫЕ",
-        "Во время использования Сайта Компания автоматически собирает следующие Персональные данные:",
-        "i. Техническая информация, в том числе адрес Интернет-протокол (IP), используемый для подключения Вашего компьютера к Интернету, данные для входа в систему, тип и версия браузера, настройка часового пояса, типы и версии плагинов для браузера, операционная система и платформа;  ii. Информация о Вашем посещении веб-сайтов, включая полный URL-адрес унифицированных указателей ресурсов (URL) на веб-сайтах, через них и с них (включая дату и время); Продукты, которые Вы просматривали или искали; время отклика страницы, ошибки загрузки, продолжительность посещения определенных страниц, информация о взаимодействии страниц (например, прокрутка, щелчки и наведение мыши) и методы, используемые для перехода от страницы.  ",
-        "Данная информация необходима для улучшения процесса работы Сайта, выполнения наших административных целей и защиты наших деловых интересов.",
-        "3.2. РЕГИСТРАЦИОННЫЕ ДАННЫЕ ",
-        "Для использования Сайта в части возможности сервисов, разработанных Компанией, в частности доступа к Умному портфелю, Вам необходимо пройти процедуру Регистрации. При переходе в Раздел «Регистрация» Вам будет предложено ввести Регистрационные данные: e-mail и пароль. Также в рамках процесса Регистрации и заполнения данных Вам будет предложено ввести Ваши имя и фамилию, номер телефона.",
-        "После прохождения регистрации Вы по собственному усмотрению можете указать страну проживания, дату рождения и загрузить изображения аккаунта.",
-        "Цель обработки таких данных – идентификация Пользователя. Введенная пара e-mail/пароль являются необходимой и достаточной информацией для доступа Пользователя на Сайт. Пользователь не имеет права передавать свои логин и пароль третьим лицам, несет полную ответственность за их сохранность, самостоятельно выбирая способ их хранения. Пользователь на используемом им аппаратно-программном обеспечении может разрешить хранение логина и пароля (с использованием файлов cookies) для последующей автоматической авторизации на Сайте."
+        "3.1. TECHNICAL DATA",
+        "The Company automatically collects the following Personal Information when you use the Site:",
+        "i. Technical information, including the Internet Protocol (IP) address used to connect your computer to the Internet, login information, browser type and version, time zone settings, browser plug-in types and versions, operating system and platform;  ii. Information about your visit to websites, including the full URL of unified resource pointers (URLs) on, through, and from websites (including the date and time); Products you viewed or searched for; page response time, loading errors, the length of time you visit or use certain pages, page interaction information (such as scrolling, clicking, and hovering), and methods used to navigate from the page.  ",
+        "This information is necessary to improve the operation of the Site, fulfill our administrative purposes and protect our business interests.",
+        "3.2. REGISTRATION DATA",
+        "In order to use the Site in terms of services developed by the Company, in particular access to the Smart Portfolio, you need to go through the Registration procedure. When going to the Registration section, you will be offered to enter your Registration data: e-mail and password. You will also be asked to enter your first and last name and phone number as part of the Registration and completion of the forms.",
+        "After completing the registration, you can optionally specify your country of residence, date of birth, and upload images of your account.",
+        "The purpose of processing such data is to identify the User. The entered e-mail/password pair is necessary and sufficient information for the User's access to the Site. The User is not allowed to transfer its login and password to third parties, is fully responsible for their safety, choosing the method of storage by itself. The User can allow the storage of login and password (using cookies) for further automatic authorization on the Site on the hardware and software used by the User."
       ]
     },
     {
-      "title": "4. ПРИНЦИПЫ ОБРАБОТКИ",
+      "title": "4. PRINCIPLES OF PROCESSING",
       "texts": [
-        "Обработка персональных данных осуществляется на основе принципов:",
-        "a. законности целей и способов обработки персональных данных; b. добросовестности; c. соответствия целей обработки персональных данных целям, заранее определенным и заявленным при сборе персональных данных, а также полномочиям Компании; d. соответствия объема и характера обрабатываемых персональных данных, способов обработки персональных данных целям обработки персональных данных; e. недопустимости объединения созданных для несовместимых между собой целей баз данных, содержащих персональные данные. "
+        "Processing of personal data is based on the following principles:",
+        "a. the lawfulness of the purposes and methods of processing personal data; b. good faith; c. compliance of the purposes of personal data processing with the purposes predetermined and stated when collecting personal data, as well as with the scope of the Company's authority; d. compliance of the scope and nature of processed personal data, methods of processing personal data to the purposes of processing of personal data; e. the prohibition of combining databases created for incompatible purposes, containing personal data. "
       ]
     },
     {
-      "title": "5. ХРАНЕНИЕ ДАННЫХ",
+      "title": "5. DATA STORAGE",
       "texts": [
-        "При сборе Персональных Данных Пользователей Компания обеспечивает запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение Ваших Персональных данных с использованием баз данных, находящихся на территории Европейского Союза.",
-        "Персональные данные, которые Компания обрабатывает, не хранятся дольше, чем это требуется для соответствующих целей. Компания будет хранить Ваши Персональные Данные в течение всего срока Ваших договорных отношений с Компанией (срока существования Вашего Личного Кабинета на Сайте) и, в той степени, в которой это разрешено, после прекращения этих отношений столько времени, сколько потребуется для выполнения целей, изложенных в настоящей Политике.",
-        "Хранение Персональных Данных осуществляется в форме, позволяющей идентифицировать субъекта Персональных данных не дольше, чем этого требуют цели обработки Персональных Данных, если срок хранения Персональных Данных не установлен применимым правом. Обрабатываемые Персональные Данные подлежат уничтожению, либо обезличиванию по достижении целей обработки или в случае утраты необходимости в достижении этих целей, если иное не предусмотрено применимым правом. В частности, Компания может хранить специальную информацию после исполнения своих обязательств по договору (после удаления Личного кабинета Пользователя), если это необходимо для выполнения требований закона, разрешения спора, предотвращения мошенничества или злоупотреблений, а также для обеспечения соблюдения положений настоящей Политики конфиденциальности. Необходимые Персональные данные Пользователей хранятся в течение 12 месяцев для анализа поведенческой активности на Сайте в обезличенной форме. ",
-        "Сроки хранения необходимых данных могут быть расширены для целей налогового комплаенса. В частности, информация о приобретении Планов и иных услуг (если таковые доступны к приобретению) может храниться Компанией в течение 5 лет или до завершения налоговой проверки, в зависимости от того, что произойдет позже. Иные Персональные Данные будут удалены через 12 месяцев после одобрения удаления Личного Кабинета. ",
-        "Мы прекратим обработку Ваших данных, если Вы возражаете против такой обработки Ваших данных или если Вы отозвали свое согласие на обработку, которое было Компанией получено ранее."
+        "When collecting Personal Data of Users and Visitors, the Company provides recording, systematization, accumulation, storage, clarification (updating, modification), extraction of your Personal Data using databases located in the European Union.",
+        "The Personal Data that the Company processes would not be stored for longer than is required for the relevant purposes. The Company will store your Personal Data for the duration of your contractual relationship with the Company and, to the extent permitted, after the termination of this relationship for as long as it takes to fulfill the purposes set out in this Policy.",
+        "Personal Data are stored in a form that allows you to determine the subject of Personal Data for no longer than the purposes of Personal data processing require, unless the period for storing Personal Data is established by applicable law. The processed Personal Data are subject to destruction or depersonalization upon achievement of the processing goals or if it is no longer necessary to achieve these goals, unless otherwise provided by applicable law. In particular, the Company may store special information after fulfilling its obligations under agreements, if this is necessary to comply with legal requirements, resolve disputes, prevent fraud or abuse, and to ensure compliance with the provisions of this Privacy Policy. Some special Personal Data of Users are stored for 12 months to analyze the behavioral activity on the Site of Users in an impersonal form.",
+        "The storage period for the required data can be extended for tax compliance purposes. In particular, information about the purchase of Products, Subscriptions, and access may be stored by the Company for 5 years or until the tax audit is completed, depending on what happens later. Other Personal Data will be deleted 12 months after the deletion of the Personal Account is approved.",
+        "We will stop processing your data if you object to such processing of your data or if you have withdrawn your consent to processing that was previously received by the Company."
       ]
     },
     {
-      "title": "6. ПРАВА СУБЪЕКТОВ ПЕРСОНАЛЬНЫХ ДАННЫХ",
+      "title": "6. RIGHTS OF PERSONAL DATA SUBJECTS",
       "texts": [
-        "Субъекты Персональных Данных, обрабатываемых Компанией, имеют все права и возможности их реализации в соответствии с применимым регулированием. Компания, в частности, гарантирует следующие права:",
-        "Право на информацию: по Вашему запросу и непосредственно в момент сбора мы предоставляем Вам информацию о сборе и использовании Ваших Персональных Данных, в частности о целях обработки этих Персональных Данных, сроках хранения и о том, кому они будут переданы. Если мы получаем Персональные Данные из других источников, мы сообщим Вам об этом в разумный срок после получения данных и не позднее одного месяца, если только Вы уже не располагаете такой информацией и, если это не потребует непропорциональных усилий для ее предоставления.",
-        "Право на доступ: Вы имеете право получить подтверждение того, обрабатываются ли Персональные Данные, касающиеся Вас, и, в случае необходимости, доступ к Персональным Данным. Если Персональные Данные передаются в третью страну или международную организацию, Вы имеете право получать информацию об имеющихся гарантиях, связанных с такой передачей.",
-        "Право на корректировку: Вы имеете право на исправление неверной или неточной информации относительно Персональных Данных по запросу об исправлении, сделанному устно или письменно. Вы можете сделать это самостоятельно в Личном Кабинете, при возникновении каких-либо вопросов необходимо связаться с нашей службой поддержки.",
-        "Право на ограничение обработки: Вы имеете право требовать ограничения или прекращения обработки своих Персональных Данных. Если обработка была ограничена, такие Персональные Данные, за исключением хранения, обрабатываются только с согласия субъекта данных или для обоснования, исполнения или ведения защиты по судебным искам, или для защиты прав другого физического или юридического лица, или в целях защиты публичного интереса",
-        "В отдельных юрисдикциях, право которых применимо к процессу обработки данных отдельных Пользователей, таким Пользователям могут быть предоставлены иные дополнительные права."
+        "Subjects of Personal Data processed by the Company have all rights and opportunities to exercise them in accordance with the provisions of the applicable law. In particular, the Company provides the following User’s rights:",
+        "The right to be informed: under your request and at the moment of collecting we will provide you information about the collection and use of your Personal Data, in particular, about purposes for processing these data, retention periods for that personal data, and who it will be shared with. If we obtain Personal Data from other sources, we will inform you about this within a reasonable period upon obtaining the data and no later than one month, unless you already have the information or if it would involve a disproportionate effort to provide it to you.",
+        "Right of access: you have the right to receive confirmation as to whether or not your Personal Data are being processed, and, if there is a need, access to the Personal Data. If the Personal Data are transferred in the third country, you have the right to be informed about your rights relating to such transfer.",
+        "Right to rectification: you have the right to have inaccurate personal data rectified or completed if it is incomplete under request for rectification made verbally or in writing.",
+        "Right to restriction of processing: you have the right to request the restriction or suppression of your Personal Data. Where processing has been restricted, such Personal Data shall, with the exception of storage, only be processed with the data subject’s consent or for the establishment, exercise or defense of legal claims or for the protection of the rights of another natural or legal person or for reasons of important public interest.",
+        "In some jurisdictions whose laws apply to the processing of certain Users' data, such Users may be granted other additional rights."
       ]
     },
     {
-      "title": "7. КОНФИДЕНЦИАЛЬНОСТЬ ДАННЫХ",
+      "title": "7. CONFIDENTIALITY AND SECURITY OF PERSONAL DATA",
       "texts": [
-        "Мы очень серьезно относимся к конфиденциальности и безопасности Ваших Персональных данных. Мы внедрили технические и организационные меры безопасности, направленные на обеспечение того, чтобы защита данных от случайного или незаконного уничтожения, потери, изменения, несанкционированного раскрытия, несанкционированного доступа и любых других незаконных или несанкционированных форм обработки была неотъемлемой частью всего процесса обработки Персональных данных в соответствии с применимым законодательством.",
-        "Мы не раскрываем эту информацию третьим сторонам, кроме как с Вашего согласия, в соответствии с положениями настоящей Политики, или если мы уверены в необходимости такого раскрытия (при наличии правомерной цели: например, в случае угрозы в отношении Вас или иных лиц) согласно применимому законодательству.",
-        "Сайт может содержать ссылки на веб-сайты, поддерживаемые третьими сторонами, чья информация и методы обеспечения конфиденциальности отличаются от наших (например, при интеграции с Биржей). Мы не несем ответственности за информацию или методы обеспечения конфиденциальности, применяемые такими третьими лицами. Мы рекомендуем Вам ознакомиться с положениями о конфиденциальности всех сторонних веб-сайтов, прежде чем использовать такие веб-сайты или предоставлять какие-либо Персональные Данные или любую другую информацию на таких веб-сайтах или через них."
+        "We take the privacy and security of your Personal Data very seriously. We have implemented technical and organizational security measures to ensure that data protection from accidental or unlawful destruction, loss, alteration, unauthorized disclosure, unauthorized access and any other unlawful or unauthorized forms of processing is an integral part of all Personal Data processing in accordance with applicable law.",
+        "We do not disclose this information to third parties except with your consent, in accordance with the provisions of this Policy, or if we believe that such disclosure is necessary (for a legitimate purpose: for example, if you or other persons are threatened) under applicable law.",
+        "The Site may contain links to websites maintained by third parties whose information and privacy practices differ from ours (for example, when processing payments). We are not responsible nor liable for the information or privacy practices used by such third parties. We recommend you read the privacy policies of all third-party websites before using such websites or providing any Personal Data or any other information on or through such websites."
       ]
     },
     {
-      "title": "8. ИЗМЕНЕНИЕ ПОЛИТИКИ",
+      "title": "8. CHANGING THE POLICY",
       "texts": [
-        "Настоящая Политика может быть пересмотрена, изменена, обновлена и / или дополнена в любое время, без необходимости предварительного уведомления Пользователя, по усмотрению Компании. В случае внесения таких изменений мы опубликуем уведомление на главной странице Сайта. Дата обновления настоящей Политики будет отображаться на первой странице Политики. Мы настоятельно рекомендуем Пользователям регулярно проверять страницу на предмет наличия изменений. Каждый Пользователь соглашается с тем, что он самостоятельно несет ответственность за периодическое ознакомление с актуальной версией Политики. ",
-        "Используя Сайт, Пользователь автоматически подтверждает свое согласие с настоящей Политикой в применимой части. Если Пользователь не согласен с настоящей Политикой, мы настоятельно рекомендуем прекратить использование Сайта. ",
-        "После размещения Политики в обновленной редакции на Сайте дальнейшее использование Сайта расценивается как принятие условий обновленной Политики.",
-        "Если у Вас остались какие-либо вопросы, направьте их в Службу поддержки по следующему электронному адресу: support@kadex.io."
+        "This Policy may be revised, changed, updated and / or supplemented at any time, without the need for prior notification to the User, at the Company's discretion. If we make such changes, we will post a notification on the main page of the Site. The date of this Policy update will be displayed on the first page of the Policy. We strongly recommend Users to check the page regularly for changes. Each User agrees that it is his/her own responsibility to review from time to time the current version of the Policy.",
+        "By using the Site, the User automatically confirms their consent to this Policy in the applicable part. If the User does not agree with this Policy, we strongly recommend you stop using the Site.",
+        "After posting the updated version of the Policy on the Site, further use of the Site is considered as acceptance of the terms of the updated Policy.",
+        "If you have any questions, please send them to Support team at the following e-mail address: support@kadex.io."
       ]
     }
   ]

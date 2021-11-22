@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 export function useSetActiveClassMenu(isActive: boolean, id: string) {

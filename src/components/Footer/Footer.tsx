@@ -6,10 +6,11 @@ import { Container } from '../Container';
 import logo from '@/assets/images/logo.svg';
 import appStore from '@/assets/images/app-store-transparent.svg';
 import googlePlay from '@/assets/images/google-play-transparent.svg';
-import { Button } from '@/ui/components/Button';
+
 import { useTranslation } from 'react-i18next';
 import { BackToTop } from './components/BackToTop';
 import { colors } from '@/constants';
+import { Button } from '@/ui/components/Button';
 
 const Footer: FC = () => {
   const { t } = useTranslation(['header', 'footer']);
