@@ -164,10 +164,11 @@ const Advantages: FC = () => {
                 listSecondScreens.current[1],
                 itemsRef.current[1]
               ).x,
-              y: getCenterTopPosition(
-                listSecondScreens.current[1],
-                itemsRef.current[1]
-              ).y,
+              y:
+                getCenterTopPosition(
+                  listSecondScreens.current[1],
+                  itemsRef.current[1]
+                ).y + 80,
               duration: 1,
             },
             '<'
@@ -233,10 +234,11 @@ const Advantages: FC = () => {
                 listSecondScreens.current[2],
                 itemsRef.current[2]
               ).x,
-              y: getCenterTopPosition(
-                listSecondScreens.current[2],
-                itemsRef.current[2]
-              ).y,
+              y:
+                getCenterTopPosition(
+                  listSecondScreens.current[2],
+                  itemsRef.current[2]
+                ).y + 80,
               duration: 1,
             },
             '<'
