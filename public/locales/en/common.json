@@ -1,3 +1,7 @@
 {
-  "mobileApp": "Mobile application"
+  "mobileApp": "Mobile application",
+  "seo": {
+    "title": "Mobile application Paxaro App",
+    "description": "Description"
+  }
 }

@@ -65,6 +65,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
     { value: '30', label: t('calculator.month') },
     { value: '180', label: t('calculator.halfYear') },
     { value: '360', label: t('calculator.year') },
+    { value: '1825', label: t('calculator.allTime') },
   ];
 
   function handleSubmit(values: FormValues) {
@@ -125,6 +126,11 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
               currentPlanMarksObject[
                 currentPlanMarksArray[currentPlanMarksArray.length - 1]
               ];
+
+            const lastValueForCurrentDay =
+              dataChart.length > 0
+                ? dataChart[dataChart.length - 1].profit
+                : 1199;
 
             return (
               <Form>
@@ -201,7 +207,12 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                   <ProfitBlock>
                     <ProfitBlockText>
                       {t('calculator.profit')}
-                      <span>$1,199</span>
+                      <span>
+                        {currency(lastValueForCurrentDay, {
+                          separator: ',',
+                          precision: 0,
+                        }).format()}
+                      </span>
                     </ProfitBlockText>
                   </ProfitBlock>
                   <DesktopSubmitBtn

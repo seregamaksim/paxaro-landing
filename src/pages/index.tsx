@@ -16,14 +16,22 @@ import { Algorithm } from '@/pageComponents/HomePage/Algorithm';
 import { Fear } from '@/pageComponents/HomePage/Fear';
 import { PartnerProgramm } from '@/pageComponents/HomePage/PartnerProgramm';
 import { Preloader } from '@/components/Preloader';
+import Head from 'next/head';
+import { useTranslation } from 'react-i18next';
 
 interface HomePageProps {
   userAgent: { [key: string]: any };
 }
 
 const Home: NextPage<HomePageProps> = ({ userAgent }) => {
+  const { t } = useTranslation('common');
+
   return (
     <MainLayout>
+      <Head>
+        <title>{t('seo.title')}</title>
+        <meta name="description" content={t('seo.description')} />
+      </Head>
       <Preloader />
       <Header userAgent={userAgent}>
         <HeaderBottom />

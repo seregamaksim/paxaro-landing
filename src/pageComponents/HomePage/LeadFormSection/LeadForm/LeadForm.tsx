@@ -7,12 +7,13 @@ import styled from 'styled-components';
 import { Trans } from 'react-i18next';
 import Link from 'next/link';
 import { Button } from '@/ui/components/Button';
-import { colors } from '@/constants';
+import { baseUrl, colors } from '@/constants';
+import axios, { AxiosResponse } from 'axios';
 
 interface FormValues {
-  firstname: string;
-  surname: string;
   email: string;
+  name: string;
+  surname: string;
   phone: string;
 }
 
@@ -21,13 +22,13 @@ interface LeadFormProps {
 }
 
 const LeadFormSchema = Yup.object().shape({
-  firstname: Yup.string().required(),
+  name: Yup.string().required(),
   surname: Yup.string(),
   phone: Yup.string(),
   email: Yup.string().email().required(),
 });
 
-export const LinkText = ({ href, children, ...props }: any) => {
+const LinkText = ({ href, children, ...props }: any) => {
   return (
     <Link href={href || ''}>
       <a>{children}</a>
@@ -39,10 +40,14 @@ const LeadForm: FC<LeadFormProps> = ({ className }) => {
   const { t } = useTranslation('leadForm');
   const [isSuccess, setIsSuccess] = useState(false);
 
-  async function submitForm(values: FormValues) {
-    await new Promise((r) => setTimeout(r, 2000));
-
-    setIsSuccess(true);
+  function submitForm(values: FormValues) {
+    axios({
+      method: 'post',
+      url: `${baseUrl}/contact_me`,
+      data: values,
+    }).then(({ status }: AxiosResponse) => {
+      if (status === 200) setIsSuccess(true);
+    });
   }
 
   return isSuccess ? (
@@ -57,7 +62,7 @@ const LeadForm: FC<LeadFormProps> = ({ className }) => {
   ) : (
     <Formik
       initialValues={{
-        firstname: '',
+        name: '',
         surname: '',
         email: '',
         phone: '',
@@ -68,8 +73,8 @@ const LeadForm: FC<LeadFormProps> = ({ className }) => {
       <StyledForm className={className}>
         <NameFormBlock>
           <InputBorder
-            id="leadform-firstname"
-            name="firstname"
+            id="leadform-name"
+            name="name"
             type="text"
             label={t('inputNameLabel')}
           />
