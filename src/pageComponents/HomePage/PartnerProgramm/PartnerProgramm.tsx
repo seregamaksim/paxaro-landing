@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import currency from 'currency.js';
-import { colors } from '@/constants';
+import { COLORS } from '@/constants';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -543,7 +543,7 @@ const Subtitle = styled.p`
   font-size: 18px;
   line-height: 25px;
   letter-spacing: 0.01em;
-  color: ${colors.black2};
+  color: ${COLORS.black2};
   @media (min-width: 1024px) and (max-height: 700px) {
     max-width: 1024px;
   }
@@ -554,7 +554,7 @@ const Subtitle = styled.p`
 `;
 
 const Calculator = styled.div`
-  background: ${colors.black2};
+  background: ${COLORS.black2};
   border-radius: 50px;
   will-change: transform;
   @media (max-width: 1024px) {
@@ -602,7 +602,7 @@ const CalculatorSectionTitle = styled.p`
   line-height: 34px;
   letter-spacing: 0.01em;
 
-  color: ${colors.white};
+  color: ${COLORS.white};
   margin-bottom: 33px;
   @media (max-width: 900px) {
     font-size: 18px;
@@ -658,7 +658,7 @@ const CalculatorText = styled.p`
   line-height: 25px;
   letter-spacing: 0.01em;
 
-  color: ${colors.white};
+  color: ${COLORS.white};
   @media (max-width: 900px) {
     font-weight: 400;
   }
@@ -696,14 +696,14 @@ const SubsriptionCheckboxInnerOpacity = styled(SubsriptionCheckboxInner)`
 `;
 
 const SubsriptionCheckboxInnerGreen = styled(SubsriptionCheckboxInner)`
-  background-image: ${colors.greenGradient};
+  background-image: ${COLORS.greenGradient};
   z-index: 2;
 `;
 
 const SubsriptionCheckbox = styled.div`
   width: 30px;
   height: 30px;
-  border: 1px solid ${colors.green};
+  border: 1px solid ${COLORS.green};
   position: relative;
   margin-right: 14px;
   border-radius: 50%;
@@ -770,7 +770,7 @@ const ProfitItem = styled.li`
   justify-content: center;
   width: 30px;
   height: 30px;
-  border: 1px solid ${colors.green};
+  border: 1px solid ${COLORS.green};
   border-radius: 7px;
   margin-right: 28px;
   will-change: opacity;
@@ -801,7 +801,7 @@ const BonusBlur = styled.div`
   position: absolute;
   width: 75px;
   height: 34px;
-  background: ${colors.green};
+  background: ${COLORS.green};
   filter: blur(88px);
   left: 50%;
   top: 50%;
@@ -812,7 +812,7 @@ const BonusText = styled.p`
   font-weight: bold;
   font-size: 36px;
   line-height: 50px;
-  color: ${colors.white};
+  color: ${COLORS.white};
   position: relative;
   will-change: contents;
   @media (max-width: 768px) {
@@ -823,7 +823,7 @@ const BonusText = styled.p`
 `;
 
 const BonusTextGreen = styled(BonusText)`
-  color: ${colors.green};
+  color: ${COLORS.green};
 `;
 
 const StyledSliderWrapper = styled.div`
@@ -848,15 +848,15 @@ const SliderCount = styled.p`
   font-size: 18px;
   line-height: 25px;
   letter-spacing: 0.01em;
-  color: ${colors.green};
+  color: ${COLORS.green};
   will-change: contents;
 `;
 
 const SliderHandle = styled.div`
   width: 24px;
   height: 24px;
-  border: 3px solid ${colors.black2};
-  background-image: ${colors.greenGradient};
+  border: 3px solid ${COLORS.black2};
+  background-image: ${COLORS.greenGradient};
   border-radius: 50%;
   &::before {
     content: '';
@@ -864,7 +864,7 @@ const SliderHandle = styled.div`
     width: 100%;
     height: 100%;
     z-index: -1;
-    background: ${colors.greenGradient};
+    background: ${COLORS.greenGradient};
     filter: blur(18px);
   }
 `;
@@ -874,7 +874,7 @@ const StyledSlider = styled.div`
   margin-right: 16px;
   width: auto;
   height: 4px;
-  background-color: ${colors.darkGray};
+  background-color: ${COLORS.darkGray};
   border-radius: 3px;
   position: relative;
 `;
@@ -883,7 +883,7 @@ const SliderBar = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: ${colors.green};
+  background-color: ${COLORS.green};
   transform-origin: left;
   transform: scaleX(0);
   will-change: transform;
@@ -910,7 +910,7 @@ const SliderBorders = styled.p`
   font-size: 18px;
   line-height: 25px;
   letter-spacing: 0.01em;
-  color: ${colors.white};
+  color: ${COLORS.white};
 `;
 
 export default PartnerProgramm;

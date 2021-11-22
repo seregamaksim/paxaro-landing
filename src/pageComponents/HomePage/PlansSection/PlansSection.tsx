@@ -1,12 +1,14 @@
 import { Container } from '@/components/Container';
 import { SectionLabel } from '@/components/SectionLabel';
 import { SectionTitle } from '@/components/SectionTitle';
-import { advancedPlanLink, primePlanLink } from '@/constants';
+
 import { useIntersection } from '@/hooks/useIntersection';
 import { FC, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { Plan } from './Plan';
+import { LINKS } from '@/constants';
+import { COLORS } from '@/constants';
 
 const PlansSection: FC = () => {
   const { t } = useTranslation('plans');
@@ -47,14 +49,14 @@ const PlansSection: FC = () => {
         <StyledPlan
           title="Advanced"
           price="1200"
-          hrefLink={advancedPlanLink}
+          hrefLink={LINKS.advancedPlanLink}
           data={data.advanced}
           countRows={5}
         />
         <StyledPlan
           title="Prime"
           price="740"
-          hrefLink={primePlanLink}
+          hrefLink={LINKS.primePlanLink}
           data={data.prime}
           countRows={3}
         />

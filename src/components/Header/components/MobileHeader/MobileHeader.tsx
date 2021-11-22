@@ -5,14 +5,13 @@ import { FC, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { LanguageSwitcher } from '../LanguageSwitcher';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
-import logo from '@/assets/images/logo.svg';
 import { ActiveLink } from '@/components/ActiveLink';
 import { MobileStore } from '../MobileStore';
 import LogoMini from '@/ui/icons/LogoMini';
 import Headroom from 'react-headroom';
-import { colors, loginLink, registrationLink } from '@/constants';
+import { LINKS } from '@/constants';
+import { COLORS } from '@/constants';
 
 interface HeaderWrapperProps {
   isActiveMenu: boolean;
@@ -101,13 +100,13 @@ const MobileHeader: FC<MobileHeaderProps> = ({ children, userAgent }) => {
               <HeaderButtonsWrap>
                 <HeaderButtonTitle>{t('main.accountTitle')}</HeaderButtonTitle>
                 <HeaderButtons>
-                  <Link href={registrationLink} passHref>
+                  <Link href={LINKS.registrationLink} passHref>
                     <HeaderButtonRegistration
                       isLink
                       text={t('main.registration')}
                     ></HeaderButtonRegistration>
                   </Link>
-                  <Link href={loginLink} passHref>
+                  <Link href={LINKS.loginLink} passHref>
                     <HeaderLinkLogin>
                       <span>{t('main.login')}</span>
                     </HeaderLinkLogin>
@@ -125,7 +124,7 @@ const MobileHeader: FC<MobileHeaderProps> = ({ children, userAgent }) => {
 };
 
 const Root = styled.header`
-  background: ${colors.black1};
+  background: ${COLORS.black1};
   box-shadow: 0px 30px 36px -15px rgba(0, 0, 0, 0.15);
   position: relative;
 `;
@@ -144,7 +143,7 @@ const HeaderWrapper = styled.div.attrs<HeaderWrapperProps>(
   left: 0;
   bottom: 0;
   overflow-y: auto;
-  background: ${colors.black1};
+  background: ${COLORS.black1};
   z-index: 10;
 `;
 
@@ -184,10 +183,10 @@ const HeaderTopLink = styled.a`
   font-size: 24px;
   line-height: 34px;
   letter-spacing: 0.01em;
-  color: ${colors.white};
+  color: ${COLORS.white};
   transition: color 0.3s ease;
   &.active {
-    color: ${colors.green};
+    color: ${COLORS.green};
   }
 `;
 
@@ -205,7 +204,7 @@ const HeaderButtonTitle = styled.p`
   font-size: 24px;
   line-height: 34px;
   letter-spacing: 0.01em;
-  color: ${colors.white};
+  color: ${COLORS.white};
   margin-bottom: 18px;
 `;
 
@@ -219,12 +218,12 @@ const HeaderButtonRegistration = styled(Button)`
 
 const HeaderLinkLogin = styled.a`
   border-radius: 8px;
-  background: ${colors.greenGradient};
+  background: ${COLORS.greenGradient};
   display: inline-flex;
   padding: 2px;
   min-height: 43px;
   min-width: 76px;
-  color: ${colors.white};
+  color: ${COLORS.white};
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
@@ -235,7 +234,7 @@ const HeaderLinkLogin = styled.a`
     box-shadow: 0px 14px 30px 0px rgba(27, 157, 120, 0.42);
   }
   span {
-    background-color: ${colors.black3};
+    background-color: ${COLORS.black3};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -260,7 +259,7 @@ const BurgerBtn = styled.button`
     position: absolute;
     width: 18px;
     height: 2px;
-    background-color: ${colors.white};
+    background-color: ${COLORS.white};
     transition: all 0.3s ease;
   }
   & span::before {

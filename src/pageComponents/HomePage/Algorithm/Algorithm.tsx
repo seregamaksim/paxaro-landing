@@ -16,9 +16,9 @@ import algorithmImg4 from '@/assets/images/algorithm-img4.svg';
 import storePhone from '@/assets/images/store-banner-phone.png';
 import appStoreImg from '@/assets/images/app-store.svg';
 import googleStoreImg from '@/assets/images/google-play.svg';
-import { appStoreLink, colors, googlePlayLink } from '@/constants';
 import { useIntersection } from '@/hooks/useIntersection';
-import { useSetActiveClassMenu } from '@/hooks/useSetActiveClassMenu';
+import { COLORS } from '@/constants';
+import { LINKS } from '@/constants';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -260,7 +260,7 @@ const Algorithm: FC = () => {
           </StoreBannerText>
           <StoresList>
             <StoreItem>
-              <Link href={appStoreLink} passHref>
+              <Link href={LINKS.appStoreLink} passHref>
                 <StoreLink target="_blank">
                   <AppStoreImgWrapper>
                     <AppStoreImg />
@@ -269,7 +269,7 @@ const Algorithm: FC = () => {
               </Link>
             </StoreItem>
             <StoreItem>
-              <Link href={googlePlayLink} passHref>
+              <Link href={LINKS.googlePlayLink} passHref>
                 <StoreLink target="_blank">
                   <GooglePlayImgWrapper>
                     <GooglePlayImg />
@@ -312,7 +312,7 @@ const Circle = styled.div`
   width: 530px;
   height: 530px;
   border-radius: 50%;
-  background-color: ${colors.black1};
+  background-color: ${COLORS.black1};
   transform-origin: left;
   will-change: transform;
 `;
@@ -334,7 +334,7 @@ const StyledSectionLabel = styled(SectionLabel)`
 `;
 
 const StyledSectionTitle = styled(SectionTitle)`
-  color: ${colors.white};
+  color: ${COLORS.white};
   margin-bottom: 24px;
 `;
 
@@ -343,7 +343,7 @@ const Subtitle = styled.p`
   line-height: 34px;
   text-align: center;
   letter-spacing: 0.01em;
-  color: ${colors.white};
+  color: ${COLORS.white};
   max-width: 671px;
   @media (max-width: 768px) {
     font-size: 14px;
@@ -376,7 +376,7 @@ const ContentSection = styled.div`
   overflow: hidden;
   z-index: 0;
   padding-bottom: 100%;
-  background: ${colors.lightGray};
+  background: ${COLORS.lightGray};
   counter-reset: counterDescription;
 `;
 
@@ -409,7 +409,7 @@ const DescriptionContentSectionItem = styled(ContentSectionItem)`
     line-height: 140%;
     letter-spacing: 0.01em;
 
-    color: ${colors.white};
+    color: ${COLORS.white};
   }
 
   @media (max-width: 1150px) {
@@ -431,7 +431,7 @@ const DescriptionText = styled.p`
   position: relative;
 
   text-align: center;
-  color: ${colors.black2};
+  color: ${COLORS.black2};
   max-width: 360px;
   @media (max-width: 1150px) {
     font-size: 36px;
@@ -445,7 +445,7 @@ const DescriptionText = styled.p`
 `;
 
 const GreenContentSection = styled(ContentSection)`
-  background: ${colors.greenGradient};
+  background: ${COLORS.greenGradient};
   @media (max-width: 768px) {
     margin-top: 20px;
   }
@@ -482,7 +482,7 @@ const StoreBannerSection = styled.div`
 
 const StoreBanner = styled.div`
   padding: 10.4% 6.45%;
-  background-color: ${colors.white};
+  background-color: ${COLORS.white};
   border-radius: 45px;
   position: relative;
   box-shadow: 0px 21px 161px -46px rgba(147, 147, 147, 0.25);
@@ -509,11 +509,11 @@ const StoreBannerText = styled.p`
   font-weight: bold;
   font-size: 48px;
   line-height: 58px;
-  color: ${colors.black3};
+  color: ${COLORS.black3};
   max-width: 76.6%;
   margin-bottom: 60px;
   span {
-    color: ${colors.darkGray};
+    color: ${COLORS.darkGray};
   }
   @media (max-width: 1200px) {
     font-size: 36px;

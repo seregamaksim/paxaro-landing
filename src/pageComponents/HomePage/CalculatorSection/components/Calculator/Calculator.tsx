@@ -16,7 +16,8 @@ import {
 } from './staticData';
 
 import axios, { AxiosResponse } from 'axios';
-import { baseUrl, colors } from '@/constants';
+import { COLORS } from '@/constants';
+import { API } from '@/constants';
 
 const SelectUiNoSSR = dynamic(
   () => import('@/ui/components/SelectUI/SelectUI'),
@@ -54,7 +55,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
   function requestAndSetChartData(values: FormValues) {
     axios({
       method: 'post',
-      url: `${baseUrl}/backtest/chart`,
+      url: `${API.baseUrl}/backtest/chart`,
       data: values,
     }).then(({ data }: AxiosResponse<ChartValue[]>) => {
       setDataChart(data);
@@ -230,7 +231,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
 };
 
 const Root = styled.div`
-  background: ${colors.black2};
+  background: ${COLORS.black2};
   border-radius: 50px;
   @media (max-width: 768px) {
     border-radius: 24px;
@@ -315,33 +316,33 @@ const HeadLabel = styled.p`
 
   margin-bottom: 12px;
 
-  color: ${colors.white};
+  color: ${COLORS.white};
 `;
 
 const StyledSlider = styled(Slider)`
   margin-left: 12px;
   margin-right: 12px;
   .rc-slider-rail {
-    background-color: ${colors.darkGray};
+    background-color: ${COLORS.darkGray};
   }
 
   .rc-slider-track {
-    background-color: ${colors.green};
+    background-color: ${COLORS.green};
   }
   .rc-slider-handle {
     width: 24px;
     height: 24px;
     margin-top: -12px;
     border-width: 3px;
-    border-color: ${colors.black2};
-    background-image: ${colors.greenGradient};
+    border-color: ${COLORS.black2};
+    background-image: ${COLORS.greenGradient};
     &::before {
       content: '';
       position: absolute;
       width: 100%;
       height: 100%;
       z-index: -1;
-      background: ${colors.greenGradient};
+      background: ${COLORS.greenGradient};
       filter: blur(18px);
     }
   }
@@ -362,7 +363,7 @@ const SliderBorders = styled.p`
   font-size: 18px;
   line-height: 25px;
   letter-spacing: 0.01em;
-  color: ${colors.white};
+  color: ${COLORS.white};
 `;
 
 const ChartWrap = styled.div`
@@ -384,13 +385,13 @@ const ChartWrap = styled.div`
     }
 
     ::-webkit-scrollbar-thumb {
-      background-color: ${colors.green};
+      background-color: ${COLORS.green};
       border-radius: 10px;
     }
 
     ::-webkit-scrollbar-track {
       border-radius: 10px;
-      background-color: ${colors.white};
+      background-color: ${COLORS.white};
     }
     padding-bottom: 20px;
   }
@@ -410,7 +411,7 @@ const Footer = styled.div`
 
 const ProfitBlock = styled.div`
   padding: 10px 20px;
-  border: 1px solid ${colors.darkGray};
+  border: 1px solid ${COLORS.darkGray};
   border-radius: 10px;
   @media (max-width: 768px) {
     display: flex;
@@ -427,9 +428,9 @@ const ProfitBlockText = styled.p`
   line-height: 34px;
   letter-spacing: 0.01em;
 
-  color: ${colors.white};
+  color: ${COLORS.white};
   span {
-    color: ${colors.green};
+    color: ${COLORS.green};
     margin-left: 24px;
   }
   @media (max-width: 768px) {

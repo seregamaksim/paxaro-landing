@@ -1,6 +1,6 @@
 import { Container } from '@/components/Container';
 import { SectionTitle } from '@/components/SectionTitle';
-import { colors } from '@/constants';
+import { COLORS } from '@/constants';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -47,7 +47,7 @@ const SectionSubtitle = styled.p`
   font-size: 18px;
   line-height: 25px;
   letter-spacing: 0.01em;
-  color: ${colors.black2};
+  color: ${COLORS.black2};
   max-width: 440px;
   @media (max-width: 768px) {
     font-size: 14px;

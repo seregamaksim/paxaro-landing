@@ -9,7 +9,8 @@ import { ActiveLink } from '@/components/ActiveLink';
 import { Button } from '@/ui/components/Button';
 import { LanguageSwitcher } from '../LanguageSwitcher';
 import Headroom from 'react-headroom';
-import { colors, loginLink, registrationLink } from '@/constants';
+import { LINKS } from '@/constants';
+import { COLORS } from '@/constants';
 
 const DesktopHeader: FC = ({ children }) => {
   const { t } = useTranslation('header');
@@ -44,13 +45,13 @@ const DesktopHeader: FC = ({ children }) => {
           <HeaderButtonsWrap>
             <HeaderButtonTitle>{t('main.accountTitle')}</HeaderButtonTitle>
             <HeaderButtons>
-              <Link href={registrationLink} passHref>
+              <Link href={LINKS.registrationLink} passHref>
                 <HeaderButtonRegistration
                   isLink
                   text={t('main.registration')}
                 ></HeaderButtonRegistration>
               </Link>
-              <Link href={loginLink} passHref>
+              <Link href={LINKS.loginLink} passHref>
                 <HeaderLinkLogin>
                   <span>{t('main.login')}</span>
                 </HeaderLinkLogin>
@@ -71,7 +72,7 @@ const DesktopHeader: FC = ({ children }) => {
 };
 
 const Root = styled.header`
-  background: ${colors.black1};
+  background: ${COLORS.black1};
   box-shadow: 0px 30px 36px -15px rgba(0, 0, 0, 0.15);
 `;
 
@@ -109,11 +110,11 @@ const HeaderTopLink = styled.a`
   font-size: 18px;
   line-height: 25px;
   letter-spacing: 0.01em;
-  color: ${colors.white};
+  color: ${COLORS.white};
   transition: color 0.3s ease;
   &.active,
   &:hover {
-    color: ${colors.green};
+    color: ${COLORS.green};
   }
 `;
 
@@ -131,7 +132,7 @@ const HeaderButtonTitle = styled.p`
   font-size: 24px;
   line-height: 34px;
   letter-spacing: 0.01em;
-  color: ${colors.white};
+  color: ${COLORS.white};
   margin-bottom: 18px;
   display: none;
 `;
@@ -146,12 +147,12 @@ const HeaderButtonRegistration = styled(Button)`
 
 const HeaderLinkLogin = styled.a`
   border-radius: 8px;
-  background: ${colors.greenGradient};
+  background: ${COLORS.greenGradient};
   display: inline-flex;
   padding: 2px;
   min-height: 43px;
   min-width: 76px;
-  color: ${colors.white};
+  color: ${COLORS.white};
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
@@ -163,7 +164,7 @@ const HeaderLinkLogin = styled.a`
   }
 
   span {
-    background-color: ${colors.black3};
+    background-color: ${COLORS.black3};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -173,7 +174,7 @@ const HeaderLinkLogin = styled.a`
 `;
 
 const HeaderBottom = styled.div`
-  background-color: ${colors.black2};
+  background-color: ${COLORS.black2};
 `;
 
 const HeaderBottomContainer = styled(Container)`

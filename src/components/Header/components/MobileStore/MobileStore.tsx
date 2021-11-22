@@ -7,7 +7,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/ui/components/Button';
-import { appStoreLink, colors, googlePlayLink } from '@/constants';
+import { LINKS } from '@/constants';
+import { COLORS } from '@/constants';
 
 interface MobileStoreProps {
   userAgent: { [key: string]: any };
@@ -24,10 +25,10 @@ const MobileStore: FC<MobileStoreProps> = ({
 
   function getDeviceLink() {
     if (userAgent.isAndroid) {
-      return googlePlayLink;
+      return LINKS.googlePlayLink;
     }
     if (userAgent.isIOS) {
-      return appStoreLink;
+      return LINKS.appStoreLink;
     }
     return '/';
   }
@@ -54,7 +55,7 @@ const MobileStore: FC<MobileStoreProps> = ({
 };
 const Root = styled.div<{ $open: boolean }>`
   display: ${(props) => (props.$open ? 'block' : 'none')};
-  background-color: ${colors.black2};
+  background-color: ${COLORS.black2};
   @media (min-width: 900px) {
     display: none;
   }
@@ -86,7 +87,7 @@ const LogoWrap = styled.div`
   width: 100%;
   max-width: 60px;
   height: 60px;
-  background: ${colors.greenGradient};
+  background: ${COLORS.greenGradient};
   margin-right: 10px;
   border-radius: 20px;
 `;
@@ -95,7 +96,7 @@ const Text = styled.p`
   font-weight: 600;
   font-size: 12px;
   line-height: 17px;
-  color: ${colors.white};
+  color: ${COLORS.white};
   max-width: 138px;
   margin-right: 10px;
 `;

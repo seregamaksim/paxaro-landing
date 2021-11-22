@@ -1,15 +1,8 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { ActiveLink } from '@/components/ActiveLink';
 import Link from 'next/link';
-import {
-  colors,
-  instagramLink,
-  telegramLink,
-  twitterLink,
-  vkLink,
-  youtubeLink,
-} from '@/constants';
+import { COLORS } from '@/constants';
+import { LINKS } from '@/constants';
 
 interface SocialListProps {
   className?: string;
@@ -18,27 +11,27 @@ const SocialList: FC<SocialListProps> = ({ className }) => {
   return (
     <Root className={className}>
       <Item>
-        <Link href={instagramLink} passHref>
+        <Link href={LINKS.instagramLink} passHref>
           <ItemLink target="_blank">Instagram</ItemLink>
         </Link>
       </Item>
       <Item>
-        <Link href={vkLink} passHref>
+        <Link href={LINKS.vkLink} passHref>
           <ItemLink target="_blank">VC</ItemLink>
         </Link>
       </Item>
       <Item>
-        <Link href={twitterLink} passHref>
+        <Link href={LINKS.twitterLink} passHref>
           <ItemLink target="_blank">Twitter</ItemLink>
         </Link>
       </Item>
       <Item>
-        <Link href={youtubeLink} passHref>
+        <Link href={LINKS.youtubeLink} passHref>
           <ItemLink target="_blank">YouTube</ItemLink>
         </Link>
       </Item>
       <Item>
-        <Link href={telegramLink} passHref>
+        <Link href={LINKS.telegramLink} passHref>
           <ItemLink target="_blank">Telegram</ItemLink>
         </Link>
       </Item>
@@ -75,7 +68,7 @@ const ItemLink = styled.a`
 
   letter-spacing: 0.01em;
 
-  color: ${colors.white};
+  color: ${COLORS.white};
 `;
 
 export default SocialList;

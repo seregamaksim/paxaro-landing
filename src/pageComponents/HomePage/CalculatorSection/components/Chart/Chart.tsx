@@ -13,7 +13,7 @@ import moment from 'moment';
 
 import currency from 'currency.js';
 import { ChartValue } from '../Calculator/Calculator';
-import { colors } from '@/constants';
+import { COLORS } from '@/constants';
 
 interface ChartProps {
   className?: string;
@@ -77,7 +77,7 @@ const Chart: FC<ChartProps> = ({ className, data }) => {
           <Line
             type="monotone"
             dataKey="profit"
-            stroke={colors.green}
+            stroke={COLORS.green}
             strokeWidth="3"
             activeDot={{ stroke: '#111', strokeWidth: 6, r: 8 }}
             dot={false}
@@ -85,7 +85,7 @@ const Chart: FC<ChartProps> = ({ className, data }) => {
           <Line
             type="monotone"
             dataKey="profit"
-            stroke={colors.green}
+            stroke={COLORS.green}
             strokeWidth="3"
             style={{
               filter: 'blur(5px)',
@@ -119,7 +119,7 @@ const StyledLineChart = styled(LineChart)`
 
 const CustomTooltipContent = styled.div`
   padding: 3px 8px;
-  background: ${colors.green};
+  background: ${COLORS.green};
   border-radius: 6px;
   box-shadow: 0px 0.796707px 6.37366px rgba(152, 152, 152, 0.17);
 `;
@@ -129,7 +129,7 @@ const CustomTooltipContentText = styled.p`
   font-size: 14px;
   line-height: 25px;
   letter-spacing: 0.01em;
-  color: ${colors.white};
+  color: ${COLORS.white};
 `;
 
 export default Chart;

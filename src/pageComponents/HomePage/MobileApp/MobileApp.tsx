@@ -10,7 +10,8 @@ import googleStoreImg from '@/assets/images/google-play.svg';
 import { useTranslation } from 'react-i18next';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { appStoreLink, colors, googlePlayLink } from '@/constants';
+import { COLORS } from '@/constants';
+import { LINKS } from '@/constants';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -49,12 +50,12 @@ const MobileApp: FC = () => {
             <StoresBlockLogo></StoresBlockLogo>
             <StoresBlockText>{t('mobileApp')}</StoresBlockText>
             <StoresBlockList>
-              <Link href={appStoreLink} passHref>
+              <Link href={LINKS.appStoreLink} passHref>
                 <StoresBlockLink target="_blank">
                   <AppStoreImg />
                 </StoresBlockLink>
               </Link>
-              <Link href={googlePlayLink} passHref>
+              <Link href={LINKS.googlePlayLink} passHref>
                 <StoresBlockLink target="_blank">
                   <GooglePlayImg />
                 </StoresBlockLink>
@@ -95,7 +96,7 @@ const StyledContainer = styled(Container)`
 
 const PhoneBlock = styled.div`
   position: relative;
-  background-color: ${colors.black1};
+  background-color: ${COLORS.black1};
   overflow: hidden;
   border-radius: 45px;
   &::before {
@@ -177,7 +178,7 @@ const StoresBlockText = styled.p`
   font-size: 24px;
   line-height: 34px;
   letter-spacing: 0.01em;
-  color: ${colors.white};
+  color: ${COLORS.white};
   margin-bottom: 77px;
   @media (max-width: 768px) {
     font-weight: bold;

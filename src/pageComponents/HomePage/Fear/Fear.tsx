@@ -9,7 +9,7 @@ import phoneImg from '@/assets/images/fear-phone.png';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { getCenterTopPosition } from '@/helpers/getCenterTopPosition';
-import { colors } from '@/constants';
+import { COLORS } from '@/constants';
 import { useIntersection } from '@/hooks/useIntersection';
 
 if (typeof window !== 'undefined') {
@@ -1034,7 +1034,7 @@ const StyledSectionLabel = styled(SectionLabel)`
 `;
 
 const MessagesBlock = styled.div`
-  background-color: ${colors.lightGray};
+  background-color: ${COLORS.lightGray};
   height: 100vh;
   min-height: 100vh;
   width: 100%;
@@ -1074,7 +1074,7 @@ const MessagesList = styled.ul`
 
 const MessageItem = styled.li`
   padding: 28px 24px;
-  background-color: ${colors.white};
+  background-color: ${COLORS.white};
   border-radius: 30px;
   max-width: 505px;
   opacity: 0;
@@ -1097,7 +1097,7 @@ const MessageItemTitle = styled.p`
   font-size: 18px;
   line-height: 25px;
   letter-spacing: 0.01em;
-  color: ${colors.black2};
+  color: ${COLORS.black2};
   margin-bottom: 14px;
   @media (max-width: 1024px) {
     margin-bottom: 12px;
@@ -1109,7 +1109,7 @@ const MessageItemText = styled.p`
   line-height: 25px;
   letter-spacing: 0.01em;
 
-  color: ${colors.black2};
+  color: ${COLORS.black2};
   @media (max-width: 1024px) {
     font-size: 14px;
     line-height: 20px;
@@ -1183,7 +1183,7 @@ const MiniCardTitle = styled.p`
   line-height: 25px;
   text-align: center;
   letter-spacing: 0.01em;
-  color: ${colors.white};
+  color: ${COLORS.white};
   will-change: color;
   position: relative;
   @media (max-width: 1024px) {

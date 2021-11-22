@@ -6,7 +6,9 @@ import Link from 'next/link';
 import educationLogo from '@/assets/images/education-logo.svg';
 import { Trans, useTranslation } from 'react-i18next';
 import { Button } from '@/ui/components/Button';
-import { colors, educationLink } from '@/constants';
+
+import { COLORS } from '@/constants';
+import { LINKS } from '@/constants';
 
 interface InfoLinkProps {
   className?: string;
@@ -27,7 +29,7 @@ const InfoLink: FC<InfoLinkProps> = ({ className }) => {
               Изучайте <span>достоверную информацию и</span> инвестируйте с умом
             </Trans>
           </Text>
-          <Link href={educationLink} passHref>
+          <Link href={LINKS.educationLink} passHref>
             <StyledButton text={t('learnMore')} isLink />
           </Link>
         </InfoWrap>
@@ -37,7 +39,7 @@ const InfoLink: FC<InfoLinkProps> = ({ className }) => {
 };
 
 const Root = styled.div`
-  background-color: ${colors.black5};
+  background-color: ${COLORS.black5};
 `;
 
 const StyledContainer = styled(Container)`
@@ -81,11 +83,11 @@ const Text = styled.p`
   font-weight: bold;
   font-size: 48px;
   line-height: 67px;
-  color: ${colors.white};
+  color: ${COLORS.white};
   max-width: 670px;
 
   span {
-    color: ${colors.darkGray};
+    color: ${COLORS.darkGray};
   }
   @media (max-width: 1300px) {
     font-size: 36px;

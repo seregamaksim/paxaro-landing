@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { colors } from '@/constants';
+import { COLORS } from '@/constants';
 
 const anchors = [
   'history',
@@ -73,12 +73,12 @@ const HeaderBottomMenuLink = styled.button.attrs(() => ({
   line-height: 20px;
   letter-spacing: 0.01em;
   cursor: pointer;
-  color: ${colors.white};
+  color: ${COLORS.white};
   transition: color 0.3s ease;
   &.active,
   &:hover,
   &:focus {
-    color: ${colors.green};
+    color: ${COLORS.green};
   }
 `;
 

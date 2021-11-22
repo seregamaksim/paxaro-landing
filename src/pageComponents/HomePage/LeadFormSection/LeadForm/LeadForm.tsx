@@ -7,8 +7,9 @@ import styled from 'styled-components';
 import { Trans } from 'react-i18next';
 import Link from 'next/link';
 import { Button } from '@/ui/components/Button';
-import { baseUrl, colors } from '@/constants';
+import { COLORS } from '@/constants';
 import axios, { AxiosResponse } from 'axios';
+import { API } from '@/constants';
 
 interface FormValues {
   email: string;
@@ -43,7 +44,7 @@ const LeadForm: FC<LeadFormProps> = ({ className }) => {
   function submitForm(values: FormValues) {
     axios({
       method: 'post',
-      url: `${baseUrl}/contact_me`,
+      url: `${API.baseUrl}/contact_me`,
       data: values,
     }).then(({ status }: AxiosResponse) => {
       if (status === 200) setIsSuccess(true);
@@ -199,7 +200,7 @@ const SuccessBlockText = styled.p`
   text-align: center;
   letter-spacing: 0.01em;
 
-  color: ${colors.black1};
+  color: ${COLORS.black1};
   span {
     display: inline-block;
     position: relative;
@@ -211,7 +212,7 @@ const SuccessBlockText = styled.p`
       width: 105%;
       left: -3px;
       height: 100%;
-      background-color: ${colors.green};
+      background-color: ${COLORS.green};
     }
   }
   @media (max-width: 768px) {

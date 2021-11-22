@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { getCenterTopPosition } from '@/helpers/getCenterTopPosition';
-import { colors } from '@/constants';
+import { COLORS } from '@/constants';
 import { useIntersection } from '@/hooks/useIntersection';
 
 if (typeof window !== 'undefined') {
@@ -481,7 +481,7 @@ const Cirle = styled.div`
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background-color: ${colors.black3};
+  background-color: ${COLORS.black3};
   opacity: 0;
   pointer-events: none;
   @media (max-width: 768px) {
@@ -518,7 +518,7 @@ const SectionTitle = styled.h2`
   font-size: 36px;
   line-height: 50px;
   font-weight: bold;
-  color: ${colors.black2};
+  color: ${COLORS.black2};
   margin-bottom: 24px;
   br {
     display: none;
@@ -536,7 +536,7 @@ const Subtitle = styled.p`
   font-size: 24px;
   line-height: 34px;
   letter-spacing: 0.01em;
-  color: ${colors.black2};
+  color: ${COLORS.black2};
   max-width: 788px;
   @media (max-width: 768px) {
     font-size: 14px;
@@ -560,7 +560,7 @@ const DescriptionStyleTitle = styled.p`
   font-weight: bold;
   font-size: 36px;
   line-height: 44px;
-  color: ${colors.white};
+  color: ${COLORS.white};
   will-change: transform;
   position: relative;
   span {
@@ -575,7 +575,7 @@ const DescriptionStyleTitle = styled.p`
       left: 50%;
       transform: translateX(-50%);
       height: 100%;
-      background-color: ${colors.green};
+      background-color: ${COLORS.green};
     }
   }
   @media (min-width: 1024px) and (max-height: 700px) {
@@ -626,27 +626,27 @@ const DescriptionItemBg = styled.div`
 const BlackDescriptionItem = styled(DescriptionItem)`
   &,
   & ${DescriptionItemBg} {
-    background-color: ${colors.black3};
+    background-color: ${COLORS.black3};
   }
 `;
 
 const GrayDescriptionItem = styled(DescriptionItem)`
   &,
   & ${DescriptionItemBg} {
-    background-color: ${colors.lightGray};
+    background-color: ${COLORS.lightGray};
   }
   & ${DescriptionStyleTitle} {
-    color: ${colors.black2};
+    color: ${COLORS.black2};
   }
 `;
 
 const GreenDescriptionItem = styled(DescriptionItem)`
   &,
   & ${DescriptionItemBg} {
-    background: ${colors.greenGradient};
+    background: ${COLORS.greenGradient};
   }
   & ${DescriptionStyleTitle} span::before {
-    background-color: ${colors.black3};
+    background-color: ${COLORS.black3};
   }
 `;
 
@@ -672,17 +672,17 @@ const DescriptionSecondScreenItemTitle = styled.p`
   font-size: 24px;
   line-height: 34px;
   letter-spacing: 0.01em;
-  color: ${colors.white};
+  color: ${COLORS.white};
   padding: 4px 8px;
   margin-bottom: 10px;
-  background-color: ${colors.green};
+  background-color: ${COLORS.green};
 `;
 
 const DescriptionSecondScreenItemText = styled.p`
   font-size: 24px;
   line-height: 34px;
   letter-spacing: 0.01em;
-  color: ${colors.white};
+  color: ${COLORS.white};
 
   @media (max-width: 1024px) {
     font-size: 20px;
@@ -712,7 +712,7 @@ const DescriptionSecondScreenItem = styled.li`
   padding-left: 50px;
   padding-right: 50px;
   border-radius: 45px;
-  background: ${colors.black3};
+  background: ${COLORS.black3};
   z-index: 2;
   @media (min-width: 1024px) and (max-height: 700px) {
     padding-top: 50px;
@@ -743,10 +743,10 @@ const DescriptionSecondScreenItem = styled.li`
 `;
 
 const GrayDescriptionSecondScreenItem = styled(DescriptionSecondScreenItem)`
-  background-color: ${colors.lightGray};
+  background-color: ${COLORS.lightGray};
 
   & ${DescriptionSecondScreenItemTitle}, & ${DescriptionSecondScreenItemText} {
-    color: ${colors.black2};
+    color: ${COLORS.black2};
   }
   @media (max-width: 768px) {
     position: absolute;
@@ -755,10 +755,10 @@ const GrayDescriptionSecondScreenItem = styled(DescriptionSecondScreenItem)`
 `;
 
 const GreenDescriptionSecondScreenItem = styled(DescriptionSecondScreenItem)`
-  background: ${colors.greenGradient};
+  background: ${COLORS.greenGradient};
 
   & ${DescriptionSecondScreenItemTitle} {
-    background-color: ${colors.black3};
+    background-color: ${COLORS.black3};
   }
   @media (max-width: 768px) {
     position: absolute;
