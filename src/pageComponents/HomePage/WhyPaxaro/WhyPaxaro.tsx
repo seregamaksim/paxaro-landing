@@ -15,7 +15,6 @@ import gridWithArrow from '@/assets/images/grid-with-arrow.svg';
 import { useRouter } from 'next/router';
 import { useIntersection } from '@/hooks/useIntersection';
 import { COLORS } from '@/constants';
-import { useSetActiveClassMenu } from '@/hooks/useSetActiveClassMenu';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -93,7 +92,7 @@ const WhyPaxaro: FC = () => {
         scrollTrigger: {
           trigger: mainRef.current,
           start: 'top top',
-          end: () => (innerWidth > 768 ? '+=3000' : '+=2000'),
+          end: () => (innerWidth > 768 ? '+=2500' : '+=2000'),
           pin: true,
           scrub: 1,
           snap: {
@@ -152,7 +151,7 @@ const WhyPaxaro: FC = () => {
             ],
             {
               opacity: 0,
-              duration: 0.1,
+              duration: 0.3,
             },
             'showDescriptionBlock'
           )
@@ -171,7 +170,7 @@ const WhyPaxaro: FC = () => {
             ],
             {
               opacity: 0,
-              duration: 0.1,
+              duration: 0.3,
             },
             '<'
           )
