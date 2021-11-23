@@ -21,6 +21,8 @@ import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { Test } from '@/pageComponents/HomePage/Test';
+import { debounce, throttle } from 'throttle-debounce';
 
 interface HomePageProps {
   userAgent: { [key: string]: any };
@@ -32,13 +34,11 @@ const Home: NextPage<HomePageProps> = ({ userAgent }) => {
     if (typeof window !== 'undefined') {
       gsap.registerPlugin(ScrollTrigger);
     }
-    window.addEventListener('resize', function () {
-      console.log('refresh');
-      // ScrollTrigger.getById('whyPaxaro').disable();
-      // // ScrollTrigger.getAll().forEach((item) => item.disable());
-      // ScrollTrigger.getById('whyPaxaro').enable();
-      ScrollTrigger.refresh();
+
+    const resizeRefreshDebouncing = debounce(1000, () => {
+      location.reload();
     });
+    window.addEventListener('resize', resizeRefreshDebouncing);
   }, []);
   return (
     <MainLayout>
@@ -51,9 +51,10 @@ const Home: NextPage<HomePageProps> = ({ userAgent }) => {
         <HeaderBottom />
       </Header>
       <main>
+        {/* <Test /> */}
         <Hero />
         <WhyPaxaro />
-        {/* <CalculatorSection />
+        <CalculatorSection />
         <Advantages />
         <Education />
         <Algorithm />
@@ -61,7 +62,7 @@ const Home: NextPage<HomePageProps> = ({ userAgent }) => {
         <Fear />
         <PartnerProgramm />
         <MobileApp />
-        <LeadForm /> */}
+        <LeadForm />
       </main>
     </MainLayout>
   );
