@@ -14,8 +14,9 @@ import {
   marks,
   portfolioTypeOptions,
 } from './staticData';
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse, AxiosError } from 'axios';
 import { COLORS, API } from '@/constants';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const SelectUiNoSSR = dynamic(
   () => import('@/ui/components/SelectUI/SelectUI'),
@@ -42,8 +43,10 @@ export interface ChartValue {
 const Calculator: FC<CalculatorProps> = ({ className }) => {
   const isMounted = useIsMounted();
   const { t } = useTranslation('calculator');
+  const [isError, setIsError] = useState(false);
   const [dataChart, setDataChart] = useState<ChartValue[]>([]);
   const [cashValue, setCashValue] = useState(5000);
+  const [isLoadingData, setIsloadingData] = useState(false);
   const [initiaFormlValue, setInitiaFormlValue] = useState<FormValues>({
     title: 'i30',
     period: '360',
@@ -51,20 +54,29 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
   });
 
   function requestAndSetChartData(values: FormValues) {
+    setIsloadingData(true);
     axios({
       method: 'post',
       url: `${API.baseUrl}/backtest/chart`,
       data: values,
-    }).then(({ data }: AxiosResponse<ChartValue[]>) => {
-      setDataChart(data);
-    });
+    })
+      .then(({ data }: AxiosResponse<ChartValue[]>) => {
+        setIsError(false);
+        setDataChart(data);
+      })
+      .catch(() => {
+        setIsError(true);
+      })
+      .finally(() => {
+        setIsloadingData(false);
+      });
   }
 
   const dateDaysOptions = [
-    { value: '30', label: t('calculator.month') },
     { value: '180', label: t('calculator.halfYear') },
     { value: '360', label: t('calculator.year') },
-    { value: '1825', label: t('calculator.allTime') },
+    { value: '720', label: t('calculator.twoYear') },
+    { value: '-1', label: t('calculator.allTime') },
   ];
 
   function handleSubmit(values: FormValues) {
@@ -129,7 +141,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
             const lastValueForCurrentDay =
               dataChart.length > 0
                 ? dataChart[dataChart.length - 1].profit
-                : 1199;
+                : '';
 
             return (
               <Form>
@@ -196,11 +208,31 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                     <MobileSubmitBtn
                       type="submit"
                       text={t('calculator.calculate')}
+                      isDisabled={isLoadingData}
+                      isLoading={isLoadingData}
                     />
                   </HeadSection>
                 </Head>
                 <ChartWrap>
-                  <StyledChart data={dataChart} />
+                  {isError ? (
+                    <ErrorMessageWrap>
+                      <ErrorMessage>
+                        {t('calculator.errorMessage')}
+                      </ErrorMessage>
+                    </ErrorMessageWrap>
+                  ) : (
+                    <>
+                      <StyledChart
+                        data={dataChart}
+                        $isLoading={isLoadingData}
+                      />
+                      {isLoadingData && (
+                        <ChartLoaderWrapper>
+                          <ClipLoader size={65} color={COLORS.white} />
+                        </ChartLoaderWrapper>
+                      )}
+                    </>
+                  )}
                 </ChartWrap>
                 <Footer>
                   <ProfitBlock>
@@ -214,9 +246,12 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                       </span>
                     </ProfitBlockText>
                   </ProfitBlock>
+
                   <DesktopSubmitBtn
                     type="submit"
                     text={t('calculator.calculate')}
+                    isDisabled={isLoadingData}
+                    isLoading={isLoadingData}
                   />
                 </Footer>
               </Form>
@@ -365,6 +400,9 @@ const SliderBorders = styled.p`
 `;
 
 const ChartWrap = styled.div`
+  width: 100%;
+  height: 300px;
+  position: relative;
   margin-bottom: 40px;
   overflow-y: hidden;
   overflow-x: auto;
@@ -395,7 +433,34 @@ const ChartWrap = styled.div`
   }
 `;
 
-const StyledChart = styled(Chart)``;
+const ErrorMessageWrap = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 350px;
+`;
+
+const ErrorMessage = styled.p`
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 34px;
+  text-align: center;
+  letter-spacing: 0.01em;
+
+  color: ${COLORS.white};
+`;
+
+const StyledChart = styled(Chart)<{ $isLoading: boolean }>`
+  opacity: ${({ $isLoading }) => ($isLoading ? 0.5 : 1)};
+`;
+
+const ChartLoaderWrapper = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 const Footer = styled.div`
   display: flex;
@@ -460,6 +525,8 @@ const MobileSubmitBtn = styled(StyledButton)`
   display: none;
   @media (max-width: 768px) {
     display: block;
+    width: 100%;
   }
 `;
+
 export default Calculator;

@@ -373,7 +373,24 @@ const PartnerProgramm: FC = () => {
             },
             'moveToFourthLevel+=0.2'
           )
-          .addLabel('moveToFivethLevel');
+          .addLabel('moveToFivethLevel')
+          .to(
+            calculatorRef.current,
+            {
+              y: 0,
+              duration: 0.5,
+            },
+            'moveToFivethLevel'
+          )
+          .to(
+            headRef.current,
+            {
+              yPercent: 0,
+              opacity: 1,
+              duration: 0.5,
+            },
+            'moveToFivethLevel'
+          );
       }
     }, 0);
   }, []);

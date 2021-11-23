@@ -15,7 +15,6 @@ import gridWithArrow from '@/assets/images/grid-with-arrow.svg';
 import { useRouter } from 'next/router';
 import { useIntersection } from '@/hooks/useIntersection';
 import { COLORS } from '@/constants';
-import { useSetActiveClassMenu } from '@/hooks/useSetActiveClassMenu';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -52,7 +51,6 @@ const WhyPaxaro: FC = () => {
 
   function getPixelsByVw(vw: number) {
     const widthWindow = innerWidth <= 1440 ? innerWidth : 1440;
-    console.log((vw * widthWindow) / 100);
 
     return (vw * widthWindow) / 100;
   }

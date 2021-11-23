@@ -5,11 +5,13 @@
     "index": "Index",
     "period": "Period",
     "investmentsAmount": "Amount",
-    "profit": "Potential balance:",
+    "profit": "Potential amount:",
     "month": "Month",
     "halfYear": "A half of year",
     "year": "Year",
+    "twoYear": "2 years",
     "allTime": "All time",
-    "calculate": "Calculate"
+    "calculate": "Calculate",
+    "errorMessage": "Failed to get data, please try again later."
   }
 }
