@@ -11,6 +11,7 @@
     "year": "Year",
     "twoYear": "2 years",
     "allTime": "All time",
-    "calculate": "Calculate"
+    "calculate": "Calculate",
+    "errorMessage": "Failed to get data, please try again later."
   }
 }
