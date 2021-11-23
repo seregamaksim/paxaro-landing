@@ -18,6 +18,9 @@ import { PartnerProgramm } from '@/pageComponents/HomePage/PartnerProgramm';
 import { Preloader } from '@/components/Preloader';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 interface HomePageProps {
   userAgent: { [key: string]: any };
@@ -25,7 +28,18 @@ interface HomePageProps {
 
 const Home: NextPage<HomePageProps> = ({ userAgent }) => {
   const { t } = useTranslation('common');
-
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+    }
+    window.addEventListener('resize', function () {
+      console.log('refresh');
+      // ScrollTrigger.getById('whyPaxaro').disable();
+      // // ScrollTrigger.getAll().forEach((item) => item.disable());
+      // ScrollTrigger.getById('whyPaxaro').enable();
+      ScrollTrigger.refresh();
+    });
+  }, []);
   return (
     <MainLayout>
       <Head>
@@ -39,7 +53,7 @@ const Home: NextPage<HomePageProps> = ({ userAgent }) => {
       <main>
         <Hero />
         <WhyPaxaro />
-        <CalculatorSection />
+        {/* <CalculatorSection />
         <Advantages />
         <Education />
         <Algorithm />
@@ -47,7 +61,7 @@ const Home: NextPage<HomePageProps> = ({ userAgent }) => {
         <Fear />
         <PartnerProgramm />
         <MobileApp />
-        <LeadForm />
+        <LeadForm /> */}
       </main>
     </MainLayout>
   );
