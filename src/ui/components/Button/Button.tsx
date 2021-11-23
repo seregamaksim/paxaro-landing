@@ -4,13 +4,19 @@ import styled from 'styled-components';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
+  isDisabled?: boolean;
   isLink?: boolean;
   className?: string;
 }
 const Button: FC<ButtonProps> = React.forwardRef(
-  ({ text, className, isLink = false, ...props }, ref) => {
+  ({ text, className, isLink = false, isDisabled = false, ...props }, ref) => {
     return (
-      <Root className={className} as={isLink ? 'a' : 'button'} {...props}>
+      <Root
+        className={className}
+        disabled={isDisabled}
+        as={isLink ? 'a' : 'button'}
+        {...props}
+      >
         {text}
       </Root>
     );
@@ -30,6 +36,10 @@ const Root = styled.button`
   &:hover {
     box-shadow: 0 14px 30px 0 rgba(27, 157, 120, 0.42);
   }
+  &:disabled {
+    cursor: not-allowed;
+    color: transparent;
+  }
   @media (max-width: 768px) {
     font-size: 14px;
     line-height: 20px;
@@ -37,4 +47,5 @@ const Root = styled.button`
   }
 `;
 Button.displayName = 'Button';
+
 export default Button;

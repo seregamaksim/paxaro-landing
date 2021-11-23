@@ -16,6 +16,7 @@ import {
 } from './staticData';
 import axios, { AxiosResponse } from 'axios';
 import { COLORS, API } from '@/constants';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const SelectUiNoSSR = dynamic(
   () => import('@/ui/components/SelectUI/SelectUI'),
@@ -44,6 +45,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
   const { t } = useTranslation('calculator');
   const [dataChart, setDataChart] = useState<ChartValue[]>([]);
   const [cashValue, setCashValue] = useState(5000);
+  const [isLoadingData, setIsloadingData] = useState(false);
   const [initiaFormlValue, setInitiaFormlValue] = useState<FormValues>({
     title: 'i30',
     period: '360',
@@ -51,19 +53,21 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
   });
 
   function requestAndSetChartData(values: FormValues) {
+    setIsloadingData(true);
     axios({
       method: 'post',
       url: `${API.baseUrl}/backtest/chart`,
       data: values,
     }).then(({ data }: AxiosResponse<ChartValue[]>) => {
       setDataChart(data);
+      setIsloadingData(false);
     });
   }
 
   const dateDaysOptions = [
-    { value: '30', label: t('calculator.month') },
     { value: '180', label: t('calculator.halfYear') },
     { value: '360', label: t('calculator.year') },
+    { value: '720', label: t('calculator.twoYear') },
     { value: '1825', label: t('calculator.allTime') },
   ];
 
@@ -114,7 +118,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
     <Root className={className}>
       <Wrapper>
         <Formik initialValues={initiaFormlValue} onSubmit={handleSubmit}>
-          {({ values }: FormikProps<FormValues>) => {
+          {({ values, isSubmitting }: FormikProps<FormValues>) => {
             const currentPlanMarksObject = marks[values.title];
             const currentPlanMarksArray = Object.keys(currentPlanMarksObject);
 
@@ -193,14 +197,27 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                   </FullHeadSection>
 
                   <HeadSection>
-                    <MobileSubmitBtn
-                      type="submit"
-                      text={t('calculator.calculate')}
-                    />
+                    <SubmitBtnWrapperMobile>
+                      <MobileSubmitBtn
+                        type="submit"
+                        text={t('calculator.calculate')}
+                        isDisabled={isLoadingData}
+                      />
+                      {isLoadingData && (
+                        <SumbitBtnSpinnerWrap>
+                          <ClipLoader size={25} color={COLORS.white} />
+                        </SumbitBtnSpinnerWrap>
+                      )}
+                    </SubmitBtnWrapperMobile>
                   </HeadSection>
                 </Head>
                 <ChartWrap>
-                  <StyledChart data={dataChart} />
+                  <StyledChart data={dataChart} $isLoading={isLoadingData} />
+                  {isLoadingData && (
+                    <ChartLoaderWrapper>
+                      <ClipLoader size={65} color={COLORS.white} />
+                    </ChartLoaderWrapper>
+                  )}
                 </ChartWrap>
                 <Footer>
                   <ProfitBlock>
@@ -214,10 +231,18 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                       </span>
                     </ProfitBlockText>
                   </ProfitBlock>
-                  <DesktopSubmitBtn
-                    type="submit"
-                    text={t('calculator.calculate')}
-                  />
+                  <SubmitBtnWrapperDesktop>
+                    <DesktopSubmitBtn
+                      type="submit"
+                      text={t('calculator.calculate')}
+                      isDisabled={isLoadingData}
+                    />
+                    {isLoadingData && (
+                      <SumbitBtnSpinnerWrap>
+                        <ClipLoader size={25} color={COLORS.white} />
+                      </SumbitBtnSpinnerWrap>
+                    )}
+                  </SubmitBtnWrapperDesktop>
                 </Footer>
               </Form>
             );
@@ -365,6 +390,7 @@ const SliderBorders = styled.p`
 `;
 
 const ChartWrap = styled.div`
+  position: relative;
   margin-bottom: 40px;
   overflow-y: hidden;
   overflow-x: auto;
@@ -395,7 +421,16 @@ const ChartWrap = styled.div`
   }
 `;
 
-const StyledChart = styled(Chart)``;
+const StyledChart = styled(Chart)<{ $isLoading: boolean }>`
+  opacity: ${({ $isLoading }) => ($isLoading ? 0.5 : 1)};
+`;
+
+const ChartLoaderWrapper = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 const Footer = styled.div`
   display: flex;
@@ -449,6 +484,30 @@ const StyledButton = styled(Button)`
   padding-bottom: 11px;
 `;
 
+const SubmitBtnWrapper = styled.div`
+  position: relative;
+`;
+
+const SubmitBtnWrapperMobile = styled(SubmitBtnWrapper)`
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
+
+const SubmitBtnWrapperDesktop = styled(SubmitBtnWrapper)`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const SumbitBtnSpinnerWrap = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
+
 const DesktopSubmitBtn = styled(StyledButton)`
   display: block;
   @media (max-width: 768px) {
@@ -460,6 +519,7 @@ const MobileSubmitBtn = styled(StyledButton)`
   display: none;
   @media (max-width: 768px) {
     display: block;
+    width: 100%;
   }
 `;
 export default Calculator;
