@@ -72,7 +72,7 @@ const PartnerProgramm: FC = () => {
           snap: {
             snapTo: 'labels',
             duration: { min: 0.2, max: 1 },
-            delay: 0.2,
+            delay: 0,
             ease: 'power3.out',
           },
           onUpdate: () => {

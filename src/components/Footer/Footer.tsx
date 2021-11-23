@@ -84,7 +84,7 @@ const Footer: FC = () => {
                 <MainMenuItem>
                   <ActiveLink href="#">
                     <MainMenuItemLink>
-                      {t('secondMain.knowledgeBase', { ns: 'header' })}
+                      {t('secondMain.education', { ns: 'header' })}
                     </MainMenuItemLink>
                   </ActiveLink>
                 </MainMenuItem>
