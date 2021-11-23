@@ -61,7 +61,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
       data: values,
     })
       .then(({ data }: AxiosResponse<ChartValue[]>) => {
-        if (isError) setIsError(false);
+        setIsError(false);
         setDataChart(data);
       })
       .catch(() => {
@@ -76,7 +76,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
     { value: '180', label: t('calculator.halfYear') },
     { value: '360', label: t('calculator.year') },
     { value: '720', label: t('calculator.twoYear') },
-    { value: '1825', label: t('calculator.allTime') },
+    { value: '-1', label: t('calculator.allTime') },
   ];
 
   function handleSubmit(values: FormValues) {
