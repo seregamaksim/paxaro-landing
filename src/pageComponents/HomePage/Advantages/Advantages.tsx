@@ -41,7 +41,7 @@ const Advantages: FC = () => {
           scrollTrigger: {
             trigger: rootRef.current,
             start: 'top top',
-            end: () => (innerWidth > 768 ? `+=5000` : `+=2000`),
+            end: innerWidth > 768 ? `+=5000` : `+=2000`,
             pin: true,
             scrub: innerWidth > 768 ? 1 : 0,
             snap: {
@@ -72,12 +72,11 @@ const Advantages: FC = () => {
             .to(
               itemsRef.current[0],
               {
-                x: () =>
-                  getCenterTopPosition(
-                    listSecondScreens.current[0],
-                    itemsRef.current[0]
-                  ).x,
-                y: () =>
+                x: getCenterTopPosition(
+                  listSecondScreens.current[0],
+                  itemsRef.current[0]
+                ).x,
+                y:
                   getCenterTopPosition(
                     listSecondScreens.current[0],
                     itemsRef.current[0]
@@ -89,8 +88,8 @@ const Advantages: FC = () => {
             .to(
               itemsBgRef.current[0],
               {
-                width: () => getItemSizes(listSecondScreens.current[0]).width,
-                height: () => getItemSizes(listSecondScreens.current[0]).height,
+                width: getItemSizes(listSecondScreens.current[0]).width,
+                height: getItemSizes(listSecondScreens.current[0]).height,
                 duration: 1,
               },
               '<'
@@ -139,8 +138,8 @@ const Advantages: FC = () => {
             .to(
               itemsBgRef.current[0],
               {
-                width: () => 133,
-                height: () => 133,
+                width: 133,
+                height: 133,
                 duration: 1,
               },
               '>'
@@ -148,10 +147,10 @@ const Advantages: FC = () => {
             .to(
               itemsRef.current[0],
               {
-                x: () => -300,
-                y: () => -700,
-                width: () => 133,
-                height: () => 133,
+                x: -300,
+                y: -700,
+                width: 133,
+                height: 133,
                 duration: 1,
               },
               '<'
@@ -159,12 +158,11 @@ const Advantages: FC = () => {
             .to(
               itemsRef.current[1],
               {
-                x: () =>
-                  getCenterTopPosition(
-                    listSecondScreens.current[1],
-                    itemsRef.current[1]
-                  ).x,
-                y: () =>
+                x: getCenterTopPosition(
+                  listSecondScreens.current[1],
+                  itemsRef.current[1]
+                ).x,
+                y:
                   getCenterTopPosition(
                     listSecondScreens.current[1],
                     itemsRef.current[1]
@@ -176,8 +174,8 @@ const Advantages: FC = () => {
             .to(
               itemsBgRef.current[1],
               {
-                width: () => getItemSizes(listSecondScreens.current[1]).width,
-                height: () => getItemSizes(listSecondScreens.current[1]).height,
+                width: getItemSizes(listSecondScreens.current[1]).width,
+                height: getItemSizes(listSecondScreens.current[1]).height,
                 duration: 1,
               },
               '<'

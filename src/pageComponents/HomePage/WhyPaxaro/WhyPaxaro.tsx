@@ -47,37 +47,37 @@ const WhyPaxaro: FC = () => {
     function getGridPixels() {
       if (innerWidth > 1300) {
         return {
-          x: () => getPixelsByVw(55),
-          y: () => getPixelsByVw(25.4),
+          x: getPixelsByVw(55),
+          y: getPixelsByVw(25.4),
         };
       }
       if (innerWidth > 1100 && innerWidth < 1300) {
         return {
-          x: () => getPixelsByVw(52),
-          y: () => getPixelsByVw(22.4),
+          x: getPixelsByVw(52),
+          y: getPixelsByVw(22.4),
         };
       }
       if (innerWidth > 1024 && innerWidth < 1100) {
         return {
-          x: () => getPixelsByVw(49),
-          y: () => getPixelsByVw(21.4),
+          x: getPixelsByVw(49),
+          y: getPixelsByVw(21.4),
         };
       }
       if (innerWidth < 1024 && innerWidth > 768) {
         return {
-          x: () => innerWidth / 2 - gridWithArrowRef!.current!.offsetWidth / 2,
-          y: () => 400,
+          x: innerWidth / 2 - gridWithArrowRef!.current!.offsetWidth / 2,
+          y: 400,
         };
       }
       if (innerWidth < 768) {
         return {
-          x: () => innerWidth / 2 - gridWithArrowRef!.current!.offsetWidth / 2,
-          y: () => 400,
+          x: innerWidth / 2 - gridWithArrowRef!.current!.offsetWidth / 2,
+          y: 400,
         };
       }
       return {
-        x: () => getPixelsByVw(55),
-        y: () => getPixelsByVw(25.4),
+        x: getPixelsByVw(55),
+        y: getPixelsByVw(25.4),
       };
     }
     setTimeout(() => {
@@ -90,7 +90,7 @@ const WhyPaxaro: FC = () => {
           scrollTrigger: {
             trigger: mainRef.current,
             start: 'top top',
-            end: () => (innerWidth > 768 ? '+=3000' : '+=2000'),
+            end: innerWidth > 768 ? '+=3000' : '+=2000',
             pin: true,
             scrub: 1,
             snap: {
@@ -105,24 +105,24 @@ const WhyPaxaro: FC = () => {
           WhyPaxaroTimeline.addLabel('start')
             .set(gridWithArrowRef.current, getGridPixels())
             .set(bitcoinRef.current, {
-              x: () => getPixelsByVw(68.75),
-              y: () => getPixelsByVw(32.7),
+              x: getPixelsByVw(68.75),
+              y: getPixelsByVw(32.7),
             })
             .set(ethereumRef.current, {
-              x: () => getPixelsByVw(58.6),
-              y: () => getPixelsByVw(27.7),
+              x: getPixelsByVw(58.6),
+              y: getPixelsByVw(27.7),
             })
             .set(coin1Ref.current, {
-              x: () => getPixelsByVw(75),
-              y: () => getPixelsByVw(20.3),
+              x: getPixelsByVw(75),
+              y: getPixelsByVw(20.3),
             })
             .set(coin2Ref.current, {
-              x: () => getPixelsByVw(57.9),
-              y: () => getPixelsByVw(42.8),
+              x: getPixelsByVw(57.9),
+              y: getPixelsByVw(42.8),
             })
             .set(coin3Ref.current, {
-              x: () => getPixelsByVw(80.4),
-              y: () => getPixelsByVw(39.2),
+              x: getPixelsByVw(80.4),
+              y: getPixelsByVw(39.2),
             })
             .to(
               whyPaxaroTitleRef.current,
@@ -184,8 +184,8 @@ const WhyPaxaro: FC = () => {
             .to(
               bitcoinRef.current,
               {
-                x: () => getPixelsByVw(79.4),
-                y: () => getPixelsByVw(30.2),
+                x: getPixelsByVw(79.4),
+                y: getPixelsByVw(30.2),
                 duration: 0.6,
                 scale: 0.7,
               },
@@ -194,8 +194,8 @@ const WhyPaxaro: FC = () => {
             .to(
               ethereumRef.current,
               {
-                x: () => getPixelsByVw(63.2),
-                y: () => getPixelsByVw(34.5),
+                x: getPixelsByVw(63.2),
+                y: getPixelsByVw(34.5),
                 duration: 0.6,
               },
               '<'
@@ -203,8 +203,8 @@ const WhyPaxaro: FC = () => {
             .to(
               coin1Ref.current,
               {
-                x: () => getPixelsByVw(71.4),
-                y: () => getPixelsByVw(30.7),
+                x: getPixelsByVw(71.4),
+                y: getPixelsByVw(30.7),
                 scale: 0.6,
                 duration: 0.6,
               },
@@ -213,8 +213,8 @@ const WhyPaxaro: FC = () => {
             .to(
               coin2Ref.current,
               {
-                x: () => getPixelsByVw(74.3),
-                y: () => getPixelsByVw(32.9),
+                x: getPixelsByVw(74.3),
+                y: getPixelsByVw(32.9),
                 scale: 0.6,
                 duration: 0.6,
               },
@@ -223,8 +223,8 @@ const WhyPaxaro: FC = () => {
             .to(
               coin3Ref.current,
               {
-                x: () => getPixelsByVw(70.4),
-                y: () => getPixelsByVw(37.8),
+                x: getPixelsByVw(70.4),
+                y: getPixelsByVw(37.8),
                 duration: 0.6,
               },
               '<'
@@ -698,7 +698,6 @@ const DescriptionsWrapper = styled.div`
   width: 100%;
   max-width: 500px;
   padding: 50px;
-
   background: ${COLORS.white};
   box-shadow: 0px 6px 36px rgba(104, 104, 104, 0.08);
   border-radius: 40px;
@@ -840,6 +839,7 @@ const BitcoinWrap = styled.div`
   position: absolute;
   left: 0;
   top: 0;
+  will-change: transform;
   border-radius: 50%;
   @media (max-width: 1024px) {
     width: 100px;
@@ -859,6 +859,7 @@ const EthereumWrap = styled.div`
   position: absolute;
   left: 0;
   top: 0;
+  will-change: transform;
   @media (max-width: 1024px) {
     width: 80px;
     height: 80px;
@@ -873,6 +874,7 @@ const Coin1Wrap = styled.div`
   position: absolute;
   left: 0;
   top: 0;
+  will-change: transform;
   @media (max-width: 1024px) {
     width: 90px;
     height: 90px;
@@ -891,6 +893,7 @@ const Coin2Wrap = styled.div`
   position: absolute;
   left: 0;
   top: 0;
+  will-change: transform;
   @media (max-width: 1024px) {
     width: 90px;
     height: 90px;
@@ -909,6 +912,7 @@ const Coin3Wrap = styled.div`
   position: absolute;
   left: 0;
   top: 0;
+  will-change: transform;
   @media (max-width: 1024px) {
     width: 90px;
     height: 90px;
@@ -927,6 +931,7 @@ const GridWithArrowWrap = styled.div`
   position: absolute;
   left: 0;
   top: 0;
+  will-change: transform;
   @media (max-width: 900px) {
     width: 450px;
   }
