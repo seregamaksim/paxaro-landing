@@ -44,7 +44,7 @@ const LeadForm: FC<LeadFormProps> = ({ className }) => {
   function submitForm(values: FormValues) {
     axios({
       method: 'post',
-      url: `${API.baseUrl}/contact_me`,
+      url: `${API.baseUrl}/contact/me`,
       data: values,
     }).then(({ status }: AxiosResponse) => {
       if (status === 200) setIsSuccess(true);
