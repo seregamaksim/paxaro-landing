@@ -9,10 +9,6 @@ import { getCenterTopPosition } from '@/helpers/getCenterTopPosition';
 import { COLORS } from '@/constants';
 import { useIntersection } from '@/hooks/useIntersection';
 
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 function getItemSizes(item: HTMLElement) {
   return {
     width: item.offsetWidth,
@@ -36,305 +32,308 @@ const Advantages: FC = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      const advantagesTimeline = gsap.timeline({
-        defaults: {
-          ease: 'sine.out',
-        },
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: 'top top',
-          end: () => (innerWidth > 768 ? `+=5000` : `+=2000`),
-          pin: true,
-          scrub: innerWidth > 768 ? 1 : 0,
-          snap: {
-            snapTo: 'labels',
-            duration: { min: 0.2, max: 2 },
-            delay: 0.2,
+      if (typeof window !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+        const advantagesTimeline = gsap.timeline({
+          defaults: {
             ease: 'sine.out',
           },
-        },
-      });
-      if (innerWidth > 768) {
-        advantagesTimeline
-          .addLabel('start')
-          .from(
-            itemsRef.current,
-            {
-              y: 80,
-              opacity: 0,
-              duration: 1,
-              stagger: 0.2,
+          scrollTrigger: {
+            trigger: rootRef.current,
+            start: 'top top',
+            end: innerWidth > 768 ? `+=5000` : `+=2000`,
+            pin: true,
+            scrub: innerWidth > 768 ? 1 : 0,
+            snap: {
+              snapTo: 'labels',
+              duration: { min: 0.2, max: 2 },
+              delay: 0.2,
+              ease: 'sine.out',
             },
-            'start'
-          )
-          .addLabel('finishMoveItems')
-          .set(itemsRef.current[0], {
-            zIndex: 1,
-          })
-          .to(
-            itemsRef.current[0],
-            {
-              x: getCenterTopPosition(
-                listSecondScreens.current[0],
-                itemsRef.current[0]
-              ).x,
-              y:
-                getCenterTopPosition(
+          },
+        });
+        if (innerWidth > 768) {
+          advantagesTimeline
+            .addLabel('start')
+            .from(
+              itemsRef.current,
+              {
+                y: 80,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+              },
+              'start'
+            )
+            .addLabel('finishMoveItems')
+            .set(itemsRef.current[0], {
+              zIndex: 1,
+            })
+            .to(
+              itemsRef.current[0],
+              {
+                x: getCenterTopPosition(
                   listSecondScreens.current[0],
                   itemsRef.current[0]
-                ).y + 80,
-              duration: 1,
-            },
-            'finishMoveItems'
-          )
-          .to(
-            itemsBgRef.current[0],
-            {
-              width: getItemSizes(listSecondScreens.current[0]).width,
-              height: getItemSizes(listSecondScreens.current[0]).height,
-              duration: 1,
-            },
-            '<'
-          )
-          .to(
-            headRef.current,
-            {
-              y: -800,
-              duration: 1,
-            },
-            '>-0.5'
-          )
-          .to(
-            [itemsRef.current[1], itemsRef.current[2]],
-            {
-              y: -800,
-              duration: 1,
-            },
-            '<'
-          )
-          .to(
-            itemsTitleRef.current[0],
-            {
-              opacity: 0,
-              duration: 0.3,
-            },
-            '<'
-          )
-          .from(
-            listSecondScreens.current[0],
-            {
-              opacity: 0,
-              duration: 0.3,
-            },
-            '>+0.1'
-          )
-          .addLabel('startHideFirstDescription')
-          .to(
-            listSecondScreens.current[0],
-            {
-              opacity: 0,
-              duration: 0.3,
-            },
-            'startHideFirstDescription+=0.3'
-          )
-          .to(
-            itemsBgRef.current[0],
-            {
-              width: 133,
-              height: 133,
-              duration: 1,
-            },
-            '>'
-          )
-          .to(
-            itemsRef.current[0],
-            {
-              x: -300,
-              y: -700,
-              width: 133,
-              height: 133,
-              duration: 1,
-            },
-            '<'
-          )
-          .to(
-            itemsRef.current[1],
-            {
-              x: getCenterTopPosition(
-                listSecondScreens.current[1],
-                itemsRef.current[1]
-              ).x,
-              y:
-                getCenterTopPosition(
+                ).x,
+                y:
+                  getCenterTopPosition(
+                    listSecondScreens.current[0],
+                    itemsRef.current[0]
+                  ).y + 80,
+                duration: 1,
+              },
+              'finishMoveItems'
+            )
+            .to(
+              itemsBgRef.current[0],
+              {
+                width: getItemSizes(listSecondScreens.current[0]).width,
+                height: getItemSizes(listSecondScreens.current[0]).height,
+                duration: 1,
+              },
+              '<'
+            )
+            .to(
+              headRef.current,
+              {
+                y: -800,
+                duration: 1,
+              },
+              '>-0.5'
+            )
+            .to(
+              [itemsRef.current[1], itemsRef.current[2]],
+              {
+                y: -800,
+                duration: 1,
+              },
+              '<'
+            )
+            .to(
+              itemsTitleRef.current[0],
+              {
+                opacity: 0,
+                duration: 0.3,
+              },
+              '<'
+            )
+            .from(
+              listSecondScreens.current[0],
+              {
+                opacity: 0,
+                duration: 0.3,
+              },
+              '>+0.1'
+            )
+            .addLabel('startHideFirstDescription')
+            .to(
+              listSecondScreens.current[0],
+              {
+                opacity: 0,
+                duration: 0.3,
+              },
+              'startHideFirstDescription+=0.3'
+            )
+            .to(
+              itemsBgRef.current[0],
+              {
+                width: 133,
+                height: 133,
+                duration: 1,
+              },
+              '>'
+            )
+            .to(
+              itemsRef.current[0],
+              {
+                x: -300,
+                y: -700,
+                width: 133,
+                height: 133,
+                duration: 1,
+              },
+              '<'
+            )
+            .to(
+              itemsRef.current[1],
+              {
+                x: getCenterTopPosition(
                   listSecondScreens.current[1],
                   itemsRef.current[1]
-                ).y + 80,
-              duration: 1,
-            },
-            '<'
-          )
-          .to(
-            itemsBgRef.current[1],
-            {
-              width: getItemSizes(listSecondScreens.current[1]).width,
-              height: getItemSizes(listSecondScreens.current[1]).height,
-              duration: 1,
-            },
-            '<'
-          )
-          .to(
-            itemsTitleRef.current[1],
-            {
-              opacity: 0,
-              duration: 0.3,
-            },
-            '>-0.7'
-          )
-          .from(
-            listSecondScreens.current[1],
-            {
-              opacity: 0,
-              duration: 0.3,
-            },
-            '>+0.3'
-          )
-          .addLabel('startHideSecondDescription')
-          .to(
-            listSecondScreens.current[1],
-            {
-              opacity: 0,
-              duration: 0.5,
-            },
-            'startHideSecondDescription+0.3'
-          )
-          .to(
-            itemsBgRef.current[1],
-            {
-              width: 133,
-              height: 133,
-              duration: 1,
-            },
-            '>'
-          )
-          .to(
-            itemsRef.current[1],
-            {
-              x: -300,
-              y: -700,
-              width: 133,
-              height: 133,
-              duration: 1,
-            },
-            '<'
-          )
-          .to(
-            itemsRef.current[2],
-            {
-              x: getCenterTopPosition(
-                listSecondScreens.current[2],
-                itemsRef.current[2]
-              ).x,
-              y:
-                getCenterTopPosition(
+                ).x,
+                y:
+                  getCenterTopPosition(
+                    listSecondScreens.current[1],
+                    itemsRef.current[1]
+                  ).y + 80,
+                duration: 1,
+              },
+              '<'
+            )
+            .to(
+              itemsBgRef.current[1],
+              {
+                width: getItemSizes(listSecondScreens.current[1]).width,
+                height: getItemSizes(listSecondScreens.current[1]).height,
+                duration: 1,
+              },
+              '<'
+            )
+            .to(
+              itemsTitleRef.current[1],
+              {
+                opacity: 0,
+                duration: 0.3,
+              },
+              '>-0.7'
+            )
+            .from(
+              listSecondScreens.current[1],
+              {
+                opacity: 0,
+                duration: 0.3,
+              },
+              '>+0.3'
+            )
+            .addLabel('startHideSecondDescription')
+            .to(
+              listSecondScreens.current[1],
+              {
+                opacity: 0,
+                duration: 0.5,
+              },
+              'startHideSecondDescription+0.3'
+            )
+            .to(
+              itemsBgRef.current[1],
+              {
+                width: 133,
+                height: 133,
+                duration: 1,
+              },
+              '>'
+            )
+            .to(
+              itemsRef.current[1],
+              {
+                x: -300,
+                y: -700,
+                width: 133,
+                height: 133,
+                duration: 1,
+              },
+              '<'
+            )
+            .to(
+              itemsRef.current[2],
+              {
+                x: getCenterTopPosition(
                   listSecondScreens.current[2],
                   itemsRef.current[2]
-                ).y + 80,
-              duration: 1,
-            },
-            '<'
-          )
-          .to(
-            itemsBgRef.current[2],
-            {
-              width: getItemSizes(listSecondScreens.current[2]).width,
-              height: getItemSizes(listSecondScreens.current[2]).height,
-              duration: 1,
-            },
-            '<'
-          )
-          .to(
-            itemsTitleRef.current[2],
-            {
-              opacity: 0,
-              duration: 0.3,
-            },
-            '>-0.7'
-          )
-          .from(
-            listSecondScreens.current[2],
-            {
-              opacity: 0,
-              duration: 0.3,
-            },
-            '>+0.3'
-          )
-          .addLabel('finishMoveThirdDescription')
+                ).x,
+                y:
+                  getCenterTopPosition(
+                    listSecondScreens.current[2],
+                    itemsRef.current[2]
+                  ).y + 80,
+                duration: 1,
+              },
+              '<'
+            )
+            .to(
+              itemsBgRef.current[2],
+              {
+                width: getItemSizes(listSecondScreens.current[2]).width,
+                height: getItemSizes(listSecondScreens.current[2]).height,
+                duration: 1,
+              },
+              '<'
+            )
+            .to(
+              itemsTitleRef.current[2],
+              {
+                opacity: 0,
+                duration: 0.3,
+              },
+              '>-0.7'
+            )
+            .from(
+              listSecondScreens.current[2],
+              {
+                opacity: 0,
+                duration: 0.3,
+              },
+              '>+0.3'
+            )
+            .addLabel('finishMoveThirdDescription')
 
-          .set(circleRef.current, {
-            opacity: 1,
-          })
-          .fromTo(
-            circleRef.current,
-            {
-              scale: 0,
-            },
-            {
-              scale:
-                rootRef!.current!.scrollWidth /
-                  circleRef!.current!.offsetWidth +
-                10,
-              duration: 1,
-            }
-          )
-          .addLabel('finish');
-      } else {
-        advantagesTimeline
-          .addLabel('start')
-          .from(
-            listSecondScreens.current[1],
-            {
-              y: innerHeight + 50,
-              duration: 0.5,
-            },
-            'start+=0.5'
-          )
-          .addLabel('finishMoveFirstScreen')
-          .from(
-            listSecondScreens.current[2],
-            {
-              y: innerHeight + 50,
-              duration: 0.5,
-            },
-            'finishMoveFirstScreen+=0.5'
-          )
-          .addLabel('finishMoveSecondScreen')
-          .set(circleRef.current, {
-            opacity: 1,
-          })
-          .to(
-            descriptionSecondListRef.current,
-            {
-              y: -50,
-              opacity: 0,
-              duration: 0.5,
-            },
-            'finishMoveSecondScreen+=0.2'
-          )
-          .fromTo(
-            circleRef.current,
-            {
-              scale: 0,
-            },
-            {
-              scale:
-                rootRef!.current!.scrollWidth /
-                  circleRef!.current!.offsetWidth +
-                5,
-              duration: 0.7,
-            },
-            'finishMoveSecondScreen+=0.2'
-          )
-          .addLabel('finish');
+            .set(circleRef.current, {
+              opacity: 1,
+            })
+            .fromTo(
+              circleRef.current,
+              {
+                scale: 0,
+              },
+              {
+                scale:
+                  rootRef!.current!.scrollWidth /
+                    circleRef!.current!.offsetWidth +
+                  10,
+                duration: 1,
+              }
+            )
+            .addLabel('finish');
+        } else {
+          advantagesTimeline
+            .addLabel('start')
+            .from(
+              listSecondScreens.current[1],
+              {
+                y: innerHeight + 50,
+                duration: 0.5,
+              },
+              'start+=0.5'
+            )
+            .addLabel('finishMoveFirstScreen')
+            .from(
+              listSecondScreens.current[2],
+              {
+                y: innerHeight + 50,
+                duration: 0.5,
+              },
+              'finishMoveFirstScreen+=0.5'
+            )
+            .addLabel('finishMoveSecondScreen')
+            .set(circleRef.current, {
+              opacity: 1,
+            })
+            .to(
+              descriptionSecondListRef.current,
+              {
+                y: -50,
+                opacity: 0,
+                duration: 0.5,
+              },
+              'finishMoveSecondScreen+=0.2'
+            )
+            .fromTo(
+              circleRef.current,
+              {
+                scale: 0,
+              },
+              {
+                scale:
+                  rootRef!.current!.scrollWidth /
+                    circleRef!.current!.offsetWidth +
+                  5,
+                duration: 0.7,
+              },
+              'finishMoveSecondScreen+=0.2'
+            )
+            .addLabel('finish');
+        }
       }
     }, 0);
   }, []);
@@ -559,6 +558,7 @@ const DescriptionList = styled.ul`
     display: none;
   }
 `;
+
 const DescriptionStyleTitle = styled.p`
   font-weight: bold;
   font-size: 36px;
@@ -581,6 +581,7 @@ const DescriptionStyleTitle = styled.p`
       background-color: ${COLORS.green};
     }
   }
+
   @media (min-width: 1024px) and (max-height: 700px) {
     font-size: 32px;
     line-height: 40px;

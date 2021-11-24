@@ -18,6 +18,8 @@ import { PartnerProgramm } from '@/pageComponents/HomePage/PartnerProgramm';
 import { Preloader } from '@/components/Preloader';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
+import { debounce } from 'throttle-debounce';
 
 interface HomePageProps {
   userAgent: { [key: string]: any };
@@ -26,6 +28,16 @@ interface HomePageProps {
 const Home: NextPage<HomePageProps> = ({ userAgent }) => {
   const { t } = useTranslation('common');
 
+  useEffect(() => {
+    const resizeRefreshDebouncing = debounce(300, false, () => {
+      location.reload();
+    });
+
+    window.addEventListener('resize', resizeRefreshDebouncing);
+    return () => {
+      window.removeEventListener('resize', resizeRefreshDebouncing);
+    };
+  }, []);
   return (
     <MainLayout>
       <Head>
