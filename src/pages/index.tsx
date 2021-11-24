@@ -27,7 +27,6 @@ interface HomePageProps {
 
 const Home: NextPage<HomePageProps> = ({ userAgent }) => {
   const { t } = useTranslation('common');
-  console.log(userAgent);
 
   useEffect(() => {
     const resizeRefreshDebouncing = debounce(300, false, () => {
