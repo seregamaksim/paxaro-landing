@@ -15,6 +15,7 @@ import gridWithArrow from '@/assets/images/grid-with-arrow.svg';
 import { useRouter } from 'next/router';
 import { useIntersection } from '@/hooks/useIntersection';
 import { COLORS } from '@/constants';
+import { LOCALES } from '@/types';
 
 const WhyPaxaro: FC = () => {
   const { t } = useTranslation('whyPaxaro');
@@ -631,7 +632,7 @@ const WhyPaxaro: FC = () => {
             <DescriptionCounterTextsWrapper>
               <DescriptionCounterTextWrap ref={descriptionTextWrapFirstRef}>
                 <DescriptionText>{t('description1.text1')}</DescriptionText>
-                {locale === 'ru' ? (
+                {locale === LOCALES.ru ? (
                   <DescriptionText>
                     В случае с альтернативными монетами вы скорее покупаете
                     акции, чем валюту.
@@ -647,7 +648,7 @@ const WhyPaxaro: FC = () => {
               <DescriptionCounterTextWrapAbsolute
                 ref={descriptionTextWrapSecondRef}
               >
-                {locale === 'ru' ? (
+                {locale === LOCALES.ru ? (
                   <DescriptionText>
                     У проектов с капитализацией ниже <br />
                     чем у Bitcoin, более высокий потенциальный <br /> рост.
@@ -743,7 +744,7 @@ const ContentTitle = styled.p<{ $locale: string }>`
     left: 0;
   }
   @media (max-width: 768px) {
-    font-size: ${({ $locale }) => ($locale === 'en' ? '28px' : '36px')};
+    font-size: ${({ $locale }) => ($locale === LOCALES.en ? '28px' : '36px')};
     line-height: 44px;
     top: 30%;
   }

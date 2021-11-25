@@ -9,6 +9,7 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import currency from 'currency.js';
 import { COLORS } from '@/constants';
 import { useRouter } from 'next/router';
+import { LOCALES } from '@/types';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -765,7 +766,7 @@ const ProfitTitle = styled(CalculatorText)<{ $locale: string }>`
     margin-right: 18px;
   }
   @media (max-width: 400px) {
-    font-size: ${({ $locale }) => ($locale === 'kz' ? '15px' : '')};
+    font-size: ${({ $locale }) => ($locale === LOCALES.kz ? '15px' : '')};
   }
 `;
 

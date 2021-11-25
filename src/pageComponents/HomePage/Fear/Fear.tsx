@@ -12,6 +12,7 @@ import { getCenterTopPosition } from '@/helpers/getCenterTopPosition';
 import { COLORS } from '@/constants';
 import { useIntersection } from '@/hooks/useIntersection';
 import { useRouter } from 'next/router';
+import { LOCALES } from '@/types';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -1101,7 +1102,7 @@ const MessageItem = styled.li<{ $locale: string }>`
     max-width: none;
   }
   @media (max-width: 768px) {
-    padding: ${({ $locale }) => ($locale === 'kz' ? '20px' : '')};
+    padding: ${({ $locale }) => ($locale === LOCALES.kz ? '20px' : '')};
   }
   @media (min-width: 320px) and (max-width: 1024px) and (max-height: 700px) {
     padding: 18px 12px;
@@ -1120,8 +1121,8 @@ const MessageItemTitle = styled.p<{ $locale: string }>`
     margin-bottom: 12px;
   }
   @media (max-width: 768px) {
-    font-size: ${({ $locale }) => ($locale === 'kz' ? '15px' : '')};
-    line-height: ${({ $locale }) => ($locale === 'kz' ? '22px' : '')};
+    font-size: ${({ $locale }) => ($locale === LOCALES.kz ? '15px' : '')};
+    line-height: ${({ $locale }) => ($locale === LOCALES.kz ? '22px' : '')};
   }
 `;
 
