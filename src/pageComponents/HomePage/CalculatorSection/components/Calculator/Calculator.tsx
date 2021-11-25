@@ -407,6 +407,7 @@ const ChartWrap = styled.div`
   overflow-y: hidden;
   overflow-x: auto;
   @media (max-width: 768px) {
+    height: 330px;
     ::-webkit-scrollbar {
       -webkit-appearance: none;
       -webkit-overflow-scrolling: auto;
@@ -429,7 +430,7 @@ const ChartWrap = styled.div`
       border-radius: 10px;
       background-color: ${COLORS.white};
     }
-    padding-bottom: 20px;
+    padding-bottom: 30px;
   }
 `;
 

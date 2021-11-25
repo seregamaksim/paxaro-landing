@@ -8,6 +8,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import currency from 'currency.js';
 import { COLORS } from '@/constants';
+import { useRouter } from 'next/router';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -15,6 +16,7 @@ if (typeof window !== 'undefined') {
 
 const PartnerProgramm: FC = () => {
   const { t } = useTranslation('partnerProgramm');
+  const { locale } = useRouter();
   const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const bonusTextRef = useRef<HTMLParagraphElement>(null);
@@ -431,7 +433,9 @@ const PartnerProgramm: FC = () => {
                 {t('calculator.profit')}
               </CalculatorSectionTitle>
               <ProfitSection>
-                <ProfitTitle>{t('calculator.levels')}</ProfitTitle>
+                <ProfitTitle $locale={locale!}>
+                  {t('calculator.levels')}
+                </ProfitTitle>
                 <ProfitList>
                   <ProfitItem>
                     <CalculatorText>1</CalculatorText>
@@ -451,7 +455,9 @@ const PartnerProgramm: FC = () => {
                 </ProfitList>
               </ProfitSection>
               <ProfitSection>
-                <ProfitTitle>{t('calculator.percent')}</ProfitTitle>
+                <ProfitTitle $locale={locale!}>
+                  {t('calculator.percent')}
+                </ProfitTitle>
                 <ProfitList>
                   <ProfitItemWithoutBorder>
                     <CalculatorText>20%</CalculatorText>
@@ -752,11 +758,14 @@ const SubsriptionItem = styled.li`
   }
 `;
 
-const ProfitTitle = styled(CalculatorText)`
+const ProfitTitle = styled(CalculatorText)<{ $locale: string }>`
   min-width: 75px;
   margin-right: 24px;
   @media (max-width: 768px) {
     margin-right: 18px;
+  }
+  @media (max-width: 400px) {
+    font-size: ${({ $locale }) => ($locale === 'kz' ? '15px' : '')};
   }
 `;
 

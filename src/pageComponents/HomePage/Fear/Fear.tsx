@@ -11,6 +11,7 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { getCenterTopPosition } from '@/helpers/getCenterTopPosition';
 import { COLORS } from '@/constants';
 import { useIntersection } from '@/hooks/useIntersection';
+import { useRouter } from 'next/router';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -29,6 +30,7 @@ function getScaleParams(targetElem: HTMLElement, toElem: HTMLElement) {
 
 const Fear: FC = () => {
   const { t } = useTranslation('fear');
+  const { locale } = useRouter();
   const rootId = 'howToStart';
   const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
@@ -891,35 +893,47 @@ const Fear: FC = () => {
         <MessagesBlock ref={messagesBlockRef}>
           <MessagesList ref={messagesListRef}>
             <MessageItem
+              $locale={locale!}
               ref={(item: HTMLLIElement) => {
                 cardItems.current[0] = item;
               }}
             >
-              <MessageItemTitle>{t('card1.title')}</MessageItemTitle>
+              <MessageItemTitle $locale={locale!}>
+                {t('card1.title')}
+              </MessageItemTitle>
               <MessageItemText>{t('card1.description')}</MessageItemText>
             </MessageItem>
             <MessageItem
+              $locale={locale!}
               ref={(item: HTMLLIElement) => {
                 cardItems.current[1] = item;
               }}
             >
-              <MessageItemTitle>{t('card2.title')}</MessageItemTitle>
+              <MessageItemTitle $locale={locale!}>
+                {t('card2.title')}
+              </MessageItemTitle>
               <MessageItemText>{t('card2.description')}</MessageItemText>
             </MessageItem>
             <MessageItem
+              $locale={locale!}
               ref={(item: HTMLLIElement) => {
                 cardItems.current[2] = item;
               }}
             >
-              <MessageItemTitle>{t('card3.title')}</MessageItemTitle>
+              <MessageItemTitle $locale={locale!}>
+                {t('card3.title')}
+              </MessageItemTitle>
               <MessageItemText>{t('card3.description')}</MessageItemText>
             </MessageItem>
             <MessageItem
+              $locale={locale!}
               ref={(item: HTMLLIElement) => {
                 cardItems.current[3] = item;
               }}
             >
-              <MessageItemTitle>{t('card4.title')}</MessageItemTitle>
+              <MessageItemTitle $locale={locale!}>
+                {t('card4.title')}
+              </MessageItemTitle>
               <MessageItemText>{t('card4.description')}</MessageItemText>
             </MessageItem>
           </MessagesList>
@@ -1072,7 +1086,7 @@ const MessagesList = styled.ul`
   }
 `;
 
-const MessageItem = styled.li`
+const MessageItem = styled.li<{ $locale: string }>`
   padding: 28px 24px;
   background-color: ${COLORS.white};
   border-radius: 30px;
@@ -1086,13 +1100,16 @@ const MessageItem = styled.li`
   @media (max-width: 1024px) {
     max-width: none;
   }
+  @media (max-width: 768px) {
+    padding: ${({ $locale }) => ($locale === 'kz' ? '20px' : '')};
+  }
   @media (min-width: 320px) and (max-width: 1024px) and (max-height: 700px) {
     padding: 18px 12px;
     border-radius: 20px;
   }
 `;
 
-const MessageItemTitle = styled.p`
+const MessageItemTitle = styled.p<{ $locale: string }>`
   font-weight: bold;
   font-size: 18px;
   line-height: 25px;
@@ -1101,6 +1118,10 @@ const MessageItemTitle = styled.p`
   margin-bottom: 14px;
   @media (max-width: 1024px) {
     margin-bottom: 12px;
+  }
+  @media (max-width: 768px) {
+    font-size: ${({ $locale }) => ($locale === 'kz' ? '15px' : '')};
+    line-height: ${({ $locale }) => ($locale === 'kz' ? '22px' : '')};
   }
 `;
 
@@ -1134,7 +1155,7 @@ const MessagePhoneWrap = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     max-width: 265px;
-    bottom: -250px;
+    bottom: -270px;
   }
 `;
 

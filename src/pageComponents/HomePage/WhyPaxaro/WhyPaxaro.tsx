@@ -307,6 +307,8 @@ const WhyPaxaro: FC = () => {
             .addLabel('showSecondDescriptionBlock');
         } else {
           const isMore600px = innerWidth > 600 ? true : false;
+          const descriptionBlockHeight =
+            desciptionBlockRef.current!.offsetHeight * 0.8;
           // ---------
           // MOBILE
           // ---------
@@ -348,6 +350,63 @@ const WhyPaxaro: FC = () => {
                 duration: 0.3,
               },
               '>-0.1'
+            )
+            .to(
+              bitcoinRef.current,
+              {
+                x: isMore600px ? getPixelsByVw(46.2) : 150,
+                y: isMore600px
+                  ? getPixelsByVw(56.7) + descriptionBlockHeight
+                  : 350 + descriptionBlockHeight,
+                duration: 0.6,
+              },
+              '<'
+            )
+            .to(
+              ethereumRef.current,
+              {
+                x: isMore600px ? getPixelsByVw(38.6) : 80,
+                y: isMore600px
+                  ? getPixelsByVw(50.5) + descriptionBlockHeight
+                  : 300 + descriptionBlockHeight,
+                duration: 0.6,
+              },
+              '<'
+            )
+            .to(
+              coin1Ref.current,
+              {
+                x: isMore600px ? getPixelsByVw(52.6) : 230,
+                y: isMore600px
+                  ? getPixelsByVw(46.7) + descriptionBlockHeight
+                  : 300 + descriptionBlockHeight,
+
+                duration: 0.6,
+              },
+              '<'
+            )
+            .to(
+              coin2Ref.current,
+              {
+                x: isMore600px ? getPixelsByVw(35.9) : 50,
+                y: isMore600px
+                  ? getPixelsByVw(63.9) + descriptionBlockHeight
+                  : 430 + descriptionBlockHeight,
+
+                duration: 0.6,
+              },
+              '<'
+            )
+            .to(
+              coin3Ref.current,
+              {
+                x: isMore600px ? getPixelsByVw(57.4) : 250,
+                y: isMore600px
+                  ? getPixelsByVw(62) + descriptionBlockHeight
+                  : 450 + descriptionBlockHeight,
+                duration: 0.6,
+              },
+              '<'
             )
             .addLabel('showDescriptionBlock')
             .to(
@@ -549,7 +608,7 @@ const WhyPaxaro: FC = () => {
         </Coin3Wrap>
 
         <Content>
-          <ContentTitle ref={whyPaxaroTitleRef}>
+          <ContentTitle ref={whyPaxaroTitleRef} $locale={locale!}>
             <Trans t={t} i18nKey="whyPaxaro">
               <span>Почему именно</span>
               <br /> Paxaro App?
@@ -665,7 +724,7 @@ const Content = styled.div`
   position: relative;
 `;
 
-const ContentTitle = styled.p`
+const ContentTitle = styled.p<{ $locale: string }>`
   max-width: 530px;
   font-weight: bold;
   font-size: 72px;
@@ -684,7 +743,7 @@ const ContentTitle = styled.p`
     left: 0;
   }
   @media (max-width: 768px) {
-    font-size: 36px;
+    font-size: ${({ $locale }) => ($locale === 'en' ? '28px' : '36px')};
     line-height: 44px;
     top: 30%;
   }

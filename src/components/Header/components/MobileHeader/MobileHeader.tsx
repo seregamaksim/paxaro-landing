@@ -81,12 +81,16 @@ const MobileHeader: FC<MobileHeaderProps> = ({ children, userAgent }) => {
               </HeaderTopItem>
               <HeaderTopItem>
                 <ActiveLink href="/blog" activeClassName="active">
-                  <HeaderTopLink>{t('main.blog')}</HeaderTopLink>
+                  <HeaderTopLink style={{ pointerEvents: 'none' }}>
+                    {t('main.blog')}
+                  </HeaderTopLink>
                 </ActiveLink>
               </HeaderTopItem>
               <HeaderTopItem>
                 <ActiveLink href="/about" activeClassName="active">
-                  <HeaderTopLink>{t('main.aboutCompany')}</HeaderTopLink>
+                  <HeaderTopLink style={{ pointerEvents: 'none' }}>
+                    {t('main.aboutCompany')}
+                  </HeaderTopLink>
                 </ActiveLink>
               </HeaderTopItem>
             </HeaderTopNav>

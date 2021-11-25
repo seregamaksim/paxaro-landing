@@ -281,7 +281,7 @@ const Advantages: FC = () => {
                   rootRef!.current!.scrollWidth /
                     circleRef!.current!.offsetWidth +
                   10,
-                duration: 1,
+                duration: 1.3,
               }
             )
             .addLabel('finish');
@@ -328,7 +328,7 @@ const Advantages: FC = () => {
                   rootRef!.current!.scrollWidth /
                     circleRef!.current!.offsetWidth +
                   5,
-                duration: 0.7,
+                duration: 1.3,
               },
               'finishMoveSecondScreen+=0.2'
             )
@@ -711,10 +711,11 @@ const DescriptionSecondScreenItem = styled.li`
   min-height: 390px;
   width: 100%;
   max-width: 650px;
-  padding: 100px 50px 50px;
-  padding-top: 100px;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding: 50px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   border-radius: 45px;
   background: ${COLORS.black3};
   z-index: 2;
@@ -732,6 +733,7 @@ const DescriptionSecondScreenItem = styled.li`
     border-radius: 30px;
   }
   @media (max-width: 768px) {
+    display: block;
     position: relative;
     transform: none;
     top: 0;
