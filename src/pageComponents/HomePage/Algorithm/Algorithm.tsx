@@ -142,7 +142,7 @@ const Algorithm: FC = () => {
           circleRef.current,
           {
             scale: 0,
-            duration: 0.8,
+            duration: 1.2,
           },
           'finishHideThirdAndShowFourthCards'
         )

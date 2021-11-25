@@ -49,6 +49,10 @@ const Content: FC<ContentProps> = ({ translateName }) => {
 const StyledContainer = styled(Container)`
   padding-top: 100px;
   padding-bottom: 100px;
+  @media (max-width: 768px) {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
 `;
 
 const Wrapper = styled.div`

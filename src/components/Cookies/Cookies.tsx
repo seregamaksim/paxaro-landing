@@ -41,6 +41,7 @@ const Root = styled.div`
   left: 0;
   right: 0;
   background-color: rgba(1, 2, 2, 0.8);
+  z-index: 10;
 `;
 
 const Wrapper = styled.div`
