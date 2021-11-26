@@ -47,7 +47,7 @@ const Algorithm: FC = () => {
         scrollTrigger: {
           trigger: rootRef.current,
           start: 'top top',
-          end: () => (innerWidth > 768 ? '+=3500' : '+=3000'),
+          end: () => '+=3500',
           pin: true,
           scrub: 1,
           snap: {
@@ -151,7 +151,7 @@ const Algorithm: FC = () => {
           {
             yPercent: -150,
             opacity: 0,
-            duration: 0.8,
+            duration: 1.2,
           },
           '<'
         )
@@ -159,7 +159,7 @@ const Algorithm: FC = () => {
           storeBannerSectionRef.current,
           {
             yPercent: 150,
-            duration: 1,
+            duration: 1.2,
           },
           '<'
         )
