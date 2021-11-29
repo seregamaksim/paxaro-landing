@@ -1,0 +1,17 @@
+{
+  "title": "Calculation of anticipated profit",
+  "subTitle": "Find out how much you could earn if you started using the Paxaro App earlier",
+  "calculator": {
+    "index": "Index",
+    "period": "Period",
+    "investmentsAmount": "Amount",
+    "profit": "Potential amount:",
+    "month": "Month",
+    "halfYear": "A half of year",
+    "year": "Year",
+    "twoYear": "2 years",
+    "allTime": "All time",
+    "calculate": "Calculate",
+    "errorMessage": "Failed to get data, please try again later."
+  }
+}

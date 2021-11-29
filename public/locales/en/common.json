@@ -1,20 +1,7 @@
 {
-  "main": {
-    "aboutProduct": "О продукте",
-    "blog": "Блог",
-    "aboutCompany": "О компании",
-    "registration": "Зарегистрироваться",
-    "login": "Войти",
-    "accountTitle": "Личный кабинет"
-  },
-  "secondMain": {
-    "history": "История",
-    "advantages": "Преимущества",
-    "knowledgeBase": "База знаний",
-    "howWork": "Как работает?",
-    "subscription": "Подписка",
-    "howToStart": "Как начать?"
-
-  },
-  "test": "vas"
+  "mobileApp": "Mobile application",
+  "seo": {
+    "title": "Reliable guide to the world of the blockchain economy",
+    "description": "Paxaro is a convenient and intuitive tool for investing in cryptocurrencies, it is profitable and secure. Manage digital assets like a pro. BECOME A PART OF THE NEW ECONOMIC REALITY"
+  }
 }

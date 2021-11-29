@@ -2,19 +2,19 @@
   "main": {
     "aboutProduct": "About product",
     "blog": "Blog",
-    "aboutCompany": "About",
-    "registration": "Sign Up",
-    "login": "Sign In",
-    "accountTitle": "Personal Area"
+    "aboutCompany": "About company",
+    "registration": "Register",
+    "login": "Log in",
+    "accountTitle": "Back office"
   },
   "secondMain": {
     "history": "History",
     "advantages": "Advantages",
-    "knowledgeBase": "Knowledge base",
-    "howWork": "How does it work?",
+    "education": "Knowledge base",
+    "howWork": "How it works?",
     "subscription": "Subscription",
     "howToStart": "How to start?"
 
   },
-  "logoAlt": "Логотип Paxaro"
+  "logoAlt": "Paxaro logotype"
 }
