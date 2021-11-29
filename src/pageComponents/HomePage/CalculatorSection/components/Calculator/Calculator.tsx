@@ -17,6 +17,7 @@ import {
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import { COLORS, API } from '@/constants';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { isSafari } from 'react-device-detect';
 
 const SelectUiNoSSR = dynamic(
   () => import('@/ui/components/SelectUI/SelectUI'),
@@ -181,6 +182,7 @@ const Calculator: FC<CalculatorProps> = ({ className }) => {
                         }).format()}
                       </SliderBorders>
                       <StyledSlider
+                        $isSafari={isSafari}
                         marks={marks[values.title]}
                         defaultValue={14}
                         step={null}
@@ -352,7 +354,7 @@ const HeadLabel = styled.p`
   color: ${COLORS.white};
 `;
 
-const StyledSlider = styled(Slider)`
+const StyledSlider = styled(Slider)<{ $isSafari: boolean }>`
   margin-left: 12px;
   margin-right: 12px;
   .rc-slider-rail {
@@ -369,6 +371,8 @@ const StyledSlider = styled(Slider)`
     border-width: 3px;
     border-color: ${COLORS.black2};
     background-image: ${COLORS.greenGradient};
+    border-radius: 50%;
+    position: relative;
     &::before {
       content: '';
       position: absolute;
@@ -376,7 +380,8 @@ const StyledSlider = styled(Slider)`
       height: 100%;
       z-index: -1;
       background: ${COLORS.greenGradient};
-      filter: blur(18px);
+      filter: ${({ $isSafari }) => ($isSafari ? 'none' : 'blur(18px)')};
+      border-radius: 50%;
     }
   }
   .rc-slider-dot,

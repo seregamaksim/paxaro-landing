@@ -68,6 +68,7 @@ const Chart: FC<ChartProps> = ({ className, data }) => {
               }).format();
             }}
             tickMargin={18}
+            width={100}
             label={{
               position: 'left',
             }}

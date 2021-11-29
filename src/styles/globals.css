@@ -54,7 +54,9 @@
   font-weight: 700;
   font-style: normal;
 }
-
+html {
+  height: 100%;
+}
 html,
 body {
   padding: 0;
