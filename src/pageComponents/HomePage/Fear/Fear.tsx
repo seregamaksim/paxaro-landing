@@ -1156,7 +1156,7 @@ const MessagePhoneWrap = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     max-width: 265px;
-    bottom: -270px;
+    bottom: -290px;
   }
 `;
 
