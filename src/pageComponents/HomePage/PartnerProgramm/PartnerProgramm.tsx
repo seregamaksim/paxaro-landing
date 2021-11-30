@@ -892,7 +892,7 @@ const SliderHandle = styled.div`
     height: 100%;
     z-index: -1;
     background: ${COLORS.greenGradient};
-    /* filter: blur(18px); */
+    filter: blur(18px);
   }
 `;
 
