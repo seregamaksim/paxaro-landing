@@ -6,7 +6,11 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { Calculator } from './components/Calculator';
 
-const CalculatorSection: FC = () => {
+interface CalculatorSectionProps {
+  isSafari: boolean;
+}
+
+const CalculatorSection: FC<CalculatorSectionProps> = ({ isSafari }) => {
   const { t } = useTranslation('calculator');
 
   return (
@@ -16,7 +20,7 @@ const CalculatorSection: FC = () => {
           <StyledSectionTitle text={t('title')} />
           <SectionSubtitle>{t('subTitle')}</SectionSubtitle>
         </SectionHead>
-        <Calculator />
+        <Calculator isSafari={isSafari} />
       </StyledContainer>
     </section>
   );
