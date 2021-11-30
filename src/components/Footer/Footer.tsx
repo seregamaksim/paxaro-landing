@@ -102,27 +102,31 @@ const Footer: FC = () => {
               <MenuSocialList>
                 <MainMenuItem>
                   <ActiveLink href={LINKS.instagramLink}>
-                    <MainMenuItemLink>Instagram</MainMenuItemLink>
+                    <MainMenuItemLink target="_blank">
+                      Instagram
+                    </MainMenuItemLink>
                   </ActiveLink>
                 </MainMenuItem>
                 <MainMenuItem>
                   <ActiveLink href={LINKS.vkLink}>
-                    <MainMenuItemLink>VC</MainMenuItemLink>
+                    <MainMenuItemLink target="_blank">VC</MainMenuItemLink>
                   </ActiveLink>
                 </MainMenuItem>
                 <MainMenuItem>
                   <ActiveLink href={LINKS.twitterLink}>
-                    <MainMenuItemLink>Twitter</MainMenuItemLink>
+                    <MainMenuItemLink target="_blank">Twitter</MainMenuItemLink>
                   </ActiveLink>
                 </MainMenuItem>
                 <MainMenuItem>
                   <ActiveLink href={LINKS.youtubeLink}>
-                    <MainMenuItemLink>YouTube</MainMenuItemLink>
+                    <MainMenuItemLink target="_blank">YouTube</MainMenuItemLink>
                   </ActiveLink>
                 </MainMenuItem>
                 <MainMenuItem>
                   <ActiveLink href={LINKS.telegramLink}>
-                    <MainMenuItemLink>Telegram</MainMenuItemLink>
+                    <MainMenuItemLink target="_blank">
+                      Telegram
+                    </MainMenuItemLink>
                   </ActiveLink>
                 </MainMenuItem>
               </MenuSocialList>

@@ -33,6 +33,7 @@ const Education: FC = () => {
   const infoLinkBackgroundRef = useRef<HTMLDivElement>(null);
   const notebookImageWrapperRef = useRef<HTMLDivElement>(null);
   const mobileVideoRef = useRef<HTMLVideoElement>(null);
+  const notebookContentRef = useRef<HTMLDivElement>(null);
 
   useIntersection(rootRef, rootId);
 
@@ -105,7 +106,7 @@ const Education: FC = () => {
             },
             'finishChangeDescription'
           )
-          .set(notebookWrapperRef.current, { overflow: 'initial' })
+          .set(notebookContentRef.current, { overflow: 'initial' })
           .set(notebookWrapperLineRef.current, { opacity: 0 })
           .addLabel('finishChangeInfoLinkPosition')
           .to(
@@ -234,28 +235,30 @@ const Education: FC = () => {
           </DescriptionSection2>
         </DescriptionWrapper>
         <NotebookWrapper ref={notebookWrapperRef}>
-          <DesktopVideo ref={videoRef}>
-            <source src="/videos/education-desktop.mp4" />
-            <source src="/videos/education-desktop.webm" />
-          </DesktopVideo>
-          <MobileVideoWrapper>
-            <MobileVideo>
-              <source src="/videos/education-mobile.mp4" />
-              <source src="/videos/education-mobile.webm" />
-            </MobileVideo>
-            <IphoneImgWrapper>
-              <Image src={mockupIphone} alt="Iphone" loading="eager" />
-            </IphoneImgWrapper>
-          </MobileVideoWrapper>
-          <InfoLinkWrapper ref={infoLinkWrapperRef}>
-            <InfoLinkContent>
-              <InfoLinkBackground ref={infoLinkBackgroundRef} />
-              <StyledInfoLink />
-            </InfoLinkContent>
-          </InfoLinkWrapper>
-          <NotebookImageWrapper ref={notebookImageWrapperRef}>
-            <Image src={mockupMackbook} alt="Mackbook Pro" loading="eager" />
-          </NotebookImageWrapper>
+          <NotebookContent ref={notebookContentRef}>
+            <DesktopVideo ref={videoRef}>
+              <source src="/videos/education-desktop.mp4" />
+              <source src="/videos/education-desktop.webm" />
+            </DesktopVideo>
+            <MobileVideoWrapper>
+              <MobileVideo>
+                <source src="/videos/education-mobile.mp4" />
+                <source src="/videos/education-mobile.webm" />
+              </MobileVideo>
+              <IphoneImgWrapper>
+                <Image src={mockupIphone} alt="Iphone" loading="eager" />
+              </IphoneImgWrapper>
+            </MobileVideoWrapper>
+            <InfoLinkWrapper ref={infoLinkWrapperRef}>
+              <InfoLinkContent>
+                <InfoLinkBackground ref={infoLinkBackgroundRef} />
+                <StyledInfoLink />
+              </InfoLinkContent>
+            </InfoLinkWrapper>
+            <NotebookImageWrapper ref={notebookImageWrapperRef}>
+              <Image src={mockupMackbook} alt="Mackbook Pro" loading="eager" />
+            </NotebookImageWrapper>
+          </NotebookContent>
 
           <NotebookWrapperLine ref={notebookWrapperLineRef} />
         </NotebookWrapper>
@@ -323,9 +326,9 @@ const NotebookWrapperLine = styled.div`
 
   z-index: 1;
   left: 0;
-  bottom: -2px;
+  bottom: -11px;
   width: 100%;
-  height: 15px;
+  height: 12px;
   background-color: ${COLORS.black1};
   @media (max-width: 900px) {
     display: none;
@@ -334,24 +337,29 @@ const NotebookWrapperLine = styled.div`
 
 const NotebookWrapper = styled.div`
   position: relative;
-  transform: translateX(100px) scale(0.4375);
+  transform: translateX(100px) scale(0.4375, 0.44);
   transform-origin: top left;
-  overflow: hidden;
+
   will-change: transform;
 
   @media (max-width: 1100px) {
-    transform: translate(50px, 50px) scale(0.4375);
+    transform: translate(50px, 50px) scale(0.4375, 0.44);
   }
   @media (max-width: 900px) {
     transform: none;
-    overflow: initial;
   }
+`;
+
+const NotebookContent = styled.div`
+  overflow: hidden;
+  position: relative;
 `;
 
 const NotebookImageWrapper = styled.div`
   position: relative;
   pointer-events: none;
   will-change: transform, opacity;
+  display: flex;
 
   @media (max-width: 900px) {
     display: none;
