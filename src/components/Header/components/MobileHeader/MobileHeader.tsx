@@ -1,7 +1,7 @@
 import { Container } from '@/components/Container';
 import SocialList from '@/components/SocialList/SocialList';
 import { Button } from '@/ui/components/Button';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { LanguageSwitcher } from '../LanguageSwitcher';
 import Link from 'next/link';
@@ -11,20 +11,21 @@ import { MobileStore } from '../MobileStore';
 import LogoMini from '@/ui/icons/LogoMini';
 import Headroom from 'react-headroom';
 import { LINKS, COLORS } from '@/constants';
+import { MobileMenuContext } from '@/pages';
 
 interface HeaderWrapperProps {
   isActiveMenu: boolean;
   $topPosition: number;
 }
-interface MobileHeaderProps {
-  userAgent: { [key: string]: any };
-}
 
-const MobileHeader: FC<MobileHeaderProps> = ({ children, userAgent }) => {
+const MobileHeader: FC = ({ children }) => {
   const { t } = useTranslation('header');
-  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const { isOpenMenu, setIsOpenMenu, userAgent } =
+    useContext(MobileMenuContext);
+
   const [topPositionMenu, setTopPositionMenu] = useState(80);
   const [isMobileStoreOpen, setIsMobileStoreOpen] = useState(true);
+
   const ref = useRef<HTMLDivElement>(null);
   const mainContentRef = useRef<HTMLDivElement>(null);
 
@@ -46,7 +47,18 @@ const MobileHeader: FC<MobileHeaderProps> = ({ children, userAgent }) => {
 
   return (
     <>
-      <Headroom style={{ zIndex: 10, transform: isOpenMenu ? 'none' : '' }}>
+      <Headroom
+        disableInlineStyles={true}
+        onUnpin={() => {
+          const headroom: HTMLElement | null =
+            document.querySelector('.headroom');
+          if (isOpenMenu) {
+            headroom!.style.transform = 'none';
+          } else {
+            headroom!.style.transform = '';
+          }
+        }}
+      >
         <div ref={mainContentRef}>
           <MobileStore
             isOpen={isMobileStoreOpen}

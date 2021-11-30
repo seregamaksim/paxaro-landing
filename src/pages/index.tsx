@@ -18,15 +18,23 @@ import { PartnerProgramm } from '@/pageComponents/HomePage/PartnerProgramm';
 import { Preloader } from '@/components/Preloader';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { debounce } from 'throttle-debounce';
 
 interface HomePageProps {
   userAgent: { [key: string]: any };
 }
 
+export const MobileMenuContext = React.createContext<any>(undefined);
+
 const Home: NextPage<HomePageProps> = ({ userAgent }) => {
   const { t } = useTranslation('common');
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const contextMobileMenuValue = {
+    isOpenMenu,
+    setIsOpenMenu,
+    userAgent,
+  };
 
   useEffect(() => {
     const resizeRefreshDebouncing = debounce(300, false, () => {
@@ -45,13 +53,17 @@ const Home: NextPage<HomePageProps> = ({ userAgent }) => {
         <meta name="description" content={t('seo.description')} />
       </Head>
       <Preloader />
-      <Header userAgent={userAgent}>
-        <HeaderBottom />
-      </Header>
+
+      <MobileMenuContext.Provider value={contextMobileMenuValue}>
+        <Header>
+          <HeaderBottom />
+        </Header>
+      </MobileMenuContext.Provider>
+
       <main>
         <Hero />
         <WhyPaxaro />
-        <CalculatorSection />
+        <CalculatorSection isSafari={userAgent.isSafari} />
         <Advantages />
         <Education />
         <Algorithm />

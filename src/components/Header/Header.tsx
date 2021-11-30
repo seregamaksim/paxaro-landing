@@ -3,11 +3,7 @@ import { MobileHeader } from './components/MobileHeader';
 import { DesktopHeader } from './components/DesktopHeader';
 import { throttle } from 'throttle-debounce';
 
-interface HeaderProps {
-  userAgent: { [key: string]: any };
-}
-
-const Header: FC<HeaderProps> = ({ children, userAgent }) => {
+const Header: FC = ({ children }) => {
   const [isMobileHeader, setIsMobileHeader] = useState(true);
 
   const handleResize = () => {
@@ -25,7 +21,7 @@ const Header: FC<HeaderProps> = ({ children, userAgent }) => {
   return (
     <>
       {isMobileHeader ? (
-        <MobileHeader userAgent={userAgent}>{children}</MobileHeader>
+        <MobileHeader>{children}</MobileHeader>
       ) : (
         <DesktopHeader>{children}</DesktopHeader>
       )}
