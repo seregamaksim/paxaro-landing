@@ -14,10 +14,9 @@ import {
   marks,
   portfolioTypeOptions,
 } from './staticData';
-import axios, { AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { COLORS, API } from '@/constants';
 import ClipLoader from 'react-spinners/ClipLoader';
-import { isSafari } from 'react-device-detect';
 
 const SelectUiNoSSR = dynamic(
   () => import('@/ui/components/SelectUI/SelectUI'),
@@ -28,6 +27,7 @@ const SelectUiNoSSR = dynamic(
 
 interface CalculatorProps {
   className?: string;
+  isSafari: boolean;
 }
 
 interface FormValues {
@@ -41,7 +41,7 @@ export interface ChartValue {
   profit: number;
 }
 
-const Calculator: FC<CalculatorProps> = ({ className }) => {
+const Calculator: FC<CalculatorProps> = ({ className, isSafari }) => {
   const isMounted = useIsMounted();
   const { t } = useTranslation('calculator');
   const [isError, setIsError] = useState(false);

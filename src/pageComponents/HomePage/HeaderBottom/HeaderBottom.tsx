@@ -1,7 +1,9 @@
-import { FC, useEffect } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { COLORS } from '@/constants';
+import { scrollToElement } from '@/helpers/scrollToElement';
+import { MobileMenuContext } from '@/pages';
 
 const anchors = [
   'history',
@@ -14,10 +16,13 @@ const anchors = [
 
 const HeaderBottom: FC = () => {
   const { t } = useTranslation('header');
+  const { setIsOpenMenu } = useContext(MobileMenuContext);
 
-  const handleBtnClick = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  const handleClickLink = (anchor: string) => {
+    const headroom: HTMLElement | null = document.querySelector('.headroom');
+    headroom!.style.transform = '';
+    scrollToElement(anchor);
+    setIsOpenMenu(false);
   };
 
   return (
@@ -27,7 +32,7 @@ const HeaderBottom: FC = () => {
           <HeaderBottomMenuItem key={index}>
             <HeaderBottomMenuLink
               data-section-id={anchor}
-              onClick={() => handleBtnClick(anchor)}
+              onClick={() => handleClickLink(anchor)}
             >
               {t(`secondMain.${anchor}`)}
             </HeaderBottomMenuLink>

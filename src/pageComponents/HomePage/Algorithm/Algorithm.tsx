@@ -47,9 +47,10 @@ const Algorithm: FC = () => {
         scrollTrigger: {
           trigger: rootRef.current,
           start: 'top top',
-          end: () => '+=3500',
+          end: () => '+=3800',
           pin: true,
           scrub: 1,
+          anticipatePin: 1,
           snap: {
             snapTo: 'labels',
             duration: { min: 0.2, max: 2 },
@@ -91,7 +92,7 @@ const Algorithm: FC = () => {
           [imageListRef.current[0], descriptionListRef.current[0]],
           {
             yPercent: -100,
-            duration: 0.6,
+            duration: 0.4,
           },
           'finishMoveContent+=0.1'
         )
@@ -99,7 +100,7 @@ const Algorithm: FC = () => {
           [imageListRef.current[1], descriptionListRef.current[1]],
           {
             y: 0,
-            duration: 0.6,
+            duration: 0.4,
           },
           '<'
         )
@@ -108,7 +109,7 @@ const Algorithm: FC = () => {
           [imageListRef.current[1], descriptionListRef.current[1]],
           {
             yPercent: -100,
-            duration: 0.6,
+            duration: 0.4,
           },
           'finishHideFirstAndShowSecondCards+=0.2'
         )
@@ -116,7 +117,7 @@ const Algorithm: FC = () => {
           [imageListRef.current[2], descriptionListRef.current[2]],
           {
             y: 0,
-            duration: 0.6,
+            duration: 0.4,
           },
           '<'
         )
@@ -125,7 +126,7 @@ const Algorithm: FC = () => {
           [imageListRef.current[2], descriptionListRef.current[2]],
           {
             yPercent: -100,
-            duration: 0.6,
+            duration: 0.4,
           },
           'finishHideSecondAndShowThirdCards+=0.2'
         )
@@ -133,7 +134,7 @@ const Algorithm: FC = () => {
           [imageListRef.current[3], descriptionListRef.current[3]],
           {
             y: 0,
-            duration: 0.6,
+            duration: 0.4,
           },
           '<'
         )
@@ -168,7 +169,7 @@ const Algorithm: FC = () => {
           phoneRef.current,
           {
             yPercent: 80,
-            duration: 0.5,
+            duration: 0.9,
           },
           'finishShowStoreBanner'
         )

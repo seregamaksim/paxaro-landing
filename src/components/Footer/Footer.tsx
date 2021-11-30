@@ -8,12 +8,30 @@ import appStore from '@/assets/images/app-store-transparent.svg';
 import googlePlay from '@/assets/images/google-play-transparent.svg';
 import { useTranslation } from 'react-i18next';
 import { BackToTop } from './components/BackToTop';
-import { COLORS } from '@/constants';
+import { COLORS, LINKS } from '@/constants';
 import { Button } from '@/ui/components/Button';
+
+const anchors = [
+  'history',
+  'advantages',
+  'education',
+  'howWork',
+  'subscription',
+  'howToStart',
+];
 
 const Footer: FC = () => {
   const { t } = useTranslation(['header', 'footer']);
 
+  const scrollToElement = (id: string) => {
+    const element = document.getElementById(id);
+    const pinElementParent = element!.parentElement;
+    const currentTopPosition = window.scrollY;
+    const parentTopPosition = pinElementParent!.getBoundingClientRect().top;
+    const scrollToPosition = currentTopPosition + parentTopPosition;
+
+    window.scrollTo(0, scrollToPosition);
+  };
   return (
     <Root>
       <StyledContainer>
@@ -26,14 +44,14 @@ const Footer: FC = () => {
             </ActiveLink>
             <StoresList>
               <StoresItem>
-                <ActiveLink href="https://www.apple.com/ru/app-store/">
+                <ActiveLink href={LINKS.appStoreLink}>
                   <StoresLink>
                     <Image src={appStore} alt="App store" loading="eager" />
                   </StoresLink>
                 </ActiveLink>
               </StoresItem>
               <StoresItem>
-                <ActiveLink href="https://play.google.com/store?hl=ru&gl=US">
+                <ActiveLink href={LINKS.googlePlayLink}>
                   <StoresLink>
                     <Image src={googlePlay} alt="Google play" loading="eager" />
                   </StoresLink>
@@ -45,101 +63,71 @@ const Footer: FC = () => {
             <MainMenuWrapper>
               <MainMenu>
                 <MainMenuItem>
-                  <ActiveLink href="#">
+                  <ActiveLink href="/" activeClassName="active">
                     <MainMenuItemLink>
                       {t('main.aboutProduct', { ns: 'header' })}
                     </MainMenuItemLink>
                   </ActiveLink>
                 </MainMenuItem>
                 <MainMenuItem>
-                  <ActiveLink href="#">
-                    <MainMenuItemLink>
+                  <ActiveLink href="/blog" activeClassName="active">
+                    <MainMenuItemLink style={{ pointerEvents: 'none' }}>
                       {t('main.blog', { ns: 'header' })}
                     </MainMenuItemLink>
                   </ActiveLink>
                 </MainMenuItem>
                 <MainMenuItem>
-                  <ActiveLink href="#">
-                    <MainMenuItemLink>
+                  <ActiveLink href="/about" activeClassName="active">
+                    <MainMenuItemLink style={{ pointerEvents: 'none' }}>
                       {t('main.aboutCompany', { ns: 'header' })}
                     </MainMenuItemLink>
                   </ActiveLink>
                 </MainMenuItem>
               </MainMenu>
               <MainMenu>
-                <MainMenuItem>
-                  <ActiveLink href="#">
-                    <MainMenuItemLink>
-                      {t('secondMain.history', { ns: 'header' })}
-                    </MainMenuItemLink>
-                  </ActiveLink>
-                </MainMenuItem>
-                <MainMenuItem>
-                  <ActiveLink href="#">
-                    <MainMenuItemLink>
-                      {t('secondMain.advantages', { ns: 'header' })}
-                    </MainMenuItemLink>
-                  </ActiveLink>
-                </MainMenuItem>
-                <MainMenuItem>
-                  <ActiveLink href="#">
-                    <MainMenuItemLink>
-                      {t('secondMain.education', { ns: 'header' })}
-                    </MainMenuItemLink>
-                  </ActiveLink>
-                </MainMenuItem>
-                <MainMenuItem>
-                  <ActiveLink href="#">
-                    <MainMenuItemLink>
-                      {t('secondMain.howWork', { ns: 'header' })}
-                    </MainMenuItemLink>
-                  </ActiveLink>
-                </MainMenuItem>
-                <MainMenuItem>
-                  <ActiveLink href="#">
-                    <MainMenuItemLink>
-                      {t('secondMain.subscription', { ns: 'header' })}
-                    </MainMenuItemLink>
-                  </ActiveLink>
-                </MainMenuItem>
-                <MainMenuItem>
-                  <ActiveLink href="#">
-                    <MainMenuItemLink>
-                      {t('secondMain.howToStart', { ns: 'header' })}
-                    </MainMenuItemLink>
-                  </ActiveLink>
-                </MainMenuItem>
+                {anchors.map((anchor, index) => {
+                  return (
+                    <MainMenuItem key={index}>
+                      <MainMenuItemLink
+                        data-section-id={anchor}
+                        onClick={() => scrollToElement(anchor)}
+                      >
+                        {t(`secondMain.${anchor}`)}
+                      </MainMenuItemLink>
+                    </MainMenuItem>
+                  );
+                })}
               </MainMenu>
 
               <MenuSocialList>
                 <MainMenuItem>
-                  <ActiveLink href="#">
+                  <ActiveLink href={LINKS.instagramLink}>
                     <MainMenuItemLink>Instagram</MainMenuItemLink>
                   </ActiveLink>
                 </MainMenuItem>
                 <MainMenuItem>
-                  <ActiveLink href="#">
+                  <ActiveLink href={LINKS.vkLink}>
                     <MainMenuItemLink>VC</MainMenuItemLink>
                   </ActiveLink>
                 </MainMenuItem>
                 <MainMenuItem>
-                  <ActiveLink href="#">
+                  <ActiveLink href={LINKS.twitterLink}>
                     <MainMenuItemLink>Twitter</MainMenuItemLink>
                   </ActiveLink>
                 </MainMenuItem>
                 <MainMenuItem>
-                  <ActiveLink href="#">
+                  <ActiveLink href={LINKS.youtubeLink}>
                     <MainMenuItemLink>YouTube</MainMenuItemLink>
                   </ActiveLink>
                 </MainMenuItem>
                 <MainMenuItem>
-                  <ActiveLink href="#">
+                  <ActiveLink href={LINKS.telegramLink}>
                     <MainMenuItemLink>Telegram</MainMenuItemLink>
                   </ActiveLink>
                 </MainMenuItem>
               </MenuSocialList>
             </MainMenuWrapper>
-            <ActiveLink href="#">
+            <ActiveLink href={LINKS.loginLink}>
               <PersonalAreaLink isLink text={t('main.accountTitle')} />
             </ActiveLink>
           </MainMenuNavWrap>
@@ -303,6 +291,8 @@ const MainMenuItemLink = styled.a`
   letter-spacing: 0.01em;
   color: ${COLORS.white};
   transition: color 0.3s ease;
+  cursor: pointer;
+  &.active,
   &:hover {
     color: ${COLORS.green};
   }

@@ -27,6 +27,7 @@ const Education: FC = () => {
   const descriptionFirstRef = useRef<HTMLDivElement>(null);
   const descriptionSecondRef = useRef<HTMLDivElement>(null);
   const notebookWrapperRef = useRef<HTMLDivElement>(null);
+  const notebookWrapperLineRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const infoLinkWrapperRef = useRef<HTMLDivElement>(null);
   const infoLinkBackgroundRef = useRef<HTMLDivElement>(null);
@@ -44,6 +45,7 @@ const Education: FC = () => {
           end: () => (innerWidth > 900 ? '+=2000' : '+=500'),
           pin: true,
           scrub: 1,
+          anticipatePin: 1,
           snap: {
             snapTo: 'labels',
             duration: { min: 0.2, max: 2 },
@@ -104,6 +106,7 @@ const Education: FC = () => {
             'finishChangeDescription'
           )
           .set(notebookWrapperRef.current, { overflow: 'initial' })
+          .set(notebookWrapperLineRef.current, { opacity: 0 })
           .addLabel('finishChangeInfoLinkPosition')
           .to(
             descriptionWrapperRef.current,
@@ -253,6 +256,8 @@ const Education: FC = () => {
           <NotebookImageWrapper ref={notebookImageWrapperRef}>
             <Image src={mockupMackbook} alt="Mackbook Pro" loading="eager" />
           </NotebookImageWrapper>
+
+          <NotebookWrapperLine ref={notebookWrapperLineRef} />
         </NotebookWrapper>
       </SectionContent>
     </Root>
@@ -310,6 +315,20 @@ const SectionContent = styled.div`
   @media (max-width: 768px) {
     padding-left: 20px;
     padding-right: 20px;
+  }
+`;
+
+const NotebookWrapperLine = styled.div`
+  position: absolute;
+
+  z-index: 1;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 15px;
+  background-color: ${COLORS.black1};
+  @media (max-width: 900px) {
+    display: none;
   }
 `;
 
