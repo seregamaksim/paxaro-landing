@@ -256,7 +256,8 @@ const Education: FC = () => {
               </InfoLinkContent>
             </InfoLinkWrapper>
             <NotebookImageWrapper ref={notebookImageWrapperRef}>
-              <Image src={mockupMackbook} alt="Mackbook Pro" loading="eager" />
+              {/* <img src={mockupMackbook} alt="Mackbook Pro" /> */}
+              <Image src={mockupMackbook} alt="Mackbook Pro" priority />
             </NotebookImageWrapper>
           </NotebookContent>
 
