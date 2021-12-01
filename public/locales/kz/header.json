@@ -1,20 +1,20 @@
 {
   "main": {
-    "aboutProduct": "О продукте",
+    "aboutProduct": "Өнім туралы",
     "blog": "Блог",
-    "aboutCompany": "О компании",
-    "registration": "Зарегистрироваться",
-    "login": "Войти",
-    "accountTitle": "Личный кабинет"
+    "aboutCompany": "Компания жөнінде",
+    "registration": "Тіркелу",
+    "login": "Кіру",
+    "accountTitle": "Жеке кабинет"
   },
   "secondMain": {
-    "history": "История",
-    "advantages": "Преимущества",
-    "knowledgeBase": "База знаний",
-    "howWork": "Как работает?",
-    "subscription": "Подписка",
-    "howToStart": "Как начать?"
+    "history": "Тарих",
+    "advantages": "Артықшылықтар",
+    "education": "Білім базасы",
+    "howWork": "Қалай жұмыс жасайды?",
+    "subscription": "Жазылу",
+    "howToStart": "Қалай бастауға болады?"
 
   },
-  "logoAlt": "Логотип Paxaro"
+  "logoAlt": "Paxaro логотипі"
 }

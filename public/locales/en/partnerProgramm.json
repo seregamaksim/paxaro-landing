@@ -1,0 +1,14 @@
+{
+  "label": "Partner program",
+  "title": "Invite your friends and receive bonuses",
+  "subtitle": "There are 5 referral levels in total - you receive interests from every invited friend, as well as from the latter`s friends. The amount of the reward depends on your subscription plan and the number of invited users.",
+  "calculator": {
+    "subsriptionPlan": "Your subscription plan",
+    "countFriend": "Number of friends",
+    "profit": "Your profit",
+    "levels": "Levels",
+    "percent": "Percent",
+    "bonus": "Your bonus",
+    "totalBonus": "Total bonus"
+  }
+}

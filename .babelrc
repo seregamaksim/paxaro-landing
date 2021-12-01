@@ -13,6 +13,7 @@
             "displayName": true,
             "preprocess": false
           }
-      ]
+      ],
+      ["@emotion"]
   ]
 }

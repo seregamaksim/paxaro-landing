@@ -1,0 +1,50 @@
+{
+  "seo": {
+    "title": "Cookie Policy",
+    "description": ""
+  },
+  "title": "Cookie Policy",
+  "dateLastUpdate": "Last updated: March 10, 2021",
+  "content": [
+    {
+      "texts": [
+        "This Cookie Policy (the «Policy») defines how Kadex Enterprise LTD (hereinafter referred to as the «Company», «we») uses cookies, what are cookies, how the Company's partners may use such files, and what options do you have for configuring the use of these files obtained as part of interaction with the online interfaces used and managed by the Company on the site located at kadex.io (hereinafter referred to as the «Site»). This Cookie Policy and Privacy Policy form part of the User Agreement. Please read this Policy carefully and accept it by placing ☑ next to the box «I have read and accept the terms of the Cookie Policy».",
+        "All terms and definitions used in this Policy that were not defined here specifically must be interpreted in the meaning specified in the User Agreement. If the User Agreement also does not define this term, the interpretation of this term is made in accordance with the applicable law or the generally accepted meaning.",
+        "Any reference to «You», «Your», etc. is interpreted as a reference to the User or Visitor of the Site, the subject to this Policy, the Privacy Policy, or the User Agreement."
+      ]
+    },
+    {
+      "title": "1. WHAT ARE COOKIES?",
+      "texts": [
+        "Cookies are small files that are stored on the hard drive of Users of the Site. A cookie file is stored in your web browser and allows the Site or third parties to recognize you as a User and make it easier for you to use the Site while subsequent visits. These cookies allow the Company to track the use of the Site and its functions. Using them allows you to better and more effectively serve Users and personalize the Site for a specific User."
+      ]
+    },
+    {
+      "title": "2. HOW DOES THE COMPANY USE COOKIES?",
+      "texts": [
+        "When you visit the Site, various cookies may be stored on your disk.",
+        "The Company may use cookies to recognize repeated User visits, the type of content viewed and other sites to which the User was redirected from the Site, the time when each page and section of the Site was opened, and the functions used. All Personal Data that may be contained in cookies are processed based on the consent of the relevant subject in accordance with the Privacy Policy.",
+        "We use both persistent and session cookies, as well as their varieties for the operation of the Site:",
+        "Essential cookies: necessary for the normal functioning of the Site. The Company may use essential cookies to authenticate users, prevent fraudulent use of accounts, or provide certain features of the Site.",
+        "Analytics and performance cookies: to provide our products to Users and improve the quality of interaction, we use cookies and other identifiers to collect data about Site usage and performance.",
+        "Functional cookies: when you log in to the Site using your account, we store your unique login ID and time in an encrypted cookie on your device."
+      ]
+    },
+    {
+      "title": "3. SETTING UP THE USE OF COOKIES",
+      "texts": [
+        "To find out how to delete cookies and how to configure deletion or refuse them, use the help function in your web browser.",
+        "Please note that if you delete cookies or refuse to use them, you may lose access to some of the Site's features: you will not be able to log in to your account, save settings, and some pages will not display correctly."
+      ]
+    },
+    {
+      "title": "4. POLICY CHANGE",
+      "texts": [
+        "This Policy may be revised, changed, updated and / or amended at any time without prior notice at the Company's discretion. If such changes are made, the notification will be published on the main page of the Site. The date when this Policy was updated will be displayed on the first page of the Policy. We strongly recommend that Users check the page regularly for changes. Each User agrees that it is hes/her own responsibility to review from time to time the current version of the Policy.",
+        "By using the Site, the User automatically confirms their consent to this Policy in the applicable part. If the User does not agree with this Policy, we strongly recommend that you stop using the Site.",
+        "After posting the updated version of the Policy on the Site, further use of the Site is considered as acceptance of the terms of the updated Policy.",
+        "If you have any questions, please send them to Support team at the following e-mail address: support@kadex.io."
+      ]
+    }
+  ]
+}
