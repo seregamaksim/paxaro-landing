@@ -1,6 +1,5 @@
 {
   "extends": [
-    "eslint-config-next",
     "next/core-web-vitals"
   ]
 }
