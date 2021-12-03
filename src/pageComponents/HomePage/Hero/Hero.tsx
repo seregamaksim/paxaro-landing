@@ -8,7 +8,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import ImageNext from 'next/image';
 import heroCollageImg from '@/assets/images/hero-collage.png';
-import { COLORS } from '@/constants';
+import { COLORS, LINKS } from '@/constants';
 
 if (typeof window !== undefined) {
   gsap.registerPlugin(ScrollTrigger);
@@ -140,7 +140,7 @@ const Hero: FC = () => {
           <Head ref={headRef}>
             <SectionTitle>{t('title')}</SectionTitle>
             <SectionText>{t('subtitle')}</SectionText>
-            <Link href="#" passHref>
+            <Link href={LINKS.mainSite} passHref>
               <Button text={t('btnText')} isLink />
             </Link>
           </Head>
