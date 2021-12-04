@@ -173,6 +173,15 @@ const Algorithm: FC = () => {
           },
           'finishShowStoreBanner'
         )
+        .addLabel('finishShowPhone')
+        .to(
+          phoneRef.current,
+          {
+            opacity: 1,
+            duration: 0.3,
+          },
+          'finishShowPhone+=0.3'
+        )
         .addLabel('finish');
     }, 0);
   }, []);

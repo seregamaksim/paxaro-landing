@@ -6,7 +6,7 @@
     "item1": "Ребалансировка",
     "item2": "Базовая стратегия ведения портфеля",
     "item3": "5 реферальных уровней",
-    "item4": "Специальный раздел обучения Paxaro education",
+    "item4": "В подарок базовый курс стоимостью $150 от <span data-block-id='education'>Paxaro Education</span>",
     "item5": "i30 - index",
     "item6": "i50 - index",
     "item7": "i100 - index",
@@ -19,6 +19,6 @@
     "item2": "Базовая стратегия ведения портфеля",
     "item3": "i30 - index",
     "item4": "3 реферальных уровня",
-    "item5": "Специальный раздел обучения Paxaro Education"
+    "item5": "Специальный раздел обучения <span data-block-id='education'>Paxaro Education</span>"
   }
 }

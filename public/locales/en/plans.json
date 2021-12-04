@@ -6,7 +6,7 @@
     "item1": "Rebalancing",
     "item2": "Basic strategy to build a portfolio",
     "item3": "5 referral levels",
-    "item4": "Special section of Paxaro education",
+    "item4": "As a gift a basic course worth $ 150 from <span data-block-id='education'>Paxaro education</span>",
     "item5": "i30 - index",
     "item6": "i50 - index",
     "item7": "i100 - index",
@@ -19,6 +19,6 @@
     "item2": "Basic strategy to build a portfolio",
     "item3": "i30 - index",
     "item4": "3 referral levels",
-    "item5": "Special section of Paxaro education"
+    "item5": "Special section of <span data-block-id='education'>Paxaro education</span>"
   }
 }
