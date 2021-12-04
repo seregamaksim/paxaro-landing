@@ -124,7 +124,7 @@ const Advantages: FC = () => {
                 opacity: 0,
                 duration: 0.3,
               },
-              '>+0.1'
+              '>+0.2'
             )
             .addLabel('startHideFirstDescription')
             .to(
@@ -194,7 +194,7 @@ const Advantages: FC = () => {
                 opacity: 0,
                 duration: 0.3,
               },
-              '>+0.3'
+              '>+0.4'
             )
             .addLabel('startHideSecondDescription')
             .to(
@@ -264,7 +264,7 @@ const Advantages: FC = () => {
                 opacity: 0,
                 duration: 0.3,
               },
-              '>+0.3'
+              '>+0.4'
             )
             .addLabel('finishMoveThirdDescription')
 

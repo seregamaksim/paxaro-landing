@@ -353,6 +353,9 @@ const NotebookWrapper = styled.div`
 const NotebookContent = styled.div`
   overflow: hidden;
   position: relative;
+  @media (max-width: 900px) {
+    overflow: initial;
+  }
 `;
 
 const NotebookImageWrapper = styled.div`

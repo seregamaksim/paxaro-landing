@@ -152,7 +152,7 @@ const WhyPaxaro: FC = () => {
                 opacity: 0,
                 duration: 0.1,
               },
-              'showDescriptionBlock'
+              'showDescriptionBlock+=0.2'
             )
             .to(
               counterLineBarRef.current,
@@ -160,8 +160,9 @@ const WhyPaxaro: FC = () => {
                 x: 35,
                 duration: 0.1,
               },
-              'showDescriptionBlock'
+              'showDescriptionBlock+=0.2'
             )
+
             .from(
               [
                 counterSecondNumberRef.current,
@@ -173,14 +174,14 @@ const WhyPaxaro: FC = () => {
               },
               '<'
             )
-            .addLabel('showSecondDescriptionBlockItem')
+            // .addLabel('showSecondDescriptionBlockItem')
             .from(
               gridWithArrowRef.current,
               {
                 opacity: 0,
                 duration: 0.6,
               },
-              '>-0.3'
+              '>-0.5'
             )
             .to(
               bitcoinRef.current,
@@ -305,7 +306,16 @@ const WhyPaxaro: FC = () => {
               },
               '>'
             )
-            .addLabel('showSecondDescriptionBlock');
+            .addLabel('showSecondDescriptionBlock')
+            .to(
+              secondDescriptionBlockRef.current,
+              {
+                opacity: 1,
+                duration: 0.5,
+              },
+              'showSecondDescriptionBlock+=0.3'
+            )
+            .addLabel('finish');
         } else {
           const isMore600px = innerWidth > 600 ? true : false;
           const descriptionBlockHeight =

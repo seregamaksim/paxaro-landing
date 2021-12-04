@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { COLORS } from '@/constants';
+import { scrollToElement } from '@/helpers/scrollToElement';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -43,6 +44,18 @@ const Plan: FC<PlanProps> = ({
       listRef.current.push(el);
     }
   };
+
+  useEffect(() => {
+    listRef.current.forEach((item) => {
+      const span = item.querySelector('span');
+      if (span) {
+        const blockId = span.dataset.blockId!;
+        span.addEventListener('click', function () {
+          scrollToElement(blockId);
+        });
+      }
+    });
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -99,8 +112,12 @@ const Plan: FC<PlanProps> = ({
       </PlanHead>
       <PlanList $rows={countRows}>
         {data.map((item, index) => (
-          <PlanItem key={index} ref={addToRefs}>
-            {item.text}
+          <PlanItem
+            key={index}
+            ref={addToRefs}
+            dangerouslySetInnerHTML={{ __html: item.text }}
+          >
+            {/* {item.text} */}
           </PlanItem>
         ))}
       </PlanList>
@@ -193,6 +210,7 @@ const PlanList = styled.ul<{ $rows: number }>`
   grid-template-rows: ${(props) => 'repeat(' + props.$rows + ', 1fr)'};
   grid-auto-flow: column;
   gap: 30px 50px;
+  align-items: center;
   @media (max-width: 1024px) {
     column-gap: 30px;
   }
@@ -202,8 +220,6 @@ const PlanList = styled.ul<{ $rows: number }>`
 `;
 
 const PlanItem = styled.li`
-  display: flex;
-  align-items: center;
   position: relative;
   padding-left: 44px;
   font-weight: bold;
@@ -212,6 +228,11 @@ const PlanItem = styled.li`
   letter-spacing: 0.01em;
 
   color: ${COLORS.darkGray};
+  span {
+    color: ${COLORS.black2};
+
+    cursor: pointer;
+  }
   &::before,
   &::after {
     content: '';

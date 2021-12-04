@@ -13,6 +13,7 @@ import { COLORS } from '@/constants';
 import { useIntersection } from '@/hooks/useIntersection';
 import { useRouter } from 'next/router';
 import { LOCALES } from '@/types';
+import logo from '@/assets/images/logo.svg';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -41,6 +42,7 @@ const Fear: FC = () => {
   const miniCardTitles = useRef<HTMLParagraphElement[]>([]);
   const miniCardBackgrounds = useRef<HTMLDivElement[]>([]);
   const messagesBlockRef = useRef<HTMLDivElement>(null);
+  const logoImgWrapRef = useRef<HTMLDivElement>(null);
 
   useIntersection(rootRef, rootId);
 
@@ -472,6 +474,10 @@ const Fear: FC = () => {
             },
             'finishMoveFourthtMiniCard'
           )
+          .from(logoImgWrapRef.current, {
+            opacity: 0,
+            duration: 0.5,
+          })
           .addLabel('showFourthCard');
       } else {
         fearTimeline
@@ -879,6 +885,10 @@ const Fear: FC = () => {
             },
             'finishMoveFourthMiniCard'
           )
+          .from(logoImgWrapRef.current, {
+            opacity: 0,
+            duration: 0.5,
+          })
           .addLabel('showFourthCard');
       }
     }, 0);
@@ -940,6 +950,9 @@ const Fear: FC = () => {
           </MessagesList>
           <MessagePhoneWrap>
             <MessagePhoneImg />
+            <LogoWrap ref={logoImgWrapRef}>
+              <LogoImg />
+            </LogoWrap>
             <MiniCard
               ref={(item: HTMLDivElement) => {
                 miniCardItems.current[3] = item;
@@ -1163,6 +1176,25 @@ const MessagePhoneWrap = styled.div`
 const MessagePhoneImg = styled(Image).attrs(() => ({
   src: phoneImg,
   alt: 'Iphone',
+}))``;
+
+const LogoWrap = styled.div`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 180px);
+
+  @media (max-width: 1024px) {
+    transform: translate(-50%, 150px);
+  }
+  @media (min-width: 320px) and (max-width: 1024px) and (max-height: 650px) {
+    transform: translate(-50%, 50px);
+  }
+`;
+
+const LogoImg = styled(Image).attrs(() => ({
+  src: logo,
+  alt: 'Paxaro',
 }))``;
 
 const MiniCard = styled.div`
