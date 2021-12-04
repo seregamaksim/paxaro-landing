@@ -23,17 +23,19 @@ const MobileApp: FC = () => {
   const phoneImgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    gsap.from(phoneImgRef.current, {
-      scrollTrigger: {
-        trigger: innerWidth > 1024 ? rootRef.current : phoneBlockRef.current,
-        start: innerWidth > 1024 ? '20% 90%' : '20% 70%',
-        end: innerWidth > 1024 ? '21% 90%' : '21% 70%',
-        toggleActions: 'play none reverse none',
-      },
-      opacity: 0,
-      yPercent: 50,
-      duration: 1,
-    });
+    setTimeout(() => {
+      gsap.from(phoneImgRef.current, {
+        scrollTrigger: {
+          trigger: innerWidth > 1024 ? rootRef.current : phoneBlockRef.current,
+          start: innerWidth > 1024 ? '30% 90%' : '20% 70%',
+          end: innerWidth > 1024 ? '31% 90%' : '21% 70%',
+          toggleActions: 'play none reverse none',
+        },
+        opacity: 0,
+        yPercent: 50,
+        duration: 1,
+      });
+    }, 0);
   }, []);
 
   return (
