@@ -327,7 +327,7 @@ const Advantages: FC = () => {
                 scale:
                   rootRef!.current!.scrollWidth /
                     circleRef!.current!.offsetWidth +
-                  5,
+                  7,
                 duration: 1.3,
               },
               'finishMoveSecondScreen+=0.2'

@@ -61,7 +61,7 @@ const Home: NextPage<HomePageProps> = ({ userAgent }) => {
       </MobileMenuContext.Provider>
 
       <main>
-        <Hero />
+        <Hero userAgent={userAgent} />
         <WhyPaxaro />
         <CalculatorSection isSafari={userAgent.isSafari} />
         <Advantages />

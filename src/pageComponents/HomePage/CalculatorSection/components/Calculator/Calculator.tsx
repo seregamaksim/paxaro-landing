@@ -17,6 +17,7 @@ import {
 import axios, { AxiosResponse } from 'axios';
 import { COLORS, API } from '@/constants';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { getKeyByValue } from '@/helpers/getKeyByValue';
 
 const SelectUiNoSSR = dynamic(
   () => import('@/ui/components/SelectUI/SelectUI'),
@@ -47,7 +48,9 @@ const Calculator: FC<CalculatorProps> = ({ className, isSafari }) => {
   const [isError, setIsError] = useState(false);
   const [dataChart, setDataChart] = useState<ChartValue[]>([]);
   const [cashValue, setCashValue] = useState(5000);
+  const [prevCashValueKey, setPrevCashValueKey] = useState<any>();
   const [isLoadingData, setIsloadingData] = useState(false);
+  const [typeIndex, setTypeIndex] = useState('i30');
   const [initiaFormlValue, setInitiaFormlValue] = useState<FormValues>({
     title: 'i30',
     period: '360',
@@ -123,6 +126,11 @@ const Calculator: FC<CalculatorProps> = ({ className, isSafari }) => {
     });
   }, []);
 
+  useEffect(() => {
+    innerWidth > 768
+      ? setCashValue(Number(marks[typeIndex][prevCashValueKey]))
+      : false;
+  }, [typeIndex]);
   return (
     <Root className={className}>
       <Wrapper>
@@ -143,6 +151,16 @@ const Calculator: FC<CalculatorProps> = ({ className, isSafari }) => {
               dataChart.length > 0
                 ? dataChart[dataChart.length - 1].profit
                 : '';
+            const cashValueKey = getKeyByValue(marks[values.title], cashValue);
+
+            setTimeout(() => {
+              setTypeIndex(values.title);
+              if (prevCashValueKey === cashValue) {
+                return false;
+              } else {
+                setPrevCashValueKey(cashValueKey);
+              }
+            }, 0);
 
             return (
               <Form>

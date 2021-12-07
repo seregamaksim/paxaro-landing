@@ -14,11 +14,15 @@ if (typeof window !== undefined) {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+interface HeroProps {
+  userAgent: { [key: string]: any };
+}
+
 function getCurrentFrameSrc(index: number) {
   return `/notebook/notebook${index.toString().padStart(3, '0')}.png`;
 }
 
-const Hero: FC = () => {
+const Hero: FC<HeroProps> = ({ userAgent }) => {
   const { t } = useTranslation('hero');
   const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
@@ -30,6 +34,8 @@ const Hero: FC = () => {
   const notebook = {
     frame: 0,
   };
+
+  const coefForAnimation = userAgent.isMacOs ? 1.5 : 3;
 
   const renderCanvas = () => {
     if (!canvasRef.current) {
@@ -90,7 +96,7 @@ const Hero: FC = () => {
           scrollTrigger: {
             trigger: rootRef.current,
             start: 'top top',
-            end: () => `+=${innerHeight * 1.5}`,
+            end: () => `+=${innerHeight * coefForAnimation}`,
 
             scrub: true,
             pin: true,
