@@ -69,7 +69,7 @@ const Home: NextPage<HomePageProps> = ({ userAgent }) => {
         <Algorithm />
         <PlansSection />
         <Fear />
-        <PartnerProgramm />
+        <PartnerProgramm isSafari={userAgent.isSafari} />
         <MobileApp />
         <LeadForm />
       </main>

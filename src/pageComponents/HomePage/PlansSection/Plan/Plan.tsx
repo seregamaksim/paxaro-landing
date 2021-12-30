@@ -116,9 +116,7 @@ const Plan: FC<PlanProps> = ({
             key={index}
             ref={addToRefs}
             dangerouslySetInnerHTML={{ __html: item.text }}
-          >
-            {/* {item.text} */}
-          </PlanItem>
+          />
         ))}
       </PlanList>
     </Root>
@@ -207,7 +205,7 @@ const PlanLink = styled(Button)`
 
 const PlanList = styled.ul<{ $rows: number }>`
   display: grid;
-  grid-template-rows: ${(props) => 'repeat(' + props.$rows + ', 1fr)'};
+  grid-template-rows: ${(props) => 'repeat(' + props.$rows + ', min-content)'};
   grid-auto-flow: column;
   gap: 30px 50px;
   align-items: center;

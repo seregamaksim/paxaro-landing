@@ -30,7 +30,7 @@ const Hero: FC<HeroProps> = ({ userAgent }) => {
   const canvasWrapRef = useRef<HTMLDivElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
   const [isLoadImages, setIsLoadImages] = useState(false);
-  const frameCount = 142;
+  const frameCount = 141;
   const notebook = {
     frame: 0,
   };
@@ -43,9 +43,11 @@ const Hero: FC<HeroProps> = ({ userAgent }) => {
     }
     const context = canvasRef.current!.getContext('2d')!;
     const canvasWrapCurrent = canvasWrapRef.current!;
-    context.canvas.width = canvasWrapCurrent.offsetWidth;
-    context.canvas.height = canvasWrapCurrent.offsetWidth * 0.5625;
-
+    context.canvas.width = canvasWrapCurrent.offsetWidth * 2;
+    context.canvas.height = canvasWrapCurrent.offsetWidth * 0.5625 * 2;
+    context.canvas.style.width = `${canvasWrapCurrent.offsetWidth}px`;
+    context.canvas.style.height = `${canvasWrapCurrent.offsetWidth * 0.5625}px`;
+    canvasRef.current!.getContext('2d')?.scale(2, 2);
     const img = new Image();
     img.src = getCurrentFrameSrc(0);
 
@@ -146,7 +148,7 @@ const Hero: FC<HeroProps> = ({ userAgent }) => {
           <Head ref={headRef}>
             <SectionTitle>{t('title')}</SectionTitle>
             <SectionText>{t('subtitle')}</SectionText>
-            <Link href={LINKS.mainSite} passHref>
+            <Link href={LINKS.demoPlanLink} passHref>
               <Button text={t('btnText')} isLink />
             </Link>
           </Head>

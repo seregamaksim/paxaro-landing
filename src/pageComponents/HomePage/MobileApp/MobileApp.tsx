@@ -84,8 +84,8 @@ const StyledContainer = styled(Container)`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  padding-top: 27px;
-  padding-bottom: 27px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   height: 100%;
   @media (max-width: 1024px) {
     display: flex;

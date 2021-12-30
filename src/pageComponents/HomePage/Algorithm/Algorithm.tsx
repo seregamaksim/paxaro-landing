@@ -47,7 +47,7 @@ const Algorithm: FC = () => {
         scrollTrigger: {
           trigger: rootRef.current,
           start: 'top top',
-          end: () => '+=3800',
+          end: () => (innerWidth > 768 ? '+=3800' : '+=2500'),
           pin: true,
           scrub: 1,
           anticipatePin: 1,
@@ -169,7 +169,7 @@ const Algorithm: FC = () => {
           phoneRef.current,
           {
             yPercent: 80,
-            duration: 0.9,
+            duration: 0.7,
           },
           'finishShowStoreBanner'
         )
@@ -593,7 +593,7 @@ const PhoneWrapper = styled.div`
   right: -5.5%;
   will-change: transform;
   filter: drop-shadow(-6px -6px 51px rgba(168, 168, 168, 0.25));
-
+  max-width: 325px;
   @media (max-width: 1200px) {
     right: -15%;
   }

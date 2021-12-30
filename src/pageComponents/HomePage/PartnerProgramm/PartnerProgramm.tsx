@@ -1,404 +1,101 @@
 import { Container } from '@/components/Container';
 import { SectionLabel } from '@/components/SectionLabel';
 import { SectionTitle } from '@/components/SectionTitle';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import currency from 'currency.js';
 import { COLORS } from '@/constants';
-import { useRouter } from 'next/router';
-import { LOCALES } from '@/types';
+import Slider, { Handle, SliderTooltip } from 'rc-slider';
+import { useIsMounted } from '@/hooks/useIsMounted';
 
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
+interface PartnerProgrammProps {
+  isSafari: boolean;
 }
 
-const PartnerProgramm: FC = () => {
+const sumsByPlan: { [key: string]: any } = {
+  prime: {
+    0: 479.6,
+    33: 719.4,
+    66: 959.2,
+    100: 1199,
+  },
+  advanced: {
+    0: 479.6,
+    33: 719.4,
+    66: 959.2,
+    100: 1199,
+  },
+};
+
+const totalSumsByPlan: { [key: string]: any } = {
+  prime: {
+    0: 1630.6,
+    33: 4064.6,
+    66: 8249.1,
+    100: 14687.8,
+  },
+  advanced: {
+    0: 3740.88,
+    33: 17661.27,
+    66: 60429.6,
+    100: 164562.75,
+  },
+};
+
+const marks: { [key: string]: any } = {
+  0: 2,
+  33: 3,
+  66: 4,
+  100: 5,
+};
+
+const PartnerProgramm: FC<PartnerProgrammProps> = ({ isSafari }) => {
   const { t } = useTranslation('partnerProgramm');
-  const { locale } = useRouter();
+  const isMounted = useIsMounted();
   const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const bonusTextRef = useRef<HTMLParagraphElement>(null);
-  const sliderRef = useRef<HTMLDivElement>(null);
-  const sliderBarRef = useRef<HTMLDivElement>(null);
-  const sliderHandleWrapRef = useRef<HTMLDivElement>(null);
   const calculatorRef = useRef<HTMLDivElement>(null);
-  const firstLevelAmount = 239.8;
-  const secondLevelAmount = 119.9;
-  const thirdLevelAmount = 83.93;
-  const fourthtLevelAmount = 59.95;
-  const fivethLevelAmount = 35.97;
+  const [isCheckedPrime, setIsCheckedPrime] = useState(true);
+  const [isCheckedAdvanced, setIsCheckedAdvanced] = useState(!isCheckedPrime);
+  const [sliderValue, setSliderValue] = useState(0);
+  const [bonusValue, setBonusValue] = useState(479.6);
+  const [totalBonusValue, setTotalBonusValue] = useState(1630.6);
 
-  const [sliderValue, setSliderValue] = useState(2);
-  const [bonusValue, setBonusValue] = useState(getSums(sliderValue).sum1);
-  const [totalBonusValue, setTotalBonusValue] = useState(
-    getAllSum(sliderValue)
-  );
-
-  function getSums(factor: number): { [key: string]: number } {
-    return {
-      sum1: factor * firstLevelAmount,
-      sum2: Math.pow(factor, 2) * secondLevelAmount,
-      sum3: Math.pow(factor, 3) * thirdLevelAmount,
-      sum4: Math.pow(factor, 4) * fourthtLevelAmount,
-      sum5: Math.pow(factor, 5) * fivethLevelAmount,
-    };
-  }
-
-  function getAllSum(factor: number) {
-    const allSums = getSums(factor);
+  const handleSliderRangeChange = (props: any) => {
+    const { value, dragging, index, ...restProps } = props;
     return (
-      allSums.sum1 + allSums.sum2 + allSums.sum3 + allSums.sum4 + allSums.sum5
+      <SliderTooltip
+        prefixCls="rc-slider-tooltip"
+        overlay={marks[value]}
+        visible={true}
+        placement="top"
+        key={index}
+        overlayInnerStyle={{
+          display: 'block',
+          fontWeight: 600,
+          color: COLORS.green,
+        }}
+      >
+        <Handle value={value} {...restProps} />
+      </SliderTooltip>
     );
-  }
+  };
 
-  useEffect(() => {
-    setTimeout(() => {
-      const bonusTarget = {
-        value: bonusValue,
-      };
-      const totalBonusTarget = {
-        value: totalBonusValue,
-      };
-      const sliderValueTarget = {
-        value: sliderValue,
-      };
-      const partnerProgrammTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: 'top top',
-          end: () => (innerWidth > 768 ? '+=2000' : '+=1500'),
-          pin: true,
-          scrub: 0,
-          snap: {
-            snapTo: 'labels',
-            duration: { min: 0.2, max: 1 },
-            delay: 0,
-            ease: 'power3.out',
-          },
-          onUpdate: () => {
-            setBonusValue(bonusTarget.value);
-            setTotalBonusValue(totalBonusTarget.value);
-            setSliderValue(sliderValueTarget.value);
-          },
-        },
-      });
+  const changeSlider = (e: number) => {
+    setSliderValue(e);
+    if (isCheckedPrime) {
+      setBonusValue(sumsByPlan.prime[e]);
+      setTotalBonusValue(totalSumsByPlan.prime[e]);
+    } else {
+      setBonusValue(sumsByPlan.advanced[e]);
+      setTotalBonusValue(totalSumsByPlan.advanced[e]);
+    }
+  };
 
-      if (innerWidth > 768) {
-        partnerProgrammTimeline
-          .addLabel('start')
-
-          .to(
-            bonusTarget,
-            {
-              duration: 1,
-              value: getSums(3).sum1,
-              roundProps: 'value',
-            },
-            'start+=0.2'
-          )
-          .to(
-            totalBonusTarget,
-            {
-              duration: 1,
-              value: getAllSum(3),
-              roundProps: 'value',
-            },
-            'start+=0.2'
-          )
-          .to(
-            sliderHandleWrapRef.current,
-            {
-              x: sliderRef!.current!.offsetWidth / 3,
-              duration: 1,
-            },
-            'start+=0.2'
-          )
-          .to(
-            sliderValueTarget,
-            {
-              duration: 1,
-              value: 3,
-              roundProps: 'value',
-            },
-            'start+=0.2'
-          )
-          .to(
-            sliderBarRef.current,
-            {
-              scaleX: 0.33,
-              duration: 1,
-            },
-            'start+=0.2'
-          )
-          .addLabel('moveToThirdLevel')
-          .to(
-            bonusTarget,
-            {
-              duration: 1,
-              value: getSums(4).sum1,
-              roundProps: 'value',
-            },
-            'moveToThirdLevel+=0.2'
-          )
-          .to(
-            totalBonusTarget,
-            {
-              duration: 1,
-              value: getAllSum(4),
-              roundProps: 'value',
-            },
-            'moveToThirdLevel+=0.2'
-          )
-          .to(
-            sliderHandleWrapRef.current,
-            {
-              x: sliderRef!.current!.offsetWidth / 1.5,
-              duration: 1,
-            },
-            'moveToThirdLevel+=0.2'
-          )
-          .to(
-            sliderValueTarget,
-            {
-              duration: 1,
-              value: 4,
-              roundProps: 'value',
-            },
-            'moveToThirdLevel+=0.2'
-          )
-          .to(
-            sliderBarRef.current,
-            {
-              scaleX: 0.66,
-              duration: 1,
-            },
-            'moveToThirdLevel+=0.2'
-          )
-          .addLabel('moveToFourthLevel')
-
-          .to(
-            bonusTarget,
-            {
-              duration: 1,
-              value: getSums(5).sum1,
-              roundProps: 'value',
-            },
-            'moveToFourthLevel+=0.2'
-          )
-          .to(
-            totalBonusTarget,
-            {
-              duration: 1,
-              value: getAllSum(5),
-              roundProps: 'value',
-            },
-            'moveToFourthLevel+=0.2'
-          )
-          .to(
-            sliderHandleWrapRef.current,
-            {
-              x: sliderRef!.current!.offsetWidth,
-              duration: 1,
-            },
-            'moveToFourthLevel+=0.2'
-          )
-          .to(
-            sliderValueTarget,
-            {
-              duration: 1,
-              value: 5,
-              roundProps: 'value',
-            },
-            'moveToFourthLevel+=0.2'
-          )
-          .to(
-            sliderBarRef.current,
-            {
-              scaleX: 1,
-              duration: 1,
-            },
-            'moveToFourthLevel+=0.2'
-          )
-          .addLabel('moveToFivethLevel');
-      } else {
-        partnerProgrammTimeline
-          .addLabel('start')
-          .to(
-            headRef.current,
-            {
-              yPercent: -100,
-              opacity: 0,
-              duration: 0.5,
-            },
-            'start+=0.3'
-          )
-          .to(
-            calculatorRef.current,
-            {
-              y: -headRef!.current!.offsetHeight,
-              duration: 0.5,
-            },
-            'start+=0.3'
-          )
-          .addLabel('finishShowCalculator')
-          .to(
-            bonusTarget,
-            {
-              duration: 1,
-              value: getSums(3).sum1,
-              roundProps: 'value',
-            },
-            'finishShowCalculator+=0.2'
-          )
-          .to(
-            totalBonusTarget,
-            {
-              duration: 1,
-              value: getAllSum(3),
-              roundProps: 'value',
-            },
-            'finishShowCalculator+=0.2'
-          )
-          .to(
-            sliderHandleWrapRef.current,
-            {
-              x: sliderRef!.current!.offsetWidth / 3,
-              duration: 1,
-            },
-            'finishShowCalculator+=0.2'
-          )
-          .to(
-            sliderValueTarget,
-            {
-              duration: 1,
-              value: 3,
-              roundProps: 'value',
-            },
-            'finishShowCalculator+=0.2'
-          )
-          .to(
-            sliderBarRef.current,
-            {
-              scaleX: 0.33,
-              duration: 1,
-            },
-            'finishShowCalculator+=0.2'
-          )
-          .addLabel('moveToThirdLevel')
-          .to(
-            bonusTarget,
-            {
-              duration: 1,
-              value: getSums(4).sum1,
-              roundProps: 'value',
-            },
-            'moveToThirdLevel+=0.2'
-          )
-          .to(
-            totalBonusTarget,
-            {
-              duration: 1,
-              value: getAllSum(4),
-              roundProps: 'value',
-            },
-            'moveToThirdLevel+=0.2'
-          )
-          .to(
-            sliderHandleWrapRef.current,
-            {
-              x: sliderRef!.current!.offsetWidth / 1.5,
-              duration: 1,
-            },
-            'moveToThirdLevel+=0.2'
-          )
-          .to(
-            sliderValueTarget,
-            {
-              duration: 1,
-              value: 4,
-              roundProps: 'value',
-            },
-            'moveToThirdLevel+=0.2'
-          )
-          .to(
-            sliderBarRef.current,
-            {
-              scaleX: 0.66,
-              duration: 1,
-            },
-            'moveToThirdLevel+=0.2'
-          )
-          .addLabel('moveToFourthLevel')
-
-          .to(
-            bonusTarget,
-            {
-              duration: 1,
-              value: getSums(5).sum1,
-              roundProps: 'value',
-            },
-            'moveToFourthLevel+=0.2'
-          )
-          .to(
-            totalBonusTarget,
-            {
-              duration: 1,
-              value: getAllSum(5),
-              roundProps: 'value',
-            },
-            'moveToFourthLevel+=0.2'
-          )
-          .to(
-            sliderHandleWrapRef.current,
-            {
-              x: sliderRef!.current!.offsetWidth,
-              duration: 1,
-            },
-            'moveToFourthLevel+=0.2'
-          )
-          .to(
-            sliderValueTarget,
-            {
-              duration: 1,
-              value: 5,
-              roundProps: 'value',
-            },
-            'moveToFourthLevel+=0.2'
-          )
-          .to(
-            sliderBarRef.current,
-            {
-              scaleX: 1,
-              duration: 1,
-            },
-            'moveToFourthLevel+=0.2'
-          )
-          .addLabel('moveToFivethLevel')
-          .to(
-            calculatorRef.current,
-            {
-              y: 0,
-              duration: 0.5,
-            },
-            'moveToFivethLevel'
-          )
-          .to(
-            headRef.current,
-            {
-              yPercent: 0,
-              opacity: 1,
-              duration: 0.5,
-            },
-            'moveToFivethLevel'
-          );
-      }
-    }, 0);
-  }, []);
   return (
-    <Root ref={rootRef}>
+    <section ref={rootRef}>
       <StyledContainer>
         <SectionHead ref={headRef}>
           <StyledSectionLabel text={t('label')} />
@@ -413,86 +110,77 @@ const PartnerProgramm: FC = () => {
                 {t('calculator.subsriptionPlan')}
               </CalculatorSectionTitle>
               <SubscriptionList>
-                <SubsriptionItem>
-                  <SubsriptionCheckbox>
-                    <SubsriptionCheckboxInnerOpacity />
-                    <SubsriptionCheckboxInnerGreen />
-                  </SubsriptionCheckbox>
-                  <CalculatorText>Prime</CalculatorText>
-                </SubsriptionItem>
-                <SubsriptionItem>
-                  <SubsriptionCheckbox>
-                    <SubsriptionCheckboxInnerOpacity />
-                    <SubsriptionCheckboxInnerGreen />
-                  </SubsriptionCheckbox>
-                  <CalculatorText>Advanced</CalculatorText>
-                </SubsriptionItem>
+                <CheckboxWrapper>
+                  <SubsriptionCheckbox
+                    name="subscription-plan"
+                    checked={isCheckedPrime}
+                    id="checkbox-prime"
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setIsCheckedPrime(true);
+                        setIsCheckedAdvanced(false);
+                        setBonusValue(sumsByPlan.prime[sliderValue]);
+                        setTotalBonusValue(totalSumsByPlan.prime[sliderValue]);
+                      } else {
+                        setIsCheckedPrime(false);
+                        setIsCheckedAdvanced(true);
+                        setBonusValue(sumsByPlan.advanced[sliderValue]);
+                        setTotalBonusValue(
+                          totalSumsByPlan.advanced[sliderValue]
+                        );
+                      }
+                    }}
+                  />
+
+                  <SubsriptionItem htmlFor="checkbox-prime">
+                    <CalculatorText>Prime</CalculatorText>
+                  </SubsriptionItem>
+                </CheckboxWrapper>
+                <CheckboxWrapper>
+                  <SubsriptionCheckbox
+                    name="subscription-plan"
+                    checked={isCheckedAdvanced}
+                    id="checkbox-advanced"
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setIsCheckedAdvanced(true);
+                        setIsCheckedPrime(false);
+                        setBonusValue(sumsByPlan.advanced[sliderValue]);
+                        setTotalBonusValue(
+                          totalSumsByPlan.advanced[sliderValue]
+                        );
+                      } else {
+                        setIsCheckedAdvanced(false);
+                        setIsCheckedPrime(true);
+                        setBonusValue(sumsByPlan.prime[sliderValue]);
+                        setTotalBonusValue(totalSumsByPlan.prime[sliderValue]);
+                      }
+                    }}
+                  />
+
+                  <SubsriptionItem htmlFor="checkbox-advanced">
+                    <CalculatorText>Advanced</CalculatorText>
+                  </SubsriptionItem>
+                </CheckboxWrapper>
               </SubscriptionList>
             </CalculatorSectionPlans>
-            <CalculatorSection>
-              <CalculatorSectionTitle>
-                {t('calculator.profit')}
-              </CalculatorSectionTitle>
-              <ProfitSection>
-                <ProfitTitle $locale={locale!}>
-                  {t('calculator.levels')}
-                </ProfitTitle>
-                <ProfitList>
-                  <ProfitItem>
-                    <CalculatorText>1</CalculatorText>
-                  </ProfitItem>
-                  <ProfitItem>
-                    <CalculatorText>2</CalculatorText>
-                  </ProfitItem>
-                  <ProfitItem>
-                    <CalculatorText>3</CalculatorText>
-                  </ProfitItem>
-                  <ProfitItem>
-                    <CalculatorText>4</CalculatorText>
-                  </ProfitItem>
-                  <ProfitItem>
-                    <CalculatorText>5</CalculatorText>
-                  </ProfitItem>
-                </ProfitList>
-              </ProfitSection>
-              <ProfitSection>
-                <ProfitTitle $locale={locale!}>
-                  {t('calculator.percent')}
-                </ProfitTitle>
-                <ProfitList>
-                  <ProfitItemWithoutBorder>
-                    <CalculatorText>20%</CalculatorText>
-                  </ProfitItemWithoutBorder>
-                  <ProfitItemWithoutBorder>
-                    <CalculatorText>10%</CalculatorText>
-                  </ProfitItemWithoutBorder>
-                  <ProfitItemWithoutBorder>
-                    <CalculatorText>7%</CalculatorText>
-                  </ProfitItemWithoutBorder>
-                  <ProfitItemWithoutBorder>
-                    <CalculatorText>5%</CalculatorText>
-                  </ProfitItemWithoutBorder>
-                  <ProfitItemWithoutBorder>
-                    <CalculatorText>3%</CalculatorText>
-                  </ProfitItemWithoutBorder>
-                </ProfitList>
-              </ProfitSection>
-            </CalculatorSection>
+
             <CalculatorSectionSlider>
               <CalculatorSectionTitleMargin>
                 {t('calculator.countFriend')}
               </CalculatorSectionTitleMargin>
               <SliderWrapper>
                 <SliderBorders>2</SliderBorders>
-                <StyledSliderWrapper>
-                  <SliderHandleWrap ref={sliderHandleWrapRef}>
-                    <SliderCount>{sliderValue}</SliderCount>
-                    <SliderHandle />
-                  </SliderHandleWrap>
-                  <StyledSlider ref={sliderRef}>
-                    <SliderBar ref={sliderBarRef} />
-                  </StyledSlider>
-                </StyledSliderWrapper>
+                <StyledSlider
+                  $isSafari={isSafari}
+                  marks={marks}
+                  defaultValue={0}
+                  step={null}
+                  onChange={changeSlider}
+                  handle={(e) =>
+                    isMounted ? handleSliderRangeChange(e) : <div></div>
+                  }
+                />
                 <SliderBorders>5</SliderBorders>
               </SliderWrapper>
             </CalculatorSectionSlider>
@@ -528,14 +216,11 @@ const PartnerProgramm: FC = () => {
           </CalculatorWrapper>
         </Calculator>
       </StyledContainer>
-    </Root>
+    </section>
   );
 };
 
-const Root = styled.section``;
-
 const StyledContainer = styled(Container)`
-  padding-bottom: 20px;
   padding-top: 40px;
 `;
 
@@ -583,6 +268,11 @@ const Calculator = styled.div`
   will-change: transform;
   @media (max-width: 1024px) {
     border-radius: 40px;
+  }
+  @media (max-width: 768px) {
+    .rc-slider-tooltip-inner {
+      display: block;
+    }
   }
 `;
 
@@ -637,8 +327,16 @@ const CalculatorSectionTitle = styled.p`
 
 const CalculatorSectionFlex = styled(CalculatorSection)`
   display: flex;
+  grid-column: 1/-1;
   ${CalculatorSection} {
-    margin-right: 100px;
+    display: flex;
+    align-items: center;
+    margin-right: 110px;
+    margin-bottom: 0;
+    ${CalculatorSectionTitle} {
+      margin-bottom: 0;
+      margin-right: 30px;
+    }
     &:last-child {
       margin-right: 0;
     }
@@ -695,59 +393,15 @@ const CalculatorSectionTitleMargin = styled(CalculatorSectionTitle)`
   }
 `;
 
-const SubscriptionList = styled.ul`
+const SubscriptionList = styled.div`
   display: flex;
   align-items: center;
 `;
 
-const SubsriptionCheckboxInner = styled.div`
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  will-change: opacity;
-  @media (max-width: 900px) {
-    width: 19px;
-    height: 19px;
-  }
-`;
-
-const SubsriptionCheckboxInnerOpacity = styled(SubsriptionCheckboxInner)`
-  background-color: rgba(255, 255, 255, 0.2);
-`;
-
-const SubsriptionCheckboxInnerGreen = styled(SubsriptionCheckboxInner)`
-  background-image: ${COLORS.greenGradient};
-  z-index: 2;
-`;
-
-const SubsriptionCheckbox = styled.div`
-  width: 30px;
-  height: 30px;
-  border: 1px solid ${COLORS.green};
-  position: relative;
-  margin-right: 14px;
-  border-radius: 50%;
-
-  @media (max-width: 900px) {
-    width: 24px;
-    height: 24px;
-    margin-right: 12px;
-  }
-`;
-
-const SubsriptionItem = styled.li`
+const CheckboxWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-right: 100px;
-  &:first-child {
-    ${SubsriptionCheckboxInnerGreen} {
-      opacity: 0;
-    }
-  }
   &:last-child {
     margin-right: 0;
   }
@@ -759,65 +413,52 @@ const SubsriptionItem = styled.li`
   }
 `;
 
-const ProfitTitle = styled(CalculatorText)<{ $locale: string }>`
-  min-width: 75px;
-  margin-right: 24px;
-  @media (max-width: 768px) {
-    margin-right: 18px;
-  }
-  @media (max-width: 400px) {
-    font-size: ${({ $locale }) => ($locale === LOCALES.kz ? '15px' : '')};
-  }
-`;
+const SubsriptionItem = styled.label`
+  position: relative;
+  padding-left: 44px;
 
-const ProfitSection = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 13px;
-  &:last-child {
-    margin-bottom: 0;
+  ::before,
+  ::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
   }
-  @media (max-width: 374px) {
-    display: block;
-    ${ProfitTitle} {
-      margin-right: 0;
-      margin-bottom: 13px;
+  ::before {
+    width: 30px;
+    height: 30px;
+    border: 1px solid ${COLORS.green};
+    left: 0;
+  }
+  ::after {
+    width: 24px;
+    height: 24px;
+    background-color: rgba(255, 255, 255, 0.2);
+    left: 3px;
+  }
+
+  @media (max-width: 900px) {
+    padding-left: 36px;
+    ::before {
+      width: 24px;
+      height: 24px;
+    }
+    ::after {
+      width: 18px;
+      height: 18px;
     }
   }
 `;
 
-const ProfitList = styled.ul`
-  display: flex;
-  align-items: center;
-`;
-
-const ProfitItem = styled.li`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border: 1px solid ${COLORS.green};
-  border-radius: 7px;
-  margin-right: 28px;
-  will-change: opacity;
-  &:last-child {
-    margin-right: 0;
-  }
-  @media (max-width: 1024px) {
-    margin-right: 20px;
-  }
-  @media (max-width: 768px) {
-    margin-right: 14px;
-    ${CalculatorText} {
-      font-size: 14px;
-      line-height: 19px;
+const SubsriptionCheckbox = styled.input.attrs(() => ({
+  type: 'checkbox',
+}))`
+  &:checked + ${SubsriptionItem} {
+    ::after {
+      background-image: ${COLORS.greenGradient};
     }
   }
-`;
-
-const ProfitItemWithoutBorder = styled(ProfitItem)`
-  border: 0;
 `;
 
 const BonusWrap = styled.div`
@@ -853,69 +494,6 @@ const BonusTextGreen = styled(BonusText)`
   color: ${COLORS.green};
 `;
 
-const StyledSliderWrapper = styled.div`
-  position: relative;
-  flex-grow: 1;
-`;
-
-const SliderHandleWrap = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  z-index: 1;
-`;
-
-const SliderCount = styled.p`
-  position: absolute;
-  bottom: calc(100% + 4px);
-  left: 50%;
-  transform: translateX(-50%);
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 25px;
-  letter-spacing: 0.01em;
-  color: ${COLORS.green};
-  will-change: contents;
-`;
-
-const SliderHandle = styled.div`
-  width: 24px;
-  height: 24px;
-  border: 3px solid ${COLORS.black2};
-  background-image: ${COLORS.greenGradient};
-  border-radius: 50%;
-  &::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: ${COLORS.greenGradient};
-    filter: blur(18px);
-  }
-`;
-
-const StyledSlider = styled.div`
-  margin-left: 16px;
-  margin-right: 16px;
-  width: auto;
-  height: 4px;
-  background-color: ${COLORS.darkGray};
-  border-radius: 3px;
-  position: relative;
-`;
-
-const SliderBar = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: ${COLORS.green};
-  transform-origin: left;
-  transform: scaleX(0);
-  will-change: transform;
-`;
-
 const SliderWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -938,6 +516,43 @@ const SliderBorders = styled.p`
   line-height: 25px;
   letter-spacing: 0.01em;
   color: ${COLORS.white};
+`;
+
+const StyledSlider = styled(Slider)<{ $isSafari: boolean }>`
+  margin-left: 20px;
+  margin-right: 20px;
+  .rc-slider-rail {
+    background-color: ${COLORS.darkGray};
+  }
+
+  .rc-slider-track {
+    background-color: ${COLORS.green};
+  }
+  .rc-slider-handle {
+    width: 24px;
+    height: 24px;
+    margin-top: -12px;
+    border-width: 3px;
+    border-color: ${COLORS.black2};
+    background-image: ${COLORS.greenGradient};
+    border-radius: 50%;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: ${COLORS.greenGradient};
+      filter: ${({ $isSafari }) => ($isSafari ? 'none' : 'blur(18px)')};
+      border-radius: 50%;
+    }
+  }
+
+  .rc-slider-dot,
+  .rc-slider-mark {
+    display: none;
+  }
 `;
 
 export default PartnerProgramm;

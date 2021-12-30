@@ -41,7 +41,7 @@ const Advantages: FC = () => {
           scrollTrigger: {
             trigger: rootRef.current,
             start: 'top top',
-            end: innerWidth > 768 ? `+=5000` : `+=2000`,
+            end: innerWidth > 768 ? `+=5000` : `+=1500`,
             pin: true,
             scrub: innerWidth > 768 ? 1 : 0,
             snap: {
@@ -328,7 +328,7 @@ const Advantages: FC = () => {
                   rootRef!.current!.scrollWidth /
                     circleRef!.current!.offsetWidth +
                   7,
-                duration: 1.3,
+                duration: 0.5,
               },
               'finishMoveSecondScreen+=0.2'
             )

@@ -1155,7 +1155,7 @@ const MessagePhoneWrap = styled.div`
   position: absolute;
   right: 10.4%;
   top: 17.7%;
-
+  max-width: 334px;
   @media (max-width: 1300px) {
     right: 40px;
   }
@@ -1188,7 +1188,7 @@ const LogoWrap = styled.div`
     transform: translate(-50%, 150px);
   }
   @media (min-width: 320px) and (max-width: 1024px) and (max-height: 650px) {
-    transform: translate(-50%, 50px);
+    transform: translate(-50%, 100px);
   }
 `;
 
