@@ -28,7 +28,6 @@ interface HomePageProps {
 export const MobileMenuContext = React.createContext<any>(undefined);
 
 const Home: NextPage<HomePageProps> = ({ userAgent }) => {
-  const { t } = useTranslation('common');
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const contextMobileMenuValue = {
     isOpenMenu,
@@ -49,8 +48,11 @@ const Home: NextPage<HomePageProps> = ({ userAgent }) => {
   return (
     <MainLayout>
       <Head>
-        <title>{t('seo.title')}</title>
-        <meta name="description" content={t('seo.description')} />
+        <title>Надежный проводник в мире блокчейн-экономики</title>
+        <meta
+          name="description"
+          content="Paxaro — удобный и понятный инструмент для инвестиций в криптовалюты, это выгодно и безопасно. Управляй цифровыми активами, как профессионал. СТАНЬ ЧАСТЬЮ НОВОЙ ЭКОНОМИЧЕСКОЙ РЕАЛЬНОСТИ"
+        />
       </Head>
       <Preloader />
 
