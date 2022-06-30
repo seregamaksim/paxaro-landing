@@ -6,16 +6,15 @@ import { scrollToElement } from '@/helpers/scrollToElement';
 import { MobileMenuContext } from '@/pages';
 
 const anchors = [
-  'history',
-  'advantages',
-  'education',
-  'howWork',
-  'subscription',
-  'howToStart',
+  { anchor: 'history', text: 'История' },
+  { anchor: 'advantages', text: 'Преимущества' },
+  { anchor: 'education', text: 'База знаний' },
+  { anchor: 'howWork', text: 'Как работает?' },
+  { anchor: 'subscription', text: 'Подписка' },
+  { anchor: 'howToStart', text: 'Как начать?' },
 ];
 
 const HeaderBottom: FC = () => {
-  const { t } = useTranslation('header');
   const { setIsOpenMenu } = useContext(MobileMenuContext);
 
   const handleClickLink = (anchor: string) => {
@@ -27,14 +26,14 @@ const HeaderBottom: FC = () => {
 
   return (
     <HeaderBottomMenu>
-      {anchors.map((anchor, index) => {
+      {anchors.map(({ anchor, text }, index) => {
         return (
           <HeaderBottomMenuItem key={index}>
             <HeaderBottomMenuLink
               data-section-id={anchor}
               onClick={() => handleClickLink(anchor)}
             >
-              {t(`secondMain.${anchor}`)}
+              {text}
             </HeaderBottomMenuLink>
           </HeaderBottomMenuItem>
         );

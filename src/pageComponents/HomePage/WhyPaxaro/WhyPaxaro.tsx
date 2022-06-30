@@ -18,7 +18,6 @@ import { COLORS } from '@/constants';
 import { LOCALES } from '@/types';
 
 const WhyPaxaro: FC = () => {
-  const { t } = useTranslation('whyPaxaro');
   const { locale } = useRouter();
   const mainId = 'history';
   const mainRef = useRef<HTMLElement>(null);
@@ -591,11 +590,9 @@ const WhyPaxaro: FC = () => {
     <Root ref={mainRef} id={mainId}>
       <StyledContainer>
         <SectionHead>
-          <StyledSectionLabel text={t('label')} />
+          <StyledSectionLabel text="История" />
           <SectionTitle>
-            <Trans t={t} i18nKey="title">
-              Почему мы <br /> уверены в Paxaro App?
-            </Trans>
+            Почему мы <br /> уверены в Paxaro App?
           </SectionTitle>
         </SectionHead>
 
@@ -620,10 +617,8 @@ const WhyPaxaro: FC = () => {
 
         <Content>
           <ContentTitle ref={whyPaxaroTitleRef} $locale={locale!}>
-            <Trans t={t} i18nKey="whyPaxaro">
-              <span>Почему именно</span>
-              <br /> Paxaro App?
-            </Trans>
+            <span>Почему именно</span>
+            <br /> Paxaro App?
           </ContentTitle>
           <DescriptionsWrapper ref={desciptionBlockRef}>
             <DescriptionsCounter>
@@ -641,51 +636,48 @@ const WhyPaxaro: FC = () => {
             </DescriptionsCounter>
             <DescriptionCounterTextsWrapper>
               <DescriptionCounterTextWrap ref={descriptionTextWrapFirstRef}>
-                <DescriptionText>{t('description1.text1')}</DescriptionText>
-                {locale === LOCALES.ru ? (
-                  <DescriptionText>
-                    В случае с альтернативными монетами вы скорее покупаете
-                    акции, чем валюту.
-                    <br />
-                    За каждой из них стоит технология,
-                    <br /> которая решает определенную проблему
-                    <br /> — похоже на инвестиции в стартап.
-                  </DescriptionText>
-                ) : (
-                  <DescriptionText>{t('description1.text2')}</DescriptionText>
-                )}
+                <DescriptionText>
+                  Влияние Bitcoin на рынке криптовалют снижается и будет
+                  продолжать снижаться
+                </DescriptionText>
+                <DescriptionText>
+                  В случае с альтернативными монетами вы скорее покупаете акции,
+                  чем валюту.
+                  <br />
+                  За каждой из них стоит технология,
+                  <br /> которая решает определенную проблему
+                  <br /> — похоже на инвестиции в стартап.
+                </DescriptionText>
+                )
               </DescriptionCounterTextWrap>
               <DescriptionCounterTextWrapAbsolute
                 ref={descriptionTextWrapSecondRef}
               >
-                {locale === LOCALES.ru ? (
-                  <DescriptionText>
-                    У проектов с капитализацией ниже <br />
-                    чем у Bitcoin, более высокий потенциальный <br /> рост.
-                    Альтернативные токены, у которых <br />
-                    есть преимущество по стоимости <br />и скорости транзакций,
-                    повышают <br />
-                    интерес к индустрии. Такие компании <br />
-                    могут обрести капитализацию свыше <br />1 млрд $ за
-                    сравнительно короткий <br /> промежуток времени.
-                  </DescriptionText>
-                ) : (
-                  <DescriptionText>{t('description2.text1')}</DescriptionText>
-                )}
+                <DescriptionText>
+                  У проектов с капитализацией ниже <br />
+                  чем у Bitcoin, более высокий потенциальный <br /> рост.
+                  Альтернативные токены, у которых <br />
+                  есть преимущество по стоимости <br />и скорости транзакций,
+                  повышают <br />
+                  интерес к индустрии. Такие компании <br />
+                  могут обрести капитализацию свыше <br />1 млрд $ за
+                  сравнительно короткий <br /> промежуток времени.
+                </DescriptionText>
               </DescriptionCounterTextWrapAbsolute>
             </DescriptionCounterTextsWrapper>
           </DescriptionsWrapper>
           <SecondDescriptionBlockRef ref={secondDescriptionBlockRef}>
             <DescriptionText>
-              <Trans t={t} i18nKey="description3.text1">
-                Индустрия растет, вместе с ней растет и индекс. За пя Bitcoin
-                вырос <b>в 144 раза</b>, а индексы Paxaro A доходность{' '}
-                <b>в 700+ раз*</b>. С Paxaro App вы охватываете <b>до 95%</b>{' '}
-                рыночной капитализации криптовалют постоянно обновляется и вы
-                всегда находитесь в топе индустрии.
-              </Trans>
+              Индустрия растет, вместе с ней растет и индекс. За пя Bitcoin
+              вырос <b>в 144 раза</b>, а индексы Paxaro A доходность{' '}
+              <b>в 700+ раз*</b>. С Paxaro App вы охватываете <b>до 95%</b>{' '}
+              рыночной капитализации криптовалют постоянно обновляется и вы
+              всегда находитесь в топе индустрии.
             </DescriptionText>
-            <DescriptionText>{t('description3.text2')}</DescriptionText>
+            <DescriptionText>
+              *Промежуток с 01/03/2016 по 03/11/2021 по данным Coinmarketcap,
+              проведено более 5000 вариантов бектестов и испытаний.
+            </DescriptionText>
           </SecondDescriptionBlockRef>
         </Content>
       </StyledContainer>

@@ -12,54 +12,52 @@ import Headroom from 'react-headroom';
 import { LINKS, COLORS } from '@/constants';
 
 const DesktopHeader: FC = ({ children }) => {
-  const { t } = useTranslation('header');
-
   return (
     <Headroom style={{ zIndex: 10 }}>
       <Root>
         <HeaderTopContainer>
           <Link href="/" passHref>
             <HeaderLogoLink>
-              <Image src={logo} alt={t('logoAlt')} loading="eager" />
+              <Image src={logo} alt="Логотип Paxaro" loading="eager" />
             </HeaderLogoLink>
           </Link>
           <HeaderTopNav>
             <HeaderTopItem>
               <ActiveLink href="/" activeClassName="active">
-                <HeaderTopLink>{t('main.aboutProduct')}</HeaderTopLink>
+                <HeaderTopLink>О продукте</HeaderTopLink>
               </ActiveLink>
             </HeaderTopItem>
             <HeaderTopItem>
               <ActiveLink href="/blog" activeClassName="active">
                 <HeaderTopLink style={{ pointerEvents: 'none' }}>
-                  {t('main.blog')}
+                  Блог
                 </HeaderTopLink>
               </ActiveLink>
             </HeaderTopItem>
             <HeaderTopItem>
               <ActiveLink href="/about" activeClassName="active">
                 <HeaderTopLink style={{ pointerEvents: 'none' }}>
-                  {t('main.aboutCompany')}
+                  О компании
                 </HeaderTopLink>
               </ActiveLink>
             </HeaderTopItem>
           </HeaderTopNav>
 
           <HeaderButtonsWrap>
-            <HeaderButtonTitle>{t('main.accountTitle')}</HeaderButtonTitle>
+            <HeaderButtonTitle>Личный кабинет</HeaderButtonTitle>
             <HeaderButtons>
               <Link href={LINKS.registrationLink} passHref>
                 <HeaderButtonRegistration
                   isLink
-                  text={t('main.registration')}
+                  text="Зарегистрироваться"
                 ></HeaderButtonRegistration>
               </Link>
               <Link href={LINKS.loginLink} passHref>
                 <HeaderLinkLogin>
-                  <span>{t('main.login')}</span>
+                  <span>Войти</span>
                 </HeaderLinkLogin>
               </Link>
-              <LanguageSwitcher />
+              {/* <LanguageSwitcher /> */}
             </HeaderButtons>
           </HeaderButtonsWrap>
         </HeaderTopContainer>

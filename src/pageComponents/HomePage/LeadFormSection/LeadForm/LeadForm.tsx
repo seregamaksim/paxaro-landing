@@ -38,7 +38,6 @@ const LinkText = ({ href, children, ...props }: any) => {
 };
 
 const LeadForm: FC<LeadFormProps> = ({ className }) => {
-  const { t } = useTranslation('leadForm');
   const [isSuccess, setIsSuccess] = useState(false);
 
   function submitForm(values: FormValues) {
@@ -54,10 +53,8 @@ const LeadForm: FC<LeadFormProps> = ({ className }) => {
   return isSuccess ? (
     <SuccessBlock>
       <SuccessBlockText>
-        <Trans t={t} i18nKey="successText">
-          Форма <span>успешно</span> отправлена, в ближайшее время с вами
-          свяжутся!
-        </Trans>
+        Форма <span>успешно</span> отправлена, в ближайшее время с вами
+        свяжутся!
       </SuccessBlockText>
     </SuccessBlock>
   ) : (
@@ -77,7 +74,7 @@ const LeadForm: FC<LeadFormProps> = ({ className }) => {
             id="leadform-name"
             name="name"
             type="text"
-            label={t('inputNameLabel')}
+            label="Имя*"
           />
         </NameFormBlock>
 
@@ -86,7 +83,7 @@ const LeadForm: FC<LeadFormProps> = ({ className }) => {
             id="leadform-email"
             name="email"
             type="email"
-            label={t('inputEmailLabel')}
+            label="Ваш e-mail*"
           />
         </FormBlock>
         <SurnameFormBlock>
@@ -94,7 +91,7 @@ const LeadForm: FC<LeadFormProps> = ({ className }) => {
             id="leadform-surname"
             name="surname"
             type="text"
-            label={t('inputSurnameLabel')}
+            label="Фамилия"
           />
         </SurnameFormBlock>
         <FormBlock>
@@ -102,23 +99,21 @@ const LeadForm: FC<LeadFormProps> = ({ className }) => {
             id="leadform-phone"
             name="phone"
             type="tel"
-            label={t('inputPhoneLabel')}
+            label="Ваш номер"
           />
         </FormBlock>
         <FormBlock>
           <FormPrivacyText>
-            <Trans t={t} i18nKey="privacyText">
-              Нажимая на кнопку, вы даете согласие на{' '}
-              <LinkText href="/term-of-use">
-                обработку персональных данных
-              </LinkText>{' '}
-              и соглашаетесь с{' '}
-              <LinkText href="/privacy">политикой конфиденциальности</LinkText>
-            </Trans>
+            Нажимая на кнопку, вы даете согласие на{' '}
+            <LinkText href="/term-of-use">
+              обработку персональных данных
+            </LinkText>{' '}
+            и соглашаетесь с{' '}
+            <LinkText href="/privacy">политикой конфиденциальности</LinkText>
           </FormPrivacyText>
         </FormBlock>
         <FormBlock>
-          <SubmitButton type="submit" text={t('formButton')} />
+          <SubmitButton type="submit" text="Отправить форму" />
         </FormBlock>
       </StyledForm>
     </Formik>

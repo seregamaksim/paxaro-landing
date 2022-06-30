@@ -18,7 +18,6 @@ if (typeof window !== 'undefined') {
 }
 
 const Education: FC = () => {
-  const { t } = useTranslation('education');
   const rootId = 'education';
   const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
@@ -220,18 +219,24 @@ const Education: FC = () => {
   return (
     <Root ref={rootRef} id={rootId}>
       <SectionHead ref={headRef}>
-        <StyledLabel text={t('label')} isDark />
-        <StyledTitle text={t('title')} />
+        <StyledLabel text="База знаний" isDark />
+        <StyledTitle text="Станьте профи в инвестициях" />
       </SectionHead>
 
       <SectionContent ref={contentRef}>
         <DescriptionWrapper ref={descriptionWrapperRef}>
           <DescriptionSection ref={descriptionFirstRef}>
-            <DescriptionLabel text={t('descriptionLabel')} />
-            <DescriptionText>{t('descriptionText1')}</DescriptionText>
+            <DescriptionLabel text="Обучение" />
+            <DescriptionText>
+              Разобраться в криптовалюте несложно — мы поделимся своими знаниями
+              и научим вас понимать индустрию.
+            </DescriptionText>
           </DescriptionSection>
           <DescriptionSection2 ref={descriptionSecondRef}>
-            <DescriptionText>{t('descriptionText2')}</DescriptionText>
+            <DescriptionText>
+              Мы собираем самую актуальную информацию и подаем ее в удобной
+              форме — есть статьи и видео уроки.
+            </DescriptionText>
           </DescriptionSection2>
         </DescriptionWrapper>
         <NotebookWrapper ref={notebookWrapperRef}>

@@ -24,7 +24,6 @@ if (typeof window !== 'undefined') {
 }
 
 const Algorithm: FC = () => {
-  const { t } = useTranslation('algorithm');
   const rootId = 'howWork';
   const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
@@ -191,9 +190,12 @@ const Algorithm: FC = () => {
       <Circle ref={circleRef} />
       <StyledContainer>
         <SectionHead ref={headRef}>
-          <StyledSectionLabel text={t('label')} isDark />
-          <StyledSectionTitle text={t('title')} />
-          <Subtitle>{t('subtitle')}</Subtitle>
+          <StyledSectionLabel text="Алгоритм" isDark />
+          <StyledSectionTitle text="Как все происходит" />
+          <Subtitle>
+            Все операции делаются в два клика — просто запускаете алгоритм и
+            следите за заработком.
+          </Subtitle>
         </SectionHead>
         <Content ref={contentRef}>
           <GreenContentSection>
@@ -202,28 +204,31 @@ const Algorithm: FC = () => {
                 imageListRef.current[0] = item;
               }}
             >
-              <Image src={algorithmImg1} alt={t('registration')} />
+              <Image src={algorithmImg1} alt="Регистрация" />
             </ContentSectionItem>
             <ContentSectionItem
               ref={(item: HTMLDivElement) => {
                 imageListRef.current[1] = item;
               }}
             >
-              <Image src={algorithmImg2} alt={t('renewal')} />
+              <Image
+                src={algorithmImg2}
+                alt="Пополнение счета на бирже и подключение кошелька"
+              />
             </ContentSectionItem>
             <ContentSectionItem
               ref={(item: HTMLDivElement) => {
                 imageListRef.current[2] = item;
               }}
             >
-              <Image src={algorithmImg3} alt={t('chosePlan')} />
+              <Image src={algorithmImg3} alt="Выбор пакета подписки" />
             </ContentSectionItem>
             <ContentSectionItem
               ref={(item: HTMLDivElement) => {
                 imageListRef.current[3] = item;
               }}
             >
-              <Image src={algorithmImg4} alt={t('choseStrategy')} />
+              <Image src={algorithmImg4} alt="Выбор инвестиционной стратегии" />
             </ContentSectionItem>
           </GreenContentSection>
           <ContentSection>
@@ -232,28 +237,30 @@ const Algorithm: FC = () => {
                 descriptionListRef.current[0] = item;
               }}
             >
-              <DescriptionText>{t('registration')}</DescriptionText>
+              <DescriptionText>Регистрация</DescriptionText>
             </DescriptionContentSectionItem>
             <DescriptionContentSectionItem
               ref={(item: HTMLDivElement) => {
                 descriptionListRef.current[1] = item;
               }}
             >
-              <DescriptionText>{t('renewal')}</DescriptionText>
+              <DescriptionText>
+                Пополнение счета на бирже и подключение кошелька
+              </DescriptionText>
             </DescriptionContentSectionItem>
             <DescriptionContentSectionItem
               ref={(item: HTMLDivElement) => {
                 descriptionListRef.current[2] = item;
               }}
             >
-              <DescriptionText>{t('chosePlan')}</DescriptionText>
+              <DescriptionText>Выбор пакета подписки</DescriptionText>
             </DescriptionContentSectionItem>
             <DescriptionContentSectionItem
               ref={(item: HTMLDivElement) => {
                 descriptionListRef.current[3] = item;
               }}
             >
-              <DescriptionText>{t('choseStrategy')}</DescriptionText>
+              <DescriptionText>Выбор инвестиционной стратегии</DescriptionText>
             </DescriptionContentSectionItem>
           </ContentSection>
         </Content>
@@ -261,11 +268,9 @@ const Algorithm: FC = () => {
       <StoreBannerSection ref={storeBannerSectionRef}>
         <StoreBanner ref={storeBannerRef}>
           <StoreBannerText>
-            <Trans t={t} i18nKey="storesText">
-              Ваш <span>личный карманный</span> брокер — <span>мобильное</span>{' '}
-              приложение <span>Paxaro App.</span> Скачивайте{' '}
-              <span>и управляйте инвестициями</span> на ходу.
-            </Trans>
+            Ваш <span>личный карманный</span> брокер — <span>мобильное</span>{' '}
+            приложение <span>Paxaro App.</span> Скачивайте{' '}
+            <span>и управляйте инвестициями</span> на ходу.
           </StoreBannerText>
           <StoresList>
             <StoreItem>

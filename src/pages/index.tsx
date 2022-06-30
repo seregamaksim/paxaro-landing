@@ -62,6 +62,16 @@ const Home: NextPage<HomePageProps> = ({ userAgent }) => {
 
       <main>
         <Hero userAgent={userAgent} />
+        <WhyPaxaro />
+        <CalculatorSection isSafari={userAgent.isSafari} />
+        <Advantages />
+        <Education />
+        <Algorithm />
+        <PlansSection />
+        <Fear />
+        <PartnerProgramm isSafari={userAgent.isSafari} />
+        <MobileApp />
+        <LeadForm />
       </main>
     </MainLayout>
   );

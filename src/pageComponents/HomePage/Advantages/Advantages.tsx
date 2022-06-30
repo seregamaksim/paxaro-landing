@@ -17,7 +17,6 @@ function getItemSizes(item: HTMLElement) {
 }
 
 const Advantages: FC = () => {
-  const { t } = useTranslation('advantages');
   const rootId = 'advantages';
   const rootRef = useRef<HTMLElement>(null);
   const itemsRef = useRef<HTMLLIElement[]>([]);
@@ -343,13 +342,14 @@ const Advantages: FC = () => {
       <StyledContainer>
         <Cirle ref={circleRef} />
         <SectionHead ref={headRef}>
-          <StyledLabel text={t('label')} />
+          <StyledLabel text="Преимущества" />
           <SectionTitle>
-            <Trans t={t} i18nKey="title">
-              Почему мы <br /> уверены в Paxaro App?
-            </Trans>
+            Почему мы <br /> уверены в Paxaro App?
           </SectionTitle>
-          <Subtitle>{t('subtitle')}</Subtitle>
+          <Subtitle>
+            Мы проверили инструмент на реальных инвестициях - он позволяет
+            управлять активами просто и быстро
+          </Subtitle>
         </SectionHead>
         <DescriptionList>
           <BlackDescriptionItem
@@ -365,10 +365,8 @@ const Advantages: FC = () => {
                 (itemsTitleRef.current[0] = element)
               }
             >
-              <Trans t={t} i18nKey="card1.styledTitle">
-                <span>Активы</span>
-                <br /> хранятся <br /> на бирже
-              </Trans>
+              <span>Активы</span>
+              <br /> хранятся <br /> на бирже
             </DescriptionStyleTitle>
           </BlackDescriptionItem>
           <GrayDescriptionItem
@@ -384,10 +382,8 @@ const Advantages: FC = () => {
                 (itemsTitleRef.current[1] = element)
               }
             >
-              <Trans t={t} i18nKey="card2.styledTitle">
-                <span>Алгоритм</span>
-                <br /> минимизирует <br /> риски
-              </Trans>
+              <span>Алгоритм</span>
+              <br /> минимизирует <br /> риски
             </DescriptionStyleTitle>
           </GrayDescriptionItem>
           <GreenDescriptionItem
@@ -403,10 +399,8 @@ const Advantages: FC = () => {
                 (itemsTitleRef.current[2] = element)
               }
             >
-              <Trans t={t} i18nKey="card3.styledTitle">
-                <span>Доходность</span>
-                <br /> зависит <br /> от сроков
-              </Trans>
+              <span>Доходность</span>
+              <br /> зависит <br /> от сроков
             </DescriptionStyleTitle>
           </GreenDescriptionItem>
         </DescriptionList>
@@ -418,10 +412,12 @@ const Advantages: FC = () => {
             }
           >
             <DescriptionSecondScreenItemTitle>
-              {t('card3.normalTitle')}
+              Доходность зависит от сроков
             </DescriptionSecondScreenItemTitle>
             <DescriptionSecondScreenItemText>
-              {t('card3.description')}
+              Доходность зависит от сроков. Чем дольше инвестиции находятся в
+              обороте, тем лучше алгоритм с ними работает. Практика показала,
+              что инвестиции в долгую приносят большую прибыль.
             </DescriptionSecondScreenItemText>
           </GreenDescriptionSecondScreenItem>
 
@@ -431,10 +427,12 @@ const Advantages: FC = () => {
             }
           >
             <DescriptionSecondScreenItemTitle>
-              {t('card2.normalTitle')}
+              Алгоритм минимизирует риски
             </DescriptionSecondScreenItemTitle>
             <DescriptionSecondScreenItemText>
-              {t('card2.description')}
+              Риски минимизированы. Наш алгоритм умеет учитывать все изменения
+              курсов и рыночные тренды. Поэтому пакет постоянно
+              диверсифицируется в соответствии с ситуацией на бирже.
             </DescriptionSecondScreenItemText>
           </GrayDescriptionSecondScreenItem>
 
@@ -444,10 +442,12 @@ const Advantages: FC = () => {
             }
           >
             <DescriptionSecondScreenItemTitle>
-              {t('card1.normalTitle')}
+              Активы хранятся на бирже
             </DescriptionSecondScreenItemTitle>
             <DescriptionSecondScreenItemText>
-              {t('card1.description')}
+              Ваши деньги не хранятся у нас. Все активы размещены на официальной
+              бирже. Она страхует их и шифрует данные. Взлом этих систем
+              невозможен.
             </DescriptionSecondScreenItemText>
           </DescriptionSecondScreenItem>
         </DescriptionSecondList>

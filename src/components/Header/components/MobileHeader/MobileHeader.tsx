@@ -19,7 +19,6 @@ interface HeaderWrapperProps {
 }
 
 const MobileHeader: FC = ({ children }) => {
-  const { t } = useTranslation('header');
   const { isOpenMenu, setIsOpenMenu, userAgent } =
     useContext(MobileMenuContext);
 
@@ -88,20 +87,20 @@ const MobileHeader: FC = ({ children }) => {
             <HeaderTopNav>
               <HeaderTopItem>
                 <ActiveLink href="/" activeClassName="active">
-                  <HeaderTopLink>{t('main.aboutProduct')}</HeaderTopLink>
+                  <HeaderTopLink>О продукте</HeaderTopLink>
                 </ActiveLink>
               </HeaderTopItem>
               <HeaderTopItem>
                 <ActiveLink href="/blog" activeClassName="active">
                   <HeaderTopLink style={{ pointerEvents: 'none' }}>
-                    {t('main.blog')}
+                    Блог
                   </HeaderTopLink>
                 </ActiveLink>
               </HeaderTopItem>
               <HeaderTopItem>
                 <ActiveLink href="/about" activeClassName="active">
                   <HeaderTopLink style={{ pointerEvents: 'none' }}>
-                    {t('main.aboutCompany')}
+                    О компании
                   </HeaderTopLink>
                 </ActiveLink>
               </HeaderTopItem>
@@ -113,17 +112,17 @@ const MobileHeader: FC = ({ children }) => {
               {children}
 
               <HeaderButtonsWrap>
-                <HeaderButtonTitle>{t('main.accountTitle')}</HeaderButtonTitle>
+                <HeaderButtonTitle>Личный кабинет</HeaderButtonTitle>
                 <HeaderButtons>
                   <Link href={LINKS.registrationLink} passHref>
                     <HeaderButtonRegistration
                       isLink
-                      text={t('main.registration')}
+                      text="Зарегистрироваться"
                     ></HeaderButtonRegistration>
                   </Link>
                   <Link href={LINKS.loginLink} passHref>
                     <HeaderLinkLogin>
-                      <span>{t('main.login')}</span>
+                      <span>Войти</span>
                     </HeaderLinkLogin>
                   </Link>
                 </HeaderButtons>
@@ -131,7 +130,7 @@ const MobileHeader: FC = ({ children }) => {
             </Container>
           )}
           <StyledSocialList />
-          <LanguageSwitcher />
+          {/* <LanguageSwitcher /> */}
         </div>
       </HeaderWrapper>
     </>

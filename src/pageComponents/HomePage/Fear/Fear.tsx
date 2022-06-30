@@ -31,7 +31,6 @@ function getScaleParams(targetElem: HTMLElement, toElem: HTMLElement) {
 }
 
 const Fear: FC = () => {
-  const { t } = useTranslation('fear');
   const { locale } = useRouter();
   const rootId = 'howToStart';
   const rootRef = useRef<HTMLElement>(null);
@@ -898,8 +897,8 @@ const Fear: FC = () => {
     <Root ref={rootRef} id={rootId}>
       <StyledContainer>
         <SectionHead ref={headRef}>
-          <StyledSectionLabel text={t('label')} />
-          <SectionTitle text={t('title')} />
+          <StyledSectionLabel text="Инвестиции — это не страшно" />
+          <SectionTitle text="Не бойтесь начать" />
         </SectionHead>
         <MessagesBlock ref={messagesBlockRef}>
           <MessagesList ref={messagesListRef}>
@@ -910,9 +909,15 @@ const Fear: FC = () => {
               }}
             >
               <MessageItemTitle $locale={locale!}>
-                {t('card1.title')}
+                Как быть, если у меня нет знаний о трейдинге и опыта инвестиций?
               </MessageItemTitle>
-              <MessageItemText>{t('card1.description')}</MessageItemText>
+              <MessageItemText>
+                Они не нужны. Наш алгоритм автоматизирует большинство процессов.
+                Вы пользуетесь готовым решением, получая прибыль. При этом вы
+                учитесь новому и сами становитесь экспертом. Команда опытных
+                специалистов поможет разобраться со сложными вопросами и охотно
+                поделится всеми знаниями.
+              </MessageItemText>
             </MessageItem>
             <MessageItem
               $locale={locale!}
@@ -921,9 +926,13 @@ const Fear: FC = () => {
               }}
             >
               <MessageItemTitle $locale={locale!}>
-                {t('card2.title')}
+                Смогу ли я начать с небольшими деньгами?
               </MessageItemTitle>
-              <MessageItemText>{t('card2.description')}</MessageItemText>
+              <MessageItemText>
+                Да. Мы рассчитаем самые выгодные стратегии, исходя из ваших
+                возможностей. Это позволит максимально эффективно использовать
+                имеющийся бюджет.
+              </MessageItemText>
             </MessageItem>
             <MessageItem
               $locale={locale!}
@@ -932,9 +941,16 @@ const Fear: FC = () => {
               }}
             >
               <MessageItemTitle $locale={locale!}>
-                {t('card3.title')}
+                Насколько велик риск, что я все потеряю?
               </MessageItemTitle>
-              <MessageItemText>{t('card3.description')}</MessageItemText>
+              <MessageItemText>
+                В инвестициях риск есть всегда. Мы лишь предлагаем инструмент,
+                который позволяет инвестировать удобно, быстро и с высокой
+                отдачей. Этот инструмент проверен и показывает свою
+                эффективность, в том числе на наших портфелях. Но все решения о
+                ваших инвестициях принимаете только вы, и ответственность за них
+                тоже лежит на вас.
+              </MessageItemText>
             </MessageItem>
             <MessageItem
               $locale={locale!}
@@ -943,9 +959,13 @@ const Fear: FC = () => {
               }}
             >
               <MessageItemTitle $locale={locale!}>
-                {t('card4.title')}
+                Для инвестиций нужно много времени?
               </MessageItemTitle>
-              <MessageItemText>{t('card4.description')}</MessageItemText>
+              <MessageItemText>
+                Нет. Вам не придется бросать работу и целыми днями следить за
+                котировками. Вложения приносят прибыль, даже если вы ничего не
+                делаете.
+              </MessageItemText>
             </MessageItem>
           </MessagesList>
           <MessagePhoneWrap>
@@ -968,7 +988,7 @@ const Fear: FC = () => {
                   miniCardTitles.current[3] = item;
                 }}
               >
-                {t('card4.title')}
+                Для инвестиций нужно много времени?
               </MiniCardTitle>
             </MiniCard>
             <MiniCard
@@ -986,7 +1006,7 @@ const Fear: FC = () => {
                   miniCardTitles.current[2] = item;
                 }}
               >
-                {t('card3.title')}
+                Насколько велик риск, что я все потеряю?
               </MiniCardTitle>
             </MiniCard>
             <MiniCard
@@ -1004,7 +1024,7 @@ const Fear: FC = () => {
                   miniCardTitles.current[1] = item;
                 }}
               >
-                {t('card2.title')}
+                Смогу ли я начать с небольшими деньгами?
               </MiniCardTitle>
             </MiniCard>
             <MiniCard
@@ -1022,7 +1042,7 @@ const Fear: FC = () => {
                   miniCardTitles.current[0] = item;
                 }}
               >
-                {t('card1.title')}
+                Как быть, если у меня нет знаний о трейдинге и опыта инвестиций?
               </MiniCardTitle>
             </MiniCard>
           </MessagePhoneWrap>

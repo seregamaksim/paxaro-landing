@@ -9,14 +9,15 @@ import { LeadForm } from './LeadForm';
 import { COLORS } from '@/constants';
 
 const LeadFormSection: FC = () => {
-  const { t } = useTranslation('leadForm');
   return (
     <section>
       <LeadFormContainer>
         <LeadFormHead>
-          <LeadFormHeadLabel text={t('label')} />
-          <LeadFormTitle text={t('title')} />
-          <LeadFormSubtitle>{t('subtitle')}</LeadFormSubtitle>
+          <LeadFormHeadLabel text="Обратная связь" />
+          <LeadFormTitle text="Начните инвестировать с Paxaro App" />
+          <LeadFormSubtitle>
+            Заполните короткую форму и мы с вами свяжемся.
+          </LeadFormSubtitle>
         </LeadFormHead>
 
         <LeadFormWrap>

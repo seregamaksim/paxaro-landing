@@ -32,8 +32,6 @@ const Plan: FC<PlanProps> = ({
   data,
   countRows,
 }) => {
-  const { t } = useTranslation('plans');
-
   const mainRef = useRef<HTMLDivElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const priceRef = useRef<HTMLDivElement>(null);
@@ -106,7 +104,7 @@ const Plan: FC<PlanProps> = ({
         <PlanHeadWrap ref={priceRef}>
           <PlanPrice>${price}</PlanPrice>
           <Link href={hrefLink} passHref>
-            <PlanLink text={t('buy')} isLink />
+            <PlanLink text="Купить" isLink />
           </Link>
         </PlanHeadWrap>
       </PlanHead>

@@ -17,23 +17,27 @@ const PlansSection: FC = () => {
 
   const data = {
     advanced: [
-      { text: t('advanced.item1') },
-      { text: t('advanced.item2') },
-      { text: t('advanced.item3') },
-      { text: t('advanced.item4') },
-      { text: t('advanced.item5') },
-      { text: t('advanced.item6') },
-      { text: t('advanced.item7') },
-      { text: t('advanced.item8') },
-      { text: t('advanced.item9') },
-      { text: t('advanced.item10') },
+      { text: 'Ребалансировка' },
+      { text: 'Базовая стратегия ведения портфеля' },
+      { text: '5 реферальных уровней' },
+      {
+        text: "В подарок базовый курс стоимостью $150 от <span data-block-id='education'>Paxaro Education</span>",
+      },
+      { text: 'i30 - index' },
+      { text: 'i50 - index' },
+      { text: 'i100 - index' },
+      { text: 'Кастомизированный index iCustom' },
+      { text: 'Привилегия участия в новых продуктах платформы' },
+      { text: 'Возможность настройки базовых индексов' },
     ],
     prime: [
-      { text: t('prime.item1') },
-      { text: t('prime.item2') },
-      { text: t('prime.item3') },
-      { text: t('prime.item4') },
-      { text: t('prime.item5') },
+      { text: 'Ребалансировка' },
+      { text: 'Базовая стратегия ведения портфеля' },
+      { text: 'i30 - index' },
+      { text: '3 реферальных уровня' },
+      {
+        text: "Специальный раздел обучения <span data-block-id='education'>Paxaro Education</span>",
+      },
     ],
   };
 
@@ -41,8 +45,8 @@ const PlansSection: FC = () => {
     <section ref={rootRef} id={rootId}>
       <StyledContainer>
         <SectionHead>
-          <StyledLabel text={t('label')} />
-          <SectionTitle text={t('title')} />
+          <StyledLabel text="Предложения" />
+          <SectionTitle text="Пакеты подписки" />
         </SectionHead>
         <StyledPlan
           title="Advanced"

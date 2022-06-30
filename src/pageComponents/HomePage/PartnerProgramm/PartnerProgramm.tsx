@@ -51,7 +51,6 @@ const marks: { [key: string]: any } = {
 };
 
 const PartnerProgramm: FC<PartnerProgrammProps> = ({ isSafari }) => {
-  const { t } = useTranslation('partnerProgramm');
   const isMounted = useIsMounted();
   const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
@@ -98,17 +97,20 @@ const PartnerProgramm: FC<PartnerProgrammProps> = ({ isSafari }) => {
     <section ref={rootRef}>
       <StyledContainer>
         <SectionHead ref={headRef}>
-          <StyledSectionLabel text={t('label')} />
-          <StyledSectionTitle text={t('title')} />
-          <Subtitle>{t('subtitle')}</Subtitle>
+          <StyledSectionLabel text="Партнерская программа" />
+          <StyledSectionTitle text="Приглашайте друзей и получайте бонусы" />
+          <Subtitle>
+            Всего есть 5 реферальных уровней — вы получаете процент с каждого
+            приведенного друга, а также с их друзей. Размер вознаграждения
+            зависит от вашего плана подписки и количества приглашенных
+            пользователей.
+          </Subtitle>
         </SectionHead>
 
         <Calculator ref={calculatorRef}>
           <CalculatorWrapper>
             <CalculatorSectionPlans>
-              <CalculatorSectionTitle>
-                {t('calculator.subsriptionPlan')}
-              </CalculatorSectionTitle>
+              <CalculatorSectionTitle>Ваш план подписки</CalculatorSectionTitle>
               <SubscriptionList>
                 <CheckboxWrapper>
                   <SubsriptionCheckbox
@@ -167,7 +169,7 @@ const PartnerProgramm: FC<PartnerProgrammProps> = ({ isSafari }) => {
 
             <CalculatorSectionSlider>
               <CalculatorSectionTitleMargin>
-                {t('calculator.countFriend')}
+                Количество друзей
               </CalculatorSectionTitleMargin>
               <SliderWrapper>
                 <SliderBorders>2</SliderBorders>
@@ -186,9 +188,7 @@ const PartnerProgramm: FC<PartnerProgrammProps> = ({ isSafari }) => {
             </CalculatorSectionSlider>
             <CalculatorSectionFlex>
               <CalculatorSection>
-                <CalculatorSectionTitle>
-                  {t('calculator.bonus')}
-                </CalculatorSectionTitle>
+                <CalculatorSectionTitle>Ваш бонус</CalculatorSectionTitle>
                 <BonusWrap>
                   <BonusBlur />
                   <BonusTextGreen ref={bonusTextRef}>
@@ -200,9 +200,7 @@ const PartnerProgramm: FC<PartnerProgrammProps> = ({ isSafari }) => {
                 </BonusWrap>
               </CalculatorSection>
               <CalculatorSection>
-                <CalculatorSectionTitle>
-                  {t('calculator.totalBonus')}
-                </CalculatorSectionTitle>
+                <CalculatorSectionTitle>Общий бонус</CalculatorSectionTitle>
                 <BonusWrap>
                   <BonusText>
                     {currency(totalBonusValue, {

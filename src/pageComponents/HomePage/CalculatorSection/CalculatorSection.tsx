@@ -11,14 +11,15 @@ interface CalculatorSectionProps {
 }
 
 const CalculatorSection: FC<CalculatorSectionProps> = ({ isSafari }) => {
-  const { t } = useTranslation('calculator');
-
   return (
     <section>
       <StyledContainer>
         <SectionHead>
-          <StyledSectionTitle text={t('title')} />
-          <SectionSubtitle>{t('subTitle')}</SectionSubtitle>
+          <StyledSectionTitle text="Расчет вероятной прибыли" />
+          <SectionSubtitle>
+            Узнайте, сколько вы могли заработать, если бы начали пользоваться
+            Paxaro App раньше
+          </SectionSubtitle>
         </SectionHead>
         <Calculator isSafari={isSafari} />
       </StyledContainer>

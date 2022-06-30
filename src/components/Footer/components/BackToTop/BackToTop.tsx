@@ -10,8 +10,6 @@ interface BackToTopProps {
 }
 
 const BackToTop: FC<BackToTopProps> = ({ className }) => {
-  const { t } = useTranslation('footer');
-
   function scrollToTop() {
     document.documentElement.scrollTo({
       top: 0,
@@ -20,7 +18,7 @@ const BackToTop: FC<BackToTopProps> = ({ className }) => {
   }
   return (
     <Root className={className} onClick={scrollToTop}>
-      <Text>{t('upText')}</Text>
+      <Text>Вернуться наверх</Text>
       <Image src={arrowUp} alt="To top" />
     </Root>
   );

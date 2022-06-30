@@ -17,7 +17,6 @@ if (typeof window !== 'undefined') {
 }
 
 const MobileApp: FC = () => {
-  const { t } = useTranslation('common');
   const rootRef = useRef<HTMLElement>(null);
   const phoneBlockRef = useRef<HTMLDivElement>(null);
   const phoneImgRef = useRef<HTMLDivElement>(null);
@@ -49,7 +48,7 @@ const MobileApp: FC = () => {
         <StoresBlock>
           <StoresBlockContent>
             <StoresBlockLogo></StoresBlockLogo>
-            <StoresBlockText>{t('mobileApp')}</StoresBlockText>
+            <StoresBlockText>Мобильное приложение</StoresBlockText>
             <StoresBlockList>
               <Link href={LINKS.appStoreLink} passHref>
                 <StoresBlockLink target="_blank">

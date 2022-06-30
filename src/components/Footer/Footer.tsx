@@ -12,17 +12,15 @@ import { COLORS, LINKS } from '@/constants';
 import { Button } from '@/ui/components/Button';
 
 const anchors = [
-  'history',
-  'advantages',
-  'education',
-  'howWork',
-  'subscription',
-  'howToStart',
+  { anchor: 'history', text: 'История' },
+  { anchor: 'advantages', text: 'Преимущества' },
+  { anchor: 'education', text: 'База знаний' },
+  { anchor: 'howWork', text: 'Как работает?' },
+  { anchor: 'subscription', text: 'Подписка' },
+  { anchor: 'howToStart', text: 'Как начать?' },
 ];
 
 const Footer: FC = () => {
-  const { t } = useTranslation(['header', 'footer']);
-
   const scrollToElement = (id: string) => {
     const element = document.getElementById(id);
     const pinElementParent = element!.parentElement;
@@ -64,35 +62,33 @@ const Footer: FC = () => {
               <MainMenu>
                 <MainMenuItem>
                   <ActiveLink href="/" activeClassName="active">
-                    <MainMenuItemLink>
-                      {t('main.aboutProduct', { ns: 'header' })}
-                    </MainMenuItemLink>
+                    <MainMenuItemLink>О продукте</MainMenuItemLink>
                   </ActiveLink>
                 </MainMenuItem>
                 <MainMenuItem>
                   <ActiveLink href="/blog" activeClassName="active">
                     <MainMenuItemLink style={{ pointerEvents: 'none' }}>
-                      {t('main.blog', { ns: 'header' })}
+                      Блог
                     </MainMenuItemLink>
                   </ActiveLink>
                 </MainMenuItem>
                 <MainMenuItem>
                   <ActiveLink href="/about" activeClassName="active">
                     <MainMenuItemLink style={{ pointerEvents: 'none' }}>
-                      {t('main.aboutCompany', { ns: 'header' })}
+                      О компании
                     </MainMenuItemLink>
                   </ActiveLink>
                 </MainMenuItem>
               </MainMenu>
               <MainMenu>
-                {anchors.map((anchor, index) => {
+                {anchors.map(({ anchor, text }, index) => {
                   return (
                     <MainMenuItem key={index}>
                       <MainMenuItemLink
                         data-section-id={anchor}
                         onClick={() => scrollToElement(anchor)}
                       >
-                        {t(`secondMain.${anchor}`)}
+                        {text}
                       </MainMenuItemLink>
                     </MainMenuItem>
                   );
@@ -132,7 +128,7 @@ const Footer: FC = () => {
               </MenuSocialList>
             </MainMenuWrapper>
             <ActiveLink href={LINKS.loginLink}>
-              <PersonalAreaLink isLink text={t('main.accountTitle')} />
+              <PersonalAreaLink isLink text="Личный кабинет" />
             </ActiveLink>
           </MainMenuNavWrap>
         </FooterTop>
@@ -145,7 +141,7 @@ const Footer: FC = () => {
             <DocumentsList>
               <DocumentItem>
                 <ActiveLink href="/term-of-use">
-                  <DocumentLink>{t('term', { ns: 'footer' })}</DocumentLink>
+                  <DocumentLink>Пользовательское соглашение</DocumentLink>
                 </ActiveLink>
               </DocumentItem>
             </DocumentsList>
