@@ -46,6 +46,7 @@ const Home: NextPage<HomePageProps> = ({ userAgent }) => {
       window.removeEventListener('resize', resizeRefreshDebouncing);
     };
   }, []);
+
   return (
     <MainLayout>
       <Head>
