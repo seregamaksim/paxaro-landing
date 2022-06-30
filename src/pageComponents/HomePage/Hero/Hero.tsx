@@ -23,7 +23,6 @@ function getCurrentFrameSrc(index: number) {
 }
 
 const Hero: FC<HeroProps> = ({ userAgent }) => {
-  const { t } = useTranslation('hero');
   const rootRef = useRef<HTMLElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -146,10 +145,15 @@ const Hero: FC<HeroProps> = ({ userAgent }) => {
       <Root ref={rootRef}>
         <StyledContainer>
           <Head ref={headRef}>
-            <SectionTitle>{t('title')}</SectionTitle>
-            <SectionText>{t('subtitle')}</SectionText>
+            <SectionTitle>
+              Стань частью новой экономической реальности
+            </SectionTitle>
+            <SectionText>
+              Инвестируй в криптовалюту и управляй цифровыми активами с помощью
+              Smart Portfolio
+            </SectionText>
             <Link href={LINKS.demoPlanLink} passHref>
-              <Button text={t('btnText')} isLink />
+              <Button text="Попробовать бесплатно" isLink />
             </Link>
           </Head>
 

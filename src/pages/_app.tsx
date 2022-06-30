@@ -8,7 +8,7 @@ import Head from 'next/head';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <CookiesProvider>
+    <>
       <Head>
         <link
           rel="apple-touch-icon"
@@ -34,7 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <Preloader />
       <Component {...pageProps} />
-    </CookiesProvider>
+    </>
   );
 }
 export default appWithTranslation(MyApp);

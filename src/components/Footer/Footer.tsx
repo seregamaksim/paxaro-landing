@@ -148,23 +148,6 @@ const Footer: FC = () => {
                   <DocumentLink>{t('term', { ns: 'footer' })}</DocumentLink>
                 </ActiveLink>
               </DocumentItem>
-              <DocumentItem>
-                <ActiveLink href="/privacy">
-                  <DocumentLink>{t('privacy', { ns: 'footer' })}</DocumentLink>
-                </ActiveLink>
-              </DocumentItem>
-              <DocumentItem>
-                <ActiveLink href="/cookie">
-                  <DocumentLink>{t('cookie', { ns: 'footer' })}</DocumentLink>
-                </ActiveLink>
-              </DocumentItem>
-              <DocumentItem>
-                <ActiveLink href="/trial">
-                  <DocumentLink>
-                    {t('testPeriod', { ns: 'footer' })}
-                  </DocumentLink>
-                </ActiveLink>
-              </DocumentItem>
             </DocumentsList>
             <StyledBackToTop />
           </FooterBottomWrapper>

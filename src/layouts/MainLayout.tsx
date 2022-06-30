@@ -9,7 +9,6 @@ const MainLayout: FC = ({ children }) => {
     <Root>
       {children}
       <Footer />
-      <Cookies />
     </Root>
   );
 };

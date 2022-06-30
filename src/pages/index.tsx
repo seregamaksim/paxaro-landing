@@ -62,43 +62,35 @@ const Home: NextPage<HomePageProps> = ({ userAgent }) => {
 
       <main>
         <Hero userAgent={userAgent} />
-        <WhyPaxaro />
-        <CalculatorSection isSafari={userAgent.isSafari} />
-        <Advantages />
-        <Education />
-        <Algorithm />
-        <PlansSection />
-        <Fear />
-        <PartnerProgramm isSafari={userAgent.isSafari} />
-        <MobileApp />
-        <LeadForm />
       </main>
     </MainLayout>
   );
 };
 
-export const getServerSideProps = async ({ locale, req }: any) => ({
-  props: {
-    userAgent: req
-      ? getSelectorsByUserAgent(req.headers['user-agent'])
-      : navigator.userAgent,
-    ...(await serverSideTranslations(locale, [
-      'common',
-      'header',
-      'footer',
-      'cookies',
-      'leadForm',
-      'hero',
-      'whyPaxaro',
-      'calculator',
-      'plans',
-      'education',
-      'advantages',
-      'algorithm',
-      'fear',
-      'partnerProgramm',
-    ])),
-  },
-});
+export const getServerSideProps = async ({ locale, req }: any) => {
+  return {
+    props: {
+      userAgent: req
+        ? getSelectorsByUserAgent(req.headers['user-agent'])
+        : navigator.userAgent,
+      // ...(await serverSideTranslations(locale, [
+      //   'common',
+      //   'header',
+      //   'footer',
+      //   'cookies',
+      //   'leadForm',
+      //   'hero',
+      //   'whyPaxaro',
+      //   'calculator',
+      //   'plans',
+      //   'education',
+      //   'advantages',
+      //   'algorithm',
+      //   'fear',
+      //   'partnerProgramm',
+      // ])),
+    },
+  };
+};
 
 export default Home;
